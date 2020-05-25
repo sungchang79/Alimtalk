@@ -48,10 +48,10 @@ Images for Friendtalk can be registered or deleted.
 ![friendtalk_03_201812.png](https://static.toastoven.net/prod_alimtalk/friendtalk_03_201812.png)
 
 #### Available Range of Image Uploads  
-* Recommended size: 720px * 720px
-* Restricted size: Unavailable to upload, if the width is below 500px, or if the 'width:length' ratio is below 2:1, or above 3:4  
+* Recommended size: general image [720px * 720px] / wide image [800px * 600px]
+* Restricted size: general image [Unavailable to upload, if the width is below 500px, or if the 'width:length' ratio is below 2:1, or above 3:4] / wide image must be [800px * 600px.]
 * File format: JPG or PNG
-* File size: Up to 500KB
+* File size: It must be 500KB or smaller for a general image, or 2MB or smaller for a wide image.
 
 ## Statistics
 

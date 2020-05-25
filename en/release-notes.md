@@ -1,4 +1,9 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2020.05.26
+* [API] 친구톡 와이드 이미지 기능
+    * 친구톡 와이드 이미지를 업로드하여, 발송할 수 있는 기능이 추가되었습니다.
+* [Console] 토큰 미등록 플러스친구 삭제 기능
+    * 토큰 미등록 플러스친구 삭제 기능이 추가되었습니다.
 
 ### Nov. 26, 2019
 * [Console] Template Registration Using File Uploads
@@ -9,8 +14,8 @@
     * Added the feature of querying by registered date for the query of delivery results
 
 ### Oct. 29, 2019
-* [API] Tighter validity checks for the delivery of certification messages 
-    * Message delivery is unavailable when authentication message is not included 
+* [API] Tighter validity checks for the delivery of certification messages
+    * Message delivery is unavailable when authentication message is not included
     * For more details, see [[API User Guide](./alimtalk-api-guide/#precautions-authword)].
 
 ### Sept. 24, 2019
