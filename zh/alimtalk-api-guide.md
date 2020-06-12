@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v1.4 Guide
+## Notification > KakaoTalk Bizmessage > Alimtalk > API v1.5 Guide
 
 ## Alimtalk
 
@@ -17,9 +17,11 @@
 </tbody>
 </table>
 
-## Overview of v1.4 API
-1. Validity checks for the main text for Authentication Messages API has been added.
-   - For more details, see [[Authentication Messages API](./alimtalk-api-guide/#precautions-authword)].
+## Overview of v1.5 API
+1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다. (전문 발송 시, title 값을 설정할 수 있습니다.)
+2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (7월 제공 예정)
+3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다.
+4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
 
 
 ## General Messages
@@ -29,7 +31,7 @@
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -57,6 +59,7 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
+    "createUser": String,
     "recipientList": [{
         "recipientNo": String,
         "templateParameter": {
@@ -80,6 +83,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O        | Registered delivery template code (up to 20 characters)      |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm)<br>(send immediately, if it is left blank) |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
+| createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
 | recipientList          | List    | O        | List of recipients (up to 1000 persons)                      |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - templateParameter    | Object  | X        | Template parameter<br>(required, if it includes a variable to be replaced for template) |
@@ -94,14 +98,14 @@ Content-Type: application/json;charset=UTF-8
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
 
 * <b>Request date and time can be set up to 90 days since a point of calling.</b>
-* <b>SMS 서비스에서 대체 발송되므로, SMS 서비스의 발송 API 명세에 따라 필드를 입력해야 합니다.(SMS 서비스에 등록된 발신 번호, 각종 필드 길이 제한 등)</b>
-* <b>SMS 서비스는 국제 SMS만 지원합니다. 국제 수신자 번호일 경우, resendType(대체 발송 타입)을 SMS로 변경해야 정상적으로 대체 발송할 수 있습니다.</b>
-* <b>지정한 대체 발송 타입의 바이트 제한을 초과하는 대체 발송 제목이나 내용은 잘려서 대체 발송될 수 있습니다.([[SMS 주의사항](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
+* <b>Since alternative delivery is made in the SMS service, field values must follow the API specifications for SMS (e.g. Sender number registered at the SMS service, or restriction in the field length). </b>
+* <b>The SMS Service supports international SMS only. For international receiver numbers, the resendType (alternative delivery type) must be changed to SMS to allow sending without fail. </b>
+* <b>Title or content for alternative delivery that exceeds specified byte size may be cut for delivery. (see [[Caution](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] for reference)</b>
 
 [Example]
 
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
 ```
 
 #### Response
@@ -150,7 +154,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/raw-messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -183,6 +187,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "recipientNo": String,
             "content": String,
+            "title" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -216,6 +221,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O        | List of recipients (up to 1,000 persons)                     |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - content              | String  | O        | Message  (up to 1000 characters)                             |
+| - title                | String  | O    | 제목 (최대 50자) |
 | - buttons              | List    | X        | List of buttons (up to 5)                                    |
 | -- ordering            | Integer | X        | Button sequence (required, if there is a button)             |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -241,7 +247,7 @@ Content-Type: application/json;charset=UTF-8
 [Exapmle]
 
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
 ```
 
 #### Response
@@ -292,7 +298,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/messages
+GET  /alimtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -320,6 +326,8 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                                   |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)            |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)              |
+| startCreateDate      | String  | 조건 필수 (3번)                  | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
+| endCreateDate        | String  | 조건 필수 (3번)                  | 등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
 | recipientNo          | String  | X                             | Recipient number                                             |
 | plusFriendId         | String  | X                             | PlusFriend ID                                                |
 | templateCode         | String  | X                             | Template code                                                |
@@ -327,6 +335,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                                     |
 | messageStatus        | String  | X                             | Request status (COMPLETED -> Successful, FAILED -> Failed, CANCEL -> Canceled) |
 | resultCode           | String  | X                             | Delivery result (MRC01 -> Successful, MRC02 ->Failed)        |
+|createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
 | pageNum              | Integer | X                             | Page number (default: 1)                                     |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max : 1000)                  |
 
@@ -351,12 +360,14 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
+			"createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
+			"createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -392,10 +403,12 @@ Content-Type: application/json;charset=UTF-8
 | -- recipientNo              | String  | Recipient number                                             |
 | -- content                  | String  | Body message                                                 |
 | -- requestDate              | String  | Date and time of request                                     |
+|-- createDate | String | 등록 일시 |
 | -- receiveDate              | String  | Date and time of receiving                                   |
 | -- resendStatus             | String  | Status code of resending                                     |
 | -- resendStatusName         | String  | Status code name of resending                                |
 | -- messageStatus            | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled ) |
+|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | -- resultCode               | String  | Result code of receiving                                     |
 | -- resultCodeName           | String  | Result code name of receiving                                |
 | -- buttons                  | List    | List of buttons                                              |
@@ -412,7 +425,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### Status of Sending SMS/LMS
@@ -431,7 +444,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -455,7 +468,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### Response
@@ -473,13 +486,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
+			"templateTitle" : String,
+			"templateSubtitle" : String,
+			"templateExtra" : String,
+			"templateAd" : String,
       "requestDate" :  String,
       "receiveDate" : String,
+			"createDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
+			"resendResultCode" : String,
+			"resendRequestId" : String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
+			"createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -510,6 +531,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - templateCode         | String  | Template code                                                |
 | - recipientNo          | String  | Recipient number                                             |
 | - content              | String  | Body message                                                 |
+|- templateTitle | String | 템플릿 제목 |
+|- templateSubtitle | String | 템플릿 보조 문구 |
+|- templateExtra | String | 템플릿 부가 내용 (7월 기능 제공 예정) |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정)|
 | - requestDate          | String  | Date and time of request                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - resendStatus         | String  | Status code of resending                                     |
@@ -546,7 +571,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/auth/messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -574,16 +599,19 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
+		"createUser" : String,
     "recipientList": [{
         "recipientNo": String,
         "templateParameter": {
             String: String
         },
-        "isResend" : boolean,
-        "resendType" : String,
-        "resendTitle" : String,
-        "resendContent" : String,
-        "resendSendNo" : String,
+        "resendParameter": {
+          "isResend" : boolean,
+          "resendType" : String,
+          "resendTitle" : String,
+          "resendContent" : String,
+          "resendSendNo" : String
+        },
         "recipientGroupingKey": String
     }]
 }
@@ -595,6 +623,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O        | Registered delivery template code (up to 20 characters)      |
 | requestDate            | String  | X        | Date of request (yyyy-MM-dd HH:mm)<br>(immediately sent, if it is left blank) |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
+|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | recipientList          | List    | O        | List of recipients (up to 1000 persons)                      |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - templateParameter    | Object  | X        | Template parameter<br>(required, if it includes a variable to be replaced for template) |
@@ -611,7 +640,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
 ```
 
 #### Response
@@ -660,7 +689,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/auth/raw-messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/auth/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -688,10 +717,12 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
+		"createUser": String,
     "recipientList": [
         {
             "recipientNo": String,
             "content": String,
+						"title" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -703,11 +734,13 @@ Content-Type: application/json;charset=UTF-8
                     "schemeAndroid": String
                 }
             ],
-            "isResend" : boolean,
-            "resendType" : String,
-            "resendTitle" : String,
-            "resendContent" : String,
-            "resendSendNo" : String,
+            "resendParameter": {
+              "isResend" : boolean,
+              "resendType" : String,
+              "resendTitle" : String,
+              "resendContent" : String,
+              "resendSendNo" : String
+            },
             "recipientGroupingKey": String
         }
     ]
@@ -720,9 +753,11 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O        | Registered delivery template code (up to 20 characters)      |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm)<br>(sent immediately, if it is left blank) |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
+|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | recipientList          | List    | O        | List of recipients (up to 1,000 persons)                     |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - content              | String  | O        | Body message (up to 1000 characters)                         |
+|- title| String | X| 제목 (최대 50자) |  
 | - buttons              | List    | X        | List of buttons (up to 5)                                    |
 | -- ordering            | Integer | X        | Button sequence (required if there a button)                 |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -743,7 +778,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{lusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body message}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{lusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body message}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
 ```
 
 #### Response
@@ -794,7 +829,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/auth/messages
+GET  /alimtalk/v1.5/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -821,6 +856,8 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                                   |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)            |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)              |
+|startCreateDate|  String| 조건 필수 (3번) | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
+|endCreateDate|  String| 조건 필수 (3번) | 등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
 | recipientNo          | String  | X                             | Recipient number                                             |
 | plusFriendId         | String  | X                             | PlusFriend ID                                                |
 | templateCode         | String  | X                             | Template code                                                |
@@ -828,6 +865,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                                     |
 | messageStatus        | String  | X                             | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled ) |
 | resultCode           | String  | X                             | Delivery result (MRC01 -> successful, MRC02 -> failed )      |
+|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | pageNum              | Integer | X                             | Page number (default: 1)                                     |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max : 1000)                  |
 
@@ -852,12 +890,14 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
+			"createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
+			"createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -893,12 +933,14 @@ Content-Type: application/json;charset=UTF-8
 | -- recipientNo              | String  | Recipient number                                             |
 | -- content                  | String  | Body message                                                 |
 | -- requestDate              | String  | Date and time of request                                     |
+|-- createDate | String | 등록 일시 |
 | -- receiveDate              | String  | Date and time of receiving                                   |
 | -- resendStatus             | String  | Status code of resending                                     |
 | -- resendStatusName         | String  | Status code name of resending                                |
 | -- messageStatus            | String  | Request status (COMPLETED -> successful, FAILED ->failed, CANCEL -> canceled ) |
 | -- resultCode               | String  | Result code of receiving                                     |
 | -- resultCodeName           | String  | Result code name of receiving                                |
+|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | -- buttons                  | List    | List of buttons                                              |
 | --- ordering                | Integer | Button sequence                                              |
 | --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -913,7 +955,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### Status of Resending SMS/LMS
@@ -932,7 +974,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v1.5/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -956,7 +998,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
 ```
 
 #### Response
@@ -974,13 +1016,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
+			"templateTitle" : String,
+			"templateSubtitle" : String,
+			"templateExtra" : String,
+			"templateAd" : String,
       "requestDate" :  String,
+			"createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
+			"resendResultCode" : String,
+			"resendRequestId" : String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
+			"createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -1011,13 +1061,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - templateCode         | String  | Template code                                                |
 | - recipientNo          | String  | Recipient number                                             |
 | - content              | String  | Body message                                                 |
+|- templateTitle | String | 템플릿 제목 |
+|- templateSubtitle | String | 템플릿 보조 문구 |
+|- templateExtra | String | 템플릿 부가 내용 (7월 기능 제공 예정) |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정)|
 | - requestDate          | String  | Date and time of request                                     |
+|- createDate | String |	등록 일시 |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - resendStatus         | String  | Status code of resending                                     |
 | - resendStatusName     | String  | Status code name of resending                                |
+|- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
+|- resendRequestId | String | 재발송 sms 요청 ID |
 | - messageStatus        | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled) |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |
+|- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | - buttons              | List    | List of buttons                                              |
 | -- ordering            | Integer | Button sequence                                              |
 | -- type                | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK:Bot Keyword, MD: Message Delivery) |
@@ -1037,7 +1095,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /alimtalk/v1.4/appkeys/{appkey}/messages/{requestId}
+DELETE  /alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1086,7 +1144,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### Query Updates of Message Result
@@ -1096,7 +1154,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/message-results
+GET  /alimtalk/v1.5/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1206,7 +1264,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
 
 ## PlusFriends
@@ -1217,7 +1275,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/categories
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1301,7 +1359,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/business-licenses
+POST  /alimtalk/v1.5/appkeys/{appkey}/business-licenses
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1366,7 +1424,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/plus-friends
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1432,7 +1490,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/tokens
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/tokens
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1492,7 +1550,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/plus-friends
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1590,7 +1648,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1618,6 +1676,9 @@ Content-Type: application/json;charset=UTF-8
   "templateCode" : String,
   "templateName" : String,
   "templateContent" : String,
+  "templateEmphasizeType" : String,
+  "templateTitle" : String,
+  "templateSubtitle" : String,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1637,6 +1698,9 @@ Content-Type: application/json;charset=UTF-8
 | templateCode    | String  | O        | Template code (up to 20 characters)                          |
 | templateName    | String  | O        | Template name (up to 20 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
+|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+|templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -1672,7 +1736,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1700,6 +1764,9 @@ Content-Type: application/json;charset=UTF-8
 {
   "templateName" : String,
   "templateContent" : String,
+  "templateEmphasizeType" : String,
+  "templateTitle" : String,
+  "templateSubtitle" : String,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1718,6 +1785,9 @@ Content-Type: application/json;charset=UTF-8
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
 | templateName    | String  | O        | Template name (up to 20 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
+|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+|templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -1753,7 +1823,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+DELETE  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1797,7 +1867,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
+PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1856,7 +1926,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/templates
+GET  /alimtalk/v1.5/appkeys/{appkey}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1897,7 +1967,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/templates?plusFriendId={PlusFriend ID}&templateStatus={template status code}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/templates?plusFriendId={PlusFriend ID}&templateStatus={template status code}"
 ```
 
 #### Response
@@ -1917,6 +1987,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
               "templateCode": String,
               "templateName": String,
               "templateContent": String,
+              "templateEmphasizeType": String,
+              "templateTitle" : String,
+              "templateSubtitle" : String,
+              "templateMessageType" : String,
+              "templateExtra" : String,
+              "templateAd" : String,
               "buttons": [
                 {
                     "ordering":Integer,
@@ -1960,6 +2036,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | Template code                                                |
 | -- templateName      | String  | Template name                                                |
 | -- templateContent   | String  | Template body                                                |
+|-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+|-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (7월 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | X| 템플릿 부가 정보 (7월 기능 제공 예정) |
+|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정) |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
@@ -1986,7 +2068,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2010,7 +2092,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
 ```
 
 #### Response
@@ -2030,6 +2112,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
               "templateCode": String,
               "templateName": String,
               "templateContent": String,
+              "templateEmphasizeType": String,
+              "templateTitle" : String,
+              "templateSubtitle" : String,
+              "templateMessageType" : String,
+              "templateExtra" : String,
+              "templateAd" : String,
               "buttons": [
                 {
                     "ordering":Integer,
@@ -2074,6 +2162,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | Template code                                                |
 | -- templateName      | String  | Template name                                                |
 | -- templateContent   | String  | Template body                                                |
+|-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+|-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (7월 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | X| 템플릿 부가 정보 (7월 기능 제공 예정) |
+|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정) |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
