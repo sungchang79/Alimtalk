@@ -19,8 +19,8 @@
 
 ## v1.5 API紹介
 1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다. (전문 발송 시, title 값을 설정할 수 있습니다.)
-2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (7월 제공 예정)
-3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다.
+2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (추후 제공 예정)
+3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다. (추후 제공 예정)
 4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
 
 ## 一般メッセージ
@@ -59,7 +59,7 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
-		"createUser": String,
+    "createUser": String,
     "recipientList": [{
         "recipientNo": String,
         "templateParameter": {
@@ -185,7 +185,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "recipientNo": String,
             "content": String,
-            "title" : String,
+            "templateTitle" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -219,7 +219,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
-| - title                | String  | O    | 제목 (최대 50자) |
+| - templateTitle        | String  | O    | 제목 (최대 50자) |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -315,7 +315,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] 1番or 2番の条件は必須
+[Query parameter] 1番or (2番, 3番)の条件は必須
 
 | 値              | タイプ | 必須  | 説明                                 |
 | -------------------- | ------- | --------- | ---------------------------------------- |
@@ -356,14 +356,14 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -483,21 +483,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
-			"templateTitle" : String,
-			"templateSubtitle" : String,
-			"templateExtra" : String,
-			"templateAd" : String,
+      "templateTitle" : String,
+      "templateSubtitle" : String,
+      "templateExtra" : String,
+      "templateAd" : String,
       "requestDate" :  String,
       "receiveDate" : String,
-			"createDate" : String,
+      "createDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -530,10 +530,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - content              | String  | 本文                                 |
 |- templateTitle | String | 템플릿 제목 |
 |- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (7월 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정)|
+|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
 | - requestDate          | String  | リクエスト日時                              |
 | - receiveDate          | String  | 受信日時                              |
+| - createDate | String | 등록 일시 |
 | - resendStatus         | String  | 再送信ステータスコード                          |
 | - resendStatusName     | String  | 再送信ステータスコード名                           |
 | - messageStatus        | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
@@ -596,7 +597,7 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
-		"createUser" : String,
+    "createUser" : String,
     "recipientList": [{
         "recipientNo": String,
         "templateParameter": {
@@ -717,12 +718,12 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
-		"createUser": String,
+    "createUser": String,
     "recipientList": [
         {
             "recipientNo": String,
             "content": String,
-						"title" : String,
+            "title" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -753,7 +754,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
-|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
@@ -850,7 +851,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] 1番or 2番の条件は必須
+[Query parameter] 1番or (2番, 3番)の条件は必須
 
 | 値              | タイプ | 必須  | 説明                                 |
 | -------------------- | ------- | --------- | ---------------------------------------- |
@@ -865,7 +866,7 @@ Content-Type: application/json;charset=UTF-8
 | senderGroupingKey    | String  | X         | 発信グルーピングキー                             |
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                            |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | resultCode           | String  | X         | 送信結果(MRC01 -> 成功、MRC02 -> 失敗)          |
 | pageNum              | Integer | X         | ページ番号(基本：1)                            |
 | pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                |
@@ -891,14 +892,14 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -1017,21 +1018,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
-			"templateTitle" : String,
-			"templateSubtitle" : String,
-			"templateExtra" : String,
-			"templateAd" : String,
+      "templateTitle" : String,
+      "templateSubtitle" : String,
+      "templateExtra" : String,
+      "templateAd" : String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -1064,8 +1065,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - content              | String  | 本文                                 |
 |- templateTitle | String | 템플릿 제목 |
 |- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (7월 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정)|
+|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
 | - requestDate          | String  | リクエスト日時                              |
 |- createDate | String |	등록 일시 |
 | - receiveDate          | String  | 受信日時                              |
@@ -2122,9 +2123,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
 |-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (7월 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (7월 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정) |
+|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
+|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
 | -- buttons           | List    | ボタンリスト                             |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -2248,9 +2249,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
 |-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (7월 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (7월 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정) |
+|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
+|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
 | -- buttons           | List    | ボタンリスト                             |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |

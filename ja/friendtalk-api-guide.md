@@ -86,7 +86,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)、フィールドを送信しない場合、即時送信 |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
-| createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | recipientList          | List    | O    | 受信者リスト(最大1000人)                         |
 | - recipientNo          | String  | O    | 受信番号                              |
 | - content              | String  | O    | 内容(最大1000文字)<br>イメージを含む時は最大400文字  |
@@ -186,7 +186,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。 [[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] 1番or 2番の条件必須
+[Query parameter] 1番or (2番, 3番)の条件必須
 
 | 値              | タイプ | 必須  | 説明                          |
 | -------------------- | ------- | --------- | --------------------------------- |
@@ -201,6 +201,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                       |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED：成功、FAILED：失敗) |
 | resultCode           | String  | X         | 送信結果(MRC01：成功、MRC02：失敗)       |
+| createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | pageNum              | Integer | X         | ページ番号(基本：1)                     |
 | pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                     |
 
@@ -329,17 +330,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "plusFriendId" :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "content" :  String,
       "messageStatus" :  String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "imageSeq" : Integer,
       "imageName" : String,
       "imageUrl" : String,
