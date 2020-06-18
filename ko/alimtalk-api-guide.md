@@ -19,8 +19,8 @@
 
 ## v1.5 API 소개
 1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다. (전문 발송 시, title 값을 설정할 수 있습니다.)
-2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (7월 제공 예정)
-3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다.
+2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (추후 제공 예정)
+3. 알림톡/친구톡 메시지 발송 시 createUser 필드를 추가할 수 었습니다. (추후 제공 예정)
 4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
 
 ## 일반 메시지
@@ -58,7 +58,7 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
-		"createUser": String,
+    "createUser": String,
     "recipientList": [{
         "recipientNo": String,
         "templateParameter": {
@@ -180,11 +180,12 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
+    "createUser": String,
     "recipientList": [
         {
             "recipientNo": String,
             "content": String,
-						"title" : String,
+            "templateTitle" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -215,10 +216,11 @@ Content-Type: application/json;charset=UTF-8
 |templateCode|	String|	O | 등록한 발송 템플릿 코드 (최대 20자) |
 |requestDate| String | X| 요청 일시 (yyyy-MM-dd HH:mm)<br>(입력하지 않을 경우 즉시 발송) |
 |senderGroupingKey| String | X| 발신 그룹핑 키 (최대 100자) |
+|createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
 |recipientList|	List|	O|	수신자 리스트 (최대 1,000명) |
 |- recipientNo|	String|	O|	수신번호 (최대 15자) |
 |- content|	String|	O|	내용 (최대 1000자) |
-|- title| String| O| 제목 (최대 50자) |
+|- templateTitle| String| O| 제목 (최대 50자) |
 |- buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-- ordering|	Integer|	X |	버튼 순서 (버튼이 있는 경우 필수)|
 |-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
@@ -355,14 +357,14 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -481,21 +483,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
-			"templateTitle" : String,
-			"templateSubtitle" : String,
-			"templateExtra" : String,
-			"templateAd" : String,
+      "templateTitle" : String,
+      "templateSubtitle" : String,
+      "templateExtra" : String,
+      "templateAd" : String,
       "requestDate" :  String,
       "receiveDate" : String,
-			"createDate" : String,
+      "createDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -528,10 +530,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- content | String |	본문 |
 |- templateTitle | String | 템플릿 제목 |
 |- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (7월 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정)|
+|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
 |- requestDate | String |	요청 일시 |
 |- receiveDate | String |	수신 일시 |
+|- createDate | String | 등록 일시 |
 |- resendStatus | String |	재발송 상태 코드 |
 |- resendStatusName | String |	재발송 상태 코드명 |
 |- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) | 
@@ -597,7 +600,7 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
-		"createUser" : String,
+    "createUser" : String,
     "recipientList": [{
         "recipientNo": String,
         "templateParameter": {
@@ -621,7 +624,7 @@ Content-Type: application/json;charset=UTF-8
 |templateCode|	String|	O | 등록한 발송 템플릿 코드 (최대 20자) |
 |requestDate| String | X| 요청 일시 (yyyy-MM-dd HH:mm)<br>(입력하지 않을 경우 즉시 발송) |
 |senderGroupingKey| String | X| 발신 그룹핑 키 (최대 100자) |
-|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String | X| 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 |recipientList|	List|	O|	수신자 리스트 (최대 1000명) |
 |- recipientNo|	String|	O|	수신번호 (최대 15자) |
 |- templateParameter|	Object|	X|	템플릿 파라미터<br>(템플릿에 치환할 변수 포함 시, 필수) |
@@ -718,12 +721,12 @@ Content-Type: application/json;charset=UTF-8
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
-		"createUser": String,
+    "createUser": String,
     "recipientList": [
         {
             "recipientNo": String,
             "content": String,
-						"title" : String,
+            "title" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -867,7 +870,7 @@ Content-Type: application/json;charset=UTF-8
 |recipientGroupingKey|	String|	X|	수신자 그룹핑 키 |
 |messageStatus| String |	X | 요청 상태 ( COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 )	|
 |resultCode| String |	X | 발송 결과 ( MRC01 -> 성공 MRC02 -> 실패 )	|
-|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 |pageNum|	Integer|	X|	페이지 번호(Default : 1)|
 |pageSize|	Integer|	X|	조회 건수(Default : 15, Max : 1000)|
 
@@ -892,14 +895,14 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -934,8 +937,8 @@ Content-Type: application/json;charset=UTF-8
 |-- templateCode | String |	템플릿 코드 |
 |-- recipientNo | String |	수신 번호 |
 |-- content | String |	본문 |
-|-- requestDate | String |	요청 일시 |
-|-- createDate | String | 등록 일시 |
+|-- requestDate | String | 요청 일시 |
+|-- createDate | String |	등록 일시 |
 |-- receiveDate | String |	수신 일시 |
 |-- resendStatus | String |	재발송 상태 코드 |
 |-- resendStatusName | String |	재발송 상태 코드명 |
@@ -1018,21 +1021,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
-			"templateTitle" : String,
-			"templateSubtitle" : String,
-			"templateExtra" : String,
-			"templateAd" : String,
+      "templateTitle" : String,
+      "templateSubtitle" : String,
+      "templateExtra" : String,
+      "templateAd" : String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "messageStatus" :  String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -1065,8 +1068,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- content | String |	본문 |
 |- templateTitle | String | 템플릿 제목 |
 |- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (7월 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정)|
+|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
 |- requestDate | String | 요청 일시 |
 |- createDate | String |	등록 일시 |
 |- receiveDate | String |	수신 일시 |
@@ -2123,9 +2126,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
 |-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (7월 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (7월 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정) |
+|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
+|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
@@ -2249,9 +2252,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
 |-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (7월 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (7월 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (7월 기능 제공 예정) |
+|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
+|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |

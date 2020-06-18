@@ -78,7 +78,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O        | Plus Friend ID (up to 30 characters)                         |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm), to be sent immediately if field is not sent |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-| createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | recipientList          | List    | O        | List of recipients (up to 1000)                              |
 | - recipientNo          | String  | O        | Recipient number                                             |
 | - content              | String  | O        | Body message (up to 1000 characters)<br>Up to 400, if image is included |
@@ -171,7 +171,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
 | X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] No.1 or 2 is conditionally required
+[Query parameter] No.1 or (2, 3) is conditionally required
 
 | Value                | Type    | Required                      | Description                                            |
 | -------------------- | ------- | ----------------------------- | ------------------------------------------------------ |
@@ -186,6 +186,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                               |
 | messageStatus        | String  | X                             | Request status (COMPLETED: successful, FAILED: failed) |
 | resultCode           | String  | X                             | Delivery result (MRC01: successful, MRC02: failed)     |
+|createUser| String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 | pageNum              | Integer | X                             | Page number (default: 1)                               |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max: 1000)             |
 
@@ -314,17 +315,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "plusFriendId" :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "content" :  String,
       "messageStatus" :  String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "imageSeq" : Integer,
       "imageName" : String,
       "imageUrl" : String,

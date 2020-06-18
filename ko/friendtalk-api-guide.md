@@ -86,7 +86,7 @@ Content-Type: application/json;charset=UTF-8
 |plusFriendId|	String|	O | 플러스친구 ID(최대 30자) |
 |requestDate|	String|	X | 요청 일시(yyyy-MM-dd HH:mm), 필드를 보내지 않을 경우, 즉시 발송 |
 |senderGroupingKey| String | X| 발신 그룹핑 키(최대 100자) |
-| createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser | String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 |recipientList|	List|	O|	수신자 목록(최대 1000명) |
 |- recipientNo|	String|	O|	수신 번호 |
 |- content|	String|	O| 내용(최대 1000자)<br>이미지 포함 시, 최대 400자 |
@@ -206,6 +206,7 @@ Content-Type: application/json;charset=UTF-8
 |recipientGroupingKey|	String|	X|	수신자 그룹핑 키 |
 |messageStatus| String |	X | 요청 상태(COMPLETED: 성공, FAILED: 실패 )	|
 |resultCode| String |	X | 발송 결과(MRC01: 성공 MRC02: 실패 )	|
+|createUser| String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
 |pageNum|	Integer|	X|	페이지 번호(Default: 1)|
 |pageSize|	Integer|	X|	조회 건수(Default: 15, Max : 1000)|
 
@@ -225,14 +226,14 @@ Content-Type: application/json;charset=UTF-8
           "plusFriendId" :  String,
           "recipientNo" :  String,
           "requestDate" : String,
-					"createDate" : String,
+          "createDate" : String,
           "content" :  String,
           "messageStatus" :  String,
           "resendStatus" :  String,
           "resendStatusName" :  String,
           "resultCode" :  String,
           "resultCodeName" : String,
-					"createUser" : String,
+          "createUser" : String,
           "senderGroupingKey": String,
           "recipientGroupingKey": String
         }
@@ -334,17 +335,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "plusFriendId" :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
-			"createDate" : String,
+      "createDate" : String,
       "receiveDate" : String,
       "content" :  String,
       "messageStatus" :  String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
-			"resendResultCode" : String,
-			"resendRequestId" : String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "resultCode" :  String,
       "resultCodeName" : String,
-			"createUser" : String,
+      "createUser" : String,
       "imageSeq" : Integer,
       "imageName" : String,
       "imageUrl" : String,
