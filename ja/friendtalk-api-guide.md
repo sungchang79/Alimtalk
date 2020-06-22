@@ -86,7 +86,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)、フィールドを送信しない場合、即時送信 |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
-| createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | recipientList          | List    | O    | 受信者リスト(最大1000人)                         |
 | - recipientNo          | String  | O    | 受信番号                              |
 | - content              | String  | O    | 内容(最大1000文字)<br>イメージを含む時は最大400文字  |
@@ -193,15 +193,15 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | 条件必須(1番) | リクエストID                             |
 | startRequestDate     | String  | 条件必須(2番) | 送信リクエスト日の開始値(yyyy-MM-dd HH:mm)   |
 | endRequestDate       | String  | 条件必須(2番) | 送信リクエスト日の終了値(yyyy-MM-dd HH:mm)    |
-|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
+|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
+|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝값(yyyy-MM-dd HH:mm) |
 | recipientNo          | String  | X         | 受信番号                       |
 | plusFriendId         | String  | X         | プラスフレンドID                          |
 | senderGroupingKey    | String  | X         | 発信グルーピングキー                        |
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                       |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED：成功、FAILED：失敗) |
 | resultCode           | String  | X         | 送信結果(MRC01：成功、MRC02：失敗)       |
-| createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | pageNum              | Integer | X         | ページ番号(基本：1)                     |
 | pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                     |
 
@@ -258,7 +258,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resendStatusName         | String  | 再送信ステータスコード名                      |
 | -- resultCode               | String  | 受信結果コード                    |
 | -- resultCodeName           | String  | 受信結果コード名                       |
-| -- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | -- senderGroupingKey        | String  | 発信グルーピングキー                        |
 | -- recipientGroupingKey     | String  | 受信者グルーピングキー                       |
 | - totalCount                | Integer | 総個数                            |
@@ -383,7 +383,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatusName     | String  | 再送信ステータスコード名                             |
 | - resultCode           | String  | 受信結果コード                           |
 | - resultCodeName       | String  | 受信結果コード名                              |
-|- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | - imageSeq             | Integer | イメージ番号                             |
 | - imageName            | String  | イメージ名(アップロードしたファイル名)                           |
 | - imageUrl             | String  | イメージURL                                  |

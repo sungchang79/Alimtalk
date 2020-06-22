@@ -1511,12 +1511,14 @@ Content-Type: application/json;charset=UTF-8
          "kakaoProfileStatusName" : String,
          "createDate": String,
          "alimtalk": {  
+                "resendAppKey": String,
                 "isResend": Boolean,
                 "resendSendNo": String,
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
           },
          "friendtalk": {  
+                "resendAppKey": String,
                 "isResend": Boolean,
                 "resendSendNo": String,
                 "resendUnsubscribeNo": String,
@@ -1534,7 +1536,7 @@ Content-Type: application/json;charset=UTF-8
 |- resultCode|	Integer|	결과 코드|
 |- resultMessage|	String| 결과 메시지|
 |- isSuccessful|	Boolean| 성공 여부|
-|plusFriends|	Object|	플러스친구|
+|plusFriend|	Object|	플러스친구|
 |- plusFriendId | String |	플러스친구 아이디 |
 |- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |- senderKey | String |	발신키 |
@@ -1546,11 +1548,13 @@ Content-Type: application/json;charset=UTF-8
 |- kakaoProfileStatus | String |	카카오 플러스친구 프로필 상태 코드<br>(A: 활성화, B:차단, C: 비활성화, D:삭제 E:삭제 처리 중)<br>status가 YSC02일 경우, kakaoProfileStatus null 값을 가집니다.|
 |- kakaoProfileStatusName | String | 카카오 플러스친구 프로필 상태명 (활성화, 비활성화, 차단, 삭제 처리 중, 삭제)<br>status가 YSC02일 경우, kakaoProfileStatusName null 값을 가집니다. |
 |- alimtalk|	Object|	알림톡 설정 정보|
+|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
 |-- isResend | String | 대체 발송 설정(재발송) 여부|
 |-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
 |-- dailyMaxCount | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |-- sentCount | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |- friendtalk|	Object|	친구톡 설정 정보|
+|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
 |-- isResend | String | 대체 발송 설정(재발송) 여부|
 |-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
 |-- resendUnsubscribeNo | String |	재발송 시, tc-sms 080 수신 거부 번호 |
@@ -1616,12 +1620,14 @@ Content-Type: application/json;charset=UTF-8
          "kakaoProfileStatusName" : String,
          "createDate": String,
          "alimtalk": {  
+                "resendAppKey": String,
                 "isResend": Boolean,
                 "resendSendNo": String,
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
           },
          "friendtalk": {  
+                "resendAppKey": String,
                 "isResend": Boolean,
                 "resendSendNo": String,
                 "resendUnsubscribeNo": String,
@@ -1652,11 +1658,13 @@ Content-Type: application/json;charset=UTF-8
 |- kakaoProfileStatus | String |	카카오 플러스친구 프로필 상태 코드<br>(A: 활성화, B:차단, C: 비활성화, D:삭제 E:삭제 처리 중)<br>status가 YSC02일 경우, kakaoProfileStatus null 값을 가집니다.|
 |- kakaoProfileStatusName | String | 카카오 플러스친구 프로필 상태명 (활성화, 비활성화, 차단, 삭제 처리 중, 삭제)<br>status가 YSC02일 경우, kakaoProfileStatusName null 값을 가집니다. |
 |- alimtalk|	Object|	알림톡 설정 정보|
+|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
 |-- isResend | String | 대체 발송 설정(재발송) 여부|
 |-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
 |-- dailyMaxCount | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |-- sentCount | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |- friendtalk|	Object|	친구톡 설정 정보|
+|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
 |-- isResend | String | 대체 발송 설정(재발송) 여부|
 |-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
 |-- resendUnsubscribeNo | String |	재발송 시, tc-sms 080 수신 거부 번호 |

@@ -18,10 +18,10 @@
 </table>
 
 ## Overview of v1.5 API
-1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다. (전문 발송 시, title 값을 설정할 수 있습니다.)
-2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (추후 제공 예정)
-3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다. (추후 제공 예정)
-4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
+1. It has been changed to allow emphasized template for Register Template API (for a full-text delivery, the title value can be configured.)
+2. Expanded the template type. Ad or additional information can be added (to be provided).
+3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
+4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
 
 
 ## General Messages
@@ -83,7 +83,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O        | Registered delivery template code (up to 20 characters)      |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm)<br>(send immediately, if it is left blank) |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-| createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
+| createUser             | String  | X        | Registrant (saved as user UUID when delivered via console)   |
 | recipientList          | List    | O        | List of recipients (up to 1000 persons)                      |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - templateParameter    | Object  | X        | Template parameter<br>(required, if it includes a variable to be replaced for template) |
@@ -240,9 +240,9 @@ Content-Type: application/json;charset=UTF-8
 
 * <b>Enter data completed with replacement for the body and button. </b>
 * **Request date and time can be set up to 90 days since a point of calling.**
-* <b>SMS 서비스에서 대체 발송되므로, SMS 서비스의 발송 API 명세에 따라 필드를 입력해야 합니다.(SMS 서비스에 등록된 발신 번호, 각종 필드 길이 제한 등)</b>
+* <b>Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
 * <b>SMS 서비스는 국제 SMS만 지원합니다. 국제 수신자 번호일 경우, resendType(대체 발송 타입)을 SMS로 변경해야 정상적으로 대체 발송할 수 있습니다.</b>
-* <b>지정한 대체 발송 타입의 바이트 제한을 초과하는 대체 발송 제목이나 내용은 잘려서 대체 발송될 수 있습니다.([[SMS 주의사항](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
+* <b>Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
 
 [Exapmle]
 
@@ -326,8 +326,8 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                                   |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)            |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)              |
-| startCreateDate      | String  | 조건 필수 (3번)                  | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
-| endCreateDate        | String  | 조건 필수 (3번)                  | 등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
+| startCreateDate      | String  | 조건 필수 (3번)                  | Start date of registration (mm:HH dd-MM-yyyy)|
+| endCreateDate        | String  | 조건 필수 (3번)                  | End date of registration (mm:HH dd-MM-yyyy) |
 | recipientNo          | String  | X                             | Recipient number                                             |
 | plusFriendId         | String  | X                             | PlusFriend ID                                                |
 | templateCode         | String  | X                             | Template code                                                |
@@ -335,7 +335,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                                     |
 | messageStatus        | String  | X                             | Request status (COMPLETED -> Successful, FAILED -> Failed, CANCEL -> Canceled) |
 | resultCode           | String  | X                             | Delivery result (MRC01 -> Successful, MRC02 ->Failed)        |
-|createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
+|createUser            | String  | X                             | Registrant (saved as user UUID when delivered via console) |
 | pageNum              | Integer | X                             | Page number (default: 1)                                     |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max : 1000)                  |
 
@@ -403,12 +403,12 @@ Content-Type: application/json;charset=UTF-8
 | -- recipientNo              | String  | Recipient number                                             |
 | -- content                  | String  | Body message                                                 |
 | -- requestDate              | String  | Date and time of request                                     |
-|-- createDate | String | 등록 일시 |
+|-- createDate                | String  | Registered date and time                                     |
 | -- receiveDate              | String  | Date and time of receiving                                   |
 | -- resendStatus             | String  | Status code of resending                                     |
 | -- resendStatusName         | String  | Status code name of resending                                |
 | -- messageStatus            | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled ) |
-|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|-- createUser                | String  | Registrant (saved as user UUID when delivered via console)   |
 | -- resultCode               | String  | Result code of receiving                                     |
 | -- resultCodeName           | String  | Result code name of receiving                                |
 | -- buttons                  | List    | List of buttons                                              |
@@ -531,13 +531,13 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - templateCode         | String  | Template code                                                |
 | - recipientNo          | String  | Recipient number                                             |
 | - content              | String  | Body message                                                 |
-|- templateTitle | String | 템플릿 제목 |
-|- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
+|- templateTitle         | String  | Template Title                                               |
+|- templateSubtitle      | String  | Auxiliary Template Phrase                                    |
+|- templateExtra         | String  | Additional Template Information (to be provided)             |
+|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
 | - requestDate          | String  | Date and time of request                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
-| - createDate | String | 등록 일시 |
+| - createDate           | String  | Registered date and time                                     |
 | - resendStatus         | String  | Status code of resending                                     |
 | - resendStatusName     | String  | status code name of resending                                |
 | - messageStatus        | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> cancelled ) |
@@ -563,8 +563,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | --- | --- |
 | Authentication Messages | auth, password, verif, にんしょう, 認証, 비밀번호, 인증 |
 
-- Example 1) Delivery shall fail if the full text (including template replacement) does not include authentication words, in the request of Authentication Messages API (for emergency) 
-- Example 2) Validity for English words shall be checked regardless of small or capital letters 
+- Example 1) Delivery shall fail if the full text (including template replacement) does not include authentication words, in the request of Authentication Messages API (for emergency)
+- Example 2) Validity for English words shall be checked regardless of small or capital letters
 
 
 ### Request of Sending Replaced Messages
@@ -624,7 +624,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O        | Registered delivery template code (up to 20 characters)      |
 | requestDate            | String  | X        | Date of request (yyyy-MM-dd HH:mm)<br>(immediately sent, if it is left blank) |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser             | String  | X        | Registrant (saved as user UUID when delivered via console)   |
 | recipientList          | List    | O        | List of recipients (up to 1000 persons)                      |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - templateParameter    | Object  | X        | Template parameter<br>(required, if it includes a variable to be replaced for template) |
@@ -754,7 +754,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O        | Registered delivery template code (up to 20 characters)      |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm)<br>(sent immediately, if it is left blank) |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-|createUser | String | X| 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser              | String  | X        | Registrant (saved as user UUID when delivered via console)  |
 | recipientList          | List    | O        | List of recipients (up to 1,000 persons)                     |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - content              | String  | O        | Body message (up to 1000 characters)                         |
@@ -857,8 +857,8 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                                   |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)            |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)              |
-|startCreateDate|  String| 조건 필수 (3번) | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수 (3번) | 등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
+|startCreateDate       | String  | Conditionally required (no.3) | Start date of registration (mm:HH dd-MM-yyyy)                |
+|endCreateDate         | String  | Conditionally required (no.3) | End date of registration (mm:HH dd-MM-yyyy)                  |
 | recipientNo          | String  | X                             | Recipient number                                             |
 | plusFriendId         | String  | X                             | PlusFriend ID                                                |
 | templateCode         | String  | X                             | Template code                                                |
@@ -866,7 +866,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                                     |
 | messageStatus        | String  | X                             | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled ) |
 | resultCode           | String  | X                             | Delivery result (MRC01 -> successful, MRC02 -> failed )      |
-|createUser | String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser            | String  | X                             | Registrant (saved as user UUID when delivered via console)   |
 | pageNum              | Integer | X                             | Page number (default: 1)                                     |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max : 1000)                  |
 
@@ -934,14 +934,14 @@ Content-Type: application/json;charset=UTF-8
 | -- recipientNo              | String  | Recipient number                                             |
 | -- content                  | String  | Body message                                                 |
 | -- requestDate              | String  | Date and time of request                                     |
-|-- createDate | String | 등록 일시 |
+|-- createDate                | String  | Registered date and time                                     |
 | -- receiveDate              | String  | Date and time of receiving                                   |
 | -- resendStatus             | String  | Status code of resending                                     |
 | -- resendStatusName         | String  | Status code name of resending                                |
 | -- messageStatus            | String  | Request status (COMPLETED -> successful, FAILED ->failed, CANCEL -> canceled ) |
 | -- resultCode               | String  | Result code of receiving                                     |
 | -- resultCodeName           | String  | Result code name of receiving                                |
-|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|-- createUser                | String  |  Registrant (saved as user UUID when delivered via console)  |
 | -- buttons                  | List    | List of buttons                                              |
 | --- ordering                | Integer | Button sequence                                              |
 | --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -1062,21 +1062,21 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - templateCode         | String  | Template code                                                |
 | - recipientNo          | String  | Recipient number                                             |
 | - content              | String  | Body message                                                 |
-|- templateTitle | String | 템플릿 제목 |
-|- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
+|- templateTitle         | String  | Template Title                                               |
+|- templateSubtitle      | String  | Auxiliary Template Phrase                                    |
+|- templateExtra         | String  | Additional Template Information (to be provided)             |
+|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
 | - requestDate          | String  | Date and time of request                                     |
-|- createDate | String |	등록 일시 |
+|- createDate            | String  |	등록 일시 |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - resendStatus         | String  | Status code of resending                                     |
 | - resendStatusName     | String  | Status code name of resending                                |
 |- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
-|- resendRequestId | String | 재발송 sms 요청 ID |
+|- resendRequestId | String | 재발송 SMS 요청 ID |
 | - messageStatus        | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled) |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |
-|- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|- createUser            | String  | Registrant (saved as user UUID when delivered via console)  |
 | - buttons              | List    | List of buttons                                              |
 | -- ordering            | Integer | Button sequence                                              |
 | -- type                | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK:Bot Keyword, MD: Message Delivery) |
@@ -1544,9 +1544,109 @@ Content-Type: application/json;charset=UTF-8
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
 
+### Get PlusFriend
+#### Request
+
+[URL]
+
+```
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Value  | Type   | Description     |
+| ------ | ------ | --------------- |
+| appkey | String | Original appkey |
+| plusFriendId | String  | PlusFriend ID |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Value        | Type   | Required | Description                                                  |
+| ------------ | ------ | -------- | ------------------------------------------------------------ |
+| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
+
+#### Response
+```
+{  
+   "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+   },
+   "plusFriend":{  
+         "plusFriendId" : String,
+         "plusFriendType" : String,
+         "senderKey" : String,
+         "categoryCode" : String,
+         "status" : String,
+         "statusName" : String,
+         "kakaoStatus" : String,
+         "kakaoStatusName" : String,
+         "kakaoProfileStatus" : String,
+         "kakaoProfileStatusName" : String,
+         "createDate": String,
+         "alimtalk": {  
+                "resendAppKey": String,
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+          },
+         "friendtalk": {  
+                "resendAppKey": String,
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "resendUnsubscribeNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+         },
+         "createDate": String
+    }
+}
+```
+
+| Value                     | Type    | Description                                                  |
+| ------------------------- | ------- | ------------------------------------------------------------ |
+| header                    | Object  | Header area                                                  |
+| - resultCode              | Integer | Result code                                                  |
+| - resultMessage           | String  | Result message                                               |
+| - isSuccessful            | Boolean | Successful or not                                            |
+| plusFriend                | Object  | PlusFriend                                                   |
+| - plusFriendId            | String  | PlusFriend ID                                                |
+| - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
+| - senderKey               | String  | Sender key                                                   |
+| - categoryCode            | String  | Category code                                                |
+| - status                  | String  | Status code of TOAST PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
+| - statusName              | String  | Status name of TOAST PlusFriend (ready for registration, normally registered) |
+| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
+| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
+| - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
+| - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
+|- alimtalk                 |	Object  |	Alimtalk information                                         |
+|-- resendAppKey            | String  | Alternative sms appkey                                       |
+|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                        |
+|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
+|-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
+|- friendtalk               |	Object  |	Friendtalk information                                                  |
+|-- resendAppKey            | String  | Alternative sms appkey                                  |
+|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                         |
+|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- resendUnsubscribeNo     | String  |	재발송 시, tc-sms 080 수신 거부 번호                               |
+|-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
+|-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
+| - createDate              | String  | Date and time of registration                                |
+| totalCount                | Integer | Total count                                                  |
+
 ### List PlusFriends
 
-#### Requet
+#### Request
 
 [URL]
 
@@ -1582,35 +1682,43 @@ Content-Type: application/json;charset=UTF-8
 #### Response
 
 ```
-{
-  "header" : {
+{  
+   "header":{  
       "resultCode" :  Integer,
       "resultMessage" :  String,
       "isSuccessful" :  boolean
-  },
-  "plusFriends" : [
-    {
-      "plusFriendId" : String,
-      "plusFriendType" : String,
-      "senderKey" : String,
-      "categoryCode" : String,
-      "alimtalkDailyMaxCount" : Integer,
-      "friendtalkDailyMaxCount" : Integer,
-      "alimtalkSentCount" : Integer,
-      "friendtalkSentCount" : Integer,
-      "status" : String,
-      "statusName" : String,
-      "kakaoStatus" : String,
-      "kakaoStatusName" : String,
-      "kakaoProfileStatus" : String,
-      "kakaoProfileStatusName" : String,
-      "resendYn" : String,
-      "smsSendNo" : Integer,
-      "createDate" : String
-    }
-  ],
-  "totalCount" : Integer
-  }
+   },
+   "plusFriends":[  
+      {  
+         "plusFriendId" : String,
+         "plusFriendType" : String,
+         "senderKey" : String,
+         "categoryCode" : String,
+         "status" : String,
+         "statusName" : String,
+         "kakaoStatus" : String,
+         "kakaoStatusName" : String,
+         "kakaoProfileStatus" : String,
+         "kakaoProfileStatusName" : String,
+         "createDate": String,
+         "alimtalk": {  
+                "resendAppKey": String,
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+          },
+         "friendtalk": {  
+                "resendAppKey": String,
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "resendUnsubscribeNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+         }
+      }
+   ],
+   "totalCount": Integer
 }
 ```
 
@@ -1625,18 +1733,25 @@ Content-Type: application/json;charset=UTF-8
 | - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
 | - senderKey               | String  | Sender key                                                   |
 | - categoryCode            | String  | Category code                                                |
-| - alimtalkDailyMaxCount   | Integer | Number of maximum daily Alimtalk deliveries  (not limited if it is 0) |
-| - friendtalkDailyMaxCount | Integer | Number of maximum daily Friendtalk deliveries (not limited if it is 0) |
-| - alimtalkSentCount       | Integer | Number of daily Alimtalk deliveries  (not limited if it is 0) |
-| - friendtalkSentCount     | Integer | Number of daily Friendtalk deliveries (not limited if it is 0) |
 | - status                  | String  | Status code of TOAST PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
 | - statusName              | String  | Status name of TOAST PlusFriend (ready for registration, normally registered) |
 | - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
 | - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
-| - resendYn                | String  | Set delivery failure (resending) or not                      |
-| - smsSendNo               | String  | Sender number for tc-sms, to resend                          |
+|- alimtalk                 |	Object  |	Alimtalk information                                         |
+|-- resendAppKey            | String  | Alternative sms appkey                                       |
+|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                        |
+|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
+|-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
+|- friendtalk               |	Object  |	친구톡 설정 정보                                                  |
+|-- resendAppKey            | String  | 대체 발송으로 설정할 SMS 서비스 앱키                                  |
+|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                         |
+|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- resendUnsubscribeNo     | String  |	재발송 시, tc-sms 080 수신 거부 번호                               |
+|-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
+|-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
 | - createDate              | String  | Date and time of registration                                |
 | totalCount                | Integer | Total count                                                  |
 
@@ -1694,14 +1809,14 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| Value           | Type    | Required | Description                                                  |
-| --------------- | ------- | -------- | ------------------------------------------------------------ |
-| templateCode    | String  | O        | Template code (up to 20 characters)                          |
-| templateName    | String  | O        | Template name (up to 20 characters)                          |
-| templateContent | String  | O        | Template body (up to 1000 characters)                        |
-|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
-|tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
-|templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+| Value               | Type    | Required | Description                                                  |
+| ---------------     | ------- | -------- | ------------------------------------------------------------ |
+| templateCode        | String  | O        | Template code (up to 20 characters)                          |
+| templateName        | String  | O        | Template name (up to 20 characters)                          |
+| templateContent     | String  | O        | Template body (up to 1000 characters)                        |
+|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+|tempalteTitle        | String  | X        | Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
+|templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -1786,9 +1901,9 @@ Content-Type: application/json;charset=UTF-8
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
 | templateName    | String  | O        | Template name (up to 20 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
-|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
-|tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
-|templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+|templateEmphasizeType| String| X| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+|tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
+|templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -2037,12 +2152,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | Template code                                                |
 | -- templateName      | String  | Template name                                                |
 | -- templateContent   | String  | Template body                                                |
-|-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
-|-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
-|-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
+|-- templateEmphasizeType| String| X| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT<br>- TEXT: templateTitle and templateSubtitle fields are required |
+|-- tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
+|-- templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
+|-- templateMessageType| String | X| Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) (To be provided)<br>EX: Requires the templateExtra field <br>AD: Requires the templaeAd field, but Group template is not allowed<br>MI: Requires the templateExtra and templateAd fields  |
+|-- templateExtra | String | X| Additional Template Information (to be provided) |
+|-- templateAd | String | X| Request for consent of receiving within template or simple ad phrases (to be provided)  |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
@@ -2163,12 +2278,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | Template code                                                |
 | -- templateName      | String  | Template name                                                |
 | -- templateContent   | String  | Template body                                                |
-|-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
-|-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
-|-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
+|-- templateEmphasizeType| String| X| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+|-- tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
+|-- templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
+|-- templateMessageType| String | X| Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) (To be provided)<br>EX: Requires the templateExtra field <br>AD: Requires the templaeAd field, but Group template is not allowed<br>MI: Requires the templateExtra and templateAd fields  |
+|-- templateExtra | String | X| Additional Template Information (to be provided) |
+|-- templateAd | String | X| Request for consent of receiving within template or simple ad phrases (to be provided)  |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |

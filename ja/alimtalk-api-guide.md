@@ -18,8 +18,8 @@
 </table>
 
 ## v1.5 API紹介
-1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다. (전문 발송 시, title 값을 설정할 수 있습니다.)
-2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (추후 제공 예정)
+1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다.(전문 발송 시, title값을 설정할 수 있습니다.)
+2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다(추후 제공 예정).
 3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다. (추후 제공 예정)
 4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
 
@@ -322,8 +322,8 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | 条件必須(1番) | リクエストID                                    |
 | startRequestDate     | String  | 条件必須(2番) | 送信リクエスト日の開始値(yyyy-MM-dd HH:mm)          |
 | endRequestDate       | String  | 条件必須(2番) | 送信リクエスト日の終了値(yyyy-MM-dd HH:mm)           |
-| startCreateDate      | String  | 조건 필수 (3번)                  | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
-| endCreateDate        | String  | 조건 필수 (3번)                  | 등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
+| startCreateDate      | String  | 조건 필수 (3번)                  | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
+| endCreateDate        | String  | 조건 필수 (3번)                  | 등록 날짜 끝값(yyyy-MM-dd HH:mm) |
 | recipientNo          | String  | X         | 受信番号                              |
 | plusFriendId         | String  | X         | プラスフレンドID                                 |
 | templateCode         | String  | X         | テンプレートコード                             |
@@ -405,7 +405,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resendStatus             | String  | 再送信ステータスコード                         |
 | -- resendStatusName         | String  | 再送信ステータスコード名                         |
 | -- messageStatus            | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|-- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | -- resultCode               | String  | 受信結果コード                          |
 | -- resultCodeName           | String  | 受信結果コード名                          |
 | -- buttons                  | List    | ボタンリスト                             |
@@ -620,7 +620,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
-|createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
 | recipientList          | List    | O    | 受信者リスト(最大1000人)                         |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
@@ -754,7 +754,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
-|createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
@@ -858,15 +858,15 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | 条件必須(1番) | リクエストID                                    |
 | startRequestDate     | String  | 条件必須(2番) | 送信リクエスト日の開始値(yyyy-MM-dd HH:mm)          |
 | endRequestDate       | String  | 条件必須(2番) | 送信リクエスト日の終了値(yyyy-MM-dd HH:mm)           |
-|startCreateDate|  String| 조건 필수 (3번) | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수 (3번) | 등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
+|startCreateDate|  String| 조건 필수 (3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
+|endCreateDate|  String| 조건 필수 (3번) | 등록 날짜 끝값(yyyy-MM-dd HH:mm) |
 | recipientNo          | String  | X         | 受信番号                              |
 | plusFriendId         | String  | X         | プラスフレンドID                                 |
 | templateCode         | String  | X         | テンプレートコード                             |
 | senderGroupingKey    | String  | X         | 発信グルーピングキー                             |
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                            |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-|createUser | String |X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | resultCode           | String  | X         | 送信結果(MRC01 -> 成功、MRC02 -> 失敗)          |
 | pageNum              | Integer | X         | ページ番号(基本：1)                            |
 | pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                |
@@ -942,7 +942,7 @@ Content-Type: application/json;charset=UTF-8
 | -- messageStatus            | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
 | -- resultCode               | String  | 受信結果コード                          |
 | -- resultCodeName           | String  | 受信結果コード名                          |
-|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|-- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | -- buttons                  | List    | ボタンリスト                             |
 | --- ordering                | Integer | ボタン順序                             |
 | --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -1073,11 +1073,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatus         | String  | 再送信ステータスコード                          |
 | - resendStatusName     | String  | 再送信ステータスコード名                           |
 |- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
-|- resendRequestId | String | 재발송 sms 요청 ID |
+|- resendRequestId | String | 재발송 SMS 요청 ID |
 | - messageStatus        | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
 | - resultCode           | String  | 受信結果コード                           |
 | - resultCodeName       | String  | 受信結果コード名                            |
-|- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | - buttons              | List    | ボタンリスト                              |
 | -- ordering            | Integer | ボタン順序                              |
 | -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
