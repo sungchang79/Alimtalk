@@ -1072,7 +1072,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatus         | String  | Status code of resending                                     |
 | - resendStatusName     | String  | Status code name of resending                                |
 |- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
-|- resendRequestId | String | 재발송 sms 요청 ID |
+|- resendRequestId | String | 재발송 SMS 요청 ID |
 | - messageStatus        | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled) |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |

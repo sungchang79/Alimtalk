@@ -86,7 +86,7 @@ Content-Type: application/json;charset=UTF-8
 |plusFriendId|	String|	O | 플러스친구 ID(최대 30자) |
 |requestDate|	String|	X | 요청 일시(yyyy-MM-dd HH:mm), 필드를 보내지 않을 경우, 즉시 발송 |
 |senderGroupingKey| String | X| 발신 그룹핑 키(최대 100자) |
-| createUser | String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+| createUser | String | X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |recipientList|	List|	O|	수신자 목록(최대 1000명) |
 |- recipientNo|	String|	O|	수신 번호 |
 |- content|	String|	O| 내용(최대 1000자)<br>이미지 포함 시, 최대 400자 |
@@ -112,8 +112,8 @@ Content-Type: application/json;charset=UTF-8
 
 * <b>요청 일시는 호출하는 시점부터 90일 후까지 설정 가능합니다.</b>
 * <b>야간 발송 제한(20:00~다음 날 08:00)</b>
-* <b>SMS 서비스로 대체 발송되므로, SMS 서비스의 발송 API 명세에 따라 필드를 입력해야합니다.(SMS 서비스에 등록된 발신 번호, 080 수신 거부 번호, 각종 필드 길이 제한 등)</b>
-* <b>지정한 대체발송 타입의 바이트 제한을 초과하는 대체 발송 제목이나 내용은 잘려서 대체 발송될 수 있습니다.([[SMS 주의 사항](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
+* <b>SMS 서비스로 대체 발송되므로, SMS 서비스의 발송 API 명세에 따라 필드를 입력해야 합니다.(SMS 서비스에 등록된 발신 번호, 080 수신 거부 번호, 각종 필드 길이 제한 등)</b>
+* <b>지정한 대체 발송 타입의 바이트 제한을 초과하는 대체 발송 제목이나 내용은 잘려서 대체 발송될 수 있습니다.([[SMS 주의 사항](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
 * <b>친구톡 광고 메시지는 광고 SMS API로 대체 발송되므로, 반드시 080 수신 거부 번호를 등록해야 대체 발송됩니다.</b>
 * <b>친구톡 광고 메시지의 resendContent 필드를 입력할 경우, SMS 광고 API의 <span style="color:red">광고 문구</span>를 필수로 입력해야 정상 대체 발송됩니다. `(광고)내용[무료 수신거부]080XXXXXXX`</b>
 * <b>친구톡 광고 메시지의 resendContent 필드가 없을 경우, 등록된 080 수신 거부 번호로 <span style="color:red">광고 문구</span>를 자동 생성해서 대체 발송됩니다.</b>
@@ -198,15 +198,15 @@ Content-Type: application/json;charset=UTF-8
 |requestId|	String|	조건 필수(1번) | 요청 ID |
 |startRequestDate|	String|	조건 필수(2번) | 발송 요청 날짜 시작 값(yyyy-MM-dd HH:mm)|
 |endRequestDate|	String| 조건 필수(2번) |	발송 요청 날짜 끝 값(yyyy-MM-dd HH:mm) |
-|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작 값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝 값(yyyy-MM-dd HH:mm) |
+|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
+|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝값(yyyy-MM-dd HH:mm) |
 |recipientNo|	String|	X |	수신 번호 |
 |plusFriendId|	String|	X |	플러스친구 ID |
 |senderGroupingKey| String | X| 발신 그룹핑 키 |
 |recipientGroupingKey|	String|	X|	수신자 그룹핑 키 |
 |messageStatus| String |	X | 요청 상태(COMPLETED: 성공, FAILED: 실패 )	|
 |resultCode| String |	X | 발송 결과(MRC01: 성공 MRC02: 실패 )	|
-|createUser| String | X | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|createUser| String | X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |pageNum|	Integer|	X|	페이지 번호(Default: 1)|
 |pageSize|	Integer|	X|	조회 건수(Default: 15, Max : 1000)|
 
@@ -263,7 +263,7 @@ Content-Type: application/json;charset=UTF-8
 |-- resendStatusName | String |	재발송 상태 코드명 |
 |-- resultCode | String |	수신 결과 코드 |
 |-- resultCodeName | String |	수신 결과 코드명 |
-|-- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|-- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |-- senderGroupingKey | String | 발신 그룹핑 키 |
 |-- recipientGroupingKey | String |	수신자 그룹핑 키 |
 |- totalCount | Integer | 총 개수 |
@@ -387,10 +387,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- resendStatus | String |	재발송 상태 코드 |
 |- resendStatusName | String |	재발송 상태 코드명 |
 |- resendResultCode | String | 재발송 결과 코드 SMS 결과 코드 |
-|- resendRequestId | String | 재발송 sms 요청 ID |
+|- resendRequestId | String | 재발송 SMS 요청 ID |
 |- resultCode | String |	수신 결과 코드 |
 |- resultCodeName | String |	수신 결과 코드명 |
-|- createUser | String | 등록자 (콘솔에서 발솔 시 사용자 UUID로 저장) |
+|- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |- imageSeq|	Integer|  이미지 번호 |
 |- imageName|	String|  이미지명(업로드한 파일명) |
 |- imageUrl|	String|  이미지 URL |
