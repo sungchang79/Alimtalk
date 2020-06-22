@@ -2120,12 +2120,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | テンプレートコード                            |
 | -- templateName      | String  | テンプレート名                              |
 | -- templateContent   | String  | テンプレート本文                            |
-|-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
-|-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
-|-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
+|-- templateEmphasizeType| String| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|-- tempalteTitle| String | 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+|-- templateSubtitle| String | 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+|-- templateMessageType| String | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
+|-- templateExtra | String | 템플릿 부가 정보 (추후 기능 제공 예정) |
+|-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
 | -- buttons           | List    | ボタンリスト                             |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -2246,12 +2246,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | テンプレートコード                            |
 | -- templateName      | String  | テンプレート名                              |
 | -- templateContent   | String  | テンプレート本文                            |
-|-- templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
-|-- tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
-|-- templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
-|-- templateMessageType| String | X| 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) <br>- EX : templateExtra 필드 필수 <br>- AD : templateAd 필드 필수, 그룹 템플릿 사용 불가 <br>- MI : templateExtra, templateAd 필드 필수 |
-|-- templateExtra | String | X| 템플릿 부가 정보 (추후 기능 제공 예정) |
-|-- templateAd | String | X| 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
+|-- templateEmphasizeType| String| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE)|
+|-- tempalteTitle| String | 템플릿 제목                                        |
+|-- templateSubtitle| String | 템플릿 보조 문구                                 |
+|-- templateMessageType| String | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) |
+|-- templateExtra | String | 템플릿 부가 정보 (추후 기능 제공 예정) |
+|-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
 | -- buttons           | List    | ボタンリスト                             |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
