@@ -1,4 +1,8 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2020.06.23.
+* [API] Allowed Alimtalk Emphasized template
+    * It has been changed to allow emphasized template for Register Template API (CBT feature)
+    
 ### 2020.05.26
 * [API] 친구톡 와이드 이미지 기능
     * 친구톡 와이드 이미지를 업로드하여, 발송할 수 있는 기능이 추가되었습니다.
