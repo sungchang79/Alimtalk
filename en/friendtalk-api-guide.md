@@ -78,7 +78,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O        | Plus Friend ID (up to 30 characters)                         |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm), to be sent immediately if field is not sent |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-| createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| createUser             | String  | X        | Registrant (saved as user UUID when delivered via console)   |
 | recipientList          | List    | O        | List of recipients (up to 1000)                              |
 | - recipientNo          | String  | O        | Recipient number                                             |
 | - content              | String  | O        | Body message (up to 1000 characters)<br>Up to 400, if image is included |
@@ -95,8 +95,13 @@ Content-Type: application/json;charset=UTF-8
 | - isAd                 | Boolean | X        | Ad or not (default is true)                                  |
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
 
-* <b> Send the first-registered Plus Friend, if Plus Friend ID field is not sent.</b>
+* <b> Request date and time can be configured up to 90 days after a point of calling </b>
 * <b> Delivery restricted during night (20:00~08:00 on the following day)</b>
+* <b> Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
+* <b> Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/en/Notification/SMS/en/api-guide/#_1)])</b>
+* <b> Friendtalk ad message can be replaced by Ad SMS API, so it must be registered at the 080 Unsubscription Service to enable alternative delivery. </b>
+* <b> When the resendContent field of a Friendtalk ad message is available, ad phrase for SMS Ad API is required to enable alternative delivery. (Ad) Content [Unsubscribe for Free] 080XXXXXXX </b>
+* <b> When the resendContent field of a Friendtalk ad message is missing, ad phrase is automatically created with registered 080 number for unsubscription to enable alternative delivery. </b>
 
 [Example]
 ```
@@ -178,15 +183,15 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                             |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)      |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)        |
-|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝값(yyyy-MM-dd HH:mm) |
+| startCreateDate      | String  | Conditionally required (no.3) | Start date of registration (mm:HH dd-MM-yyyy)          |
+| endCreateDate        | String  | Conditionally required (no.3) | End date of registration (mm:HH dd-MM-yyyy)            |
 | recipientNo          | String  | X                             | Recipient number                                       |
 | plusFriendId         | String  | X                             | Plus Friend ID                                         |
 | senderGroupingKey    | String  | X                             | Sender's grouping key                                  |
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                               |
 | messageStatus        | String  | X                             | Request status (COMPLETED: successful, FAILED: failed) |
 | resultCode           | String  | X                             | Delivery result (MRC01: successful, MRC02: failed)     |
-|createUser| String | X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| createUser           | String  | X                             | Registrant (saved as user UUID when delivered via console)  |
 | pageNum              | Integer | X                             | Page number (default: 1)                               |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max: 1000)             |
 
@@ -236,14 +241,14 @@ Content-Type: application/json;charset=UTF-8
 | -- plusFriendId             | String  | Plus Friend ID                                         |
 | -- recipientNo              | String  | Recipient number                                       |
 | -- requestDate              | String  | Date and time of request                               |
-|-- createDate | String | 등록 일시 |
+| -- createDate               | String  | Registered date and time                               |
 | -- content                  | String  | Body                                                   |
 | -- messageStatus            | String  | Request status (COMPLETED: successful, FAILED: failed) |
 | -- resendStatus             | String  | Status code of resending                               |
 | -- resendStatusName         | String  | Status code name of resending                          |
 | -- resultCode               | String  | Result code of receiving                               |
 | -- resultCodeName           | String  | Result code name of receiving                          |
-| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| -- createUser               | String  | Registrant (saved as user UUID when delivered via console)  |
 | -- senderGroupingKey        | String  | Sender's grouping key                                  |
 | -- recipientGroupingKey     | String  | Recipient's grouping key                               |
 | - totalCount                | Integer | Total count                                            |
@@ -360,7 +365,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - plusFriendId         | String  | Plus Friend ID                                               |
 | - recipientNo          | String  | Recipient number                                             |
 | - requestDate          | String  | Date and time of request                                     |
-|- createDate | String | 등록 일시 |
+| - createDate           | String  | Registered date and time                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - content              | String  | Body                                                         |
 | - messageStatus        | String  | Status of request (COMPLETED: successful, FAILED: failed)    |
@@ -368,7 +373,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatusName     | String  | Status code name of resending                                |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |
-|- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| - createUser           | String  | Registrant (saved as user UUID when delivered via console)   |
 | - imageSeq             | Integer | Image number                                                 |
 | - imageName            | String  | Image name (name of uploaded file)                           |
 | - imageUrl             | String  | Image URL                                                    |

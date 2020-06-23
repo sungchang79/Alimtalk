@@ -1067,12 +1067,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- templateExtra         | String  | Additional Template Information (to be provided)             |
 |- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
 | - requestDate          | String  | Date and time of request                                     |
-|- createDate            | String  |	등록 일시 |
+| - createDate            | String  | Registered date and time                                    |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - resendStatus         | String  | Status code of resending                                     |
 | - resendStatusName     | String  | Status code name of resending                                |
-|- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
-|- resendRequestId | String | 재발송 SMS 요청 ID |
+| - resendResultCode     | String  | Result code of resending [Result code of SMS sending](https://docs.toast.com/en/Notification/SMS/en/error-code/#api) |
+| - resendRequestId      | String  | ID requesting of resending SMS                               |
 | - messageStatus        | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled) |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |
