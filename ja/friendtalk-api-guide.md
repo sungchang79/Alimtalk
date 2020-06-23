@@ -86,7 +86,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)、フィールドを送信しない場合、即時送信 |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
-| createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| createUser             | String  | X    | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存) |
 | recipientList          | List    | O    | 受信者リスト(最大1000人)                         |
 | - recipientNo          | String  | O    | 受信番号                              |
 | - content              | String  | O    | 内容(最大1000文字)<br>イメージを含む時は最大400文字  |
@@ -110,8 +110,13 @@ Content-Type: application/json;charset=UTF-8
 | - isAd                 | Boolean | X    | 広告かどうか(デフォルト値true)                          |
 | - recipientGroupingKey | String  | X    | 受信者グルーピングキー(最大100文字)                       |
 
-* <b>プラスフレンドIDフィールドを送信しない場合、最初に登録したプラスフレンドに送信されます。</b>
+* <b>リクエスト日時は呼び出す時点から90日後まで設定可能です。</b>
 * <b>夜間送信制限(20:00～翌日08:00)</b>
+* <b>SMSサービスの代替として送信されるため、SMSサービスの発送API明細に従ってフィールドを入力してください。(SMSサービスに登録された発信番号、080受信拒否番号、各種フィールドの長さ制限など)</b>
+* <b>指定した代替発送タイプのバイトの制限を超える代替発送のタイトルや内容はカットされ、代替発送となることがあります。([[SMS注意事項](https://docs.toast.com/ja/Notification/SMS/ja/api-guide/#_1)] 参照)</b>
+* <b>友達トークの広告メッセージは、広告SMS APIに代替送信されるので、必ず080受信拒否番号を登録しないと代替送信されません。</b>
+* <b>友達トーク広告メッセージのresendContentフィールドを入力する場合、SMS広告APIの広告文句を必須入力すると正常的に代替して送信されます。(広告)内容[無料受信拒否]080XXXXXX</b>
+* <b>友達トーク広告メッセージのresendContentフィールドがない場合は、登録された080受信拒否番号で広告メッセージを自動生成して代替送信されます。</b>
 
 [例]
 ```
@@ -193,15 +198,15 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | 条件必須(1番) | リクエストID                             |
 | startRequestDate     | String  | 条件必須(2番) | 送信リクエスト日の開始値(yyyy-MM-dd HH:mm)   |
 | endRequestDate       | String  | 条件必須(2番) | 送信リクエスト日の終了値(yyyy-MM-dd HH:mm)    |
-|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝값(yyyy-MM-dd HH:mm) |
+| startCreateDate      | String  | 条件必須(3番) | 登録日 開始値(yyy-MM-dd HH:mm)                   |
+| endCreateDate        | String  | 条件必須(3番) | 登録日 終値(yyy-MM-dd HH:mm)                    |
 | recipientNo          | String  | X         | 受信番号                       |
 | plusFriendId         | String  | X         | プラスフレンドID                          |
 | senderGroupingKey    | String  | X         | 発信グルーピングキー                        |
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                       |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED：成功、FAILED：失敗) |
 | resultCode           | String  | X         | 送信結果(MRC01：成功、MRC02：失敗)       |
-| createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| createUser           | String  | X         | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存) |
 | pageNum              | Integer | X         | ページ番号(基本：1)                     |
 | pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                     |
 
@@ -251,14 +256,14 @@ Content-Type: application/json;charset=UTF-8
 | -- plusFriendId             | String  | プラスフレンドID                          |
 | -- recipientNo              | String  | 受信番号                       |
 | -- requestDate              | String  | リクエスト日時                       |
-|-- createDate | String | 등록 일시 |
+| -- createDate               | String  | 登録日時                             |
 | -- content                  | String  | 本文                          |
 | -- messageStatus            | String  | リクエストステータス(COMPLETED：成功、FAILED：失敗) |
 | -- resendStatus             | String  | 再送信ステータスコード                   |
 | -- resendStatusName         | String  | 再送信ステータスコード名                      |
 | -- resultCode               | String  | 受信結果コード                    |
 | -- resultCodeName           | String  | 受信結果コード名                       |
-| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| -- createUser               | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | -- senderGroupingKey        | String  | 発信グルーピングキー                        |
 | -- recipientGroupingKey     | String  | 受信者グルーピングキー                       |
 | - totalCount                | Integer | 総個数                            |
@@ -383,7 +388,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatusName     | String  | 再送信ステータスコード名                             |
 | - resultCode           | String  | 受信結果コード                           |
 | - resultCodeName       | String  | 受信結果コード名                              |
-|- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| - createUser           | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | - imageSeq             | Integer | イメージ番号                             |
 | - imageName            | String  | イメージ名(アップロードしたファイル名)                           |
 | - imageUrl             | String  | イメージURL                                  |

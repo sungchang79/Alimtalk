@@ -78,7 +78,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O        | Plus Friend ID (up to 30 characters)                         |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm), to be sent immediately if field is not sent |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-| createUser | String |X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| createUser             | String  | X        | Registrant (saved as user UUID when delivered via console)   |
 | recipientList          | List    | O        | List of recipients (up to 1000)                              |
 | - recipientNo          | String  | O        | Recipient number                                             |
 | - content              | String  | O        | Body message (up to 1000 characters)<br>Up to 400, if image is included |
@@ -178,15 +178,15 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                             |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)      |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)        |
-|startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
-|endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝값(yyyy-MM-dd HH:mm) |
+| startCreateDate      | String  | Conditionally required (no.3) | Start date of registration (mm:HH dd-MM-yyyy)          |
+| endCreateDate        | String  | Conditionally required (no.3) | End date of registration (mm:HH dd-MM-yyyy)            |
 | recipientNo          | String  | X                             | Recipient number                                       |
 | plusFriendId         | String  | X                             | Plus Friend ID                                         |
 | senderGroupingKey    | String  | X                             | Sender's grouping key                                  |
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                               |
 | messageStatus        | String  | X                             | Request status (COMPLETED: successful, FAILED: failed) |
 | resultCode           | String  | X                             | Delivery result (MRC01: successful, MRC02: failed)     |
-|createUser| String | X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| createUser           | String  | X                             | Registrant (saved as user UUID when delivered via console)  |
 | pageNum              | Integer | X                             | Page number (default: 1)                               |
 | pageSize             | Integer | X                             | Number of queries (default: 15, max: 1000)             |
 
@@ -236,14 +236,14 @@ Content-Type: application/json;charset=UTF-8
 | -- plusFriendId             | String  | Plus Friend ID                                         |
 | -- recipientNo              | String  | Recipient number                                       |
 | -- requestDate              | String  | Date and time of request                               |
-|-- createDate | String | 등록 일시 |
+| -- createDate               | String  | Registered date and time                               |
 | -- content                  | String  | Body                                                   |
 | -- messageStatus            | String  | Request status (COMPLETED: successful, FAILED: failed) |
 | -- resendStatus             | String  | Status code of resending                               |
 | -- resendStatusName         | String  | Status code name of resending                          |
 | -- resultCode               | String  | Result code of receiving                               |
 | -- resultCodeName           | String  | Result code name of receiving                          |
-| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| -- createUser               | String  | Registrant (saved as user UUID when delivered via console)  |
 | -- senderGroupingKey        | String  | Sender's grouping key                                  |
 | -- recipientGroupingKey     | String  | Recipient's grouping key                               |
 | - totalCount                | Integer | Total count                                            |
@@ -360,7 +360,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - plusFriendId         | String  | Plus Friend ID                                               |
 | - recipientNo          | String  | Recipient number                                             |
 | - requestDate          | String  | Date and time of request                                     |
-|- createDate | String | 등록 일시 |
+| - createDate           | String  | Registered date and time                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - content              | String  | Body                                                         |
 | - messageStatus        | String  | Status of request (COMPLETED: successful, FAILED: failed)    |
@@ -368,7 +368,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatusName     | String  | Status code name of resending                                |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |
-|- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| - createUser           | String  | Registrant (saved as user UUID when delivered via console)   |
 | - imageSeq             | Integer | Image number                                                 |
 | - imageName            | String  | Image name (name of uploaded file)                           |
 | - imageUrl             | String  | Image URL                                                    |
