@@ -1,7 +1,15 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2020.07.28.
+* [API] 알림톡 강조표기 템플릿 기능
+    * CBT가 종료 되어, 정식 기능으로 추가되었습니다.
+* [API] 알림톡 템플릿 메시지 유형 확대
+    * 알림톡 템플릿 메시지 유형이 확대 되었습니다. (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형)
+* [API] 알림톡 템플릿 첨부 파일 문의 기능
+    * 알림톡 템플릿 문의 시, 파일을 첨부하여, 문의하는 기능이 추가되었습니다.
+
 ### 2020.06.23.
 * [API] Allowed Alimtalk Emphasized template
-    * It has been changed to allow emphasized template for Register Template API (CBT feature)
+    * It has been changed to allow emphasized template for Register Template API
 
 ### 2020.05.26
 * [API] 친구톡 와이드 이미지 기능

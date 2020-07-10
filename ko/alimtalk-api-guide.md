@@ -530,8 +530,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- content | String |	본문 |
 |- templateTitle | String | 템플릿 제목 |
 |- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
+|- templateExtra | String | 템플릿 부가 내용 |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 |
 |- requestDate | String |	요청 일시 |
 |- receiveDate | String |	수신 일시 |
 |- createDate | String | 등록 일시 |
@@ -1068,8 +1068,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- content | String |	본문 |
 |- templateTitle | String | 템플릿 제목 |
 |- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
+|- templateExtra | String | 템플릿 부가 내용 |
+|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 |
 |- requestDate | String | 요청 일시 |
 |- createDate | String |	등록 일시 |
 |- receiveDate | String |	수신 일시 |
@@ -1780,7 +1780,10 @@ Content-Type: application/json;charset=UTF-8
   "templateCode" : String,
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1802,7 +1805,10 @@ Content-Type: application/json;charset=UTF-8
 |templateCode|	String |	O | 템플릿 코드 (최대 20자) |
 |templateName|	String |	O | 템플릿명 (최대 20자) |
 |templateContent|	String |	O | 템플릿 본문 (최대 1000자) |
-|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용을 신청한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|templateMessageType| String | X |템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형, default: BA) |
+|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE)<br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|templateExtra | String | X | 템플릿 부가 정보 (템플릿 메시지 유형이 [부가 정보형/복합형]일 경우 필수) |
+|templateAd | String | X | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
@@ -1865,7 +1871,10 @@ Content-Type: application/json;charset=UTF-8
 {
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1886,7 +1895,10 @@ Content-Type: application/json;charset=UTF-8
 |---|---|---|---|
 |templateName|	String |	O | 템플릿명 (최대 20자) |
 |templateContent|	String |	O | 템플릿 본문 (최대 1000자) |
-|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) <br>- CBT 기능 사용 신청을 한 플러스 친구만 사용 가능 <br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|templateMessageType| String | X | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|templateEmphasizeType| String| X| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE)<br>- TEXT: templateTitle, templateSubtitle 필드 필수|
+|templateExtra | String | X | 템플릿 부가 정보 (템플릿 메시지 유형이 [부가 정보형/복합형]일 경우 필수) |
+|templateAd | String | X | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
@@ -2134,9 +2146,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateEmphasizeType| String| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) |
 |-- tempalteTitle| String | 템플릿 제목 |
 |-- templateSubtitle| String | 템플릿 보조 문구 |
-|-- templateMessageType| String | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) |
-|-- templateExtra | String | 템플릿 부가 정보 (추후 기능 제공 예정) |
-|-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
+|-- templateMessageType| String | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|-- templateExtra | String | 템플릿 부가 정보 |
+|-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
@@ -2260,9 +2272,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateEmphasizeType| String| 템플릿 강조 표시 타입 (NONE : 기본, TEXT : 강조 표시, default : NONE) |
 |-- tempalteTitle| String | 템플릿 제목 |
 |-- templateSubtitle| String | 템플릿 보조 문구 |
-|-- templateMessageType| String | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) (추후 기능 제공 예정) |
-|-- templateExtra | String | 템플릿 부가 정보 (추후 기능 제공 예정) |
-|-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정) |
+|-- templateMessageType| String | 템플릿 메시지 유형 (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|-- templateExtra | String | 템플릿 부가 정보 |
+|-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |

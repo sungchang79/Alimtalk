@@ -19,7 +19,7 @@
 
 ## Overview of v1.5 API
 1. It has been changed to allow emphasized template for Register Template API (for a full-text delivery, the title value can be configured.)
-2. Expanded the template type. Ad or additional information can be added (to be provided).
+2. Expanded the template type. Ad or additional information can be added.
 3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
 4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
 
@@ -533,8 +533,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - content              | String  | Body message                                                 |
 |- templateTitle         | String  | Template Title                                               |
 |- templateSubtitle      | String  | Auxiliary Template Phrase                                    |
-|- templateExtra         | String  | Additional Template Information (to be provided)             |
-|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
+|- templateExtra         | String  | Additional Template Information                              |
+|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases  |
 | - requestDate          | String  | Date and time of request                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - createDate           | String  | Registered date and time                                     |
@@ -1064,10 +1064,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - content              | String  | Body message                                                 |
 |- templateTitle         | String  | Template Title                                               |
 |- templateSubtitle      | String  | Auxiliary Template Phrase                                    |
-|- templateExtra         | String  | Additional Template Information (to be provided)             |
-|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
+|- templateExtra         | String  | Additional Template Information                              |
+|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases |
 | - requestDate          | String  | Date and time of request                                     |
-| - createDate           | String  | Registered date and time                                     |
+| - createDate            | String  | Registered date and time                                    |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - resendStatus         | String  | Status code of resending                                     |
 | - resendStatusName     | String  | Status code name of resending                                |
@@ -1792,7 +1792,10 @@ Content-Type: application/json;charset=UTF-8
   "templateCode" : String,
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1814,7 +1817,10 @@ Content-Type: application/json;charset=UTF-8
 | templateCode        | String  | O        | Template code (up to 20 characters)                          |
 | templateName        | String  | O        | Template name (up to 20 characters)                          |
 | templateContent     | String  | O        | Template body (up to 1000 characters)                        |
-|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type, default: Basic) |
+|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateExtra       | String  | X        | Additional Template Information (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수)                             |
+| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle        | String  | X        | Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
@@ -1880,7 +1886,10 @@ Content-Type: application/json;charset=UTF-8
 {
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1901,7 +1910,10 @@ Content-Type: application/json;charset=UTF-8
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
 | templateName    | String  | O        | Template name (up to 20 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
-|templateEmphasizeType| String| X| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type, default: Basic) |
+|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateExtra       | String  | X        | Additional Template Information (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수)                             |
+| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
@@ -2152,12 +2164,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | Template code                                                |
 | -- templateName      | String  | Template name                                                |
 | -- templateContent   | String  | Template body                                                |
-| -- templateEmphasizeType| String| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE) |
-| -- tempalteTitle      | String  | Template Title                                               |
-| -- templateSubtitle   | String  | Auxiliary Template Phrase                                    |
-| -- templateMessageType| String  | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) |
-| -- templateExtra      | String  | Additional Template Information (to be provided) |
-| -- templateAd         | String  | Request for consent of receiving within template or simple ad phrases (to be provided)  |
+|-- templateEmphasizeType| String| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE) |
+|-- tempalteTitle      | String  | Template Title                                               |
+|-- templateSubtitle   | String  | Auxiliary Template Phrase                                    |
+|-- templateMessageType| String  | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) |
+|-- templateExtra      | String  | Additional Template Information                              |
+|-- templateAd         | String  | Request for consent of receiving within template or simple ad phrases |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
@@ -2278,12 +2290,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | Template code                                                |
 | -- templateName      | String  | Template name                                                |
 | -- templateContent   | String  | Template body                                                |
-| -- templateEmphasizeType| String| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE) |
+| -- templateEmphasizeType| String | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE) |
 | -- tempalteTitle      | String  | Template Title                                               |
 | -- templateSubtitle   | String  | Auxiliary Template Phrase                                    |
 | -- templateMessageType| String  | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) |
-| -- templateExtra      | String  | Additional Template Information (to be provided) |
-| -- templateAd         | String  | Request for consent of receiving within template or simple ad phrases (to be provided)  |
+| -- templateExtra      | String  | Additional Template Information                             |
+| -- templateAd         | String  | Request for consent of receiving within template or simple ad phrases |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |

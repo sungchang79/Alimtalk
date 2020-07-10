@@ -83,7 +83,7 @@ Content-Type: application/json;charset=UTF-8
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
-| createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
+| createUser             | String  | X    | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | recipientList          | List    | O    | 受信者リスト(最大1000人)                         |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - templateParameter    | Object  | X    | テンプレートパラメータ<br>(テンプレートに置換する変数が含まれる時は必須)       |
@@ -219,7 +219,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
-| - templateTitle        | String  | O    | 제목 (최대 50자) |
+| - templateTitle        | String  | O    | テンプレートハイライトタイトル (最大50桁) |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -331,7 +331,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                            |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
 | resultCode           | String  | X         | 送信結果(MRC01 -> 成功、MRC02 -> 失敗)          |
-|createUser| String | X| 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
+| createUser           | String  | X         | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | pageNum              | Integer | X         | ページ番号(基本：1)                            |
 | pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                |
 
@@ -528,10 +528,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - templateCode         | String  | テンプレートコード                             |
 | - recipientNo          | String  | 受信番号                              |
 | - content              | String  | 本文                                 |
-|- templateTitle | String | 템플릿 제목 |
-|- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
+|- templateTitle         | String  | テンプレートハイライトタイトル               |
+|- templateSubtitle      | String  | テンプレートハイライトサブタイトル            |
+|- templateExtra         | String  | テンプレート付加情報                      |
+|- templateAd            | String  | テンプレート内の受信同意または簡単な広告文句    |
 | - requestDate          | String  | リクエスト日時                              |
 | - receiveDate          | String  | 受信日時                              |
 | - createDate           | String  | 登録日時                             |
@@ -758,7 +758,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
-|- title| String | X| 제목 (최대 50자) |  
+| - title                | String  | X    | タイトル (最大50桁)                            | 
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -1063,10 +1063,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - templateCode         | String  | テンプレートコード                             |
 | - recipientNo          | String  | 受信番号                              |
 | - content              | String  | 本文                                 |
-|- templateTitle | String | 템플릿 제목 |
-|- templateSubtitle | String | 템플릿 보조 문구 |
-|- templateExtra | String | 템플릿 부가 내용 (추후 기능 제공 예정) |
-|- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단 광고 문구 (추후 기능 제공 예정)|
+| - templateTitle        | String  | テンプレートハイライトタイトル               |
+| - templateSubtitle     | String  | テンプレートハイライトサブタイトル            |
+| - templateExtra        | String  | テンプレート付加情報                      |
+| - templateAd           | String  | テンプレート内の受信同意または簡単な広告文句    |
 | - requestDate          | String  | リクエスト日時                              |
 | - createDate           | String  | 登録日時                             |
 | - receiveDate          | String  | 受信日時                              |
@@ -1769,7 +1769,10 @@ Content-Type: application/json;charset=UTF-8
   "templateCode" : String,
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1791,9 +1794,12 @@ Content-Type: application/json;charset=UTF-8
 | templateCode    | String  | O    | テンプレートコード(最大20文字)                           |
 | templateName    | String  | O    | テンプレート名(最大20文字)                             |
 | templateContent | String  | O    | テンプレート本文(最大1000文字)                         |
-|templateEmphasizeType| String| X  | テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>CBT機能の使用を申し込んだプラス友達のみ使用可能<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
-|tempalteTitle| String | X| テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
-|templateSubtitle| String | X| テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
+| templateMessageType| String | X  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
+|templateEmphasizeType| String| X  | テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
+| templateExtra     | String  | X  | テンプレート付加情報 |
+| templateAd        | String  | X  | テンプレート内の受信同意または簡単な広告文句 |
+|tempalteTitle      | String  | X  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
+|templateSubtitle   | String  | X  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
 | buttons         | List    | X    | ボタンリスト(最大5個)                             |
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
 | -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -1854,7 +1860,10 @@ Content-Type: application/json;charset=UTF-8
 {
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1875,7 +1884,10 @@ Content-Type: application/json;charset=UTF-8
 | --------------- | ------- | ---- | ---------------------------------------- |
 | templateName    | String  | O    | テンプレート名(最大20文字)                             |
 | templateContent | String  | O    | テンプレート本文(最大1000文字)                         |
-| templateEmphasizeType| String| X  | テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>CBT機能の使用を申し込んだプラス友達のみ使用可能<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
+| templateMessageType| String | X  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
+| templateEmphasizeType| String| X  | テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
+| templateExtra   | String  | X    |テンプレート付加情報 |
+| templateAd      | String  | X    | テンプレート内の受信同意または簡単な広告文句 |
 | tempalteTitle| String | X| テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | templateSubtitle| String | X| テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
 | buttons         | List    | X    | ボタンリスト(最大5個)                             |
@@ -2120,12 +2132,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | テンプレートコード                            |
 | -- templateName      | String  | テンプレート名                              |
 | -- templateContent   | String  | テンプレート本文                            |
-| -- templateEmphasizeType| String| テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>CBT機能の使用を申し込んだプラス友達のみ使用可能<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
+| -- templateEmphasizeType| String| テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
 | -- tempalteTitle     | String  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | -- templateSubtitle  | String  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
-| -- templateMessageType| String  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)(後日機能提供予定)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
-| -- templateExtra     | String  | テンプレート付加情報(後日機能提供予定) |
-| -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句(後日機能提供予定) |
+| -- templateMessageType| String  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
+| -- templateExtra     | String  | テンプレート付加情報 |
+| -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句 |
 | -- buttons           | List    | ボタンリスト                             |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -2246,12 +2258,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateCode      | String  | テンプレートコード                            |
 | -- templateName      | String  | テンプレート名                              |
 | -- templateContent   | String  | テンプレート本文                            |
-| -- templateEmphasizeType| String| テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>CBT機能の使用を申し込んだプラス友達のみ使用可能<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
+| -- templateEmphasizeType| String| テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
 | -- tempalteTitle     | String  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | -- templateSubtitle  | String  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
-| -- templateMessageType| String  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)(後日機能提供予定)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
-| -- templateExtra     | String  | テンプレート付加情報(後日機能提供予定) |
-| -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句(後日機能提供予定) |
+| -- templateMessageType| String  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
+| -- templateExtra     | String  | テンプレート付加情報 |
+| -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句 |
 | -- buttons           | List    | ボタンリスト                             |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
