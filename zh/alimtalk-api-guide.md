@@ -22,6 +22,7 @@
 2. Expanded the template type. Ad or additional information can be added.
 3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
 4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
+5. 파일 첨부하여 템플릿 문의하기 API가 추가되었습니다.
 
 
 ## General Messages
@@ -2046,6 +2047,65 @@ Content-Type: application/json;charset=UTF-8
 | - resultCode    | Integer | Result code       |
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
+
+### 파일 첨부하여 템플릿 문의하기
+#### 요청
+[URL]
+
+```
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 appkey|
+|plusFriendId|	String|	플러스친구 아이디 |
+|templateCode|	String|	템플릿 코드 |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+[Request Body]
+
+```
+{
+  "comment" : String,
+  "attachments" : File
+}
+```
+
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|comment|	String |	O | 문의 내용 |
+|attachments| List<File> | X | 첨부 파일 리스트 (최대 5개) |
+
+#### 응답
+```
+{
+  "header" : {
+    "resultCode" :  Integer,
+    "resultMessage" :  String,
+    "isSuccessful" :  boolean
+  }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
 
 ### List Templates
 

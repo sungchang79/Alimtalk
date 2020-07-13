@@ -19,9 +19,10 @@
 
 ## v1.5 API 소개
 1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다.(전문 발송 시, title값을 설정할 수 있습니다.)
-2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다. (추후 제공 예정).
+2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다.
 3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다. (추후 제공 예정).
 4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
+5. 파일 첨부하여 템플릿 문의하기 API가 추가되었습니다.
 
 ## 일반 메시지
 
@@ -1975,7 +1976,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2008,6 +2009,65 @@ Content-Type: application/json;charset=UTF-8
 |값|	타입|	필수|	설명|
 |---|---|---|---|
 |comment|	String |	O | 문의 내용 |
+
+#### 응답
+```
+{
+  "header" : {
+    "resultCode" :  Integer,
+    "resultMessage" :  String,
+    "isSuccessful" :  boolean
+  }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
+
+### 파일 첨부하여 템플릿 문의하기
+#### 요청
+[URL]
+
+```
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 appkey|
+|plusFriendId|	String|	플러스친구 아이디 |
+|templateCode|	String|	템플릿 코드 |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+[Request Body]
+
+```
+{
+  "comment" : String,
+  "attachments" : File
+}
+```
+
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|comment|	String |	O | 문의 내용 |
+|attachments| List<File> | X | 첨부 파일 리스트 (최대 5개) |
 
 #### 응답
 ```
