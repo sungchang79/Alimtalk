@@ -64,6 +64,7 @@
 | Common  | false     | -8002      | No image available corresponding to image sequence           |
 | Common  | false     | -8003      | Deleting image failed                                        |
 | Common  | false     | -8005      | No Plus Friend is registered in project to upload images     |
+| Common  | false     | -8006      | 인증 메시지 발송 시, 템플릿 내용에 인증 문구가 없는 경우       |
 | Common  | false     | -9995      | Called API of a faded version                                |
 | Common  | false     | -9996      | Content-type is not application/json                         |
 | Common  | false     | -9998      | API does not exist                                           |
