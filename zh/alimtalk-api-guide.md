@@ -243,7 +243,7 @@ Content-Type: application/json;charset=UTF-8
 * **Request date and time can be set up to 90 days since a point of calling.**
 * <b>Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
 * <b>SMS 서비스는 국제 SMS만 지원합니다. 국제 수신자 번호일 경우, resendType(대체 발송 타입)을 SMS로 변경해야 정상적으로 대체 발송할 수 있습니다.</b>
-* <b>Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
+* <b>Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)])</b>
 
 [Exapmle]
 
@@ -1631,15 +1631,15 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
 |- alimtalk                 |	Object  |	Alimtalk information                                         |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                        |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
 |-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
 |-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
-|- friendtalk               |	Object  |	Friendtalk information                                                  |
-|-- resendAppKey            | String  | Alternative sms appkey                                  |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                         |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
-|-- resendUnsubscribeNo     | String  |	재발송 시, tc-sms 080 수신 거부 번호                               |
+|- friendtalk               |	Object  |	Friendtalk information                                       |
+|-- resendAppKey            | String  | Alternative sms appkey                                       |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
+|-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery           |
 |-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
 | - createDate              | String  | Date and time of registration                                |
@@ -1742,15 +1742,15 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
 |- alimtalk                 |	Object  |	Alimtalk information                                         |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                        |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
 |-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
 |-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
-|- friendtalk               |	Object  |	친구톡 설정 정보                                                  |
-|-- resendAppKey            | String  | 대체 발송으로 설정할 SMS 서비스 앱키                                  |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                         |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
-|-- resendUnsubscribeNo     | String  |	재발송 시, tc-sms 080 수신 거부 번호                               |
+|- friendtalk               |	Object  |	Friendtalk information                                        |
+|-- resendAppKey            | String  | Alternative sms appkey                                        |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails        |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                        |
+|-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery            |
 |-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
 | - createDate              | String  | Date and time of registration                                |
@@ -2062,8 +2062,8 @@ Content-Type: application/json;charset=UTF-8
 |값|	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 appkey|
-|plusFriendId|	String|	플러스친구 아이디 |
-|templateCode|	String|	템플릿 코드 |
+|plusFriendId|	String|	PlusFriend ID |
+|templateCode|	String|	Template code |
 
 [Header]
 ```
