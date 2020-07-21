@@ -2061,7 +2061,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 |plusFriendId|	String|	PlusFriend ID |
 |templateCode|	String|	Template code |
 
@@ -2087,7 +2087,7 @@ Content-Type: application/json;charset=UTF-8
 |값|	타입|	필수|	설명|
 |---|---|---|---|
 |comment|	String |	O | 문의 내용 |
-|attachments| List<File> | X | 첨부 파일 리스트 (최대 5개) |
+|attachments| List<File> | X | 첨부 파일 목록(최대 5개) |
 
 #### 응답
 ```

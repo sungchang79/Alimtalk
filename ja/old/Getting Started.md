@@ -35,7 +35,7 @@ Console에 접속하여 SecretKey를 생성합니다.
 ![[그림 5] 플러스 친구 등록](http://static.toastoven.net/prod_alimtalk/image05.png)
 <center>[그림 5] 플러스 친구 등록</center>
 #### [참고 사항]
-* 플러스친구 아이디는 플러스친구 개설 시, 등록한 검색용 아이디를 입력해야 합니다.
+* 플러스친구 ID는 플러스친구 개설 시, 등록한 검색용 아이디를 입력해야 합니다.
 * 고객이 받는 알림톡 메세지는 카카오톡에 등록한 플러스 친구 이름으로 노출됩니다.
 
 ![[그림 6] 카카오톡 토큰](http://static.toastoven.net/prod_alimtalk/img06.png)
