@@ -380,7 +380,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - plusFriendId         | String  | プラスフレンドID                                 |
 | - recipientNo          | String  | 受信番号                              |
 | - requestDate          | String  | リクエスト日時                              |
-|- createDate | String | 등록 일시 |
+| - createDate           | String  | 登録日時                             |
 | - receiveDate          | String  | 受信日時                              |
 | - content              | String  | 本文                                 |
 | - messageStatus        | String  | リクエストステータス(COMPLETED：成功、FAILED：失敗)      |

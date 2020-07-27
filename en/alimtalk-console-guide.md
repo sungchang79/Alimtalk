@@ -105,7 +105,7 @@ Click **Register Templates** to register a template.
 
 #### Modify Templates
 
-* Only templates in the <b><span style="color:red">Returned</span></b> status can be modified.
+* 승인된 템플릿을 수정한 후 검수가 완료되면, 기존 템플릿 내용이 수정한 내용으로 대체됩니다.
 
 #### Delete Templates
 

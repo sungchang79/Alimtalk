@@ -36,7 +36,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -75,7 +75,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 아이디 (최대 30자) |
+|plusFriendId|	String|	O | 플러스친구 ID (최대 30자) |
 |templateCode|	String|	O | 등록한 발송 템플릿 코드 (최대 20자) |
 |requestDate| String | X| 요청 일시 (yyyy-MM-dd HH:mm)<br>(입력하지 않을 경우 즉시 발송) |
 |senderGroupingKey| String | X| 발신 그룹핑 키 (최대 100자) |
@@ -99,7 +99,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/messages -d '{"plusFriendId":"{플러스친구 아이디}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","templateParameter":{"{치환자 필드}":"{치환 데이터}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/messages -d '{"plusFriendId":"{플러스친구 ID}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","templateParameter":{"{치환자 필드}":"{치환 데이터}"}}]}'
 ```
 
 #### 응답
@@ -156,7 +156,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -206,7 +206,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 아이디 (최대 30자) |
+|plusFriendId|	String|	O | 플러스친구 ID (최대 30자) |
 |templateCode|	String|	O | 등록한 발송 템플릿 코드 (최대 20자) |
 |requestDate| String | X| 요청 일시 (yyyy-MM-dd HH:mm)<br>(입력하지 않을 경우 즉시 발송) |
 |senderGroupingKey| String | X| 발신 그룹핑 키 (최대 100자) |
@@ -237,7 +237,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{플러스친구 아이디}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","content":"{내용}","buttons":[{"ordering":"{버튼 순서}","type":"{버튼 타입}","name":"{버튼 이름}","linkMo":"{모바일 웹 링크}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{플러스친구 ID}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","content":"{내용}","buttons":[{"ordering":"{버튼 순서}","type":"{버튼 타입}","name":"{버튼 이름}","linkMo":"{모바일 웹 링크}"}]}]}'
 ```
 
 #### 응답
@@ -296,7 +296,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -316,7 +316,7 @@ Content-Type: application/json;charset=UTF-8
 |startRequestDate|	String|	조건 필수 (2번) | 발송 요청 날짜 시작 값(yyyy-MM-dd HH:mm)|
 |endRequestDate|	String| 조건 필수 (2번) |	발송 요청 날짜 끝 값(yyyy-MM-dd HH:mm) |
 |recipientNo|	String|	X |	수신번호 |
-|plusFriendId|	String|	X |	플러스친구 아이디 |
+|plusFriendId|	String|	X |	플러스친구 ID |
 |templateCode|	String|	X |	템플릿 코드|
 |senderGroupingKey| String | X| 발신 그룹핑 키 |
 |recipientGroupingKey|	String|	X|	수신자 그룹핑 키 |
@@ -382,7 +382,7 @@ Content-Type: application/json;charset=UTF-8
 |- messages | List |	메시지 리스트 |
 |-- requestId | String |	요청 아이디 |
 |-- recipientSeq | Integer |	수신자 시퀀스 번호 |
-|-- plusFriendId | String |	플러스친구 아이디 |
+|-- plusFriendId | String |	플러스친구 ID |
 |-- templateCode | String |	템플릿 코드 |
 |-- recipientNo | String |	수신 번호 |
 |-- content | String |	본문 |
@@ -434,7 +434,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey |
+|appkey|	String|	고유의 Appkey |
 |requestId|	String|	요청 아이디 |
 |recipientSeq|	Integer|	수신자 시퀀스 번호 |
 
@@ -501,7 +501,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |message|	Object|	메시지|
 |- requestId | String |	요청 아이디 |
 |- recipientSeq | Integer |	수신자 시퀀스 번호 |
-|- plusFriendId | String |	플러스친구 아이디 |
+|- plusFriendId | String |	플러스친구 ID |
 |- templateCode | String |	템플릿 코드 |
 |- recipientNo | String |	수신 번호 |
 |- content | String |	본문 |
@@ -549,7 +549,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -588,7 +588,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 아이디 (최대 30자) |
+|plusFriendId|	String|	O | 플러스친구 ID (최대 30자) |
 |templateCode|	String|	O | 등록한 발송 템플릿 코드 (최대 20자) |
 |requestDate| String | X| 요청 일시 (yyyy-MM-dd HH:mm)<br>(입력하지 않을 경우 즉시 발송) |
 |senderGroupingKey| String | X| 발신 그룹핑 키 (최대 100자) |
@@ -611,7 +611,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{플러스친구 아이디}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","templateParameter":{"{치환자 필드}":"{치환 데이터}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{플러스친구 ID}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","templateParameter":{"{치환자 필드}":"{치환 데이터}"}}]}'
 ```
 
 #### 응답
@@ -668,7 +668,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -718,7 +718,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 아이디 (최대 30자) |
+|plusFriendId|	String|	O | 플러스친구 ID (최대 30자) |
 |templateCode|	String|	O | 등록한 발송 템플릿 코드 (최대 20자) |
 |requestDate| String | X| 요청 일시 (yyyy-MM-dd HH:mm)<br>(입력하지 않을 경우 즉시 발송) |
 |senderGroupingKey| String | X| 발신 그룹핑 키 (최대 100자) |
@@ -746,7 +746,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{플러스친구 아이디}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","content":"{내용}","buttons":[{"ordering":"{버튼 순서}","type":"{버튼 타입}","name":"{버튼 이름}","linkMo":"{모바일 웹 링크}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{플러스친구 ID}","templateCode":"{템플릿 코드}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{수신번호}","content":"{내용}","buttons":[{"ordering":"{버튼 순서}","type":"{버튼 타입}","name":"{버튼 이름}","linkMo":"{모바일 웹 링크}"}]}]}'
 ```
 
 #### 응답
@@ -805,7 +805,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -825,7 +825,7 @@ Content-Type: application/json;charset=UTF-8
 |startRequestDate|	String|	조건 필수 (2번) | 발송 요청 날짜 시작 값(yyyy-MM-dd HH:mm)|
 |endRequestDate|	String| 조건 필수 (2번) |	발송 요청 날짜 끝 값(yyyy-MM-dd HH:mm) |
 |recipientNo|	String|	X |	수신번호 |
-|plusFriendId|	String|	X |	플러스친구 아이디 |
+|plusFriendId|	String|	X |	플러스친구 ID |
 |templateCode|	String|	X |	템플릿 코드|
 |senderGroupingKey| String | X| 발신 그룹핑 키 |
 |recipientGroupingKey|	String|	X|	수신자 그룹핑 키 |
@@ -891,7 +891,7 @@ Content-Type: application/json;charset=UTF-8
 |- messages | List |	메시지 리스트 |
 |-- requestId | String |	요청 아이디 |
 |-- recipientSeq | Integer |	수신자 시퀀스 번호 |
-|-- plusFriendId | String |	플러스친구 아이디 |
+|-- plusFriendId | String |	플러스친구 ID |
 |-- templateCode | String |	템플릿 코드 |
 |-- recipientNo | String |	수신 번호 |
 |-- content | String |	본문 |
@@ -943,7 +943,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey |
+|appkey|	String|	고유의 Appkey |
 |requestId|	String|	요청 아이디 |
 |recipientSeq|	Integer|	수신자 시퀀스 번호 |
 
@@ -1010,7 +1010,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |message|	Object|	메시지|
 |- requestId | String |	요청 아이디 |
 |- recipientSeq | Integer |	수신자 시퀀스 번호 |
-|- plusFriendId | String |	플러스친구 아이디 |
+|- plusFriendId | String |	플러스친구 ID |
 |- templateCode | String |	템플릿 코드 |
 |- recipientNo | String |	수신 번호 |
 |- content | String |	본문 |
@@ -1228,7 +1228,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -1310,7 +1310,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -1373,7 +1373,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -1397,7 +1397,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 아이디 (최대 30자) |
+|plusFriendId|	String|	O | 플러스친구 ID (최대 30자) |
 |phoneNo|	String |	O | 관리자 핸드폰 번호 (최대 15자) |
 |categoryCode|	String |	O | 카테고리 코드(11자)<br>카테고리 조회 API의 응답 참고<br>ex) 00100010001 건강(001) - 병원(0001) - 종합병원(0001) |
 
@@ -1432,8 +1432,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
-|plusFriendId|	String|	플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey|
+|plusFriendId|	String|	플러스친구 ID |
 
 [Header]
 ```
@@ -1489,8 +1489,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
-|plusFriendId| String | 플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey|
+|plusFriendId| String | 플러스친구 ID |
 
 [Header]
 ```
@@ -1549,7 +1549,7 @@ Content-Type: application/json;charset=UTF-8
 |- resultMessage|	String| 결과 메시지|
 |- isSuccessful|	Boolean| 성공 여부|
 |plusFriend|	Object|	플러스친구|
-|- plusFriendId | String |	플러스친구 아이디 |
+|- plusFriendId | String |	플러스친구 ID |
 |- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |- senderKey | String |	발신키 |
 |- categoryCode | String |	카테고리 코드 |
@@ -1588,7 +1588,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -1604,7 +1604,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	X | 플러스친구 아이디 |
+|plusFriendId|	String|	X | 플러스친구 ID |
 |status|	String|	X | 플러스친구 상태 코드 <br>(YSC02: 토큰 인증 대기중, YSC03: 정상 등록)|
 |isSearchKakaoStatus|	boolean| X | 카카오 상태 조회 여부(false일 경우, 카카오 상태 관련 필드 (kakaoStatus, kakaoProfileStatus 등) null값)<br>default값 : true |
 |pageNum|	Integer|	X|	페이지 번호(Default : 1)|
@@ -1659,7 +1659,7 @@ Content-Type: application/json;charset=UTF-8
 |- resultMessage|	String| 결과 메시지|
 |- isSuccessful|	Boolean| 성공 여부|
 |plusFriends|	Object|	플러스친구|
-|- plusFriendId | String |	플러스친구 아이디 |
+|- plusFriendId | String |	플러스친구 ID |
 |- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |- senderKey | String |	발신키 |
 |- categoryCode | String |	카테고리 코드 |
@@ -1700,8 +1700,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey |
-|plusFriendId|	String|	플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey |
+|plusFriendId|	String|	플러스친구 ID |
 
 [Header]
 ```
@@ -1779,8 +1779,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey |
-|plusFriendId|	String|	플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey |
+|plusFriendId|	String|	플러스친구 ID |
 |templateCode|	String|	템플릿 코드 |
 
 [Header]
@@ -1857,8 +1857,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
-|plusFriendId|	String|	플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey|
+|plusFriendId|	String|	플러스친구 ID |
 |templateCode|	String|	템플릿 코드 |
 
 [Header]
@@ -1899,8 +1899,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
-|plusFriendId|	String|	플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey|
+|plusFriendId|	String|	플러스친구 ID |
 |templateCode|	String|	템플릿 코드 |
 
 [Header]
@@ -1958,7 +1958,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -1974,7 +1974,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	X |	플러스친구 아이디 |
+|plusFriendId|	String|	X |	플러스친구 ID |
 |templateCode|	String|	X |	템플릿 코드|
 |templateName|	String|	X |	템플릿 이름|
 |templateStatus| String |	X | 템플릿 상태 코드|
@@ -1990,7 +1990,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/templates?plusFriendId={플러스친구 아이디}&templateStatus={템플릿 상태 코드}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.4/appkeys/{appkey}/templates?plusFriendId={플러스친구 ID}&templateStatus={템플릿 상태 코드}"
 ```
 
 #### 응답
@@ -2048,7 +2048,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- isSuccessful|	Boolean| 성공 여부|
 |templateListResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
-|-- plusFriendId | String |	플러스친구 아이디 |
+|-- plusFriendId | String |	플러스친구 ID |
 |-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
 |-- templateName | String |	템플릿명 |
@@ -2087,8 +2087,8 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
-|plusFriendId|	String|	플러스친구 아이디 |
+|appkey|	String|	고유의 Appkey|
+|plusFriendId|	String|	플러스친구 ID |
 |templateCode|	String|	템플릿 코드 |
 
 [Header]
@@ -2162,7 +2162,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- isSuccessful|	Boolean| 성공 여부|
 |templateModificationsResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
-|-- plusFriendId | String |	플러스친구 아이디 |
+|-- plusFriendId | String |	플러스친구 ID |
 |-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
 |-- templateName | String |	템플릿명 |
@@ -2201,7 +2201,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -2256,7 +2256,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	설명|
 |---|---|---|
-|appkey|	String|	고유의 appkey|
+|appkey|	String|	고유의 Appkey|
 
 [Header]
 ```
@@ -2281,7 +2281,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 아이디 |
+|plusFriendId|	String|	O | 플러스친구 ID |
 |isResend|	Boolean|	O | 발송 실패 시, 문자 대체발송 여부<br>Console에서 대체 발송 설정 시, default로 재발송 됩니다. |
 |resendSendNo|	String|	O | 대체 발송 발신번호<br><span style="color:red">(SMS 상품에 등록된 발신번호가 아닐 경우, 대체발송이 실패할 수 있습니다.)</span> |
 
