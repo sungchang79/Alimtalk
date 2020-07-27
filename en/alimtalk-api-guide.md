@@ -19,9 +19,10 @@
 
 ## Overview of v1.5 API
 1. It has been changed to allow emphasized template for Register Template API (for a full-text delivery, the title value can be configured.)
-2. Expanded the template type. Ad or additional information can be added (to be provided).
+2. Expanded the template type. Ad or additional information can be added.
 3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
 4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
+5. 파일 첨부하여 템플릿 문의하기 API가 추가되었습니다.
 
 
 ## General Messages
@@ -242,7 +243,7 @@ Content-Type: application/json;charset=UTF-8
 * **Request date and time can be set up to 90 days since a point of calling.**
 * <b>Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
 * <b>SMS 서비스는 국제 SMS만 지원합니다. 국제 수신자 번호일 경우, resendType(대체 발송 타입)을 SMS로 변경해야 정상적으로 대체 발송할 수 있습니다.</b>
-* <b>Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
+* <b>Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)])</b>
 
 [Exapmle]
 
@@ -533,8 +534,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - content              | String  | Body message                                                 |
 |- templateTitle         | String  | Template Title                                               |
 |- templateSubtitle      | String  | Auxiliary Template Phrase                                    |
-|- templateExtra         | String  | Additional Template Information (to be provided)             |
-|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
+|- templateExtra         | String  | Additional Template Information                              |
+|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases  |
 | - requestDate          | String  | Date and time of request                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - createDate           | String  | Registered date and time                                     |
@@ -1064,8 +1065,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - content              | String  | Body message                                                 |
 |- templateTitle         | String  | Template Title                                               |
 |- templateSubtitle      | String  | Auxiliary Template Phrase                                    |
-|- templateExtra         | String  | Additional Template Information (to be provided)             |
-|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases (to be provided) |
+|- templateExtra         | String  | Additional Template Information                              |
+|- templateAd            | String  | Request for consent of receiving within template or simple ad phrases |
 | - requestDate          | String  | Date and time of request                                     |
 | - createDate            | String  | Registered date and time                                    |
 | - receiveDate          | String  | Date and time of receiving                                   |
@@ -1630,15 +1631,15 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
 |- alimtalk                 |	Object  |	Alimtalk information                                         |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                        |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
 |-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
 |-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
-|- friendtalk               |	Object  |	Friendtalk information                                                  |
-|-- resendAppKey            | String  | Alternative sms appkey                                  |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                         |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
-|-- resendUnsubscribeNo     | String  |	재발송 시, tc-sms 080 수신 거부 번호                               |
+|- friendtalk               |	Object  |	Friendtalk information                                       |
+|-- resendAppKey            | String  | Alternative sms appkey                                       |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
+|-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery           |
 |-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
 | - createDate              | String  | Date and time of registration                                |
@@ -1741,15 +1742,15 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
 |- alimtalk                 |	Object  |	Alimtalk information                                         |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                        |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
 |-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
 |-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
-|- friendtalk               |	Object  |	친구톡 설정 정보                                                  |
-|-- resendAppKey            | String  | 대체 발송으로 설정할 SMS 서비스 앱키                                  |
-|-- isResend                | String  | 대체 발송 설정(재발송) 여부                                         |
-|-- resendSendNo            | String  |	재발송 시, tc-sms 발신 번호                                       |
-|-- resendUnsubscribeNo     | String  |	재발송 시, tc-sms 080 수신 거부 번호                               |
+|- friendtalk               |	Object  |	Friendtalk information                                        |
+|-- resendAppKey            | String  | Alternative sms appkey                                        |
+|-- isResend                | String  | Whether to send text as alternative, if delivery fails        |
+|-- resendSendNo            | String  |	Sender number for alternative delivery                        |
+|-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery            |
 |-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
 | - createDate              | String  | Date and time of registration                                |
@@ -1792,7 +1793,10 @@ Content-Type: application/json;charset=UTF-8
   "templateCode" : String,
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1814,7 +1818,10 @@ Content-Type: application/json;charset=UTF-8
 | templateCode        | String  | O        | Template code (up to 20 characters)                          |
 | templateName        | String  | O        | Template name (up to 20 characters)                          |
 | templateContent     | String  | O        | Template body (up to 1000 characters)                        |
-|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type, default: Basic) |
+|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateExtra       | String  | X        | Additional Template Information (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수)                             |
+| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle        | String  | X        | Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
@@ -1880,7 +1887,10 @@ Content-Type: application/json;charset=UTF-8
 {
   "templateName" : String,
   "templateContent" : String,
+  "templateMessageType": String,
   "templateEmphasizeType" : String,
+  "templateExtra": String,
+  "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
   "buttons" : [
@@ -1901,7 +1911,10 @@ Content-Type: application/json;charset=UTF-8
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
 | templateName    | String  | O        | Template name (up to 20 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
-|templateEmphasizeType| String| X| Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- Available only for Plus Friends who applied for CBT <br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type, default: Basic) |
+|templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required |
+| templateExtra       | String  | X        | Additional Template Information (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수)                             |
+| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
@@ -2035,6 +2048,65 @@ Content-Type: application/json;charset=UTF-8
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
 
+### 파일 첨부하여 템플릿 문의하기
+#### 요청
+[URL]
+
+```
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 Appkey|
+|plusFriendId|	String|	PlusFriend ID |
+|templateCode|	String|	Template code |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+[Request Body]
+
+```
+{
+  "comment" : String,
+  "attachments" : File
+}
+```
+
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|comment|	String |	O | 문의 내용 |
+|attachments| List<File> | X | 첨부 파일 목록(최대 5개) |
+
+#### 응답
+```
+{
+  "header" : {
+    "resultCode" :  Integer,
+    "resultMessage" :  String,
+    "isSuccessful" :  boolean
+  }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
+
 ### List Templates
 
 #### Request
@@ -2156,8 +2228,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- tempalteTitle      | String  | Template Title                                               |
 |-- templateSubtitle   | String  | Auxiliary Template Phrase                                    |
 |-- templateMessageType| String  | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) |
-|-- templateExtra      | String  | Additional Template Information (to be provided) |
-|-- templateAd         | String  | Request for consent of receiving within template or simple ad phrases (to be provided)  |
+|-- templateExtra      | String  | Additional Template Information                              |
+|-- templateAd         | String  | Request for consent of receiving within template or simple ad phrases |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
@@ -2282,8 +2354,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- tempalteTitle      | String  | Template Title                                               |
 | -- templateSubtitle   | String  | Auxiliary Template Phrase                                    |
 | -- templateMessageType| String  | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type) |
-| -- templateExtra      | String  | Additional Template Information (to be provided) |
-| -- templateAd         | String  | Request for consent of receiving within template or simple ad phrases (to be provided)  |
+| -- templateExtra      | String  | Additional Template Information                             |
+| -- templateAd         | String  | Request for consent of receiving within template or simple ad phrases |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
 | --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
