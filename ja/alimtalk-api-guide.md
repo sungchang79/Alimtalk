@@ -19,10 +19,10 @@
 
 ## v1.5 API紹介
 1. テンプレート登録APIにハイライトテンプレートを使用できるように変更されました。（全文送信時、title値を設定できます）
-2. テンプレートタイプが拡張されました。 広告・付加情報などの内容を追加することができます（後日提供予定）。
+2. テンプレートタイプが拡張されました。広告・付加情報などの内容を追加することができます（後日提供予定）。
 3. 通知トーク/友達トークメッセージ送信時にcreateUserフィールドが追加されました。
 4. 通知トーク/友達トークのメッセージ照会時に登録時間と登録者で照会できるようフィールドが追加されました。
-5. 파일 첨부하여 템플릿 문의하기 API가 추가되었습니다.
+5. ファイルを添付してテンプレート問い合わせAPIを追加しました。
 
 
 ## 一般メッセージ
@@ -48,7 +48,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -79,7 +79,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                | タイプ | 必須 | 説明                                 |
+| 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
@@ -90,7 +90,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - templateParameter    | Object  | X    | テンプレートパラメータ<br>(テンプレートに置換する変数が含まれる時は必須)       |
 | -- key                 | String  | X    | 置換キー(#{key})                             |
-| -- value               | String  | X    | 置換キーにマッピングされるvalue値                 |
+| -- value               | String  | X    | 置換キーにマッピングされるvalue値                |
 | - resendParameter      | Object  | X    | 代替発送情報 |
 | -- isResend            | boolean | X    | 送信失敗時、代替送信するかどうか<br>コンソールで送信失敗設定をした時、デフォルト設定は再送信になっています。 |
 | -- resendType          | String  | X    | 代替送信タイプ(SMS、LMS)<br>値がない場合は、テンプレート本文の長さに応じてタイプが決まります。 |
@@ -134,18 +134,18 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 }
 ```
 
-| 値                 | タイプ | 説明     |
+| 値                | タイプ | 説明    |
 | ----------------------- | ------- | ------------ |
-| header                  | Object  | ヘッダ領域  |
-| - resultCode            | Integer | 結果コード  |
+| header                  | Object  | ヘッダ領域 |
+| - resultCode            | Integer | 結果コード |
 | - resultMessage         | String  | 結果メッセージ |
-| - isSuccessful          | Boolean | 成否   |
-| message                 | Object  | 本文領域  |
+| - isSuccessful          | Boolean | 成否  |
+| message                 | Object  | 本文領域 |
 | - requestId             | String  | リクエストID        |
 | - senderGroupingKey     | String  | 発信グルーピングキー |
 | - sendResults           | Object  | 送信リクエスト結果 |
 | -- recipientSeq         | Integer | 受信者シーケンス番号 |
-| -- recipientNo          | String  | 受信番号  |
+| -- recipientNo          | String  | 受信番号 |
 | -- resultCode           | Integer | 送信リクエスト結果コード |
 | -- resultMessage        | String  | 送信リクエスト結果メッセージ |
 | -- recipientGroupingKey | String  | 受信者グルーピングキー |
@@ -171,7 +171,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -212,7 +212,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                | タイプ | 必須 | 説明                                 |
+| 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
@@ -221,7 +221,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
-| - templateTitle        | String  | O    | テンプレートハイライトタイトル (最大50桁) |
+| - templateTitle        | String  | O    | テンプレートハイライトタイトル(最大50桁) |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -241,7 +241,7 @@ Content-Type: application/json;charset=UTF-8
 * <b>本文とボタンに置換が完了したデータを入れてください。</b>
 * <b>リクエスト日時は呼び出す時点から90日後まで設定可能です。</b>
 * <b>SMSサービスで代替送信されるため、SMSサービスの送信APIの仕様に応じてフィールドを入力する必要があります。(SMSサービスに登録された発信番号、各種フィールドの長さ制限など)</b>
-* <b>SMS 서비스는 국제 SMS만 지원합니다. 국제 수신자 번호일 경우, resendType(대체 발송 타입)을 SMS로 변경해야 정상적으로 대체 발송할 수 있습니다.</b>
+* <b>SMSサービスは、国際SMSのみサポートします。国際受信者番号の場合、 resendType(代替送信タイプ)をSMSに変更すると正常に代替送信できます。</b>
 * <b>指定した代替送信タイプのバイト制限を超える代替送信のタイトルや内容は、途中で切れて代替送信されることがあります。([[SMS注意事項](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)]参考)<
 
 [例]
@@ -274,18 +274,18 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 }
 ```
 
-| 値                 | タイプ | 説明     |
+| 値                | タイプ | 説明    |
 | ----------------------- | ------- | ------------ |
-| header                  | Object  | ヘッダ領域  |
-| - resultCode            | Integer | 結果コード  |
+| header                  | Object  | ヘッダ領域 |
+| - resultCode            | Integer | 結果コード |
 | - resultMessage         | String  | 結果メッセージ |
-| - isSuccessful          | Boolean | 成否   |
-| message                 | Object  | 本文領域  |
+| - isSuccessful          | Boolean | 成否  |
+| message                 | Object  | 本文領域 |
 | - requestId             | String  | リクエストID        |
 | - senderGroupingKey     | String  | 発信グルーピングキー |
 | - sendResults           | Object  | 送信リクエスト結果 |
 | -- recipientSeq         | Integer | 受信者シーケンス番号 |
-| -- recipientNo          | String  | 受信番号  |
+| -- recipientNo          | String  | 受信番号 |
 | -- resultCode           | Integer | 送信リクエスト結果コード |
 | -- resultMessage        | String  | 送信リクエスト結果メッセージ |
 | -- recipientGroupingKey | String  | 受信者グルーピングキー |
@@ -313,29 +313,29 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] 1番or (2番, 3番)の条件は必須
+[Query parameter] 1番or (2番、 3番)の条件は必須
 
-| 値              | タイプ | 必須  | 説明                                 |
+| 値             | タイプ | 必須 | 説明                                |
 | -------------------- | ------- | --------- | ---------------------------------------- |
 | requestId            | String  | 条件必須(1番) | リクエストID                                    |
 | startRequestDate     | String  | 条件必須(2番) | 送信リクエスト日の開始値(yyyy-MM-dd HH:mm)          |
 | endRequestDate       | String  | 条件必須(2番) | 送信リクエスト日の終了値(yyyy-MM-dd HH:mm)           |
-| startCreateDate      | String  | 条件必須(3番) | 登録日 開始値(yyy-MM-dd HH:mm)                   |
-| endCreateDate        | String  | 条件必須(3番) | 登録日 終値(yyy-MM-dd HH:mm)                    |
-| recipientNo          | String  | X         | 受信番号                              |
+| startCreateDate      | String  | 条件必須(3番) | 登録日開始値(yyy-MM-dd HH:mm)                   |
+| endCreateDate        | String  | 条件必須(3番) | 登録日終値(yyy-MM-dd HH:mm)                    |
+| recipientNo          | String  | X         | 受信番号                             |
 | plusFriendId         | String  | X         | プラスフレンドID                                 |
-| templateCode         | String  | X         | テンプレートコード                             |
-| senderGroupingKey    | String  | X         | 発信グルーピングキー                             |
-| recipientGroupingKey | String  | X         | 受信者グルーピングキー                            |
+| templateCode         | String  | X         | テンプレートコード                            |
+| senderGroupingKey    | String  | X         | 発信グルーピングキー                            |
+| recipientGroupingKey | String  | X         | 受信者グルーピングキー                           |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
 | resultCode           | String  | X         | 送信結果(MRC01 -> 成功、MRC02 -> 失敗)          |
 | createUser           | String  | X         | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | pageNum              | Integer | X         | ページ番号(基本：1)                            |
-| pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                |
+| pageSize             | Integer | X         | 照会件数(基本：15、最大: 1000)                |
 
 * 90日以上前の送信リクエストデータは照会されません。
 * 送信リクエスト日時の範囲は最大30日です。
@@ -386,41 +386,41 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                    | タイプ | 説明                                |
+| 値                   | タイプ | 説明                               |
 | --------------------------- | ------- | ---------------------------------------- |
-| header                      | Object  | ヘッダ領域                             |
-| - resultCode                | Integer | 結果コード                             |
-| - resultMessage             | String  | 結果メッセージ                            |
-| - isSuccessful              | Boolean | 成否                              |
-| messageSearchResultResponse | Object  | 本文領域                             |
-| - messages                  | List    | メッセージリスト                            |
+| header                      | Object  | ヘッダ領域                            |
+| - resultCode                | Integer | 結果コード                            |
+| - resultMessage             | String  | 結果メッセージ                           |
+| - isSuccessful              | Boolean | 成否                             |
+| messageSearchResultResponse | Object  | 本文領域                            |
+| - messages                  | List    | メッセージリスト                           |
 | -- requestId                | String  | リクエストID                                    |
-| -- recipientSeq             | Integer | 受信者シーケンス番号                        |
+| -- recipientSeq             | Integer | 受信者シーケンス番号                       |
 | -- plusFriendId             | String  | プラスフレンドID                                 |
-| -- templateCode             | String  | テンプレートコード                            |
-| -- recipientNo              | String  | 受信番号                             |
-| -- content                  | String  | 本文                                |
+| -- templateCode             | String  | テンプレートコード                           |
+| -- recipientNo              | String  | 受信番号                            |
+| -- content                  | String  | 本文                               |
 | -- requestDate              | String  | リクエスト日
-時                             |
-| -- createDate               | String  | 登録日時                             |
-| -- receiveDate              | String  | 受信日時                             |
-| -- resendStatus             | String  | 再送信ステータスコード                         |
-| -- resendStatusName         | String  | 再送信ステータスコード名                         |
+時                            |
+| -- createDate               | String  | 登録日時                            |
+| -- receiveDate              | String  | 受信日時                            |
+| -- resendStatus             | String  | 再送信ステータスコード                        |
+| -- resendStatusName         | String  | 再送信ステータスコード名                        |
 | -- messageStatus            | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
 | -- createUser               | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存) |
-| -- resultCode               | String  | 受信結果コード                          |
-| -- resultCodeName           | String  | 受信結果コード名                          |
-| -- buttons                  | List    | ボタンリスト                             |
-| --- ordering                | Integer | ボタン順序                             |
+| -- resultCode               | String  | 受信結果コード                         |
+| -- resultCodeName           | String  | 受信結果コード名                         |
+| -- buttons                  | List    | ボタンリスト                            |
+| --- ordering                | Integer | ボタン順序                            |
 | --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| --- name                    | String  | ボタン名                             |
+| --- name                    | String  | ボタン名                            |
 | --- linkMo                  | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos               | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid           | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- senderGroupingKey        | String  | 発信グルーピングキー                             |
-| -- recipientGroupingKey     | String  | 受信者グルーピングキー                            |
-| - totalCount                | Integer | 総個数                               |
+| -- senderGroupingKey        | String  | 発信グルーピングキー                            |
+| -- recipientGroupingKey     | String  | 受信者グルーピングキー                           |
+| - totalCount                | Integer | 総個数                              |
 
 [例]
 ```
@@ -428,13 +428,13 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 ```
 
 #### SMS/LMS再送信ステータス
-| 値 | 説明                       |
+| 値 | 説明                      |
 | ----- | ------------------------------- |
-| RSC01 | 再送信の対象ではない                  |
+| RSC01 | 再送信の対象ではない                 |
 | RSC02 | 再送信の対象(送信結果が失敗の時、再送信が行われます。) |
-| RSC03 | 再送信中                     |
-| RSC04 | 再送信成功                   |
-| RSC05 | 再送信失敗                   |
+| RSC03 | 再送信中                    |
+| RSC04 | 再送信成功                  |
+| RSC05 | 再送信失敗                  |
 
 ### メッセージ単件照会
 
@@ -449,7 +449,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明  |
+| 値    | タイプ | 説明 |
 | ------------ | ------- | ---------- |
 | appkey       | String  | 固有のアプリケーションキー |
 | requestId    | String  | リクエストID      |
@@ -461,7 +461,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -517,41 +517,41 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 }
 ```
 
-| 値                | タイプ | 説明                                 |
+| 値               | タイプ | 説明                                |
 | ---------------------- | ------- | ---------------------------------------- |
-| header                 | Object  | ヘッダ領域                              |
-| - resultCode           | Integer | 結果コード                              |
-| - resultMessage        | String  | 結果メッセージ                             |
-| - isSuccessful         | Boolean | 成否                               |
-| message                | Object  | メッセージ                                |
+| header                 | Object  | ヘッダ領域                             |
+| - resultCode           | Integer | 結果コード                             |
+| - resultMessage        | String  | 結果メッセージ                            |
+| - isSuccessful         | Boolean | 成否                              |
+| message                | Object  | メッセージ                               |
 | - requestId            | String  | リクエストID                                    |
-| - recipientSeq         | Integer | 受信者シーケンス番号                         |
+| - recipientSeq         | Integer | 受信者シーケンス番号                        |
 | - plusFriendId         | String  | プラスフレンドID                                 |
-| - templateCode         | String  | テンプレートコード                             |
-| - recipientNo          | String  | 受信番号                              |
-| - content              | String  | 本文                                 |
-|- templateTitle         | String  | テンプレートハイライトタイトル               |
-|- templateSubtitle      | String  | テンプレートハイライトサブタイトル            |
-|- templateExtra         | String  | テンプレート付加情報                      |
-|- templateAd            | String  | テンプレート内の受信同意または簡単な広告文句    |
-| - requestDate          | String  | リクエスト日時                              |
-| - receiveDate          | String  | 受信日時                              |
-| - createDate           | String  | 登録日時                             |
-| - resendStatus         | String  | 再送信ステータスコード                          |
-| - resendStatusName     | String  | 再送信ステータスコード名                           |
+| - templateCode         | String  | テンプレートコード                            |
+| - recipientNo          | String  | 受信番号                             |
+| - content              | String  | 本文                                |
+|- templateTitle         | String  | テンプレートハイライトタイトル              |
+|- templateSubtitle      | String  | テンプレートハイライトサブタイトル           |
+|- templateExtra         | String  | テンプレート付加情報                     |
+|- templateAd            | String  | テンプレート内の受信同意または簡単な広告文句   |
+| - requestDate          | String  | リクエスト日時                             |
+| - receiveDate          | String  | 受信日時                             |
+| - createDate           | String  | 登録日時                            |
+| - resendStatus         | String  | 再送信ステータスコード                         |
+| - resendStatusName     | String  | 再送信ステータスコード名                          |
 | - messageStatus        | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-| - resultCode           | String  | 受信結果コード                           |
-| - resultCodeName       | String  | 受信結果コード名                            |
-| - buttons              | List    | ボタンリスト                              |
-| -- ordering            | Integer | ボタン順序                              |
+| - resultCode           | String  | 受信結果コード                          |
+| - resultCodeName       | String  | 受信結果コード名                           |
+| - buttons              | List    | ボタンリスト                             |
+| -- ordering            | Integer | ボタン順序                             |
 | -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| -- name                | String  | ボタン名                              |
+| -- name                | String  | ボタン名                             |
 | -- linkMo              | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | -- schemeIos           | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | -- schemeAndroid       | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| - senderGroupingKey    | String  | 発信グルーピングキー                             |
-| - recipientGroupingKey | String  | 受信者グルーピングキー                            |
+| - senderGroupingKey    | String  | 発信グルーピングキー                            |
+| - recipientGroupingKey | String  | 受信者グルーピングキー                           |
 
 ## 認証メッセージ
 
@@ -587,7 +587,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -617,7 +617,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                | タイプ | 必須 | 説明                                 |
+| 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
@@ -628,7 +628,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - templateParameter    | Object  | X    | テンプレートパラメータ<br>(テンプレートに置換する変数が含まれる時は必須)       |
 | -- key                 | String  | X    | 置換キー(#{key})                             |
-| -- value               | String  | X    | 置換キーにマッピングされるvalue値                 |
+| -- value               | String  | X    | 置換キーにマッピングされるvalue値                |
 | - resendParameter      | Object  | X    | 代替発送情報 |
 | -- isResend            | boolean | X    | 送信失敗時、代替送信するかどうか<br>コンソールで送信失敗設定をした時、デフォルト設定は再送信になっています。 |
 | -- resendType          | String  | X    | 代替送信タイプ(SMS、LMS)<br>値がない場合は、テンプレート本文の長さに応じてタイプが決まります。 |
@@ -671,18 +671,18 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 }
 ```
 
-| 値                 | タイプ | 説明     |
+| 値                | タイプ | 説明    |
 | ----------------------- | ------- | ------------ |
-| header                  | Object  | ヘッダ領域  |
-| - resultCode            | Integer | 結果コード  |
+| header                  | Object  | ヘッダ領域 |
+| - resultCode            | Integer | 結果コード |
 | - resultMessage         | String  | 結果メッセージ |
-| - isSuccessful          | Boolean | 成否   |
-| message                 | Object  | 本文領域  |
+| - isSuccessful          | Boolean | 成否  |
+| message                 | Object  | 本文領域 |
 | - requestId             | String  | リクエストID        |
 | - senderGroupingKey     | String  | 発信グルーピングキー |
 | - sendResults           | Object  | 送信リクエスト結果 |
 | -- recipientSeq         | Integer | 受信者シーケンス番号 |
-| -- recipientNo          | String  | 受信番号  |
+| -- recipientNo          | String  | 受信番号 |
 | -- resultCode           | Integer | 送信リクエスト結果コード |
 | -- resultMessage        | String  | 送信リクエスト結果メッセージ |
 | -- recipientGroupingKey | String  | 受信者グルーピングキー |
@@ -708,7 +708,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -750,7 +750,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                | タイプ | 必須 | 説明                                 |
+| 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
@@ -760,7 +760,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
-| - title                | String  | X    | タイトル (最大50桁)                            | 
+| - title                | String  | X    | タイトル(最大50桁)                            |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
@@ -810,18 +810,18 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 }
 ```
 
-| 値                 | タイプ | 説明     |
+| 値                | タイプ | 説明    |
 | ----------------------- | ------- | ------------ |
-| header                  | Object  | ヘッダ領域  |
-| - resultCode            | Integer | 結果コード  |
+| header                  | Object  | ヘッダ領域 |
+| - resultCode            | Integer | 結果コード |
 | - resultMessage         | String  | 結果メッセージ |
-| - isSuccessful          | Boolean | 成否   |
-| message                 | Object  | 本文領域  |
+| - isSuccessful          | Boolean | 成否  |
+| message                 | Object  | 本文領域 |
 | - requestId             | String  | リクエストID        |
 | - senderGroupingKey     | String  | 発信グルーピングキー |
 | - sendResults           | Object  | 送信リクエスト結果 |
 | -- recipientSeq         | Integer | 受信者シーケンス番号 |
-| -- recipientNo          | String  | 受信番号  |
+| -- recipientNo          | String  | 受信番号 |
 | -- resultCode           | Integer | 送信リクエスト結果コード |
 | -- resultMessage        | String  | 送信リクエスト結果メッセージ |
 | -- recipientGroupingKey | String  | 受信者グルーピングキー |
@@ -849,29 +849,29 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] 1番or (2番, 3番)の条件は必須
+[Query parameter] 1番or (2番、 3番)の条件は必須
 
-| 値              | タイプ | 必須  | 説明                                 |
+| 値             | タイプ | 必須 | 説明                                |
 | -------------------- | ------- | --------- | ---------------------------------------- |
 | requestId            | String  | 条件必須(1番) | リクエストID                                    |
 | startRequestDate     | String  | 条件必須(2番) | 送信リクエスト日の開始値(yyyy-MM-dd HH:mm)          |
 | endRequestDate       | String  | 条件必須(2番) | 送信リクエスト日の終了値(yyyy-MM-dd HH:mm)           |
-| startCreateDate      | String  | 条件必須(3番) | 登録日 開始値(yyy-MM-dd HH:mm)                   |
-| endCreateDate        | String  | 条件必須(3番) | 登録日 終値(yyy-MM-dd HH:mm)                    |
-| recipientNo          | String  | X         | 受信番号                              |
+| startCreateDate      | String  | 条件必須(3番) | 登録日開始値(yyy-MM-dd HH:mm)                   |
+| endCreateDate        | String  | 条件必須(3番) | 登録日終値(yyy-MM-dd HH:mm)                    |
+| recipientNo          | String  | X         | 受信番号                             |
 | plusFriendId         | String  | X         | プラスフレンドID                                 |
-| templateCode         | String  | X         | テンプレートコード                             |
-| senderGroupingKey    | String  | X         | 発信グルーピングキー                             |
-| recipientGroupingKey | String  | X         | 受信者グルーピングキー                            |
+| templateCode         | String  | X         | テンプレートコード                            |
+| senderGroupingKey    | String  | X         | 発信グルーピングキー                            |
+| recipientGroupingKey | String  | X         | 受信者グルーピングキー                           |
 | messageStatus        | String  | X         | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
 | createUser           | String  | X         | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | resultCode           | String  | X         | 送信結果(MRC01 -> 成功、MRC02 -> 失敗)          |
 | pageNum              | Integer | X         | ページ番号(基本：1)                            |
-| pageSize             | Integer | X         | 照会件数(基本：15, 最大 : 1000)                |
+| pageSize             | Integer | X         | 照会件数(基本：15、最大: 1000)                |
 
 * 90日以上前の送信リクエストデータは照会されません。
 * 送信リクエスト日時の範囲は最大30日です。
@@ -922,40 +922,40 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                    | タイプ | 説明                                |
+| 値                   | タイプ | 説明                               |
 | --------------------------- | ------- | ---------------------------------------- |
-| header                      | Object  | ヘッダ領域                             |
-| - resultCode                | Integer | 結果コード                             |
-| - resultMessage             | String  | 結果メッセージ                            |
-| - isSuccessful              | Boolean | 成否                              |
-| messageSearchResultResponse | Object  | 本文領域                             |
-| - messages                  | List    | メッセージリスト                            |
+| header                      | Object  | ヘッダ領域                            |
+| - resultCode                | Integer | 結果コード                            |
+| - resultMessage             | String  | 結果メッセージ                           |
+| - isSuccessful              | Boolean | 成否                             |
+| messageSearchResultResponse | Object  | 本文領域                            |
+| - messages                  | List    | メッセージリスト                           |
 | -- requestId                | String  | リクエストID                                    |
-| -- recipientSeq             | Integer | 受信者シーケンス番号                        |
+| -- recipientSeq             | Integer | 受信者シーケンス番号                       |
 | -- plusFriendId             | String  | プラスフレンドID                                 |
-| -- templateCode             | String  | テンプレートコード                            |
-| -- recipientNo              | String  | 受信番号                             |
-| -- content                  | String  | 本文                                |
-| -- requestDate              | String  | リクエスト日時                             |
-| -- createDate               | String  | 登録日時                             |
-| -- receiveDate              | String  | 受信日時                             |
-| -- resendStatus             | String  | 再送信ステータスコード                         |
-| -- resendStatusName         | String  | 再送信ステータスコード名                         |
+| -- templateCode             | String  | テンプレートコード                           |
+| -- recipientNo              | String  | 受信番号                            |
+| -- content                  | String  | 本文                               |
+| -- requestDate              | String  | リクエスト日時                            |
+| -- createDate               | String  | 登録日時                            |
+| -- receiveDate              | String  | 受信日時                            |
+| -- resendStatus             | String  | 再送信ステータスコード                        |
+| -- resendStatusName         | String  | 再送信ステータスコード名                        |
 | -- messageStatus            | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-| -- resultCode               | String  | 受信結果コード                          |
-| -- resultCodeName           | String  | 受信結果コード名                          |
+| -- resultCode               | String  | 受信結果コード                         |
+| -- resultCodeName           | String  | 受信結果コード名                         |
 | -- createUser               | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
-| -- buttons                  | List    | ボタンリスト                             |
-| --- ordering                | Integer | ボタン順序                             |
+| -- buttons                  | List    | ボタンリスト                            |
+| --- ordering                | Integer | ボタン順序                            |
 | --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| --- name                    | String  | ボタン名                             |
+| --- name                    | String  | ボタン名                            |
 | --- linkMo                  | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos               | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid           | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- senderGroupingKey        | String  | 発信グルーピングキー                             |
-| -- recipientGroupingKey     | String  | 受信者グルーピングキー                            |
-| - totalCount                | Integer | 総個数                               |
+| -- senderGroupingKey        | String  | 発信グルーピングキー                            |
+| -- recipientGroupingKey     | String  | 受信者グルーピングキー                           |
+| - totalCount                | Integer | 総個数                              |
 
 [例]
 ```
@@ -963,13 +963,13 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 ```
 
 #### SMS/LMS再送信ステータス
-| 値 | 説明                       |
+| 値 | 説明                      |
 | ----- | ------------------------------- |
-| RSC01 | 再送信の対象ではない                  |
+| RSC01 | 再送信の対象ではない                 |
 | RSC02 | 再送信の対象(送信結果が失敗の時、再送信が行われます。) |
-| RSC03 | 再送信中                     |
-| RSC04 | 再送信成功                   |
-| RSC05 | 再送信失敗                   |
+| RSC03 | 再送信中                    |
+| RSC04 | 再送信成功                  |
+| RSC05 | 再送信失敗                  |
 
 ### メッセージ単件照会
 
@@ -984,7 +984,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明  |
+| 値    | タイプ | 説明 |
 | ------------ | ------- | ---------- |
 | appkey       | String  | 固有のアプリケーションキー |
 | requestId    | String  | リクエストID      |
@@ -996,7 +996,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1052,44 +1052,44 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 }
 ```
 
-| 値                | タイプ | 説明                                 |
+| 値               | タイプ | 説明                                |
 | ---------------------- | ------- | ---------------------------------------- |
-| header                 | Object  | ヘッダ領域                              |
-| - resultCode           | Integer | 結果コード                              |
-| - resultMessage        | String  | 結果メッセージ                             |
-| - isSuccessful         | Boolean | 成否                               |
-| message                | Object  | メッセージ                                |
+| header                 | Object  | ヘッダ領域                             |
+| - resultCode           | Integer | 結果コード                             |
+| - resultMessage        | String  | 結果メッセージ                            |
+| - isSuccessful         | Boolean | 成否                              |
+| message                | Object  | メッセージ                               |
 | - requestId            | String  | リクエストID                                    |
-| - recipientSeq         | Integer | 受信者シーケンス番号                         |
+| - recipientSeq         | Integer | 受信者シーケンス番号                        |
 | - plusFriendId         | String  | プラスフレンドID                                 |
-| - templateCode         | String  | テンプレートコード                             |
-| - recipientNo          | String  | 受信番号                              |
-| - content              | String  | 本文                                 |
-| - templateTitle        | String  | テンプレートハイライトタイトル               |
-| - templateSubtitle     | String  | テンプレートハイライトサブタイトル            |
-| - templateExtra        | String  | テンプレート付加情報                      |
-| - templateAd           | String  | テンプレート内の受信同意または簡単な広告文句    |
-| - requestDate          | String  | リクエスト日時                              |
-| - createDate           | String  | 登録日時                             |
-| - receiveDate          | String  | 受信日時                              |
-| - resendStatus         | String  | 再送信ステータスコード                          |
-| - resendStatusName     | String  | 再送信ステータスコード名                           |
-| - resendResultCode     | String  | 再送結果コード [SMS結果コード](https://docs.toast.com/ja/Notification/SMS/ja/error-code/#api) |
+| - templateCode         | String  | テンプレートコード                            |
+| - recipientNo          | String  | 受信番号                             |
+| - content              | String  | 本文                                |
+| - templateTitle        | String  | テンプレートハイライトタイトル              |
+| - templateSubtitle     | String  | テンプレートハイライトサブタイトル           |
+| - templateExtra        | String  | テンプレート付加情報                     |
+| - templateAd           | String  | テンプレート内の受信同意または簡単な広告文句   |
+| - requestDate          | String  | リクエスト日時                             |
+| - createDate           | String  | 登録日時                            |
+| - receiveDate          | String  | 受信日時                             |
+| - resendStatus         | String  | 再送信ステータスコード                         |
+| - resendStatusName     | String  | 再送信ステータスコード名                          |
+| - resendResultCode     | String  | 再送結果コード[SMS結果コード](https://docs.toast.com/ja/Notification/SMS/ja/error-code/#api) |
 | - resendRequestId      | String  | 再送SMSリクエストID                                                  |
 | - messageStatus        | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-| - resultCode           | String  | 受信結果コード                           |
-| - resultCodeName       | String  | 受信結果コード名                            |
+| - resultCode           | String  | 受信結果コード                          |
+| - resultCodeName       | String  | 受信結果コード名                           |
 | - createUser           | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
-| - buttons              | List    | ボタンリスト                              |
-| -- ordering            | Integer | ボタン順序                              |
+| - buttons              | List    | ボタンリスト                             |
+| -- ordering            | Integer | ボタン順序                             |
 | -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| -- name                | String  | ボタン名                              |
+| -- name                | String  | ボタン名                             |
 | -- linkMo              | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | -- schemeIos           | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | -- schemeAndroid       | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| - senderGroupingKey    | String  | 発信グルーピングキー                             |
-| - recipientGroupingKey | String  | 受信者グルーピングキー                            |
+| - senderGroupingKey    | String  | 発信グルーピングキー                            |
+| - recipientGroupingKey | String  | 受信者グルーピングキー                           |
 
 ## メッセージ
 ### メッセージ送信取消
@@ -1105,7 +1105,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値  | タイプ | 説明 |
+| 値 | タイプ | 説明 |
 | --------- | ------ | ------ |
 | appkey    | String | 固有のアプリケーションキー |
 | requestId | String | リクエストID  |
@@ -1116,13 +1116,13 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | recipientSeq | String | X    | 受信者シーケンス番号<br>(入力しない場合、リクエストIDのすべての送信件をキャンセル) |
 
@@ -1139,7 +1139,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1174,19 +1174,19 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| 値             | タイプ | 必須 | 説明                           |
+| 値            | タイプ | 必須 | 説明                          |
 | ------------------- | ------- | ---- | ---------------------------------- |
 | startUpdateDate     | String  | O    | 結果アップデート照会開始時間(yyyy-MM-dd HH:mm) |
 | endUpdateDate       | String  | O    | 結果アップデート照会終了時間(yyyy-MM-dd HH:mm) |
 | alimtalkMessageType | String  | X    | お知らせトークメッセージタイプ(NORMAL、AUTH)           |
 | pageNum             | Integer | X    | ページ番号(基本：1)                      |
-| pageSize            | Integer | X    | 照会件数(基本：15, 最大 : 1000)          |
+| pageSize            | Integer | X    | 照会件数(基本：15、最大: 1000)          |
 
 #### レスポンス
 ```
@@ -1232,38 +1232,38 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                    | タイプ | 説明                                |
+| 値                   | タイプ | 説明                               |
 | --------------------------- | ------- | ---------------------------------------- |
-| header                      | Object  | ヘッダ領域                             |
-| - resultCode                | Integer | 結果コード                             |
-| - resultMessage             | String  | 結果メッセージ                            |
-| - isSuccessful              | Boolean | 成否                              |
-| messageSearchResultResponse | Object  | 本文領域                             |
-| - messages                  | List    | メッセージリスト                            |
+| header                      | Object  | ヘッダ領域                            |
+| - resultCode                | Integer | 結果コード                            |
+| - resultMessage             | String  | 結果メッセージ                           |
+| - isSuccessful              | Boolean | 成否                             |
+| messageSearchResultResponse | Object  | 本文領域                            |
+| - messages                  | List    | メッセージリスト                           |
 | -- requestId                | String  | リクエストID                                    |
-| -- recipientSeq             | Integer | 受信者シーケンス番号                        |
+| -- recipientSeq             | Integer | 受信者シーケンス番号                       |
 | -- plusFriendId             | String  | プラスフレンドID                                 |
-| -- templateCode             | String  | テンプレートコード                            |
-| -- recipientNo              | String  | 受信番号                             |
-| -- content                  | String  | 本文                                |
-| -- requestDate              | String  | リクエスト日時                             |
-| -- receiveDate              | String  | 受信日時                             |
-| -- resendStatus             | String  | 再送信ステータスコード                         |
-| -- resendStatusName         | String  | 再送信ステータスコード名                         |
+| -- templateCode             | String  | テンプレートコード                           |
+| -- recipientNo              | String  | 受信番号                            |
+| -- content                  | String  | 本文                               |
+| -- requestDate              | String  | リクエスト日時                            |
+| -- receiveDate              | String  | 受信日時                            |
+| -- resendStatus             | String  | 再送信ステータスコード                        |
+| -- resendStatusName         | String  | 再送信ステータスコード名                        |
 | -- messageStatus            | String  | リクエストステータス(COMPLETED -> 成功、FAILED -> 失敗、CANCEL -> キャンセル) |
-| -- resultCode               | String  | 受信結果コード                          |
-| -- resultCodeName           | String  | 受信結果コード名                          |
-| -- buttons                  | List    | ボタンリスト                             |
-| --- ordering                | Integer | ボタン順序                             |
+| -- resultCode               | String  | 受信結果コード                         |
+| -- resultCodeName           | String  | 受信結果コード名                         |
+| -- buttons                  | List    | ボタンリスト                            |
+| --- ordering                | Integer | ボタン順序                            |
 | --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| --- name                    | String  | ボタン名                             |
+| --- name                    | String  | ボタン名                            |
 | --- linkMo                  | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos               | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid           | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- senderGroupingKey        | String  | 発信グルーピングキー                             |
-| -- recipientGroupingKey     | String  | 受信者グルーピングキー                            |
-| - totalCount                | Integer | 総個数                               |
+| -- senderGroupingKey        | String  | 発信グルーピングキー                            |
+| -- recipientGroupingKey     | String  | 受信者グルーピングキー                           |
+| - totalCount                | Integer | 総個数                              |
 
 [例]
 ```
@@ -1294,7 +1294,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1333,7 +1333,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値         | タイプ | 説明 |
+| 値        | タイプ | 説明 |
 | ---------------- | ------- | ------- |
 | header           | Object  | ヘッダ領域 |
 | - resultCode     | Integer | 結果コード |
@@ -1376,7 +1376,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1389,9 +1389,9 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値 | タイプ | 必須 | 説明                                |
+| 値 | タイプ | 必須 | 説明                               |
 | -------- | ------ | ---- | ---------------------------------------- |
-| fileName | String | O    | ファイル名                             |
+| fileName | String | O    | ファイル名                            |
 | fileBody | Byte[] | O    | ファイルbyte[]をBase64でエンコードした値。(最大500KB)<br>またはbyte配列値 |
 
 #### レスポンス
@@ -1408,7 +1408,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1438,7 +1438,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1452,7 +1452,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------- | ---- | ---------------------------------------- |
 | plusFriendId | String  | O    | プラスフレンドID(最大30文字)                         |
 | phoneNo      | String  | O    | 管理者の携帯電話番号(最大15桁)                       |
@@ -1469,7 +1469,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1487,7 +1487,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 | plusFriendId | String | プラスフレンドID |
@@ -1498,7 +1498,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1510,7 +1510,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値 | タイプ | 必須 | 説明                                |
+| 値 | タイプ | 必須 | 説明                               |
 | ----- | ------- | ---- | ---------------------------------------- |
 | token | Integer | O    | 認証トークン(プラスフレンド登録API呼び出し後、カカオトークアプリで受け取った認証トークン) |
 
@@ -1525,7 +1525,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1557,7 +1557,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1599,17 +1599,17 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                  | タイプ | 説明                                |
+| 値                 | タイプ | 説明                               |
 | ------------------------- | ------- | ---------------------------------------- |
-| header                    | Object  | ヘッダ領域                             |
-| - resultCode              | Integer | 結果コード                             |
-| - resultMessage           | String  | 結果メッセージ                            |
-| - isSuccessful            | Boolean | 成否                              |
-| plusFriend               | Object  | プラスフレンド                             |
+| header                    | Object  | ヘッダ領域                            |
+| - resultCode              | Integer | 結果コード                            |
+| - resultMessage           | String  | 結果メッセージ                           |
+| - isSuccessful            | Boolean | 成否                             |
+| plusFriend               | Object  | プラスフレンド                            |
 | - plusFriendId            | String  | プラスフレンドID                                 |
 | - plusFriendType          | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
-| - senderKey               | String  | 発信キー                                 |
-| - categoryCode            | String  | カテゴリーコード                           |
+| - senderKey               | String  | 発信キー                                |
+| - categoryCode            | String  | カテゴリーコード                          |
 | - status                  | String  | TOASTプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
 | - statusName              | String  | TOASTプラスフレンドステータス名(登録待機中、正常登録)           |
 | - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
@@ -1617,17 +1617,17 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
 | - kakaoProfileStatusName  | String  | カカオプラスフレンドプロフィールステータス名(有効化、無効化、遮断、削除処理中、削除)<br>statusがYSC02の場合、kakaoProfileStatusName null値を持ちます。 |
 |- alimtalk|	Object|	お知らせトーク設定情報|
-|-- isResend | String  | 送信失敗設定(再送信)するかどうか                    |
-|-- resendSendNo | String  | 再送信時、tc-sms発信番号               |
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
 |-- dailyMaxCount | Integer | お知らせトークの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 |-- sentCount | Integer | お知らせトークの一日送信件数<br>(値が0の場合、件数制限なし)       |
 |- friendtalk|	Object|	友人トーク設定情報|
-|-- isResend | String  | 送信失敗設定(再送信)するかどうか                    |
-|-- resendSendNo | String  | 再送信時、tc-sms発信番号               |
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
 |-- resendUnsubscribeNo | String |	再送信時、tc-sms 080受信拒否番号 |
 |-- dailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 |-- sentCount | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
-| - createDate              | String  | 登録日時                             |
+| - createDate              | String  | 登録日時                            |
 
 ### プラスフレンドリストの照会
 #### リクエスト
@@ -1651,19 +1651,19 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
 [Query parameter] 1番or 2番の条件は必須
 
-| 値            | タイプ | 必須 | 説明                                |
+| 値           | タイプ | 必須 | 説明                               |
 | ------------------- | ------- | ---- | ---------------------------------------- |
 | plusFriendId        | String  | X    | プラスフレンドID                                 |
 | status              | String  | X    | プラスフレンドステータスコード <br>(YSC02：トークン認証待機中、YSC03：正常登録) |
 | isSearchKakaoStatus | boolean | X    | カカオステータスを照会するかどうか(falseの場合、カカオステータス関連フィールド(kakaoStatus、kakaoProfileStatusなど) null値)<br>default値：true |
 | pageNum        | Integer | X    | ページ番号(基本：1) |
-| pageSize       | Integer | X    | 照会件数(基本：15, 最大 : 1000) |
+| pageSize       | Integer | X    | 照会件数(基本：15、最大: 1000) |
 
 #### レスポンス
 ```
@@ -1705,17 +1705,17 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                  | タイプ | 説明                                |
+| 値                 | タイプ | 説明                               |
 | ------------------------- | ------- | ---------------------------------------- |
-| header                    | Object  | ヘッダ領域                             |
-| - resultCode              | Integer | 結果コード                             |
-| - resultMessage           | String  | 結果メッセージ                            |
-| - isSuccessful            | Boolean | 成否                              |
-| plusFriends               | Object  | プラスフレンド                             |
+| header                    | Object  | ヘッダ領域                            |
+| - resultCode              | Integer | 結果コード                            |
+| - resultMessage           | String  | 結果メッセージ                           |
+| - isSuccessful            | Boolean | 成否                             |
+| plusFriends               | Object  | プラスフレンド                            |
 | - plusFriendId            | String  | プラスフレンドID                                 |
 | - plusFriendType          | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
-| - senderKey               | String  | 発信キー                                 |
-| - categoryCode            | String  | カテゴリーコード                           |
+| - senderKey               | String  | 発信キー                                |
+| - categoryCode            | String  | カテゴリーコード                          |
 | - status                  | String  | TOASTプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
 | - statusName              | String  | TOASTプラスフレンドステータス名(登録待機中、正常登録)           |
 | - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
@@ -1723,18 +1723,18 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
 | - kakaoProfileStatusName  | String  | カカオプラスフレンドプロフィールステータス名(有効化、無効化、遮断、削除処理中、削除)<br>statusがYSC02の場合、kakaoProfileStatusName null値を持ちます。 |
 |- alimtalk|	Object|	お知らせトーク設定情報|
-|-- isResend | String  | 送信失敗設定(再送信)するかどうか                    |
-|-- resendSendNo | String  | 再送信時、tc-sms発信番号               |
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
 |-- dailyMaxCount | Integer | お知らせトークの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 |-- sentCount | Integer | お知らせトークの一日送信件数<br>(値が0の場合、件数制限なし)       |
 |- friendtalk|	Object|	友人トーク設定情報|
-|-- isResend | String  | 送信失敗設定(再送信)するかどうか                    |
-|-- resendSendNo | String  | 再送信時、tc-sms発信番号               |
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
 |-- resendUnsubscribeNo | String |	再送信時、tc-sms 080受信拒否番号 |
 |-- dailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 |-- sentCount | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
-| - createDate              | String  | 登録日時                             |
-| totalCount                | Integer | 総個数                                |
+| - createDate              | String  | 登録日時                            |
+| totalCount                | Integer | 総個数                               |
 
 ## テンプレート
 
@@ -1749,7 +1749,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 | plusFriendId | String | プラスフレンドID |
@@ -1760,7 +1760,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1791,7 +1791,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 必須 | 説明                                |
+| 値       | タイプ | 必須 | 説明                               |
 | --------------- | ------- | ---- | ---------------------------------------- |
 | templateCode    | String  | O    | テンプレートコード(最大20文字)                           |
 | templateName    | String  | O    | テンプレート名(最大20文字)                             |
@@ -1822,7 +1822,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1840,7 +1840,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 | plusFriendId | String | プラスフレンドID |
@@ -1852,7 +1852,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -1882,7 +1882,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 必須 | 説明                                |
+| 値       | タイプ | 必須 | 説明                               |
 | --------------- | ------- | ---- | ---------------------------------------- |
 | templateName    | String  | O    | テンプレート名(最大20文字)                             |
 | templateContent | String  | O    | テンプレート本文(最大1000文字)                         |
@@ -1912,7 +1912,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1930,7 +1930,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 | plusFriendId | String | プラスフレンドID |
@@ -1954,7 +1954,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
@@ -1972,7 +1972,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 | plusFriendId | String | プラスフレンドID |
@@ -1984,7 +1984,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -2011,15 +2011,15 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値        | タイプ | 説明 |
+| 値       | タイプ | 説明 |
 | --------------- | ------- | ------ |
 | header          | Object  | ヘッダ領域 |
 | - resultCode    | Integer | 結果コード |
 | - resultMessage | String  | 結果メッセージ |
 | - isSuccessful  | Boolean | 成否 |
 
-### 파일 첨부하여 템플릿 문의하기
-#### 요청
+### ファイルを添付してテンプレートお問い合わせ
+#### リクエスト
 [URL]
 
 ```
@@ -2029,11 +2029,11 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+|値|	タイプ|	説明|
 |---|---|---|
-|appkey|	String|	고유의 Appkey|
-|plusFriendId|	String|	플러스친구 ID |
-|templateCode|	String|	템플릿 코드 |
+|appkey|	String|	固有のAppkey|
+|plusFriendId|	String|	プラスフレンドID |
+|templateCode|	String|	テンプレートコード |
 
 [Header]
 ```
@@ -2041,9 +2041,9 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+|値|	タイプ|	必須|	説明|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
 [Request Body]
 
@@ -2054,12 +2054,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	필수|	설명|
+|値|	タイプ|	必須|	説明|
 |---|---|---|---|
-|comment|	String |	O | 문의 내용 |
-|attachments| List<File> | X | 첨부 파일 목록(최대 5개) |
+|comment|	String |	O | お問い合わせ内容 |
+|attachments| List<File> | X | 添付ファイルリスト(最大5個) |
 
-#### 응답
+#### レスポンス
 ```
 {
   "header" : {
@@ -2070,12 +2070,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+|値|	タイプ|	説明|
 |---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
+|header|	Object|	ヘッダ領域|
+|- resultCode|	Integer|	結果コード|
+|- resultMessage|	String| 結果メッセージ|
+|- isSuccessful|	Boolean| 成否|
 
 ### テンプレートリストの照会
 
@@ -2100,20 +2100,20 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| 値       | タイプ | 必須 | 説明     |
+| 値      | タイプ | 必須 | 説明    |
 | -------------- | ------- | ---- | ------------- |
 | plusFriendId   | String  | X    | プラスフレンドID      |
 | templateCode   | String  | X    | テンプレートコード |
 | templateName   | String  | X    | テンプレート名 |
 | templateStatus | String  | X    | テンプレートステータスコード |
 | pageNum        | Integer | X    | ページ番号(基本：1) |
-| pageSize       | Integer | X    | 照会件数(基本：15, 最大 : 1000) |
+| pageSize       | Integer | X    | 照会件数(基本：15、最大: 1000) |
 
 | テンプレートステータスコード | 説明 |
 | --------- | ---- |
@@ -2180,43 +2180,43 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 }
 ```
 
-| 値             | タイプ | 説明                                |
+| 値            | タイプ | 説明                               |
 | -------------------- | ------- | ---------------------------------------- |
-| header               | Object  | ヘッダ領域                             |
-| - resultCode         | Integer | 結果コード                             |
-| - resultMessage      | String  | 結果メッセージ                            |
-| - isSuccessful       | Boolean | 成否                              |
-| templateListResponse | Object  | 本文領域                             |
-| - templates          | List    | テンプレートリスト                           |
+| header               | Object  | ヘッダ領域                            |
+| - resultCode         | Integer | 結果コード                            |
+| - resultMessage      | String  | 結果メッセージ                           |
+| - isSuccessful       | Boolean | 成否                             |
+| templateListResponse | Object  | 本文領域                            |
+| - templates          | List    | テンプレートリスト                          |
 | -- plusFriendId      | String  | プラスフレンドID                                 |
 | -- plusFriendType    | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
-| -- templateCode      | String  | テンプレートコード                            |
-| -- templateName      | String  | テンプレート名                              |
-| -- templateContent   | String  | テンプレート本文                            |
+| -- templateCode      | String  | テンプレートコード                           |
+| -- templateName      | String  | テンプレート名                             |
+| -- templateContent   | String  | テンプレート本文                           |
 | -- templateEmphasizeType| String| テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
 | -- tempalteTitle     | String  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | -- templateSubtitle  | String  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
 | -- templateMessageType| String  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
 | -- templateExtra     | String  | テンプレート付加情報 |
 | -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句 |
-| -- buttons           | List    | ボタンリスト                             |
+| -- buttons           | List    | ボタンリスト                            |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| --- name             | String  | ボタン名                             |
+| --- name             | String  | ボタン名                            |
 | --- linkMo           | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc           | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos        | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid    | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- comments          | List    | 検収結果                             |
+| -- comments          | List    | 検収結果                            |
 | --- id               | Integer | お問い合わせID                                   |
-| --- content          | String  | お問い合わせ内容                             |
-| ---userName          | String  | 作成者                                |
-| ---createAt          | String  | 登録日                             |
+| --- content          | String  | お問い合わせ内容                            |
+| ---userName          | String  | 作成者                               |
+| ---createAt          | String  | 登録日                            |
 | ---status            | String  | 応答状態(INQ：お問い合わせ、APR：承認、REJ：差し戻し、REP：返信) |
-| -- status            | String  | テンプレートのステータス                            |
-| -- statusName        | String  | テンプレートのステータス名                            |
-| -- createDate        | String  | 作成日時                             |
-| - totalCount         | Integer | 総個数                               |
+| -- status            | String  | テンプレートのステータス                           |
+| -- statusName        | String  | テンプレートのステータス名                           |
+| -- createDate        | String  | 作成日時                            |
+| - totalCount         | Integer | 総個数                              |
 
 ### テンプレートの修正リスト照会
 
@@ -2243,11 +2243,11 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 |---|---|---|---|
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-[예시]
+[例]
 ```
 curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
 ```
@@ -2306,47 +2306,47 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 }
 ```
 
-| 値             | タイプ | 説明                                |
+| 値            | タイプ | 説明                               |
 | -------------------- | ------- | ---------------------------------------- |
-| header               | Object  | ヘッダ領域                             |
-| - resultCode         | Integer | 結果コード                             |
-| - resultMessage      | String  | 結果メッセージ                            |
-| - isSuccessful       | Boolean | 成否                              |
-| templateModificationsResponse | Object  | 本文領域                             |
-| - templates          | List    | テンプレートリスト                           |
+| header               | Object  | ヘッダ領域                            |
+| - resultCode         | Integer | 結果コード                            |
+| - resultMessage      | String  | 結果メッセージ                           |
+| - isSuccessful       | Boolean | 成否                             |
+| templateModificationsResponse | Object  | 本文領域                            |
+| - templates          | List    | テンプレートリスト                          |
 | -- plusFriendId      | String  | プラスフレンドID                                 |
 | -- plusFriendType    | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
-| -- templateCode      | String  | テンプレートコード                            |
-| -- templateName      | String  | テンプレート名                              |
-| -- templateContent   | String  | テンプレート本文                            |
+| -- templateCode      | String  | テンプレートコード                           |
+| -- templateName      | String  | テンプレート名                             |
+| -- templateContent   | String  | テンプレート本文                           |
 | -- templateEmphasizeType| String| テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
 | -- tempalteTitle     | String  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | -- templateSubtitle  | String  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
 | -- templateMessageType| String  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
 | -- templateExtra     | String  | テンプレート付加情報 |
 | -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句 |
-| -- buttons           | List    | ボタンリスト                             |
+| -- buttons           | List    | ボタンリスト                            |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
 | --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
-| --- name             | String  | ボタン名                             |
+| --- name             | String  | ボタン名                            |
 | --- linkMo           | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc           | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos        | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid    | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- comments          | List    | 検収結果                             |
+| -- comments          | List    | 検収結果                            |
 | --- id               | Integer | お問い合わせID                                   |
-| --- content          | String  | お問い合わせ内容                             |
-| ---userName          | String  | 作成者                                |
-| ---createAt          | String  | 登録日                             |
+| --- content          | String  | お問い合わせ内容                            |
+| ---userName          | String  | 作成者                               |
+| ---createAt          | String  | 登録日                            |
 | ---status            | String  | 応答状態(INQ：お問い合わせ、APR：承認、REJ：差し戻し、REP：返信) |
-| -- status            | String  | テンプレートのステータス                            |
-| -- statusName        | String  | テンプレートのステータス名                            |
-| -- activated         | Boolean  | 有効かどうか                             |
-| -- createDate        | String  | 作成日時                             |
-| - totalCount         | Integer | 総個数                               |
+| -- status            | String  | テンプレートのステータス                           |
+| -- statusName        | String  | テンプレートのステータス名                           |
+| -- activated         | Boolean  | 有効かどうか                            |
+| -- createDate        | String  | 作成日時                            |
+| - totalCount         | Integer | 総個数                              |
 
 ## 代替送信管理
-### SMS AppKey 登録
+### SMS AppKey登録
 
 [URL]
 
@@ -2357,7 +2357,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 
@@ -2368,7 +2368,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -2381,7 +2381,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 |---|---|---|---|
 |resendAppKey|	String|	O | 代替発送に設定するSMS AppKey |
 
@@ -2413,7 +2413,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| 値     | タイプ | 説明 |
+| 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
 
@@ -2424,7 +2424,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値     | タイプ | 必須 | 説明                                |
+| 値    | タイプ | 必須 | 説明                               |
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -2439,7 +2439,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| 値                | タイプ | 必須 | 説明                                 |
+| 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
 | plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | isResend             | boolean | O    | 送信失敗時、代替送信するかどうか<br>コンソールで送信失敗設定をした時、デフォルト設定は再送信になっています。 |
@@ -2447,7 +2447,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@플러스친구","isResend": true,"resendSendNo": "01012341234" }
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@プラスフレンド","isResend": true,"resendSendNo": "01012341234" }
 ```
 
 #### レスポンス
