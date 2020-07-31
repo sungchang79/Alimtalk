@@ -214,6 +214,10 @@
 		<td>msg_type error (neither 1008 nor 1009)</td>
 	</tr>
 	<tr>
+		<td>3018</td>
+		<td>메시지를 전송할 수 없음<br>1. 카카오톡 사용했었다가 탈퇴한사람<br>2. 카카오톡 가입한적이 한번도 없는 사람<br>3. 알림톡 수신차단<br>4. 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
+	</tr>
+	<tr>
 		<td>3023</td>
 		<td>Grammatical error of message (error in JSON format)</td>
 	</tr>
