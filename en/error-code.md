@@ -199,7 +199,7 @@
 	</tr>
 	<tr>
 		<td>3012</td>
-		<td>Message serial number is redundant </td>
+		<td>카카오 통신 실패 </td>
 	</tr>
 	<tr>
 		<td>3013</td>
