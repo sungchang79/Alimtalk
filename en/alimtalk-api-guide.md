@@ -225,7 +225,7 @@ Content-Type: application/json;charset=UTF-8
 | - title                | String  | O    | 제목 (최대 50자) |
 | - buttons              | List    | X        | List of buttons (up to 5)                                    |
 | -- ordering            | Integer | X        | Button sequence (required, if there is a button)             |
-| -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | -- name                | String  | X        | Button name (required if there is a button, up to 14 characters) |
 | -- linkMo              | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
 | -- linkPc              | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
@@ -414,7 +414,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resultCodeName           | String  | Result code name of receiving                                |
 | -- buttons                  | List    | List of buttons                                              |
 | --- ordering                | Integer | Button sequence                                              |
-| --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | --- name                    | String  | Button name                                                  |
 | --- linkMo                  | String  | Mobile web link  (required for the WL type)                  |
 | --- linkPc                  | String  | PC web link (optional for the WL type)                       |
@@ -546,7 +546,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resultCodeName       | String  | Result code name of receiving                                |
 | - buttons              | List    | List of buttons                                              |
 | -- ordering            | Integer | Button sequence                                              |
-| -- type                | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK:Bot Keyword, MD: Message Delivery) |
+| -- type                | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK:Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | -- name                | String  | Button name                                                  |
 | -- linkMo              | String  | Mobile web link (required for the WL type)                   |
 | -- linkPc              | String  | PC web link (optional for the WL type)                       |
@@ -762,7 +762,7 @@ Content-Type: application/json;charset=UTF-8
 |- templateTitle| String | X| 제목 (최대 50자) |  
 | - buttons              | List    | X        | List of buttons (up to 5)                                    |
 | -- ordering            | Integer | X        | Button sequence (required if there a button)                 |
-| -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | -- name                | String  | X        | Button name (required if there is a button, for up to 14 characters) |
 | -- linkMo              | String  | X        | Mobile web link (required for the WL type, for up to 200 characters) |
 | -- linkPc              | String  | X        | PC web link (required for the WL type, for up to 200 characters) |
@@ -945,7 +945,7 @@ Content-Type: application/json;charset=UTF-8
 |-- createUser                | String  |  Registrant (saved as user UUID when delivered via console)  |
 | -- buttons                  | List    | List of buttons                                              |
 | --- ordering                | Integer | Button sequence                                              |
-| --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | --- name                    | String  | Button name                                                  |
 | --- linkMo                  | String  | Mobile web link (required for the WL type)                   |
 | --- linkPc                  | String  | PC web link (optional for the WL type)                       |
@@ -1080,7 +1080,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- createUser            | String  | Registrant (saved as user UUID when delivered via console)  |
 | - buttons              | List    | List of buttons                                              |
 | -- ordering            | Integer | Button sequence                                              |
-| -- type                | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK:Bot Keyword, MD: Message Delivery) |
+| -- type                | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK:Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | -- name                | String  | Button name                                                  |
 | -- linkMo              | String  | Mobile web link (required for the WL type)                   |
 | -- linkPc              | String  | PC web link (optional for the WL type)                       |
@@ -1253,7 +1253,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resultCodeName           | String  | Result code name of receiving                                |
 | -- buttons                  | List    | List of buttons                                              |
 | --- ordering                | Integer | Button sequence                                              |
-| --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| --- type                    | String  | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | --- name                    | String  | Button name                                                  |
 | --- linkMo                  | String  | Mobile web link (required for the WL type)                   |
 | --- linkPc                  | String  | PC web link (optional for the WL type)                       |
@@ -1799,6 +1799,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "pcFlag": Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1824,9 +1825,10 @@ Content-Type: application/json;charset=UTF-8
 | templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle        | String  | X        | Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
+| pcFlag          | Boolean | X        | PC 카카오에서 알림톡 메시지 노출 여부(default: true)  |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
-| -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가[광고 추가/복합형만]) |
 | -name           | String  | X        | Button name (required, if there's a button, up to 14 characters) |
 | -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
 | -linkPc         | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
@@ -1893,6 +1895,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "pcFlag": Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1917,9 +1920,10 @@ Content-Type: application/json;charset=UTF-8
 | templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
+| pcFlag          | Boolean | X        | PC 카카오에서 알림톡 메시지 노출 여부(default: true)  |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
-| -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
+| -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가[광고 추가/복합형만]) |
 | -name           | String  | X        | Button name (required, if there's a button, up to 14 characters) |
 | -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
 | -linkPc         | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
@@ -2232,7 +2236,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateAd         | String  | Request for consent of receiving within template or simple ad phrases |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
-| --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
+| --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | --- name             | String  | Button name                                                  |
 | --- linkMo           | String  | Mobile web link (required for the WL type)                   |
 | --- linkPc           | String  | PC web link (optional for the WL type)                       |
@@ -2358,7 +2362,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateAd         | String  | Request for consent of receiving within template or simple ad phrases |
 | -- buttons           | List    | List of buttons                                              |
 | --- ordering         | Integer | Button sequence (1~5)                                        |
-| --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery) |
+| --- type             | String  | Button type (WL: Web link, AL: App link, DS: Delivery search, BK: Bot keyword, MD: Message delivery, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 | --- name             | String  | Button name                                                  |
 | --- linkMo           | String  | Mobile web link (required for the WL type)                   |
 | --- linkPc           | String  | PC web link (optional for the WL type)                       |
