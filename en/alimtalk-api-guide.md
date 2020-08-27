@@ -22,7 +22,7 @@
 2. Expanded the template type. Ad or additional information can be added.
 3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
 4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
-5. 파일 첨부하여 템플릿 문의하기 API가 추가되었습니다.
+5. Added Attach Files to Send Inquiry on Templates API.
 
 
 ## General Messages
@@ -242,7 +242,7 @@ Content-Type: application/json;charset=UTF-8
 * <b>Enter data completed with replacement for the body and button. </b>
 * **Request date and time can be set up to 90 days since a point of calling.**
 * <b>Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
-* <b>SMS 서비스는 국제 SMS만 지원합니다. 국제 수신자 번호일 경우, resendType(대체 발송 타입)을 SMS로 변경해야 정상적으로 대체 발송할 수 있습니다.</b>
+* <b>Only the international SMS service is supported. For an international recipient number, the resendType (alternative delivery type) must be changed to SMS to allow sending normally. </b>
 * <b>Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)])</b>
 
 [Exapmle]
@@ -1633,8 +1633,8 @@ Content-Type: application/json;charset=UTF-8
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
 |-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
-|-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
+|-- dailyMaxCount           | Integer |	Maximum daily Alimtalk delivery count (no limits for 0)      |
+|-- sentCount               | Integer |	Daily Alimtalk delivery count (no limits for 0)              |
 |- friendtalk               |	Object  |	Friendtalk information                                       |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
@@ -1744,8 +1744,8 @@ Content-Type: application/json;charset=UTF-8
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
 |-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- dailyMaxCount           | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)               |
-|-- sentCount               | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                   |
+|-- dailyMaxCount           | Integer |	Maximum daily Alimtalk delivery count (no limits for 0)      |
+|-- sentCount               | Integer |	Daily Alimtalk delivery count (no limits for 0)              |
 |- friendtalk               |	Object  |	Friendtalk information                                        |
 |-- resendAppKey            | String  | Alternative sms appkey                                        |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails        |
@@ -2048,8 +2048,8 @@ Content-Type: application/json;charset=UTF-8
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
 
-### 파일 첨부하여 템플릿 문의하기
-#### 요청
+### Attach files to send inquiry on templates
+#### Request
 [URL]
 
 ```
@@ -2059,7 +2059,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| Value           | Type    | Description       |
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 |plusFriendId|	String|	PlusFriend ID |
@@ -2071,7 +2071,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| Value        | Type   | Required | Description                                                  |
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
 
@@ -2084,12 +2084,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	필수|	설명|
+| Value        | Type   | Required | Description                                                  |
 |---|---|---|---|
 |comment|	String |	O | 문의 내용 |
-|attachments| List<File> | X | 첨부 파일 목록(최대 5개) |
+|attachments| List<File> | X | List of Attachment (Up to 5) |
 
-#### 응답
+#### Response
 ```
 {
   "header" : {
@@ -2100,7 +2100,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| Value           | Type    | Description       |
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|

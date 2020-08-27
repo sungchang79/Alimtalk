@@ -224,7 +224,7 @@ Content-Type: application/json;charset=UTF-8
 | - templateTitle        | String  | O    | テンプレートハイライトタイトル(最大50桁) |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
-| -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | -- name                | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
 | -- linkMo              | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
 | -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
@@ -412,7 +412,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resultCodeName           | String  | 受信結果コード名                         |
 | -- buttons                  | List    | ボタンリスト                            |
 | --- ordering                | Integer | ボタン順序                            |
-| --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | --- name                    | String  | ボタン名                            |
 | --- linkMo                  | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
@@ -544,7 +544,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resultCodeName       | String  | 受信結果コード名                           |
 | - buttons              | List    | ボタンリスト                             |
 | -- ordering            | Integer | ボタン順序                             |
-| -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | -- name                | String  | ボタン名                             |
 | -- linkMo              | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
@@ -763,7 +763,7 @@ Content-Type: application/json;charset=UTF-8
 | - title                | String  | X    | タイトル(最大50桁)                            |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
-| -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | -- name                | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
 | -- linkMo              | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
 | -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
@@ -947,7 +947,7 @@ Content-Type: application/json;charset=UTF-8
 | -- createUser               | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | -- buttons                  | List    | ボタンリスト                            |
 | --- ordering                | Integer | ボタン順序                            |
-| --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | --- name                    | String  | ボタン名                            |
 | --- linkMo                  | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
@@ -1082,7 +1082,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - createUser           | String  | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
 | - buttons              | List    | ボタンリスト                             |
 | -- ordering            | Integer | ボタン順序                             |
-| -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| -- type                | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | -- name                | String  | ボタン名                             |
 | -- linkMo              | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
@@ -1255,7 +1255,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resultCodeName           | String  | 受信結果コード名                         |
 | -- buttons                  | List    | ボタンリスト                            |
 | --- ordering                | Integer | ボタン順序                            |
-| --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| --- type                    | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | --- name                    | String  | ボタン名                            |
 | --- linkMo                  | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
@@ -1777,6 +1777,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "pcFlag": Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1802,9 +1803,10 @@ Content-Type: application/json;charset=UTF-8
 | templateAd        | String  | X  | テンプレート内の受信同意または簡単な広告文句 |
 |tempalteTitle      | String  | X  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 |templateSubtitle   | String  | X  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
+| pcFlag          | Boolean | X    | PCカカオでお知らせトークメッセージを表示するかどうか(default: true)  |
 | buttons         | List    | X    | ボタンリスト(最大5個)                             |
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
-| -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |[広告追加/複合型のみ]) |
 | -name           | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
 | -linkMo         | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
 | -linkPc         | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
@@ -1868,6 +1870,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "pcFlag": Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1892,9 +1895,10 @@ Content-Type: application/json;charset=UTF-8
 | templateAd      | String  | X    | テンプレート内の受信同意または簡単な広告文句 |
 | tempalteTitle| String | X| テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | templateSubtitle| String | X| テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
+| pcFlag          | Boolean | X    | PCカカオでお知らせトークメッセージを表示するかどうか(default: true)  |
 | buttons         | List    | X    | ボタンリスト(最大5個)                             |
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
-| -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |[広告追加/複合型のみ]) |
 | -name           | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
 | -linkMo         | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
 | -linkPc         | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
@@ -2201,7 +2205,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句 |
 | -- buttons           | List    | ボタンリスト                            |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
-| --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | --- name             | String  | ボタン名                            |
 | --- linkMo           | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc           | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
@@ -2327,7 +2331,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- templateAd        | String  | テンプレート内の受信同意または簡単な広告文句 |
 | -- buttons           | List    | ボタンリスト                            |
 | --- ordering         | Integer | ボタン順序(1~5)                               |
-| --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達) |
+| --- type             | String  | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
 | --- name             | String  | ボタン名                            |
 | --- linkMo           | String  | モバイルWebリンク(WLタイプの場合は必須フィールド)                |
 | --- linkPc           | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
