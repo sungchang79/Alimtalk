@@ -224,7 +224,7 @@ Content-Type: application/json;charset=UTF-8
 |- templateTitle| String| O| 제목 (최대 50자) |
 |- buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-- ordering|	Integer|	X |	버튼 순서 (버튼이 있는 경우 필수)|
-|-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |-- name| String |	X |	버튼 이름 (버튼이 있는 경우 필수, 최대 14자)|
 |-- linkMo| String |	X |	모바일 웹 링크 (WL 타입일 경우 필수 필드, 최대 200자)|
 |-- linkPc | String |	X |PC 웹 링크  (WL 타입일 경우 선택 필드, 최대 200자) |
@@ -411,7 +411,7 @@ Content-Type: application/json;charset=UTF-8
 |-- resultCodeName | String |	수신 결과 코드명 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서 |
-|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |--- name | String |	버튼 이름 |
 |--- linkMo | String |	모바일 웹 링크 (WL 타입일 경우 필수 필드) |
 |--- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
@@ -546,7 +546,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |- buttons | List |	버튼 리스트 |
 |-- ordering | Integer |	버튼 순서 |
-|-- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|-- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |-- name | String |	버튼 이름 |
 |-- linkMo | String |	모바일 웹 링크 (WL 타입일 경우 필수 필드) |
 |-- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
@@ -765,7 +765,7 @@ Content-Type: application/json;charset=UTF-8
 |- title| String | X| 제목 (최대 50자) |  
 |- buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-- ordering|	Integer|	X |	버튼 순서 (버튼이 있는 경우 필수)|
-|-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |-- name| String |	X |	버튼 이름 (버튼이 있는 경우 필수, 최대 14자)|
 |-- linkMo| String |	X |	모바일 웹 링크 (WL 타입일 경우 필수 필드, 최대 200자)|
 |-- linkPc | String |	X |PC 웹 링크  (WL 타입일 경우 선택 필드, 최대 200자) |
@@ -949,7 +949,7 @@ Content-Type: application/json;charset=UTF-8
 |-- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서 |
-|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |--- name | String |	버튼 이름 |
 |--- linkMo | String |	모바일 웹 링크 (WL 타입일 경우 필수 필드) |
 |--- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
@@ -1084,7 +1084,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |- buttons | List |	버튼 리스트 |
 |-- ordering | Integer |	버튼 순서 |
-|-- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|-- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |-- name | String |	버튼 이름 |
 |-- linkMo | String |	모바일 웹 링크 (WL 타입일 경우 필수 필드) |
 |-- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
@@ -1257,7 +1257,7 @@ Content-Type: application/json;charset=UTF-8
 |-- resultCodeName | String |	수신 결과 코드명 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서 |
-|--- type | String |	버튼 타입(WL:웹 링크, AL:앱 링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |--- name | String |	버튼 이름 |
 |--- linkMo | String |	모바일 웹 링크(WL 타입일 경우 필수 필드) |
 |--- linkPc | String |	PC 웹 링크(WL 타입일 경우 선택 필드) |
@@ -1787,6 +1787,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "pcFlag": Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1812,9 +1813,10 @@ Content-Type: application/json;charset=UTF-8
 |templateAd | String | X | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구(템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+|pcFlag| Boolean | X| PC 카카오에서 알림톡 메시지 노출 여부(default: true) |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-ordering|	Integer |	X | 버튼 순서(1~5) |
-|-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가[광고 추가/복합형만]) |
 |-name| String |	X |	버튼 이름 (버튼이 있는 경우 필수, 최대 14자)|
 |-linkMo| String |	X |	모바일 웹 링크 (WL 타입일 경우 필수 필드, 최대 200자)|
 |-linkPc | String |	X |PC 웹 링크  (WL 타입일 경우 선택 필드, 최대 200자) |
@@ -1878,6 +1880,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "pcFlag": Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1902,9 +1905,10 @@ Content-Type: application/json;charset=UTF-8
 |templateAd | String | X | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구(템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+|pcFlag| Boolean | X| PC 카카오에서 알림톡 메시지 노출 여부(default: true) |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-ordering|	Integer |	X | 버튼 순서(1~5) |
-|-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가[광고 추가/복합형만]) |
 |-name| String |	X |	버튼 이름 (버튼이 있는 경우 필수, 최대 14자)|
 |-linkMo| String |	X |	모바일 웹 링크 (WL 타입일 경우 필수 필드, 최대 200자)|
 |-linkPc | String |	X |PC 웹 링크  (WL 타입일 경우 선택 필드, 최대 200자) |
@@ -2211,7 +2215,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
-|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |--- name | String |	버튼 이름 |
 |--- linkMo | String |	모바일 웹 링크 (WL 타입일 경우 필수 필드) |
 |--- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
@@ -2337,7 +2341,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
-|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달) |
+|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
 |--- name | String |	버튼 이름 |
 |--- linkMo | String |	모바일 웹 링크 (WL 타입일 경우 필수 필드) |
 |--- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |

@@ -105,7 +105,7 @@ Click **Register Templates** to register a template.
 
 #### Modify Templates
 
-* 승인된 템플릿을 수정한 후 검수가 완료되면, 기존 템플릿 내용이 수정한 내용으로 대체됩니다.
+* Once approved template is modified and inspected, the content of existing template shall be replaced by modified message.
 
 #### Delete Templates
 
