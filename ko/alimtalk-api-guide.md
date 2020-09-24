@@ -18,7 +18,7 @@
 </table>
 
 ## v1.5 API 소개
-1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다.(전문 발송 시, title값을 설정할 수 있습니다.)
+1. 템플릿 등록 API에 강조 템플릿을 사용할 수 있도록 변경되었습니다.(전문 발송 시, templateTitle값을 설정할 수 있습니다.)
 2. 템플릿 유형이 확대되었습니다. 광고, 부가 정보와 같은 내용을 추가할 수 있습니다.
 3. 알림톡/친구톡 메시지 발송 시 createUser 필드가 추가되었습니다. (추후 제공 예정).
 4. 알림톡/친구톡 메시지 조회 시 등록 시간 및 등록자로 조회할 수 있도록 필드가 추가되었습니다.
@@ -727,7 +727,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "recipientNo": String,
             "content": String,
-            "title" : String,
+            "templateTitle" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -762,7 +762,7 @@ Content-Type: application/json;charset=UTF-8
 |recipientList|	List|	O|	수신자 리스트 (최대 1,000명) |
 |- recipientNo|	String|	O|	수신번호 (최대 15자) |
 |- content|	String|	O|	내용 (최대 1000자) |
-|- title| String | X| 제목 (최대 50자) |  
+|- templateTitle| String | X| 제목 (최대 50자) |  
 |- buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-- ordering|	Integer|	X |	버튼 순서 (버튼이 있는 경우 필수)|
 |-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |

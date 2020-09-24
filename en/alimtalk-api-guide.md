@@ -188,7 +188,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "recipientNo": String,
             "content": String,
-            "title" : String,
+            "templateTitle" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -222,7 +222,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O        | List of recipients (up to 1,000 persons)                     |
 | - recipientNo          | String  | O        | Recipient number (up to 15 characters)                       |
 | - content              | String  | O        | Message  (up to 1000 characters)                             |
-| - title                | String  | O    | 제목 (최대 50자) |
+| - templateTitle        | String  | X        | 제목 (최대 50자) |
 | - buttons              | List    | X        | List of buttons (up to 5)                                    |
 | -- ordering            | Integer | X        | Button sequence (required, if there is a button)             |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |

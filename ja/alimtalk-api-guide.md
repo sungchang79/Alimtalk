@@ -725,7 +725,7 @@ Content-Type: application/json;charset=UTF-8
         {
             "recipientNo": String,
             "content": String,
-            "title" : String,
+            "templateTitle" : String,
             "buttons": [
                 {
                     "ordering": Integer,
@@ -760,7 +760,7 @@ Content-Type: application/json;charset=UTF-8
 | recipientList          | List    | O    | 受信者リスト(最大1,000人)                        |
 | - recipientNo          | String  | O    | 受信番号(最大15桁)                            |
 | - content              | String  | O    | 内容(最大1000文字)                             |
-| - title                | String  | X    | タイトル(最大50桁)                            |
+| - templateTitle        | String  | X    | タイトル(最大50桁)                            |
 | - buttons              | List    | X    | ボタンリスト(最大5個)                             |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、CA：チャンネル追加) |
