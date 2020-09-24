@@ -221,7 +221,7 @@ Content-Type: application/json;charset=UTF-8
 |recipientList|	List|	O|	수신자 리스트 (최대 1,000명) |
 |- recipientNo|	String|	O|	수신번호 (최대 15자) |
 |- content|	String|	O|	내용 (최대 1000자) |
-|- templateTitle| String| O| 제목 (최대 50자) |
+|- templateTitle| String| X| 제목 (최대 50자) |
 |- buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-- ordering|	Integer|	X |	버튼 순서 (버튼이 있는 경우 필수)|
 |-- type| String |	X |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, CA: 채널 추가) |
