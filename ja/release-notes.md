@@ -1,4 +1,5 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+
 ### 2020.08.25.
 * [API] お知らせトークpc表示/未表示機能
     * テンプレート登録時、pc表示/未表示を選択できる機能を追加しました。

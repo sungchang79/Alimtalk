@@ -1,4 +1,5 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+
 ### 2020.07.28.
 * [API] 알림톡 강조표기 템플릿 기능
     * CBT가 종료 되어, 정식 기능으로 추가되었습니다.
