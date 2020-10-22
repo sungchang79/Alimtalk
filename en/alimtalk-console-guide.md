@@ -92,7 +92,7 @@ Click **Register Templates** to register a template.
 
 * Only English and numbers up to 10 characters can be registered.  
 * Up to 20 characters are allowed for a template name.
-* Template can have up to 1,000 characters, including variables and URL,  be it  Korean or English.
+* Template can have up to 1,000 characters, including variables and URL, be it Korean or English.
 * Up to 100 characters are allowed for a button link URL.
 * Register a template replacer, like #{replacer}.
 * To use a replacer for a button link, make sure to enter http:// or https:// protocol.
