@@ -64,7 +64,7 @@
 | Common  | false     | -8002      | No image available corresponding to image sequence           |
 | Common  | false     | -8003      | Deleting image failed                                        |
 | Common  | false     | -8005      | No Plus Friend is registered in project to upload images     |
-| Common  | false     | -8006      | 인증 메시지 발송 시, 템플릿 내용에 인증 문구가 없는 경우       |
+| Common  | false     | -8006      | Authentication message is missing from template, when sending authentication message        |
 | Common  | false     | -9995      | Called API of a faded version                                |
 | Common  | false     | -9996      | Content-type is not application/json                         |
 | Common  | false     | -9998      | API does not exist                                           |
@@ -199,7 +199,7 @@
 	</tr>
 	<tr>
 		<td>3012</td>
-		<td>카카오 통신 실패 </td>
+		<td>Communication failed with Kakaotalk </td>
 	</tr>
 	<tr>
 		<td>3013</td>
@@ -215,7 +215,7 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>메시지를 전송할 수 없음<br>1. 카카오톡 사용했었다가 탈퇴한사람<br>2. 카카오톡 가입한적이 한번도 없는 사람<br>3. 알림톡 수신차단<br>4. 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
+		<td>Unable to send messages <br>1. Previous kakaotalk user who has withdrawn <br>2. User with no record of Kakaotalk subscription <br>3. User who has blocked to receive Alimtalk <br>4. Android user who uses "different phone number for Kakaotalk from USIM" <br>5. Non-activated user (for push) <br>6. Minimum kakaotalk version user, non Kakaotalk-supported device user, or punished user </td>
 	</tr>
 	<tr>
 		<td>3023</td>
