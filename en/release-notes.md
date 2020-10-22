@@ -1,23 +1,24 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
-### 2020.07.28.
-* [API] 알림톡 강조표기 템플릿 기능
-    * CBT가 종료 되어, 정식 기능으로 추가되었습니다.
-* [API] 알림톡 템플릿 메시지 유형 확대
-    * 알림톡 템플릿 메시지 유형이 확대 되었습니다. (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형)
-* [API] 알림톡 템플릿 첨부 파일 문의 기능
-    * 알림톡 템플릿 문의 시, 파일을 첨부하여, 문의하는 기능이 추가되었습니다.
 
-### 2020.06.23.
-* [API] Allowed Alimtalk Emphasized template
+### July 28, 2020
+* [API] Template for Emphasizing Alimtalk 
+    * Officially added the feature, due to service closed for CBT.  
+* [API] More Template Types for Alimtalk Messages 
+    * Expanded template message types for Alimtalk. (BA: Default, EX: Extra information, AD: Ads, MI: Mixed purposes) 
+* [API] Send Inquiry on Templates with File Attachment 
+    * Inquiries on Alimtalk templates can be sent along with file attachment. 
+
+### June 23, 2020
+* [API] Emphasized Alimtalk Templates
     * It has been changed to allow emphasized template for Register Template API
 
-### 2020.05.26
-* [API] 친구톡 와이드 이미지 기능
-    * 친구톡 와이드 이미지를 업로드하여, 발송할 수 있는 기능이 추가되었습니다.
-* [Console] 토큰 미등록 플러스친구 삭제 기능
-    * 토큰 미등록 플러스친구 삭제 기능이 추가되었습니다.
+### 2020.05.26 May 26, 2020
+* [API] Wide Image for Friendtalk  
+    * Added a feature to upload and send friendtalk in wide image.
+* [Console] Delete Plusfriends without Registered Tokens 
+    * Added a feature to delete plusfriends without registered tokens. 
 
-### Nov. 26, 2019
+### November 26, 2019
 * [Console] Template Registration Using File Uploads
     * Added the feature of file uploading for mass templates
 * [Console] Template Query Upgrades
@@ -25,12 +26,12 @@
 * [Console] Query by Registered Date for Delivery Results
     * Added the feature of querying by registered date for the query of delivery results
 
-### Oct. 29, 2019
+### October 29, 2019
 * [API] Tighter validity checks for the delivery of certification messages
     * Message delivery is unavailable when authentication message is not included
     * For more details, see [[API User Guide](./alimtalk-api-guide/#precautions-authword)].
 
-### Sept. 24, 2019
+### September 24, 2019
 * [Console] Canceling Scheduled Delivery of Alimtalk/FriendTalk
     - Added the feature of canceling scheduled delivery of Alimtalk/FriendTalk from the **Query Delivery Result** tab, if it is yet to be delivered.
     - Canceling is available by querying time after scheduled delivery is requested.
@@ -41,12 +42,12 @@
 * [Console] Name Change from Kakaotalk PlusFriend to Kakaotalk Channel
     - As of September 17 of 2019, the service name has changed from 'PlusFriend' to 'Kakaotalk Channel'.
 
-### 2019.07.30
+### July 30, 2019
 * [Console] Field Added for Result Code of Alternative SMS Delivery Request
     - To query details of alternative delivery message, result code of SMS request has been added.
 * [System] Server Replacement for Service Stabilization
 
-### 2019.06.27
+### June 27, 2019
 * [Console] Allowed alternative delivery, and added split delivery, for mass delivery of Friendtalk messages
     - Fields related to alternative delivery can be specified, such as content of alternative delivery/sender number/alternative delivery.
     - Features have been added to send in splits by specifying split times/interval.
@@ -67,7 +68,7 @@
     - For registring PlusFriend, <b>must be certified for business</b> [[Related announcements](https://center-pf.kakao.com/notices/311)]
 
 
-### 2019.05.28
+### May 28, 2019
 * [API] For delivery, country code can be included to recipient numbers.  
     - The recipientNo field can now include country code for delivery.
     - Available to send to users authenticated for overseas mobile phone on the Kakaotalk appliation.
