@@ -22,7 +22,7 @@
 2. Expanded the template type. Ad or additional information can be added.
 3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
 4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
-5. Added Attach Files to Send Inquiry on Templates API.
+5. Added Send Inquiry on Templates with File Attachment API.
 
 
 ## General Messages
@@ -327,8 +327,8 @@ Content-Type: application/json;charset=UTF-8
 | requestId            | String  | Conditionally required (no.1) | Request ID                                                   |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)            |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)              |
-| startCreateDate      | String  | 조건 필수 (3번)                  | Start date of registration (mm:HH dd-MM-yyyy)|
-| endCreateDate        | String  | 조건 필수 (3번)                  | End date of registration (mm:HH dd-MM-yyyy) |
+| startCreateDate      | String  | Conditionally required (no.3)                  | Start date of registration (mm:HH dd-MM-yyyy)|
+| endCreateDate        | String  | Conditionally required (no.3)                  | End date of registration (mm:HH dd-MM-yyyy) |
 | recipientNo          | String  | X                             | Recipient number                                             |
 | plusFriendId         | String  | X                             | PlusFriend ID                                                |
 | templateCode         | String  | X                             | Template code                                                |
@@ -1820,8 +1820,8 @@ Content-Type: application/json;charset=UTF-8
 | templateContent     | String  | O        | Template body (up to 1000 characters)                        |
 | templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type, default: Basic) |
 |templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required |
-| templateExtra       | String  | X        | Additional Template Information (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수)                             |
-| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
+| templateExtra       | String  | X        | Additional Template Information (Required, if the template message type is [Ads/Mixed purposes])                             |
+| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (Required, if the template message type is [Ads/Mixed purposes]) |
 |tempalteTitle        | String  | X        | Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
@@ -1913,8 +1913,8 @@ Content-Type: application/json;charset=UTF-8
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
 | templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra information, AD: Ads, MI: Mixed type, default: Basic) |
 |templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required |
-| templateExtra       | String  | X        | Additional Template Information (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수)                             |
-| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
+| templateExtra       | String  | X        | Additional Template Information (Required, if the template mssage type is [Ads/Mixed purposes])                             |
+| templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (Required, if the template message type is [Ads/Mixed purposes]) |
 |tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
@@ -2048,7 +2048,7 @@ Content-Type: application/json;charset=UTF-8
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
 
-### Attach files to send inquiry on templates
+### Send Inquiry on Templates with File Attachment
 #### Request
 [URL]
 
@@ -2061,7 +2061,7 @@ Content-Type: application/json;charset=UTF-8
 
 | Value           | Type    | Description       |
 |---|---|---|
-|appkey|	String|	고유의 Appkey|
+|appkey|	String|	Original Appkey|
 |plusFriendId|	String|	PlusFriend ID |
 |templateCode|	String|	Template code |
 
@@ -2073,7 +2073,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 | Value        | Type   | Required | Description                                                  |
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | Can be created on console. [[For reference](./plus-friend-console-guide/#x-secret-key)] |
 
 [Request Body]
 
@@ -2086,7 +2086,7 @@ Content-Type: application/json;charset=UTF-8
 
 | Value        | Type   | Required | Description                                                  |
 |---|---|---|---|
-|comment|	String |	O | 문의 내용 |
+|comment|	String |	O | Content of inquiry |
 |attachments| List<File> | X | List of Attachment (Up to 5) |
 
 #### Response
@@ -2102,10 +2102,10 @@ Content-Type: application/json;charset=UTF-8
 
 | Value           | Type    | Description       |
 |---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
+|header|	Object|	Header area|
+|- resultCode|	Integer|	Result code|
+|- resultMessage|	String| Result message|
+|- isSuccessful|	Boolean| Successful or not|
 
 ### List Templates
 
