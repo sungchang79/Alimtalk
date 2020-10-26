@@ -1799,6 +1799,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "securityFlag" : Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1824,6 +1825,7 @@ Content-Type: application/json;charset=UTF-8
 | templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle        | String  | X        | Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
+| securityFlag    | Boolean | X        | 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
@@ -1893,6 +1895,7 @@ Content-Type: application/json;charset=UTF-8
   "templateAd": String,
   "templateTitle" : String,
   "templateSubtitle" : String,
+  "securityFlag" : Boolean,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1917,6 +1920,7 @@ Content-Type: application/json;charset=UTF-8
 | templateAd          | String  | X        | Request for consent of receiving within template or simple ad phrases (템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
 |tempalteTitle| String | X| Template Title (No more than 50 characters, Android: To be abbreviated if it exceeds 2 lines with more than 23 characters, iOS: To be abbreviated if it exceeds 2 lines with more than 27 characters) |
 |templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
+| securityFlag    | Boolean | X        | 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
