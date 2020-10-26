@@ -22,9 +22,9 @@ Select **Mass Delivery** at the bottom.
 
 ![alimtalk_02_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_02_201812.png)
 
-* Select a template and click **Download Templates** to download CSV file which includes a template replacer. Sending fails if a template replacer is not included.  
+* Select a template and click **Download Templates** to download CSV, XLSX file which includes a template replacer. Sending fails if a template replacer is not included.  
 * It is recommended to send after inspection to see if it was properly replaced; saving CSV file in excel may cause broken Korean.  
-* Only CSV files, sized no more than 20 MB, can be uploaded, up to 100,000 recipients.
+* Only CSV, XLSX files, sized no more than 20 MB, can be uploaded, up to 1,000,000 recipients.
 
 ![alimtalk_03_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_03_201812.png)
 
