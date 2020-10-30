@@ -44,19 +44,19 @@
 | Common  | false     | -3009      | Button name does not exist.                                  |
 | Common  | false     | -3010      | Template body does not match.                                |
 | Common  | false     | -3011      | Template button does not match.                              |
-| Common  | false     | -3012      | 수정할 수 없는 템플릿 상태 (승인/반려 상태만 가능)           |
-| Common  | false     | -3013      | 이미 수정 중인 템플릿이 존재                          |
-| Common  | false     | -3014      | 버튼 타입이 올바르지 않은 경우                        |
-| Common  | false     | -3015      | CBT 기능이 비활성화 된 플러스친구일 경우                 |
-| Common  | false     | -3016      | 강조 표기형 템플릿은 templateTitle, templateSubtitle 필수 필드            |
-| Common  | false     | -3017      | templateSubtitle 은 치환 변수를 사용 불가            |
-| Common  | false     | -3018      | 부가 정보형 템플릿은 templateExtra 필수 필드           |
-| Common  | false     | -3019      | 광고 추가형 템플릿은 templateAd 필수 필드           |
-| Common  | false     | -3020      | 복합형 템플릿은 templateExtra, templateAd 필수 필드   |
-| Common  | false     | -3021      | templateExtra은 치환 변수를 사용 불가               |
-| Common  | false     | -3022      | templateAd은 치환 변수를 사용 불가                  |
-| Common  | false     | -3023      | templateAd은 url link 포함 불가                   |
-| Common  | false     | -3024      | CA 타입 버튼은 광고 추가형 복합형 템플릿만 등록 가능       |
+| Common  | false     | -3012      | Unavailable to modify template (either approved or returned)           |
+| Common  | false     | -3013      | Template under modification exists                           |
+| Common  | false     | -3014      | Invalid button type                         |
+| Common  | false     | -3015      | Plus Friend with CBT deactivated                  |
+| Common  | false     | -3016      | Reguires templateTitle and templateSubtitle, for Emphasized templates            |
+| Common  | false     | -3017      | Unable to use replacement variable for templateSubtitle            |
+| Common  | false     | -3018      | Requires templateExtra for Extra Information-type templates           |
+| Common  | false     | -3019      | Requires templateAd for Ad-included-type templates           |
+| Common  | false     | -3020      | Requires templateExtra and templateAd for Mixed-purposes templates   |
+| Common  | false     | -3021      | Unable to use replacement variable for templateExtra               |
+| Common  | false     | -3022      | Unable to use replacement variable for templateAd                  |
+| Common  | false     | -3023      | Unable to include url link for templateAd                   |
+| Common  | false     | -3024      | CA-type button can be registration only for Ad-included or Mixed Purposes-type templates       |
 | Common  | false     | -3100      | Unavailable to inquire of template                           |
 | Common  | false     | -4003      | Query range exceeding a month                                |
 | Common  | false     | -4004      | Appkey does not exist                                        |
@@ -77,7 +77,7 @@
 | Common  | false     | -8002      | No image available corresponding to image sequence           |
 | Common  | false     | -8003      | Deleting image failed                                        |
 | Common  | false     | -8005      | No Plus Friend is registered in project to upload images     |
-| Common  | false     | -8006      | 인증 메시지 발송 시, 템플릿 내용에 인증 문구가 없는 경우       |
+| Common  | false     | -8006      | Authentication message not included in Template, when sending an authentication message       |
 | Common  | false     | -9995      | Called API of a faded version                                |
 | Common  | false     | -9996      | Content-type is not application/json                         |
 | Common  | false     | -9998      | API does not exist                                           |
@@ -212,7 +212,7 @@
 	</tr>
 	<tr>
 		<td>3012</td>
-		<td>카카오 통신 실패 </td>
+		<td>Communication failed with Kakaotalk </td>
 	</tr>
 	<tr>
 		<td>3013</td>
@@ -228,7 +228,7 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>메시지를 전송할 수 없음<br>1. 카카오톡 사용했었다가 탈퇴한사람<br>2. 카카오톡 가입한적이 한번도 없는 사람<br>3. 알림톡 수신차단<br>4. 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
+		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan 카카오톡 사용했었다가 탈퇴한사람<br>2. Never been subscribed to Kakaotalk 카카오톡 가입한적이 한번도 없는 사람<br>3. Blocked from Alimtalk messages 알림톡 수신차단<br>4. For Android users who have different number on" 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
 	</tr>
 	<tr>
 		<td>3023</td>
