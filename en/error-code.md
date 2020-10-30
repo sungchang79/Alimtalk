@@ -228,7 +228,7 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan 카카오톡 사용했었다가 탈퇴한사람<br>2. Never been subscribed to Kakaotalk 카카오톡 가입한적이 한번도 없는 사람<br>3. Blocked from Alimtalk messages 알림톡 수신차단<br>4. For Android users who have different number on" 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
+		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan <br>2. User who has never been subscribed to Kakaotalk <br>3. Blocked user from Alimtalk messages <br>4. Android users who use different "Kakaotalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum Kakaotalk version or unsupported device, or punished user </td>
 	</tr>
 	<tr>
 		<td>3023</td>
