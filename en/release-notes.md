@@ -1,27 +1,28 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
-### 2020.08.25.
-* [API] 알림톡 pc 노출/미노출 기능
-    * 템플릿 등록 시, pc 노출/미노출 선택할 수 있는 기능이 추가되었습니다.
-* [Console] 대량 발송 엑셀 파일 지원
-    * 대량 발송 시, 수신자 파일 업로드 시, excel 확장자가 추가되었습니다.
+
+### August 25, 2020
+* [API] Show/Not Show Alimtalk on PC
+    * Added the feature of selecting Show/Not Show on PC, when registering a template 
+* [Console] Supports Excel Files for Bulk Delivery 
+    * Allows excel extension for sending bulk messages, or for uploading recipients' file
     
-### 2020.07.28.
-* [API] 알림톡 강조표기 템플릿 기능
-    * CBT가 종료 되어, 정식 기능으로 추가되었습니다.
-* [API] 알림톡 템플릿 메시지 유형 확대
-    * 알림톡 템플릿 메시지 유형이 확대 되었습니다. (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형)
-* [API] 알림톡 템플릿 첨부 파일 문의 기능
-    * 알림톡 템플릿 문의 시, 파일을 첨부하여, 문의하는 기능이 추가되었습니다.
+### July 28, 2020
+* [API] Template Emphasizing Alimtalk Messages  
+    * Officially added as a feature, with CBT closed. 
+* [API] More Types for Alimtalk Template Messages  
+    * Expanded types for Alimtalk template messages (BA: Basic, EX: Extra Information, AD: Ads Inclded, MI: Mixed Purposes) 
+* [API] Query of Attachments for Alimitalk Templates 
+    * Added the feature of querying on Alimtalk templates with files attached
 
 ### 2020.06.23.
 * [API] Allowed Alimtalk Emphasized template
     * It has been changed to allow emphasized template for Register Template API
 
-### 2020.05.26
-* [API] 친구톡 와이드 이미지 기능
-    * 친구톡 와이드 이미지를 업로드하여, 발송할 수 있는 기능이 추가되었습니다.
-* [Console] 토큰 미등록 플러스친구 삭제 기능
-    * 토큰 미등록 플러스친구 삭제 기능이 추가되었습니다.
+### May 26, 2020
+* [API] Friendtalk in Wide Images 
+    * Added the feature of uploading and sending friendtalk messages in wide images.
+* [Console] Delete Plus Friends with Unregistered Tokens 
+    * Added the feature of deleting Plus Friends with unregistered tokens
 
 ### Nov. 26, 2019
 * [Console] Template Registration Using File Uploads
