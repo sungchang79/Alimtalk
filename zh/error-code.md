@@ -16,12 +16,9 @@
 | Common  | false     | -1016      | Message is not found                                         |
 | Common  | false     | -1017      | Sending in excess of daily volume failed                     |
 | Common  | false     | -1018      | Business registration certificate file does not exist        |
-| Common  | false     | -2016      | Sending requested in excess of 1,000 recipients              |
 | Common  | false     | -2017      | Plus Friend does not exist                                   |
 | Common  | false     | -2018      | Invalid button parameter                                     |
 | Common  | false     | -2019      | Failed due to template body with above 1,000 characters      |
-| Common  | false     | -2020      | Failed due to button name with above 14 characters           |
-| Common  | false     | -2021      | Failed due to mobile link/web link (limkMo/linkPc) with above100 characters |
 | Common  | false     | -2022      | ImageLink is missing for attached image                      |
 | Common  | false     | -2023      | Friendtalk body message exceeding 400 characters (image attached) |
 | Common  | false     | -2024      | Friendtalk body message exceeding 1,000 characters           |
@@ -57,7 +54,6 @@
 | Common  | false     | -4103      | Start/End time value of delivery request is unavailable for queries |
 | Common  | false     | -4200      | 유효하지 않은 대체 발송 메시지                                      |
 | Common  | false     | -5000      | Invalid recipient number                                     |
-| Common  | false     | -5001      | Recipient list unavailable for sending                       |
 | Common  | false     | -7000      | Vendor request API failed                                    |
 | Common  | false     | -8000      | Image sequence (imageSeq) is missing                         |
 | Common  | false     | -8001      | Image file is not normal                                     |
