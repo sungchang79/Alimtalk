@@ -20,8 +20,6 @@
 | Common  | false     | -2017      | Plus Friend does not exist                                   |
 | Common  | false     | -2018      | Invalid button parameter                                     |
 | Common  | false     | -2019      | Failed due to template body with above 1,000 characters      |
-| Common  | false     | -2020      | Failed due to button name with above 14 characters           |
-| Common  | false     | -2021      | Failed due to mobile link/web link (limkMo/linkPc) with above100 characters |
 | Common  | false     | -2022      | ImageLink is missing for attached image                      |
 | Common  | false     | -2023      | Friendtalk body message exceeding 400 characters (image attached) |
 | Common  | false     | -2024      | Friendtalk body message exceeding 1,000 characters           |
