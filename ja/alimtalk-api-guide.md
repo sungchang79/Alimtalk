@@ -1738,8 +1738,8 @@ Content-Type: application/json;charset=UTF-8
 
 ## テンプレート
 
-### 템플릿 카테고리 조회
-#### 요청
+### テンプレートカテゴリー照会
+#### リクエスト
 [URL]
 
 ```
@@ -1749,9 +1749,9 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
-|---|---|---|
-|appkey|	String|	고유의 Appkey |
+| 値    | タイプ | 説明 |
+| ------------ | ------ | -------- |
+| appkey       | String | 固有のアプリケーションキー |
 
 [Header]
 ```
@@ -1759,11 +1759,11 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 値    | タイプ | 必須 | 説明                               |
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
 
-#### 응답
+#### レスポンス
 ```
 
 {
@@ -1789,20 +1789,20 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
-|---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
-|categories|	List|	카테고리 리스트 |
-|- name | String | 카테고리 이름 |
-|- subCategories | List |	서브 카테고리 리스트 |
-|-- code | String | 카테고리 코드 (템플릿 등록/수정 시, 사용) |
-|-- name | String |	카테고리 이름 |
-|-- groupName | String |	카테고리 그룹명 |
-|-- inclusion | String |	카테고리 적용 대상 템플릿 설명 |
-|-- exclusion| String| 카테고리 제외 대상 템플릿 설명 |
+| 値       | タイプ | 説明 |
+| --------------- | ------- | ------ |
+| header          | Object  | ヘッダ領域 |
+| - resultCode    | Integer | 結果コード |
+| - resultMessage | String  | 結果メッセージ |
+| - isSuccessful  | Boolean | 成否 |
+|categories|	List|	カテゴリー一覧 |
+|- name | String | カテゴリー名 |
+|- subCategories | List |	サブカテゴリーのリスト |
+|-- code | String | カテゴリーコード (テンプレートの登録/変更する際、使用) |
+|-- name | String |	カテゴリー名 |
+|-- groupName | String |	カテゴリーグループ名 |
+|-- inclusion | String |	カテゴリー対象テンプレートの説明 |
+|-- exclusion| String| カテゴリの除外対象のテンプレートの説明 |
 
 ### テンプレートの登録
 #### リクエスト
@@ -1870,8 +1870,8 @@ Content-Type: application/json;charset=UTF-8
 | templateAd        | String  | X  | テンプレート内の受信同意または簡単な広告文句 |
 |tempalteTitle      | String  | X  | テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 |templateSubtitle   | String  | X  | テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
-|securityFlag| Boolean | X| 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
-|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 입력한 템플릿을 우선 심사 |
+|securityFlag| Boolean | X| セキュリティテンプレートかどうか<br>OTPなどのセキュリティメッセージの場合、設定<br>発信当時のメインデバイスを除くすべてのデバイスにメッセージテキストミノチュル(default: false) |
+|categoryCode| String | X | テンプレートのカテゴリコード (テンプレートカテゴリー照会API参考, default: 999999)<br>カテゴリーを入力し、テンプレートを優先審査 |
 | buttons         | List    | X    | ボタンリスト(最大5個)                             |
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
 | -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、AC：チャンネル追加) |[広告追加/複合型のみ]) |
@@ -1964,8 +1964,8 @@ Content-Type: application/json;charset=UTF-8
 | templateAd      | String  | X    | テンプレート内の受信同意または簡単な広告文句 |
 | tempalteTitle| String | X| テンプレートのタイトル(最大50字、Android:2行、23字以上のコマ処理、iOS:2行、27字以上のコマ処理) |
 | templateSubtitle| String | X| テンプレートの補助フレーズ(最大50文字、Android:18字以上のコマを省く、iOS:21字以上のコマを省く) |
-|securityFlag| Boolean | X| 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
-|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 입력한 템플릿을 우선 심사 |
+|securityFlag| Boolean | X| セキュリティテンプレートかどうか<br>OTPなどのセキュリティメッセージの場合、設定<br>発信当時のメインデバイスを除くすべてのデバイスにメッセージテキストミノチュル(default: false) |
+|categoryCode| String | X | テンプレートのカテゴリコード (テンプレートカテゴリー照会API参考, default: 999999)<br>カテゴリーを入力し、テンプレートを優先審査 |
 | buttons         | List    | X    | ボタンリスト(最大5個)                             |
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
 | -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、AC：チャンネル追加) |[広告追加/複合型のみ]) |
