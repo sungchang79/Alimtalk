@@ -40,7 +40,20 @@
 | Common  | false     | -3008      | Query delivery button type does not allow the input of button URL. |
 | Common  | false     | -3009      | Button name does not exist.                                  |
 | Common  | false     | -3010      | Template body does not match.                                |
-| Common  | false     | -3011      | Template button does not exist.                              |
+| Common  | false     | -3011      | Template button does not match.                              |
+| Common  | false     | -3012      | Unavailable to modify template (either approved or returned)           |
+| Common  | false     | -3013      | Template under modification exists                           |
+| Common  | false     | -3014      | Invalid button type                         |
+| Common  | false     | -3015      | Plus Friend with CBT deactivated                  |
+| Common  | false     | -3016      | Reguires templateTitle and templateSubtitle, for Emphasized templates            |
+| Common  | false     | -3017      | Unable to use replacement variable for templateSubtitle            |
+| Common  | false     | -3018      | Requires templateExtra for Extra Information-type templates           |
+| Common  | false     | -3019      | Requires templateAd for Ad-included-type templates           |
+| Common  | false     | -3020      | Requires templateExtra and templateAd for Mixed-purposes templates   |
+| Common  | false     | -3021      | Unable to use replacement variable for templateExtra               |
+| Common  | false     | -3022      | Unable to use replacement variable for templateAd                  |
+| Common  | false     | -3023      | Unable to include url link for templateAd                   |
+| Common  | false     | -3024      | CA-type button can be registration only for Ad-included or Mixed Purposes-type templates       |
 | Common  | false     | -3100      | Unavailable to inquire of template                           |
 | Common  | false     | -4003      | Query range exceeding a month                                |
 | Common  | false     | -4004      | Appkey does not exist                                        |
@@ -60,7 +73,7 @@
 | Common  | false     | -8002      | No image available corresponding to image sequence           |
 | Common  | false     | -8003      | Deleting image failed                                        |
 | Common  | false     | -8005      | No Plus Friend is registered in project to upload images     |
-| Common  | false     | -8006      | 인증 메시지 발송 시, 템플릿 내용에 인증 문구가 없는 경우       |
+| Common  | false     | -8006      | Authentication message not included in Template, when sending an authentication message       |
 | Common  | false     | -9995      | Called API of a faded version                                |
 | Common  | false     | -9996      | Content-type is not application/json                         |
 | Common  | false     | -9998      | API does not exist                                           |
@@ -195,7 +208,7 @@
 	</tr>
 	<tr>
 		<td>3012</td>
-		<td>카카오 통신 실패 </td>
+		<td>Communication failed with Kakaotalk </td>
 	</tr>
 	<tr>
 		<td>3013</td>
@@ -211,7 +224,7 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>메시지를 전송할 수 없음<br>1. 카카오톡 사용했었다가 탈퇴한사람<br>2. 카카오톡 가입한적이 한번도 없는 사람<br>3. 알림톡 수신차단<br>4. 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
+		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan <br>2. User who has never been subscribed to Kakaotalk <br>3. Blocked user from Alimtalk messages <br>4. Android users who use different "Kakaotalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum Kakaotalk version or unsupported device, or punished user </td>
 	</tr>
 	<tr>
 		<td>3023</td>

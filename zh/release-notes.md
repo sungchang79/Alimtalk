@@ -27,21 +27,21 @@
 * [Console] 친구톡 발송 결과 상세 조회 모달 개선
     * 친구톡 발송 결과 상세 조회할 때, 광고 여부와 대체 발송 요청 결과를 추가적으로 확인할 수 있습니다.
 
-### 2020.08.25.
-* [API] 알림톡 PC 노출/미노출 기능
-    * 템플릿 등록 시, PC 노출/미노출을 선택할 수 있는 기능이 추가되었습니다.
-* [Console] 대량 발송 Excel 파일 지원
-    * 대량 발송 시, Excel 형식의 수신자 목록 파일도 업로드할 수 있게 수정했습니다.
+### August 25, 2020
+* [API] Show/Not Show Alimtalk on PC
+    * Added the feature of selecting Show/Not Show on PC, when registering a template
+* [Console] Supports Excel Files for Bulk Delivery
+    * Allows excel extension for sending bulk messages, or for uploading recipients' file
 
-### 2020.07.28.
-* [API] 알림톡 강조표기 템플릿 기능
-    * CBT가 종료 되어, 정식 기능으로 추가되었습니다.
-* [API] 알림톡 템플릿 메시지 유형 확대
-    * 알림톡 템플릿 메시지 유형이 확대 되었습니다. (BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형)
-* [API] 알림톡 템플릿 첨부 파일 문의 기능
-    * 알림톡 템플릿 문의 시, 파일을 첨부하여, 문의하는 기능이 추가되었습니다.
+### July 28, 2020
+* [API] Template Emphasizing Alimtalk Messages  
+    * Officially added as a feature, with CBT closed.
+* [API] More Types for Alimtalk Template Messages  
+    * Expanded types for Alimtalk template messages (BA: Basic, EX: Extra Information, AD: Ads Inclded, MI: Mixed Purposes)
+* [API] Query of Attachments for Alimitalk Templates
+    * Added the feature of querying on Alimtalk templates with files attached
 
-### 2020.06.23.
+### June 23, 2020
 * [API] Allowed Alimtalk Emphasized template
     * It has been changed to allow emphasized template for Register Template API
 
