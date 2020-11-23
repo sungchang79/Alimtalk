@@ -1748,6 +1748,72 @@ Content-Type: application/json;charset=UTF-8
 
 ## 템플릿
 
+### 템플릿 카테고리 조회
+#### 요청
+[URL]
+
+```
+POST  /alimtalk/v1.5/appkeys/{appkey}/template/categories
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 Appkey |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+#### 응답
+```
+
+{
+  "header" : {
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+  },
+  "categories": [
+    {
+      "name": String,
+      "subCategories": [
+        {
+          "code": String,
+          "name": String,
+          "groupName": String,
+          "inclusion": String,
+          "exclusion": String
+        }
+      ]
+    }
+  ]
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
+|categories|	List|	카테고리 리스트 |
+|- name | String | 카테고리 이름 |
+|- subCategories | List |	서브 카테고리 리스트 |
+|-- code | String | 카테고리 코드 (템플릿 등록/수정 시, 사용) |
+|-- name | String |	카테고리 이름 |
+|-- groupName | String |	카테고리 그룹명 |
+|-- inclusion | String |	카테고리 적용 대상 템플릿 설명 |
+|-- exclusion| String| 카테고리 제외 대상 템플릿 설명 |
+
 ### 템플릿 등록
 #### 요청
 [URL]
@@ -1788,6 +1854,7 @@ Content-Type: application/json;charset=UTF-8
   "templateTitle" : String,
   "templateSubtitle" : String,
   "securityFlag": Boolean,
+  "categoryCode": String,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1814,6 +1881,7 @@ Content-Type: application/json;charset=UTF-8
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 |securityFlag| Boolean | X| 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
+|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 입력한 템플릿을 우선 심사 |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-ordering|	Integer |	X | 버튼 순서(1~5) |
 |-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가[광고 추가/복합형만]) |
@@ -1881,6 +1949,7 @@ Content-Type: application/json;charset=UTF-8
   "templateTitle" : String,
   "templateSubtitle" : String,
   "securityFlag": Boolean,
+  "categoryCode": String,
   "buttons" : [
     {
       "ordering" : Integer,
@@ -1906,6 +1975,7 @@ Content-Type: application/json;charset=UTF-8
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 |securityFlag| Boolean | X| 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
+|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 입력한 템플릿을 우선 심사 |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-ordering|	Integer |	X | 버튼 순서(1~5) |
 |-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가[광고 추가/복합형만]) |
