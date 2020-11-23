@@ -16,7 +16,6 @@
 | Common  | false     | -1016      | Message is not found                                         |
 | Common  | false     | -1017      | Sending in excess of daily volume failed                     |
 | Common  | false     | -1018      | Business registration certificate file does not exist        |
-| Common  | false     | -2016      | Sending requested in excess of 1,000 recipients              |
 | Common  | false     | -2017      | Plus Friend does not exist                                   |
 | Common  | false     | -2018      | Invalid button parameter                                     |
 | Common  | false     | -2019      | Failed due to template body with above 1,000 characters      |
@@ -41,7 +40,20 @@
 | Common  | false     | -3008      | Query delivery button type does not allow the input of button URL. |
 | Common  | false     | -3009      | Button name does not exist.                                  |
 | Common  | false     | -3010      | Template body does not match.                                |
-| Common  | false     | -3011      | Template button does not exist.                              |
+| Common  | false     | -3011      | Template button does not match.                              |
+| Common  | false     | -3012      | 수정할 수 없는 템플릿 상태 (승인/반려 상태만 가능)           |
+| Common  | false     | -3013      | 이미 수정 중인 템플릿이 존재                          |
+| Common  | false     | -3014      | 버튼 타입이 올바르지 않은 경우                        |
+| Common  | false     | -3015      | CBT 기능이 비활성화 된 플러스친구일 경우                 |
+| Common  | false     | -3016      | 강조 표기형 템플릿은 templateTitle, templateSubtitle 필수 필드            |
+| Common  | false     | -3017      | templateSubtitle 은 치환 변수를 사용 불가            |
+| Common  | false     | -3018      | 부가 정보형 템플릿은 templateExtra 필수 필드           |
+| Common  | false     | -3019      | 광고 추가형 템플릿은 templateAd 필수 필드           |
+| Common  | false     | -3020      | 복합형 템플릿은 templateExtra, templateAd 필수 필드   |
+| Common  | false     | -3021      | templateExtra은 치환 변수를 사용 불가               |
+| Common  | false     | -3022      | templateAd은 치환 변수를 사용 불가                  |
+| Common  | false     | -3023      | templateAd은 url link 포함 불가                   |
+| Common  | false     | -3024      | CA 타입 버튼은 광고 추가형 복합형 템플릿만 등록 가능       |
 | Common  | false     | -3100      | Unavailable to inquire of template                           |
 | Common  | false     | -4003      | Query range exceeding a month                                |
 | Common  | false     | -4004      | Appkey does not exist                                        |
@@ -55,7 +67,6 @@
 | Common  | false     | -4103      | Start/End time value of delivery request is unavailable for queries |
 | Common  | false     | -4200      | 유효하지 않은 대체 발송 메시지                                      |
 | Common  | false     | -5000      | Invalid recipient number                                     |
-| Common  | false     | -5001      | Recipient list unavailable for sending                       |
 | Common  | false     | -7000      | Vendor request API failed                                    |
 | Common  | false     | -8000      | Image sequence (imageSeq) is missing                         |
 | Common  | false     | -8001      | Image file is not normal                                     |

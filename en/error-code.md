@@ -16,7 +16,6 @@
 | Common  | false     | -1016      | Message is not found                                         |
 | Common  | false     | -1017      | Sending in excess of daily volume failed                     |
 | Common  | false     | -1018      | Business registration certificate file does not exist        |
-| Common  | false     | -2016      | Sending requested in excess of 1,000 recipients              |
 | Common  | false     | -2017      | Plus Friend does not exist                                   |
 | Common  | false     | -2018      | Invalid button parameter                                     |
 | Common  | false     | -2019      | Failed due to template body with above 1,000 characters      |
@@ -41,7 +40,20 @@
 | Common  | false     | -3008      | Query delivery button type does not allow the input of button URL. |
 | Common  | false     | -3009      | Button name does not exist.                                  |
 | Common  | false     | -3010      | Template body does not match.                                |
-| Common  | false     | -3011      | Template button does not exist.                              |
+| Common  | false     | -3011      | Template button does not match.                              |
+| Common  | false     | -3012      | Unavailable to modify template (either approved or returned)           |
+| Common  | false     | -3013      | Template under modification exists                           |
+| Common  | false     | -3014      | Invalid button type                         |
+| Common  | false     | -3015      | Plus Friend with CBT deactivated                  |
+| Common  | false     | -3016      | Reguires templateTitle and templateSubtitle, for Emphasized templates            |
+| Common  | false     | -3017      | Unable to use replacement variable for templateSubtitle            |
+| Common  | false     | -3018      | Requires templateExtra for Extra Information-type templates           |
+| Common  | false     | -3019      | Requires templateAd for Ad-included-type templates           |
+| Common  | false     | -3020      | Requires templateExtra and templateAd for Mixed-purposes templates   |
+| Common  | false     | -3021      | Unable to use replacement variable for templateExtra               |
+| Common  | false     | -3022      | Unable to use replacement variable for templateAd                  |
+| Common  | false     | -3023      | Unable to include url link for templateAd                   |
+| Common  | false     | -3024      | CA-type button can be registration only for Ad-included or Mixed Purposes-type templates       |
 | Common  | false     | -3100      | Unavailable to inquire of template                           |
 | Common  | false     | -4003      | Query range exceeding a month                                |
 | Common  | false     | -4004      | Appkey does not exist                                        |
@@ -55,14 +67,13 @@
 | Common  | false     | -4103      | Start/End time value of delivery request is unavailable for queries |
 | Common  | false     | -4200      | Invalid alternative delivery message                                       |
 | Common  | false     | -5000      | Invalid recipient number                                     |
-| Common  | false     | -5001      | Recipient list unavailable for sending                       |
 | Common  | false     | -7000      | Vendor request API failed                                    |
 | Common  | false     | -8000      | Image sequence (imageSeq) is missing                         |
 | Common  | false     | -8001      | Image file is not normal                                     |
 | Common  | false     | -8002      | No image available corresponding to image sequence           |
 | Common  | false     | -8003      | Deleting image failed                                        |
 | Common  | false     | -8005      | No Plus Friend is registered in project to upload images     |
-| Common  | false     | -8006      | Authentication message is missing from template, when sending authentication message        |
+| Common  | false     | -8006      | Authentication message not included in Template, when sending an authentication message       |
 | Common  | false     | -9995      | Called API of a faded version                                |
 | Common  | false     | -9996      | Content-type is not application/json                         |
 | Common  | false     | -9998      | API does not exist                                           |
@@ -213,7 +224,7 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>Unable to send messages <br>1. Previous kakaotalk user who has withdrawn <br>2. User with no record of Kakaotalk subscription <br>3. User who has blocked to receive Alimtalk <br>4. Android user who uses "different phone number for Kakaotalk from USIM" <br>5. Non-activated user (for push) <br>6. Minimum kakaotalk version user, non Kakaotalk-supported device user, or punished user </td>
+		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan <br>2. User who has never been subscribed to Kakaotalk <br>3. Blocked user from Alimtalk messages <br>4. Android users who use different "Kakaotalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum Kakaotalk version or unsupported device, or punished user </td>
 	</tr>
 	<tr>
 		<td>3023</td>
