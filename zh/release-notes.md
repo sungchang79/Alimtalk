@@ -1,25 +1,26 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
 
-### 2020.11.24.
-* [API] 알림톡 템플릿 카테고리 코드 추가
-    * 알림톡 템플릿 등록/수정 시, 카테고리 코드 필드가 추가되었습니다.
-    * 카테고리 입력한 템플릿을 우선 심사됩니다.
-* [Console] 알림톡 180일 지난 발송 목록 데이터 백업 기능 추가
-    * 180일이 지난 발송 목록(일반/대량)에 대해 고객 OBS 또는 AWS S3로 백업 파일을 생성해주는 기능이 추가되었습니다.
-    * 백업 설정은 발송 설정 탭에서 확인 가능합니다.
-* [API] 알림톡 템플릿 코드 제한 변경
-    * 알림톡 templateCode 필드가 (영문, 숫자, -, _)로 허용되도록 변경되었습니다.
+### November 24, 2020
+* [API] Alimtalk template category code added
+  * Category Code field added for registration or modification of Alimtalk template.
+  * The template with a category entered is screened first.
+* [Console] Backup function of Alimtalk sent list data more than 180 days old added
+  * A function that adds a backup file to customers' object storage or AWS S3 for a sent list (normal/batch) more than 180 days old has been added.
+  * Backup settings can be set in the **Send
+    Settings** tab.
+* [API] Alimtalk template code limit changed
+  * Changed to allow the following in the Alimtalk templateCode field: (alphabet letters, numbers, -, _).
 
 ### 2020.10.27.
 * [API] 알림톡 PC 노출/미노출 필드 변경
     * pcFlag에서 securityFlag로 필드가 변경되었습니다. (default: false)
     * 보안 템플릿 여부를 나타내는 필드로, OTP등 보안 메시지일 경우 설정해야 합니다.
     * true로 등록되면, 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트가 나타나지 않습니다.
-* [API] 알림톡 채널 추가 버튼 타입 변경
-    * 채널 추가 버튼 타입이 CA에서 AC로 변경되었습니다.
-    * 채널 추가 버튼은 버튼 목록 중, 최상단 혹은 단독으로 있을 때만 등록 가능합니다.
-    * 채널 추가 버튼명은 '채널 추가'만 가능합니다.
-    * AC로 변경한 버튼은 하이라이트 처리와 아이콘이 보이는 새로운 버튼 형태로 노출됩니다.
+* [API] Changed the type of the Add Channel button for Alimtalk
+    * Changed the type of the **Add Channel** button from CA to AC.
+    * The **Add Channel** button can be registered only when it is on top of the buttons list or it is the only button available.
+      *The name of the **Add Channel** button can only be 'Add Channel.'
+    * Buttons of which type is changed to AC will be displayed as a new button with the highlight effect and new icon.
 * [Console] 알림톡 발송 결과 백업 기능 추가
     * 알림톡 발송 결과 백업 요청 기능이 추가되었습니다.
     * 콘솔에서 조회한 검색 조건을 기반으로 발송 결과 Excel 파일을 생성할 수 있습니다.
@@ -45,11 +46,11 @@
 * [API] Allowed Alimtalk Emphasized template
     * It has been changed to allow emphasized template for Register Template API
 
-### 2020.05.26
-* [API] 친구톡 와이드 이미지 기능
-    * 친구톡 와이드 이미지를 업로드하여, 발송할 수 있는 기능이 추가되었습니다.
-* [Console] 토큰 미등록 플러스친구 삭제 기능
-    * 토큰 미등록 플러스친구 삭제 기능이 추가되었습니다.
+### May 26, 2020
+* [API] Friendtalk in Wide Images
+    * Added the feature of uploading and sending friendtalk messages in wide images.
+* [Console] Delete Plus Friends with Unregistered Tokens
+    * Added the feature of deleting Plus Friends with unregistered tokens
 
 ### Nov. 26, 2019
 * [Console] Template Registration Using File Uploads
