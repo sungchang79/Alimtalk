@@ -1,4 +1,9 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### January 26, 2021
+* [Console] 친구톡 발송 결과 백업 기능 추가
+    * 친구톡 발송 결과 백업 요청 기능이 추가되었습니다.
+    * 콘솔에서 조회한 검색 조건을 기반으로 발송 결과 Excel 파일을 생성할 수 있습니다.
+    * 발송 결과 파일은 7일 이후 삭제됩니다.
 
 ### November 24, 2020
 * [API] Alimtalk template category code added
