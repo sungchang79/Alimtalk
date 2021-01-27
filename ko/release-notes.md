@@ -1,5 +1,8 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
 
+### 2021.01.26
+* 테스트입니다. 일부로 맞춤뻡을 틀려송 작성합니다.
+
 ### 2020.10.27.
 * [API] 알림톡 PC 노출/미노출 필드 변경
     * pcFlag에서 securityFlag로 필드가 변경되었습니다. (default: false)
