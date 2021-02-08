@@ -1355,68 +1355,6 @@ Content-Type: application/json;charset=UTF-8
 | --- code         | String  | カテゴリーコード |
 | --- name         | String  | カテゴリー名 |
 
-### プラスフレンド事業者登録証のアップロード
-#### リクエスト
-[URL]
-
-```
-POST  /alimtalk/v1.5/appkeys/{appkey}/business-licenses
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| 値 | タイプ | 説明 |
-| ------ | ------ | ------ |
-| appkey | String | 固有のアプリケーションキー |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-| 値    | タイプ | 必須 | 説明                               |
-| ------------ | ------ | ---- | ---------------------------------------- |
-| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request body]
-
-```
-{
-  "fileName" : String,
-  "fileBody" : "{byte[] -> Base64エンコードした値}"
-}
-```
-
-| 値 | タイプ | 必須 | 説明                               |
-| -------- | ------ | ---- | ---------------------------------------- |
-| fileName | String | O    | ファイル名                            |
-| fileBody | Byte[] | O    | ファイルbyte[]をBase64でエンコードした値。(最大500KB)<br>またはbyte配列値 |
-
-#### レスポンス
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  },
-  "attachFile" : {
-    "fileSeq" : Integer
-  }
-}
-```
-
-| 値       | タイプ | 説明 |
-| --------------- | ------- | ------ |
-| header          | Object  | ヘッダ領域 |
-| - resultCode    | Integer | 結果コード |
-| - resultMessage | String  | 結果メッセージ |
-| - isSuccessful  | Boolean | 成否 |
-| attachFile      | Object  | 添付ファイル |
-| - fileSeq       | Integer | ファイルシーケンス |
-
 ### プラスフレンドの登録
 #### リクエスト
 [URL]

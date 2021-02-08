@@ -12,10 +12,8 @@
 | Common  | false     | -1005      | Registration requested in excess of 10 Plus Friends          |
 | Common  | false     | -1008      | Registration failed for Plus Friend token                    |
 | Common  | false     | -1009      | Uploading attached files failed                              |
-| Common  | false     | -1014      | Invalid business registration number                         |
 | Common  | false     | -1016      | Message is not found                                         |
 | Common  | false     | -1017      | Sending in excess of daily volume failed                     |
-| Common  | false     | -1018      | Business registration certificate file does not exist        |
 | Common  | false     | -2017      | Plus Friend does not exist                                   |
 | Common  | false     | -2018      | Invalid button parameter                                     |
 | Common  | false     | -2019      | Failed due to template body with above 1,000 characters      |
@@ -131,16 +129,8 @@
 		<td>Invalid app connection</td>
 	</tr>
 	<tr>
-		<td>1014</td>
-		<td>Invalid business registration number</td>
-	</tr>
-	<tr>
 		<td>1015</td>
 		<td>Invalid app user ID request </td>
-	</tr>
-	<tr>
-		<td>1016</td>
-		<td>Inconsistent business registration number</td>
 	</tr>
   <tr>
 		<td>1021</td>
