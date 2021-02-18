@@ -1491,8 +1491,8 @@ Content-Type: application/json;charset=UTF-8
 | - friendtalkDailyMaxCount | Integer | Number of maximum daily Friendtalk deliveries (not limited if it is 0) |
 | - alimtalkSentCount       | Integer | Number of daily Alimtalk deliveries  (not limited if it is 0) |
 | - friendtalkSentCount     | Integer | Number of daily Friendtalk deliveries (not limited if it is 0) |
-| - status                  | String  | Status code of TOAST PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
-| - statusName              | String  | Status name of TOAST PlusFriend (ready for registration, normally registered) |
+| - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
+| - statusName              | String  | Status name of NHN Cloud PlusFriend (ready for registration, normally registered) |
 | - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
 | - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |

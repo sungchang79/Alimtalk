@@ -772,8 +772,8 @@ Content-Type: application/json;charset=UTF-8
 | - friendtalkDailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 | - alimtalkSentCount       | Integer | お知らせトークの一日送信件数<br>(値が0の場合、件数制限なし)       |
 | - friendtalkSentCount     | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
-| - status                  | String  | TOASTプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
-| - statusName              | String  | TOASTプラスフレンドステータス名(登録待機中、正常登録)           |
+| - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
+| - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
 | - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
 | - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |

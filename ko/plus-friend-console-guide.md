@@ -3,7 +3,7 @@
 ## 플러스친구 등록/인증
 * 카카오톡 비즈 메시지를 발송하려면 플러스친구를 먼저 등록해야 합니다.
 * 플러스친구는 카카오톡 홈페이지( https://center-pf.kakao.com )에서 무료로 만들 수 있습니다.
-* 비즈니스 인증을 받은 플러스친구만 TOAST KakaoTalk Bizmessage 서비스에 추가할 수 있습니다.([[플러스친구 비즈니스 인증](https://static.toastoven.net/prod_alimtalk/plusfriend_business_certify_guide_20190311.pdf)] 참고)
+* 비즈니스 인증을 받은 플러스친구만 NHN Cloud KakaoTalk Bizmessage 서비스에 추가할 수 있습니다.([[플러스친구 비즈니스 인증](https://static.toastoven.net/prod_alimtalk/plusfriend_business_certify_guide_20190311.pdf)] 참고)
 
 ## 플러스친구 추가
 
@@ -34,9 +34,9 @@
 ![plusfriend_03_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_03_201812.png)
 
 ## 개인정보 수탁사 고지 안내
-'고객'이 TOAST > Notification > KakaoTalk Bizmessage 서비스 이용 시, '고객' - '당사' 간 개인정보 처리에 관한 업무 위수탁 관계가 발생하는 바 정보통신망법 및 개인정보보호법에 따라 위탁자인 '고객'은 개인정보 처리방침을 통해 '당사'에 개인정보를 위탁한 현황(수탁자 및 업무의 내용)을 공개해야 합니다.
+'고객'이 NHN Cloud > Notification > KakaoTalk Bizmessage 서비스 이용 시, '고객' - '당사' 간 개인정보 처리에 관한 업무 위수탁 관계가 발생하는 바 정보통신망법 및 개인정보보호법에 따라 위탁자인 '고객'은 개인정보 처리방침을 통해 '당사'에 개인정보를 위탁한 현황(수탁자 및 업무의 내용)을 공개해야 합니다.
 
-이에, '당사'에서는 '고객'이 TOAST의 KakaoTalk Bizmessage 서비스를 이용함에 있어 관련 법령을 준수하고, 위탁 현황 미공개로 인하여 과태료 등의 불이익을 받지 않도록 아래와 같이 가이드할 수 있습니다.
+이에, '당사'에서는 '고객'이 NHN Cloud의 KakaoTalk Bizmessage 서비스를 이용함에 있어 관련 법령을 준수하고, 위탁 현황 미공개로 인하여 과태료 등의 불이익을 받지 않도록 아래와 같이 가이드할 수 있습니다.
 
 (예시)<br>
 [개인정보 수탁사 고지 안내]<br>

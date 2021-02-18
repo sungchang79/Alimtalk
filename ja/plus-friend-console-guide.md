@@ -3,7 +3,7 @@
 ## プラスフレンド登録/認証
 * カカオトークBizメッセージを送信するには、プラスフレンドを先に登録する必要があります。
 * プラスフレンドは、カカオトークWebサイト( https://center-pf.kakao.com )で、無料で作成できます。
-* ビジネス認証済のプラスフレンドのみTOAST KakaoTalk Bizmessageサービスに追加できます。([[プラスフレンドビジネス認証](https://static.toastoven.net/prod_alimtalk/plusfriend_business_certify_guide_20190311.pdf)]参考)
+* ビジネス認証済のプラスフレンドのみNHN Cloud KakaoTalk Bizmessageサービスに追加できます。([[プラスフレンドビジネス認証](https://static.toastoven.net/prod_alimtalk/plusfriend_business_certify_guide_20190311.pdf)]参考)
 
 ## プラスフレンドの追加
 
@@ -34,9 +34,9 @@
 ![plusfriend_03_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_03_201812.png)
 
 ## 個人情報受託会社の告知案内
-顧客'がTOAST > Notification > KakaoTalk Bizmessageサービスを利用する時、'顧客'と'当社'の間で個人情報処理に関する業務の委託/受託関係が発生しますので、韓国情報通信網法および個人情報保護法に従って、委託者である'顧客'は個人情報処理方針を通して'当社'に個人情報を委託した状況(受託者および業務の内容)を公開する必要があります。
+顧客'がNHN Cloud > Notification > KakaoTalk Bizmessageサービスを利用する時、'顧客'と'当社'の間で個人情報処理に関する業務の委託/受託関係が発生しますので、韓国情報通信網法および個人情報保護法に従って、委託者である'顧客'は個人情報処理方針を通して'当社'に個人情報を委託した状況(受託者および業務の内容)を公開する必要があります。
 
-よって'当社'では'顧客'がTOASTのKakaoTalk Bizmessageサービスを利用するにおいて関連法令を遵守し、委託状況の未公開により過料などの不利益を被らないよう、下記のように案内できます。
+よって'当社'では'顧客'がNHN CloudのKakaoTalk Bizmessageサービスを利用するにおいて関連法令を遵守し、委託状況の未公開により過料などの不利益を被らないよう、下記のように案内できます。
 
 (例)<br>
 [個人情報受託会社の告知案内]<br>

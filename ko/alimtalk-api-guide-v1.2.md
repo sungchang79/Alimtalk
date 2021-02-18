@@ -1465,8 +1465,8 @@ Content-Type: application/json;charset=UTF-8
 | - friendtalkDailyMaxCount | Integer | 친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)    |
 | - alimtalkSentCount       | Integer | 알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)       |
 | - friendtalkSentCount     | Integer | 친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)       |
-| - status                  | String  | TOAST 플러스친구 상태 코드 <br>(YSC02: 등록 대기중, YSC03: 정상 등록) |
-| - statusName              | String  | TOAST 플러스친구 상태명(등록 대기중, 정상 등록)           |
+| - status                  | String  | NHN Cloud 플러스친구 상태 코드 <br>(YSC02: 등록 대기중, YSC03: 정상 등록) |
+| - statusName              | String  | NHN Cloud 플러스친구 상태명(등록 대기중, 정상 등록)           |
 | - kakaoStatus             | String  | 카카오 플러스친구 상태 코드<br>(A: 정상, S: 차단, D:삭제)<br>status가 YSC02일 경우, kakaoStatus null 값을 가집니다. |
 | - kakaoStatusName         | String  | 카카오 플러스친구 상태명(정상, 차단, 삭제)<br>status가 YSC02일 경우, kakaoStatusName null 값을 가집니다. |
 | - kakaoProfileStatus      | String  | 카카오 플러스친구 프로필 상태 코드<br>(A: 활성화, B:차단, C: 비활성화, D:삭제 E:삭제 처리 중)<br>status가 YSC02일 경우, kakaoProfileStatus null 값을 가집니다. |
