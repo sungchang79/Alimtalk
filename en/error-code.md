@@ -9,7 +9,6 @@
 | Common  | false     | -1002      | Invalid SMS appkey                                           |
 | Common  | false     | -1003      | Invalid SMS sender number                                    |
 | Common  | false     | -1004      | Already registered Plus Friend                               |
-| Common  | false     | -1005      | Registration requested in excess of 10 Plus Friends          |
 | Common  | false     | -1008      | Registration failed for Plus Friend token                    |
 | Common  | false     | -1009      | Uploading attached files failed                              |
 | Common  | false     | -1016      | Message is not found                                         |
