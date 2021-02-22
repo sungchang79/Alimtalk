@@ -11,16 +11,16 @@ To send KakaoTalk Bizmessages, a Plus Friend must be registered first. Plus Frie
 ![[그림 2] 홈 공개 변경](http://static.toastoven.net/prod_alimtalk/plus_friend_overview_02.png)
 
 ### Status of Plus Friend
-#### Status of TOAST Plus Friend
-* Refers to the status of Plus Friend who is registered to TOAST.
+#### Status of NHN Cloud Plus Friend
+* Refers to the status of Plus Friend who is registered to NHN Cloud.
 * Register your Plus Friend and authenticate tokens, in reference of the console guide, and the service is enabled.
 
 #### Profile Status of KakaoTalk Plus Friend
 * Refers to the status of sender key to send Alimtalk/Friendtalk.
 * May be blocked if profile is not in use for a long time or business information is not consistent.
-* If status is not normal, send request to TOAST Customer Center, along with Plus Friend ID, to ask for the release of blockage.
+* If status is not normal, send request to NHN Cloud Customer Center, along with Plus Friend ID, to ask for the release of blockage.
 
 #### Status of KakoTalk Plus Friend
 * Refers to the status of KakaoTalk business ID.
 * May be blocked if Plus Friend is not in use for a long time.
-* If status is not normal, send request to TOAST Customer Center, along with the Plus Friend ID, for the release of blockage.
+* If status is not normal, send request to NHN Cloud Customer Center, along with the Plus Friend ID, for the release of blockage.

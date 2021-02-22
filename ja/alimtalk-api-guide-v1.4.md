@@ -1296,68 +1296,6 @@ Content-Type: application/json;charset=UTF-8
 | --- code         | String  | カテゴリーコード |
 | --- name         | String  | カテゴリー名 |
 
-### プラスフレンド事業者登録証のアップロード
-#### リクエスト
-[URL]
-
-```
-POST  /alimtalk/v1.4/appkeys/{appkey}/business-licenses
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| 値 | タイプ | 説明 |
-| ------ | ------ | ------ |
-| appkey | String | 固有のアプリケーションキー |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-| 値     | タイプ | 必須 | 説明                                |
-| ------------ | ------ | ---- | ---------------------------------------- |
-| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request body]
-
-```
-{
-  "fileName" : String,
-  "fileBody" : "{byte[] -> Base64エンコードした値}"
-}
-```
-
-| 値 | タイプ | 必須 | 説明                                |
-| -------- | ------ | ---- | ---------------------------------------- |
-| fileName | String | O    | ファイル名                             |
-| fileBody | Byte[] | O    | ファイルbyte[]をBase64でエンコードした値。(最大500KB)<br>またはbyte配列値 |
-
-#### レスポンス
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  },
-  "attachFile" : {
-    "fileSeq" : Integer
-  }
-}
-```
-
-| 値        | タイプ | 説明 |
-| --------------- | ------- | ------ |
-| header          | Object  | ヘッダ領域 |
-| - resultCode    | Integer | 結果コード |
-| - resultMessage | String  | 結果メッセージ |
-| - isSuccessful  | Boolean | 成否 |
-| attachFile      | Object  | 添付ファイル |
-| - fileSeq       | Integer | ファイルシーケンス |
-
 ### プラスフレンドの登録
 #### リクエスト
 [URL]
@@ -1551,8 +1489,8 @@ Content-Type: application/json;charset=UTF-8
 | - plusFriendType          | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
 | - senderKey               | String  | 発信キー                                 |
 | - categoryCode            | String  | カテゴリーコード                           |
-| - status                  | String  | TOASTプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
-| - statusName              | String  | TOASTプラスフレンドステータス名(登録待機中、正常登録)           |
+| - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
+| - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
 | - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
 | - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
@@ -1657,8 +1595,8 @@ Content-Type: application/json;charset=UTF-8
 | - plusFriendType          | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
 | - senderKey               | String  | 発信キー                                 |
 | - categoryCode            | String  | カテゴリーコード                           |
-| - status                  | String  | TOASTプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
-| - statusName              | String  | TOASTプラスフレンドステータス名(登録待機中、正常登録)           |
+| - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
+| - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
 | - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
 | - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |

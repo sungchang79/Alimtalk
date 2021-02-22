@@ -584,69 +584,6 @@ Content-Type: application/json;charset=UTF-8
 | --- code         | String  | Category code     |
 | --- name         | String  | Category name     |
 
-### Upload Business Registration Certificates
-#### Request
-[URL]
-
-```
-POST  /alimtalk/v1.1/appkeys/{appkey}/business-licenses
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
-
-[Header]
-
-```
-{
-  "X-Secret-Key": String
-}
-```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request Body]
-
-```
-{
-  "fileName" : String,
-  "fileBody" : "{byte[] -> Encoded value in Base64}"
-}
-```
-
-| Value    | Type   | Required | Description                                                  |
-| -------- | ------ | -------- | ------------------------------------------------------------ |
-| fileName | String | O        | Name of a file                                               |
-| fileBody | Byte[] | O        | Encoded value of file byte[] in Base64 (up to 500KB)<br>or arrayed value of byte |
-
-#### Response
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  },
-  "attachFile" : {
-    "fileSeq" : Integer
-  }
-}
-```
-
-| Value           | Type    | Description       |
-| --------------- | ------- | ----------------- |
-| header          | Object  | Header area       |
-| - resultCode    | Integer | Result code       |
-| - resultMessage | String  | Result message    |
-| - isSuccessful  | Boolean | Successful or not |
-| attachFile      | Object  | Attached file     |
-| - fileSeq       | Integer | File sequence     |
-
 ### Register PlusFriends
 #### Request
 [URL]
@@ -689,7 +626,6 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
 | plusFriendId | String  | O        | PlusFriend ID (up to 30 characters)                          |
 | phoneNo      | String  | O        | Mobile number of administrator (up to 15 characters)         |
-| licenseNo    | String  | O        | Business registration number (up to 10 characters)           |
 | categoryCode | String  | O        | Category code (11 characters)<br>See response for Search Category API <br>e.g.) 00100010001 Health (001) - Hospital (0001) - General Hospital (0001) |
 | fileSeq      | Integer | O        | File sequence                                                |
 
@@ -850,8 +786,8 @@ Content-Type: application/json;charset=UTF-8
 | - friendtalkDailyMaxCount | Integer | Number of maximum daily Friendtalk deliveries<br>(not limited if it is 0) |
 | - alimtalkSentCount       | Integer | Number of daily Alimtalk deliveries <br>(not limited if it is 0) |
 | - friendtalkSentCount     | Integer | Number of daily Friendtalk deliveries<br>(not limited if it is 0) |
-| - status                  | String  | Status code of TOAST PlusFriend <br>(YSC02: Ready for registeration, YSC03: Normally registered) |
-| - statusName              | String  | Status name of TOAST PlusFriend (ready for registration, normally registered) |
+| - status                  | String  | Status code of NHN Cloud PlusFriend <br>(YSC02: Ready for registeration, YSC03: Normally registered) |
+| - statusName              | String  | Status name of NHN Cloud PlusFriend (ready for registration, normally registered) |
 | - kakaoStatus             | String  | Status code of Kakao PlusFriend<br>(A: Normal, S: Blocked, D: Deleted)<br>kakaoStatus is null if the status is YSC02. |
 | - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted)<br>kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile <br>(A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting)<br>kakaoProfileStatus is null if the status is YSC02. |
