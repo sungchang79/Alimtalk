@@ -89,10 +89,10 @@ Content-Type: application/json;charset=UTF-8
 | createUser | String | X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
 |recipientList|	List|	O|	수신자 목록(최대 1000명) |
 |- recipientNo|	String|	O|	수신 번호 |
-|- content|	String|	O| 내용(최대 1000자)<br>이미지 포함 시, 최대 400자 |
+|- content|	String|	O| 내용(최대 1000자)<br>이미지 발송 시, 최대 400자<br>와이드 이미지 발송 시, 최대 76자 |
 |- imageSeq|	Integer|	X|	이미지 번호 |
 |- imageLink|	String|	X|	이미지 링크(이미지 번호를 입력할 경우 필수)|
-|- buttons|	List|	X|	버튼 |
+|- buttons|	List|	X|	버튼<br>와이드 이미지 발송 시, 링크 버튼 1개 |
 |-- ordering|	Integer|	X |	버튼 순서(버튼이 있는 경우 필수)|
 |-- type| String |	X |	버튼 타입(WL:웹 링크, AL:앱 링크, BK:봇 키워드, MD:메시지 전달) |
 |-- name| String |	X |	버튼 이름(버튼이 있는 경우 필수)|
