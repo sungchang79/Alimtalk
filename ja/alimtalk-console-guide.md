@@ -2,7 +2,7 @@
 
 ## お知らせトーク一般送信
 
-お知らせトークを送信するには、**TOAST Console**で**Notification > KakaoTalk Bizmessage > お知らせトーク**を選択します。
+お知らせトークを送信するには、**NHN Cloud Console**で**Notification > KakaoTalk Bizmessage > お知らせトーク**を選択します。
 
 ![alimtalk_01_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_01_201812.png)
 

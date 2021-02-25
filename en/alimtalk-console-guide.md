@@ -2,7 +2,7 @@
 
 ## General Delivery
 
-To send Alimtalk, go to **TOAST Console** and **Notification > KakaoTalk Bizmessage > Alimtalk**.
+To send Alimtalk, go to **NHN Cloud Console** and **Notification > KakaoTalk Bizmessage > Alimtalk**.
 
 ![alimtalk_01_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_01_201812.png)
 
