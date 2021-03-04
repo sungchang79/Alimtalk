@@ -91,7 +91,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientNo          | String  | O    | 受信番号                              |
 | - content              | String  | O    | 内容(最大1000文字)<br>イメージを含む時は最大400文字  |
 | - imageSeq             | Integer | X    | イメージ番号                             |
-| - imageLink            | String  | X    | イメージリンク(イメージ番号を入力する場合は必須)                |
+| - imageLink            | String  | X    | イメージリンク                                |
 | - buttons              | List    | X    | ボタン                                 |
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、BK：Botキーワード、MD：メッセージ伝達) |

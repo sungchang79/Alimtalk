@@ -78,7 +78,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientNo    | String  | O        | Recipient number                                             |
 | - content        | String  | O        | Body message (up to 1000 characters)<br>Up to 400 characters, if image is included |
 | - imageSeq       | Integer | X        | Image number                                                 |
-| - imageLink      | String  | X        | Image link (required to enter image number)                  |
+| - imageLink      | String  | X        | Image link                                                   |
 | - buttons        | List    | X        | Button                                                       |
 | -- ordering      | Integer | X        | Button sequence (required if there is a button)              |
 | -- type          | String  | X        | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
@@ -333,7 +333,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - imageSeq         | Integer | Image number                                                 |
 | - imageName        | String  | Image name (name of uploaded file)                           |
 | - imageUrl         | String  | Image URL                                                    |
-| - imageLink        | String  | Image link (required to enter image number)                  |
+| - imageLink        | String  | Image link                                                   |
 | - buttons          | List    | List of buttons                                              |
 | -- ordering        | Integer | Button sequence                                              |
 | -- type            | String  | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
