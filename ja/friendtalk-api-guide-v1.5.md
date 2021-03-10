@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > カカともへのメッセージ > API v2.0 Guide
+## Notification > KakaoTalk Bizmessage > カカともへのメッセージ > API v1.5 Guide
 
 ## カカともへのメッセージ
 
@@ -23,7 +23,7 @@
 [URL]
 
 ```
-POST  /friendtalk/v2.0/appkeys/{appkey}/messages
+POST  /friendtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -120,7 +120,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages -d '{"plusFriendId":"@プラスフレンド","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"内容","buttons":[{"ordering":1,"type":"WL","name":"ボタン1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages -d '{"plusFriendId":"@プラスフレンド","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"内容","buttons":[{"ordering":1,"type":"WL","name":"ボタン1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
 ```
 
 #### レスポンス
@@ -171,7 +171,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /friendtalk/v2.0/appkeys/{appkey}/messages
+GET  /friendtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -270,7 +270,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
 ```
 
 #### 再送信ステータス
@@ -289,7 +289,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -318,7 +318,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### レスポンス
@@ -415,7 +415,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}
+DELETE  /friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -464,7 +464,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### メッセージ結果アップデート照会
@@ -474,7 +474,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /friendtalk/v2.0/appkeys/{appkey}/message-results
+GET  /friendtalk/v1.5/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -561,7 +561,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
 
 ## イメージの管理
@@ -572,7 +572,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /friendtalk/v2.0/appkeys/{appkey}/images
+POST  /friendtalk/v1.5/appkeys/{appkey}/images
 Content-Type: multipart/form-data
 ```
 
@@ -601,7 +601,7 @@ Content-Type: multipart/form-data
 
 [例]
 ```
-curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
+curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
 ```
 
 #### レスポンス
@@ -639,7 +639,7 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 [URL]
 
 ```
-GET  /friendtalk/v2.0/appkeys/{appkey}/images
+GET  /friendtalk/v1.5/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -668,7 +668,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images?pageNum=1&pageSize=15"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images?pageNum=1&pageSize=15"
 ```
 
 #### レスポンス
@@ -719,7 +719,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v2.0/appkeys/{appkey}/images
+DELETE  /friendtalk/v1.5/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -747,7 +747,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images?imageSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images?imageSeq=1,2,3"
 ```
 
 #### レスポンス
@@ -776,7 +776,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-POST  /friendtalk/v2.0/appkeys/{appkey}/failback/appkey
+POST  /friendtalk/v1.5/appkeys/{appkey}/failback/appkey
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -811,7 +811,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
 ```
 
 #### レスポンス
@@ -831,7 +831,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /friendtalk/v2.0/appkeys/{appkey}/failback
+POST  /friendtalk/v1.5/appkeys/{appkey}/failback
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -872,7 +872,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@플러스친구","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@플러스친구","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
 ```
 
 #### レスポンス
