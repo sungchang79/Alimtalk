@@ -228,6 +228,7 @@ Content-Type: application/json;charset=UTF-8
           "recipientNo" :  String,
           "requestDate" : String,
           "createDate" : String,
+          "receiveDate" : String,
           "content" :  String,
           "messageStatus" :  String,
           "resendStatus" :  String,
@@ -259,6 +260,7 @@ Content-Type: application/json;charset=UTF-8
 |-- recipientNo | String |	수신 번호 |
 |-- requestDate | String |	요청 일시 |
 |-- createDate | String | 등록 일시 |
+|-- receiveDate | String |	수신 일시 |
 |-- content | String |	본문 |
 |-- messageStatus | String |	요청 상태(COMPLETED: 성공, FAILED: 실패 ) |
 |-- resendStatus | String |	재발송 상태 코드 |
