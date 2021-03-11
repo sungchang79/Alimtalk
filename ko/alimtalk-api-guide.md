@@ -1209,31 +1209,16 @@ Content-Type: application/json;charset=UTF-8
     {
       "requestId" :  String,
       "recipientSeq" : Integer,
-      "plusFriendId" :  String,
-      "senderKey"    :  String,
-      "templateCode" :  String,
-      "recipientNo" :  String,
-      "content" :  String,
       "requestDate" :  String,
+      "createDate" :  String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
+      "resendResultCode" :  String,
+      "resendRequestId" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
-      "resultCodeName" : String,
-      "buttons" : [
-        {
-          "ordering" :  Integer,
-          "type" :  String,
-          "name" :  String,
-          "linkMo" :  String,
-          "linkPc": String,
-          "schemeIos": String,
-          "schemeAndroid": String
-        }
-      ],
-      "senderGroupingKey": String,
-      "recipientGroupingKey": String
+      "resultCodeName" : String
     }
     ],
     "totalCount" :  Integer
@@ -1247,33 +1232,19 @@ Content-Type: application/json;charset=UTF-8
 |- resultCode|	Integer|	결과 코드|
 |- resultMessage|	String| 결과 메시지|
 |- isSuccessful|	Boolean| 성공 여부|
-|messageSearchResultResponse|	Object|	본문 영역|
-|- messages | List |	메시지 리스트 |
-|-- requestId | String |	요청 ID |
-|-- recipientSeq | Integer |	수신자 시퀀스 번호 |
-|-- plusFriendId | String |	플러스친구 ID |
-|-- senderKey    | String | 발신 키    |
-|-- templateCode | String |	템플릿 코드 |
-|-- recipientNo | String |	수신 번호 |
-|-- content | String |	본문 |
-|-- requestDate | String |	요청 일시 |
-|-- receiveDate | String |	수신 일시 |
-|-- resendStatus | String |	재발송 상태 코드 |
-|-- resendStatusName | String |	재발송 상태 코드명 |
-|-- messageStatus | String |	요청 상태(COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 ) |
-|-- resultCode | String |	수신 결과 코드 |
-|-- resultCodeName | String |	수신 결과 코드명 |
-|-- buttons | List |	버튼 리스트 |
-|--- ordering | Integer |	버튼 순서 |
-|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가) |
-|--- name | String |	버튼 이름 |
-|--- linkMo | String |	모바일 웹 링크(WL 타입일 경우 필수 필드) |
-|--- linkPc | String |	PC 웹 링크(WL 타입일 경우 선택 필드) |
-|--- schemeIos | String | iOS 앱 링크(AL 타입일 경우 필수 필드) |
-|--- schemeAndroid | String |	Android 앱 링크(AL 타입일 경우 필수 필드) |
-|-- senderGroupingKey | String | 발신 그룹핑 키 |
-|-- recipientGroupingKey | String |	수신자 그룹핑 키 |
-|- totalCount | Integer | 총 개수 |
+|messages|	List|	메시지 리스트|
+|- requestId | String |	요청 ID |
+|- recipientSeq | Integer |	수신자 시퀀스 번호 |
+|- requestDate | String |	요청 일시 |
+|- createDate  | String |	생성 일시 |
+|- receiveDate | String |	수신 일시 |
+|- resendStatus | String |	재발송 상태 코드 |
+|- resendStatusName | String |	재발송 상태 코드명 |
+|- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
+|- resendRequestId | String | 재발송 SMS 요청 ID |
+|- messageStatus | String |	요청 상태(COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 ) |
+|- resultCode | String |	수신 결과 코드 |
+|- resultCodeName | String |	수신 결과 코드명 |
 
 [예시]
 ```
@@ -1758,17 +1729,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templates": [
           {
               "plusFriendId": String,
-              "plusFriendType": String,
               "senderKey": String,
+              "plusFriendType": String,
               "templateCode": String,
               "templateName": String,
-              "templateContent": String,
-              "templateEmphasizeType": String,
-              "templateTitle" : String,
-              "templateSubtitle" : String,
               "templateMessageType" : String,
+              "templateEmphasizeType": String,
+              "templateContent": String,
               "templateExtra" : String,
               "templateAd" : String,
+              "templateTitle" : String,
+              "templateSubtitle" : String,
               "buttons": [
                 {
                     "ordering":Integer,
@@ -1791,7 +1762,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                 ],
                 "status": String,
                 "statusName": String,
-                "createDate": String
+                "securityFlag": Boolean,
+                "categoryCode": String,
+                "createDate": String,
+                "updateDate": String
             }
         ],
         "totalCount": Integer
@@ -1808,17 +1782,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |templateListResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
 |-- plusFriendId | String |	플러스친구 ID |
-|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- senderKey    | String | 발신 키    |
+|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
 |-- templateName | String |	템플릿명 |
-|-- templateContent | String |	템플릿 본문 |
-|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
-|-- tempalteTitle| String | 템플릿 제목 |
-|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- templateMessageType| String | 템플릿 메시지 유형(BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
+|-- templateContent | String |	템플릿 본문 |
 |-- templateExtra | String | 템플릿 부가 정보 |
 |-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구 |
+|-- tempalteTitle| String | 템플릿 제목 |
+|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가) |
@@ -1835,7 +1809,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |---status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
 |-- status| String | 템플릿 상태 |
 |-- statusName | String | 템플릿 상태명 |
+|-- securityFlag| Boolean | 보안 템플릿 여부 |
+|-- categoryCode| String | 템플릿 카테고리 코드  |
 |-- createDate | String | 생성일자 |
+|-- updateDate | String | 수정일자 |
 |- totalCount | Integer | 총 개수 |
 
 ### 템플릿 수정 리스트 조회
@@ -1885,17 +1862,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templates": [
           {
               "plusFriendId": String,
-              "plusFriendType": String,
               "senderKey": String,
+              "plusFriendType": String,
               "templateCode": String,
               "templateName": String,
-              "templateContent": String,
-              "templateEmphasizeType": String,
-              "templateTitle" : String,
-              "templateSubtitle" : String,
               "templateMessageType" : String,
+              "templateEmphasizeType": String,
+              "templateContent": String,
               "templateExtra" : String,
               "templateAd" : String,
+              "templateTitle" : String,
+              "templateSubtitle" : String,
               "buttons": [
                 {
                     "ordering":Integer,
@@ -1918,8 +1895,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                 ],
                 "status": String,
                 "statusName": String,
+                "securityFlag": Boolean,
+                "categoryCode": String,
                 "activated": boolean,
-                "createDate": String
+                "createDate": String,
+                "updateDate": String
             }
         ],
         "totalCount": Integer
@@ -1936,17 +1916,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |templateModificationsResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
 |-- plusFriendId | String |	플러스친구 ID |
-|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- senderKey    | String | 발신 키    |
+|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
 |-- templateName | String |	템플릿명 |
-|-- templateContent | String |	템플릿 본문 |
-|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
-|-- tempalteTitle| String | 템플릿 제목 |
-|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- templateMessageType| String | 템플릿 메시지 유형(BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
+|-- templateContent | String |	템플릿 본문 |
 |-- templateExtra | String | 템플릿 부가 정보 |
 |-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구 |
+|-- tempalteTitle| String | 템플릿 제목 |
+|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가) |
@@ -1963,8 +1943,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |---status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
 |-- status| String | 템플릿 상태 |
 |-- statusName | String | 템플릿 상태명 |
+|-- securityFlag| Boolean | 보안 템플릿 여부 |
+|-- categoryCode| String | 템플릿 카테고리 코드  |
 |-- activated | Boolean | 활성화 여부 |
 |-- createDate | String | 생성일자 |
+|-- updateDate | String | 수정일자 |
 |- totalCount | Integer | 총 개수 |
 
 ## 대체 발송 관리

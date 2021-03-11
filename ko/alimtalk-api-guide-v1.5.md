@@ -1208,6 +1208,7 @@ Content-Type: application/json;charset=UTF-8
       "recipientNo" :  String,
       "content" :  String,
       "requestDate" :  String,
+      "createDate" : String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
@@ -1225,6 +1226,7 @@ Content-Type: application/json;charset=UTF-8
           "schemeAndroid": String
         }
       ],
+      "createUser": String,
       "senderGroupingKey": String,
       "recipientGroupingKey": String
     }
@@ -1249,6 +1251,7 @@ Content-Type: application/json;charset=UTF-8
 |-- recipientNo | String |	수신 번호 |
 |-- content | String |	본문 |
 |-- requestDate | String |	요청 일시 |
+|-- createDate | String |	등록 일자 |
 |-- receiveDate | String |	수신 일시 |
 |-- resendStatus | String |	재발송 상태 코드 |
 |-- resendStatusName | String |	재발송 상태 코드명 |
@@ -1263,6 +1266,7 @@ Content-Type: application/json;charset=UTF-8
 |--- linkPc | String |	PC 웹 링크(WL 타입일 경우 선택 필드) |
 |--- schemeIos | String | iOS 앱 링크(AL 타입일 경우 필수 필드) |
 |--- schemeAndroid | String |	Android 앱 링크(AL 타입일 경우 필수 필드) |
+|-- createUser| String | 등록자 (콘솔에서 발송 시 사용자 UUID로 저장)|
 |-- senderGroupingKey | String | 발신 그룹핑 키 |
 |-- recipientGroupingKey | String |	수신자 그룹핑 키 |
 |- totalCount | Integer | 총 개수 |
