@@ -211,6 +211,12 @@ Content-Type: application/json;charset=UTF-8
     "resultCode" :  Integer,
     "resultMessage" :  String,
     "isSuccessful" :  boolean
+  },
+  "sender": {
+    "plusFriendId": String,
+    "senderKey": String,
+    "categoryCode": String,
+    "status": String
   }
 }
 ```
@@ -221,6 +227,11 @@ Content-Type: application/json;charset=UTF-8
 |- resultCode|	Integer|	결과 코드|
 |- resultMessage|	String| 결과 메시지|
 |- isSuccessful|	Boolean| 성공 여부|
+|sender|	Object|	발신 프로필|
+|- plusFriendId | String |	플러스친구 ID |
+|- senderKey | String |	발신 키 |
+|- categoryCode | String |	카테고리 코드 |
+|- status | String |	NHN Cloud 플러스친구 상태 코드 <br>(YSC02: 등록 대기중, YSC03: 정상 등록) |
 
 ### 발신 프로필 삭제
 #### 요청
