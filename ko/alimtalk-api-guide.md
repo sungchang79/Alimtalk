@@ -18,8 +18,9 @@
 </table>
 
 ## v2.0 API 소개
-1. 카카오 채널 추가 시, 발급 받은 senderKey 필드로 API 호출이 되도록 변경 되었습니다.
-2. 카카오 채널 그룹 기능이 추가 되었습니다.
+1. 카카오 채널 추가 시, 발급 받은 senderKey 필드로 API 호출이 되도록 변경 되었습니다. (plusFriendId 필드 대체)
+2. API uri가 변경 되었습니다. (/plus-friends -> /senders)
+3. 카카오 채널 그룹 기능이 추가 되었습니다.
 
 ## 일반 메시지
 
@@ -1208,31 +1209,16 @@ Content-Type: application/json;charset=UTF-8
     {
       "requestId" :  String,
       "recipientSeq" : Integer,
-      "plusFriendId" :  String,
-      "senderKey"    :  String,
-      "templateCode" :  String,
-      "recipientNo" :  String,
-      "content" :  String,
       "requestDate" :  String,
+      "createDate" :  String,
       "receiveDate" : String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
+      "resendResultCode" :  String,
+      "resendRequestId" :  String,
       "messageStatus" :  String,
       "resultCode" :  String,
-      "resultCodeName" : String,
-      "buttons" : [
-        {
-          "ordering" :  Integer,
-          "type" :  String,
-          "name" :  String,
-          "linkMo" :  String,
-          "linkPc": String,
-          "schemeIos": String,
-          "schemeAndroid": String
-        }
-      ],
-      "senderGroupingKey": String,
-      "recipientGroupingKey": String
+      "resultCodeName" : String
     }
     ],
     "totalCount" :  Integer
@@ -1246,450 +1232,24 @@ Content-Type: application/json;charset=UTF-8
 |- resultCode|	Integer|	결과 코드|
 |- resultMessage|	String| 결과 메시지|
 |- isSuccessful|	Boolean| 성공 여부|
-|messageSearchResultResponse|	Object|	본문 영역|
-|- messages | List |	메시지 리스트 |
-|-- requestId | String |	요청 ID |
-|-- recipientSeq | Integer |	수신자 시퀀스 번호 |
-|-- plusFriendId | String |	플러스친구 ID |
-|-- senderKey    | String | 발신 키    |
-|-- templateCode | String |	템플릿 코드 |
-|-- recipientNo | String |	수신 번호 |
-|-- content | String |	본문 |
-|-- requestDate | String |	요청 일시 |
-|-- receiveDate | String |	수신 일시 |
-|-- resendStatus | String |	재발송 상태 코드 |
-|-- resendStatusName | String |	재발송 상태 코드명 |
-|-- messageStatus | String |	요청 상태(COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 ) |
-|-- resultCode | String |	수신 결과 코드 |
-|-- resultCodeName | String |	수신 결과 코드명 |
-|-- buttons | List |	버튼 리스트 |
-|--- ordering | Integer |	버튼 순서 |
-|--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가) |
-|--- name | String |	버튼 이름 |
-|--- linkMo | String |	모바일 웹 링크(WL 타입일 경우 필수 필드) |
-|--- linkPc | String |	PC 웹 링크(WL 타입일 경우 선택 필드) |
-|--- schemeIos | String | iOS 앱 링크(AL 타입일 경우 필수 필드) |
-|--- schemeAndroid | String |	Android 앱 링크(AL 타입일 경우 필수 필드) |
-|-- senderGroupingKey | String | 발신 그룹핑 키 |
-|-- recipientGroupingKey | String |	수신자 그룹핑 키 |
-|- totalCount | Integer | 총 개수 |
+|messages|	List|	메시지 리스트|
+|- requestId | String |	요청 ID |
+|- recipientSeq | Integer |	수신자 시퀀스 번호 |
+|- requestDate | String |	요청 일시 |
+|- createDate  | String |	생성 일시 |
+|- receiveDate | String |	수신 일시 |
+|- resendStatus | String |	재발송 상태 코드 |
+|- resendStatusName | String |	재발송 상태 코드명 |
+|- resendResultCode | String | 재발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
+|- resendRequestId | String | 재발송 SMS 요청 ID |
+|- messageStatus | String |	요청 상태(COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 ) |
+|- resultCode | String |	수신 결과 코드 |
+|- resultCodeName | String |	수신 결과 코드명 |
 
 [예시]
 ```
 curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
-
-
-## 플러스친구
-
-### 플러스친구 카테고리 조회
-
-#### 요청
-[URL]
-
-```
-GET  /alimtalk/v2.0/appkeys/{appkey}/sender/categories
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-|appkey|	String|	고유의 Appkey|
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
-
-#### 응답
-```
-{
-  "header" : {
-      "resultCode" :  Integer,
-      "resultMessage" :  String,
-      "isSuccessful" :  boolean
-  },
-  "categories" : [
-  {
-      "parentCode" : String,
-      "depth" : Integer,
-      "code" : String,
-      "name" : String,
-      "subCategories" : [
-        {
-        "parentCode" : String,
-        "depth" : Integer,
-        "code" : String,
-        "name" : String,
-        "subCategories" : [
-          {
-            "parentCode" : String,
-            "depth" : Integer,
-            "code" : String,
-            "name" : String
-          }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
-|categories|	Object|	카테고리|
-|- parentCode | String |	부모 코드 |
-|- depth | Integer |	카테고리 깊이 |
-|- code | String |	카테고리 코드 |
-|- name | String |	카테고리 이름 |
-|- subCategories | Object |	서브 카테고리 |
-|-- parentCode | String |	부모 코드 |
-|-- depth | Integer |	카테고리 깊이 |
-|-- code | String |	카테고리 코드 |
-|-- name | String |	카테고리 이름 |
-|-- subCategories | Object |	서브 카테고리 |
-|--- parentCode | String |	부모 코드 |
-|--- depth | Integer |	카테고리 깊이 |
-|--- code | String |	카테고리 코드 |
-|--- name | String |	카테고리 이름 |
-
-### 플러스친구 등록
-#### 요청
-[URL]
-
-```
-POST  /alimtalk/v2.0/appkeys/{appkey}/senders
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-|appkey|	String|	고유의 Appkey|
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request Body]
-
-```
-{
-  "plusFriendId" : String,
-  "phoneNo" : String,
-  "categoryCode" : String
-}
-```
-
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 ID (최대 30자) |
-|phoneNo|	String |	O | 관리자 핸드폰 번호 (최대 15자) |
-|categoryCode|	String |	O | 카테고리 코드(11자)<br>카테고리 조회 API의 응답 참고<br>ex) 00100010001 건강(001) - 병원(0001) - 종합병원(0001) |
-
-#### 응답
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  }
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
-
-### 플러스친구 토큰 인증
-#### 요청
-[URL]
-
-```
-POST  /alimtalk/v2.0/appkeys/{appkey}/sender/token
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-|appkey|	String|	고유의 Appkey|
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request Body]
-
-```
-{
-  "token" : "Integer"
-}
-```
-
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|plusFriendId | String | O | 플러스친구 ID |
-|token|	Integer |	O | 인증 토큰 (플러스친구 등록 API 호출 후, 카카오톡 앱으로 받은 인증 토큰) |
-
-#### 응답
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  }
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
-
-### 플러스친구 단건 조회
-#### 요청
-
-[URL]
-
-```
-GET  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-|appkey|	String|	고유의 Appkey|
-|senderKey| String | 발신 키 |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
-
-#### 응답
-```
-{  
-   "header":{  
-      "resultCode" :  Integer,
-      "resultMessage" :  String,
-      "isSuccessful" :  boolean
-   },
-   "plusFriend":{  
-         "plusFriendId" : String,
-         "plusFriendType" : String,
-         "senderKey" : String,
-         "categoryCode" : String,
-         "status" : String,
-         "statusName" : String,
-         "kakaoStatus" : String,
-         "kakaoStatusName" : String,
-         "kakaoProfileStatus" : String,
-         "kakaoProfileStatusName" : String,
-         "createDate": String,
-         "alimtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-          },
-         "friendtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "resendUnsubscribeNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-         },
-         "createDate": String
-    }
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
-|plusFriend |	Object|	플러스친구|
-|- plusFriendId | String |	플러스친구 ID |
-|- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
-|- senderKey | String |	발신 키 |
-|- categoryCode | String |	카테고리 코드 |
-|- status | String |	NHN Cloud 플러스친구 상태 코드 <br>(YSC02: 등록 대기중, YSC03: 정상 등록) |
-|- statusName | String |	NHN Cloud 플러스친구 상태명 (등록 대기중, 정상 등록) |
-|- kakaoStatus | String |	카카오 플러스친구 상태 코드<br>(A: 정상, S: 차단, D:삭제)<br>status가 YSC02일 경우, kakaoStatus null 값을 가집니다. |
-|- kakaoStatusName | String |	카카오 플러스친구 상태명 (정상, 차단, 삭제)<br>status가 YSC02일 경우, kakaoStatusName null 값을 가집니다. |
-|- kakaoProfileStatus | String |	카카오 플러스친구 프로필 상태 코드<br>(A: 활성화, B:차단, C: 비활성화, D:삭제 E:삭제 처리 중)<br>status가 YSC02일 경우, kakaoProfileStatus null 값을 가집니다.|
-|- kakaoProfileStatusName | String | 카카오 플러스친구 프로필 상태명 (활성화, 비활성화, 차단, 삭제 처리 중, 삭제)<br>status가 YSC02일 경우, kakaoProfileStatusName null 값을 가집니다. |
-|- alimtalk|	Object|	알림톡 설정 정보|
-|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
-|-- isResend | String | 대체 발송 설정(재발송) 여부|
-|-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
-|-- dailyMaxCount | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|-- sentCount | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|- friendtalk|	Object|	친구톡 설정 정보|
-|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
-|-- isResend | String | 대체 발송 설정(재발송) 여부|
-|-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
-|-- resendUnsubscribeNo | String |	재발송 시, tc-sms 080 수신 거부 번호 |
-|-- dailyMaxCount | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|-- sentCount | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|- createDate | String |	등록 일자 |
-
-### 플러스친구 리스트 조회
-#### 요청
-
-[URL]
-
-```
-GET  /alimtalk/v2.0/appkeys/{appkey}/senders
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-|appkey|	String|	고유의 Appkey|
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
-
-[Query parameter] 1번 or 2번 조건 필수
-
-|값|	타입|	필수|	설명|
-|---|---|---|---|
-|plusFriendId|	String|	X | 플러스친구 ID |
-| senderKey | String | X | 발신 키 |
-|status|	String|	X | 플러스친구 상태 코드 <br>(YSC02: 토큰 인증 대기중, YSC03: 정상 등록)|
-|isSearchKakaoStatus|	boolean| X | 카카오 상태 조회 여부(false일 경우, 카카오 상태 관련 필드 (kakaoStatus, kakaoProfileStatus 등) null값)<br>default값 : true |
-|pageNum|	Integer|	X|	페이지 번호(Default : 1)|
-|pageSize|	Integer|	X|	조회 건수(Default : 15, Max : 1000)|
-
-#### 응답
-```
-{  
-   "header":{  
-      "resultCode" :  Integer,
-      "resultMessage" :  String,
-      "isSuccessful" :  boolean
-   },
-   "plusFriends":[  
-      {  
-         "plusFriendId" : String,
-         "plusFriendType" : String,
-         "senderKey" : String,
-         "categoryCode" : String,
-         "status" : String,
-         "statusName" : String,
-         "kakaoStatus" : String,
-         "kakaoStatusName" : String,
-         "kakaoProfileStatus" : String,
-         "kakaoProfileStatusName" : String,
-         "createDate": String,
-         "alimtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-          },
-         "friendtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "resendUnsubscribeNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-         }
-      }
-   ],
-   "totalCount": Integer
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-|header|	Object|	헤더 영역|
-|- resultCode|	Integer|	결과 코드|
-|- resultMessage|	String| 결과 메시지|
-|- isSuccessful|	Boolean| 성공 여부|
-|plusFriends|	Object|	플러스친구|
-|- plusFriendId | String |	플러스친구 ID |
-|- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
-|- senderKey | String |	발신 키 |
-|- categoryCode | String |	카테고리 코드 |
-|- status | String |	NHN Cloud 플러스친구 상태 코드 <br>(YSC02: 등록 대기중, YSC03: 정상 등록) |
-|- statusName | String |	NHN Cloud 플러스친구 상태명 (등록 대기중, 정상 등록) |
-|- kakaoStatus | String |	카카오 플러스친구 상태 코드<br>(A: 정상, S: 차단, D:삭제)<br>status가 YSC02일 경우, kakaoStatus null 값을 가집니다. |
-|- kakaoStatusName | String |	카카오 플러스친구 상태명 (정상, 차단, 삭제)<br>status가 YSC02일 경우, kakaoStatusName null 값을 가집니다. |
-|- kakaoProfileStatus | String |	카카오 플러스친구 프로필 상태 코드<br>(A: 활성화, B:차단, C: 비활성화, D:삭제 E:삭제 처리 중)<br>status가 YSC02일 경우, kakaoProfileStatus null 값을 가집니다.|
-|- kakaoProfileStatusName | String | 카카오 플러스친구 프로필 상태명 (활성화, 비활성화, 차단, 삭제 처리 중, 삭제)<br>status가 YSC02일 경우, kakaoProfileStatusName null 값을 가집니다. |
-|- alimtalk|	Object|	알림톡 설정 정보|
-|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
-|-- isResend | String | 대체 발송 설정(재발송) 여부|
-|-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
-|-- dailyMaxCount | Integer |	알림톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|-- sentCount | Integer |	알림톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|- friendtalk|	Object|	친구톡 설정 정보|
-|-- resendAppKey | String | 대체 발송으로 설정할 SMS 서비스 앱키 |
-|-- isResend | String | 대체 발송 설정(재발송) 여부|
-|-- resendSendNo | String |	재발송 시, tc-sms 발신 번호 |
-|-- resendUnsubscribeNo | String |	재발송 시, tc-sms 080 수신 거부 번호 |
-|-- dailyMaxCount | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|-- sentCount | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
-|- createDate | String |	등록 일자 |
-|totalCount | Integer | 총 개수 |
 
 ## 템플릿
 
@@ -2169,17 +1729,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templates": [
           {
               "plusFriendId": String,
-              "plusFriendType": String,
               "senderKey": String,
+              "plusFriendType": String,
               "templateCode": String,
               "templateName": String,
-              "templateContent": String,
-              "templateEmphasizeType": String,
-              "templateTitle" : String,
-              "templateSubtitle" : String,
               "templateMessageType" : String,
+              "templateEmphasizeType": String,
+              "templateContent": String,
               "templateExtra" : String,
               "templateAd" : String,
+              "templateTitle" : String,
+              "templateSubtitle" : String,
               "buttons": [
                 {
                     "ordering":Integer,
@@ -2202,7 +1762,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                 ],
                 "status": String,
                 "statusName": String,
-                "createDate": String
+                "securityFlag": Boolean,
+                "categoryCode": String,
+                "createDate": String,
+                "updateDate": String
             }
         ],
         "totalCount": Integer
@@ -2219,17 +1782,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |templateListResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
 |-- plusFriendId | String |	플러스친구 ID |
-|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- senderKey    | String | 발신 키    |
+|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
 |-- templateName | String |	템플릿명 |
-|-- templateContent | String |	템플릿 본문 |
-|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
-|-- tempalteTitle| String | 템플릿 제목 |
-|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- templateMessageType| String | 템플릿 메시지 유형(BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
+|-- templateContent | String |	템플릿 본문 |
 |-- templateExtra | String | 템플릿 부가 정보 |
 |-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구 |
+|-- tempalteTitle| String | 템플릿 제목 |
+|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가) |
@@ -2246,7 +1809,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |---status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
 |-- status| String | 템플릿 상태 |
 |-- statusName | String | 템플릿 상태명 |
+|-- securityFlag| Boolean | 보안 템플릿 여부 |
+|-- categoryCode| String | 템플릿 카테고리 코드  |
 |-- createDate | String | 생성일자 |
+|-- updateDate | String | 수정일자 |
 |- totalCount | Integer | 총 개수 |
 
 ### 템플릿 수정 리스트 조회
@@ -2296,17 +1862,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "templates": [
           {
               "plusFriendId": String,
-              "plusFriendType": String,
               "senderKey": String,
+              "plusFriendType": String,
               "templateCode": String,
               "templateName": String,
-              "templateContent": String,
-              "templateEmphasizeType": String,
-              "templateTitle" : String,
-              "templateSubtitle" : String,
               "templateMessageType" : String,
+              "templateEmphasizeType": String,
+              "templateContent": String,
               "templateExtra" : String,
               "templateAd" : String,
+              "templateTitle" : String,
+              "templateSubtitle" : String,
               "buttons": [
                 {
                     "ordering":Integer,
@@ -2329,8 +1895,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                 ],
                 "status": String,
                 "statusName": String,
+                "securityFlag": Boolean,
+                "categoryCode": String,
                 "activated": boolean,
-                "createDate": String
+                "createDate": String,
+                "updateDate": String
             }
         ],
         "totalCount": Integer
@@ -2347,17 +1916,17 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |templateModificationsResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
 |-- plusFriendId | String |	플러스친구 ID |
-|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- senderKey    | String | 발신 키    |
+|-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
 |-- templateName | String |	템플릿명 |
-|-- templateContent | String |	템플릿 본문 |
-|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
-|-- tempalteTitle| String | 템플릿 제목 |
-|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- templateMessageType| String | 템플릿 메시지 유형(BA: 기본형, EX: 부가 정보형, AD: 광고 추가형, MI: 복합형) |
+|-- templateEmphasizeType| String| 템플릿 강조 표시 타입(NONE : 기본, TEXT : 강조 표시, default : NONE) |
+|-- templateContent | String |	템플릿 본문 |
 |-- templateExtra | String | 템플릿 부가 정보 |
 |-- templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구 |
+|-- tempalteTitle| String | 템플릿 제목 |
+|-- templateSubtitle| String | 템플릿 보조 문구 |
 |-- buttons | List |	버튼 리스트 |
 |--- ordering | Integer |	버튼 순서(1~5) |
 |--- type | String |	버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가) |
@@ -2374,8 +1943,11 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |---status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
 |-- status| String | 템플릿 상태 |
 |-- statusName | String | 템플릿 상태명 |
+|-- securityFlag| Boolean | 보안 템플릿 여부 |
+|-- categoryCode| String | 템플릿 카테고리 코드  |
 |-- activated | Boolean | 활성화 여부 |
 |-- createDate | String | 생성일자 |
+|-- updateDate | String | 수정일자 |
 |- totalCount | Integer | 총 개수 |
 
 ## 대체 발송 관리
