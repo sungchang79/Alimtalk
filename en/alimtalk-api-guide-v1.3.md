@@ -20,6 +20,7 @@
 ## Overview of v1.3 API
 * senderGroupingKey and recipientGroupingKey have been added to Send API and Query API.
 * Request Successful and Failed fields have been added to response for Send API.
+* 발송 시, 대체 발송 설정 필드가 변경되었습니다. (아래 명세 참조)
 
 ## General Messages
 
