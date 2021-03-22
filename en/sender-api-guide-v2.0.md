@@ -21,15 +21,15 @@
 </tbody>
 </table>
 
-## PlusFriends
+## Senders
 
-### Query PlusFriend by Category
+### Query Sender by Category
 
 #### Request
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/categories
+GET  /alimtalk/v2.0/appkeys/{appkey}/sender/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -106,14 +106,14 @@ Content-Type: application/json;charset=UTF-8
 | --- code         | String  | Category code     |
 | --- name         | String  | Category name     |
 
-### Register PlusFriends
+### Register Senders
 
 #### Request
 
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/plus-friends
+POST  /alimtalk/v2.0/appkeys/{appkey}/senders
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -139,9 +139,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "plusFriendId" : String,
   "phoneNo" : String,
-  "licenseNo" : String,
-  "categoryCode" : String,
-  "fileSeq" : Integer
+  "categoryCode" : String
 }
 ```
 
@@ -150,7 +148,6 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId | String  | O        | PlusFriend ID (up to 30 characters)                          |
 | phoneNo      | String  | O        | Mobile number of administrator (up to 15 characters)         |
 | categoryCode | String  | O        | Category code (11 characters) See response for Search Category API  e.g.) 00100010001 Health (001) - Hospital (0001) - General Hospital (0001) |
-| fileSeq      | Integer | O        | File sequence                                                |
 
 #### Response
 
@@ -171,14 +168,14 @@ Content-Type: application/json;charset=UTF-8
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
 
-### Authenticate Tokens for PlusFriends
+### Authenticate Tokens for Senders
 
 #### Request
 
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/tokens
+POST  /alimtalk/v2.0/appkeys/{appkey}/sender/token
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -187,7 +184,6 @@ Content-Type: application/json;charset=UTF-8
 | Value        | Type   | Description     |
 | ------------ | ------ | --------------- |
 | appkey       | String | Original appkey |
-| plusFriendId | String | PlusFriend ID   |
 
 [Header]
 
@@ -204,12 +200,14 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {
+  "plusFriendId" : String,
   "token" : "Integer"
 }
 ```
 
 | Value | Type    | Required | Description                                                  |
 | ----- | ------- | -------- | ------------------------------------------------------------ |
+| plusFriendId | String  | O | PlusFriend ID |
 | token | Integer | O        | Authentication token (received on Kakaotalk app, after Register PlusFriend API call) |
 
 #### Response
@@ -231,13 +229,61 @@ Content-Type: application/json;charset=UTF-8
 | - resultMessage | String  | Result message    |
 | - isSuccessful  | Boolean | Successful or not |
 
-### Get PlusFriend
+### Delete Sender
 #### Request
 
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}
+DELETE  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Value        | Type   | Description     |
+| ------------ | ------ | --------------- |
+| appkey       | String | Original appkey |
+| senderKey    | String | Sender key      |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Value        | Type   | Required | Description                                                  |
+| ------------ | ------ | -------- | ------------------------------------------------------------ |
+| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
+
+* 발신 프로필 삭제 시, 등록한 템플릿 데이터가 함께 삭제 됩니다.
+* 발신 프로필 삭제 시, 복구가 불가능합니다.
+
+#### Response
+```
+{  
+   "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+   }
+}
+```
+
+| Value           | Type    | Description       |
+| --------------- | ------- | ----------------- |
+| header          | Object  | Header area       |
+| - resultCode    | Integer | Result code       |
+| - resultMessage | String  | Result message    |
+| - isSuccessful  | Boolean | Successful or not |
+
+### Get Sender
+#### Request
+
+[URL]
+
+```
+GET  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -246,7 +292,7 @@ Content-Type: application/json;charset=UTF-8
 | Value  | Type   | Description     |
 | ------ | ------ | --------------- |
 | appkey | String | Original appkey |
-| plusFriendId | String  | PlusFriend ID |
+| senderKey    | String | Sender key      |
 
 [Header]
 ```
@@ -266,9 +312,8 @@ Content-Type: application/json;charset=UTF-8
       "resultMessage" :  String,
       "isSuccessful" :  boolean
    },
-   "plusFriend":{  
+   "sender":{  
          "plusFriendId" : String,
-         "plusFriendType" : String,
          "senderKey" : String,
          "categoryCode" : String,
          "status" : String,
@@ -304,9 +349,8 @@ Content-Type: application/json;charset=UTF-8
 | - resultCode              | Integer | Result code                                                  |
 | - resultMessage           | String  | Result message                                               |
 | - isSuccessful            | Boolean | Successful or not                                            |
-| plusFriend                | Object  | PlusFriend                                                   |
+| sender                | Object  | Sender                                                   |
 | - plusFriendId            | String  | PlusFriend ID                                                |
-| - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
 | - senderKey               | String  | Sender key                                                   |
 | - categoryCode            | String  | Category code                                                |
 | - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
@@ -331,14 +375,14 @@ Content-Type: application/json;charset=UTF-8
 | - createDate              | String  | Date and time of registration                                |
 | totalCount                | Integer | Total count                                                  |
 
-### List PlusFriends
+### List Sender
 
 #### Request
 
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/plus-friends
+GET  /alimtalk/v2.0/appkeys/{appkey}/senders
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -363,8 +407,11 @@ Content-Type: application/json;charset=UTF-8
 | Value               | Type    | Required | Description                                                  |
 | ------------------- | ------- | -------- | ------------------------------------------------------------ |
 | plusFriendId        | String  | X        | PlusFriend ID                                                |
+| senderKey | String | X | Sender key |
 | status              | String  | X        | Status code of PlusFriend  (YSC02: Ready for token authenticated, YSC03: Normally registered) |
 | isSearchKakaoStatus | boolean | X        | Query of Kakao status (null for Kakao status-related fields (e.g. kakaoStatus or kakaoProfileStatus) if it is false) Default: True |
+|pageNum|	Integer|	X|	page number(Default : 1)|
+|pageSize|	Integer|	X|	page size(Default : 15, Max : 1000)|
 
 #### Response
 
@@ -375,10 +422,9 @@ Content-Type: application/json;charset=UTF-8
       "resultMessage" :  String,
       "isSuccessful" :  boolean
    },
-   "plusFriends":[  
+   "senders":[  
       {  
          "plusFriendId" : String,
-         "plusFriendType" : String,
          "senderKey" : String,
          "categoryCode" : String,
          "status" : String,
@@ -415,9 +461,8 @@ Content-Type: application/json;charset=UTF-8
 | - resultCode              | Integer | Result code                                                  |
 | - resultMessage           | String  | Result message                                               |
 | - isSuccessful            | Boolean | Successful or not                                            |
-| plusFriends               | Object  | PlusFriend                                                   |
+| senders               | List  | Sender                                                   |
 | - plusFriendId            | String  | PlusFriend ID                                                |
-| - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
 | - senderKey               | String  | Sender key                                                   |
 | - categoryCode            | String  | Category code                                                |
 | - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
@@ -441,3 +486,166 @@ Content-Type: application/json;charset=UTF-8
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
 | - createDate              | String  | Date and time of registration                                |
 | totalCount                | Integer | Total count                                                  |
+
+## Sender group
+
+### Get Sender group
+
+#### Request
+[URL]
+
+```
+GET  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Value  | Type   | Description     |
+| ------ | ------ | --------------- |
+| appkey | String | Original appkey |
+| groupSenderKey    | String | Sender key of Sender group      |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Value        | Type   | Required | Description                                                  |
+| ------------ | ------ | -------- | ------------------------------------------------------------ |
+| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
+
+#### Response
+```
+{
+    "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+    },
+    "senderGroup": {
+        "groupName": String,
+        "senderKey": String,
+        "status": String,
+        "senders": [
+            {
+                "plusFriendId": String,
+                "senderKey": String,
+                "createDate": String
+            }
+        ],
+        "createDate": String,
+        "updateDate": String
+    }
+}
+```
+
+| Value                     | Type    | Description                                                  |
+|---|---|---|
+| header                    | Object  | Header area                                                  |
+| - resultCode              | Integer | Result code                                                  |
+| - resultMessage           | String  | Result message                                               |
+| - isSuccessful            | Boolean | Successful or not                                            |
+|senderGroup|	Object|	Sender group |
+|- groupName | String |	group name |
+|- senderKey | String |	Sender key |
+| - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
+|- senders | List |	Sender List |
+|-- plusFriendId | String |	PlusFriend ID |
+|-- senderKey | String |	Sender key |
+|-- createDate | String | Date and time of registration |
+|- createDate | String | Date and time of registration |
+|- updateDate |	String|	Date and time of modification |
+
+### Add sender to group
+
+#### Request
+[URL]
+
+```
+POST  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Value  | Type   | Description     |
+| ------ | ------ | --------------- |
+| appkey | String | Original appkey |
+| groupSenderKey    | String | Sender key of Sender group      |
+| senderKey    | String | Sender key   |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Value        | Type   | Required | Description                                                  |
+| ------------ | ------ | -------- | ------------------------------------------------------------ |
+| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
+
+#### Response
+```
+{
+    "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+    }
+}
+```
+
+| Value           | Type    | Description       |
+| --------------- | ------- | ----------------- |
+| header          | Object  | Header area       |
+| - resultCode    | Integer | Result code       |
+| - resultMessage | String  | Result message    |
+| - isSuccessful  | Boolean | Successful or not |
+
+### Delete sender from group
+
+#### Request
+[URL]
+
+```
+DELETE  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Value  | Type   | Description     |
+| ------ | ------ | --------------- |
+| appkey | String | Original appkey |
+| groupSenderKey    | String | Sender key of Sender group      |
+| senderKey    | String | Sender key   |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Value        | Type   | Required | Description                                                  |
+| ------------ | ------ | -------- | ------------------------------------------------------------ |
+| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
+
+#### Response
+```
+{
+    "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+    }
+}
+```
+
+| Value           | Type    | Description       |
+| --------------- | ------- | ----------------- |
+| header          | Object  | Header area       |
+| - resultCode    | Integer | Result code       |
+| - resultMessage | String  | Result message    |
+| - isSuccessful  | Boolean | Successful or not |

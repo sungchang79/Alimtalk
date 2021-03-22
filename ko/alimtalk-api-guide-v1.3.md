@@ -20,6 +20,7 @@
 ## v1.3 API 소개
 * 발송/조회 API에 senderGroupingKey, recipientGroupingKey 필드가 추가되었습니다.
 * 발송 API 응답에 요청 성공/실패 필드가 추가되었습니다.
+* 발송 시, 대체 발송 설정 필드가 변경되었습니다. (아래 명세 참조)
 
 ## 일반 메시지
 
