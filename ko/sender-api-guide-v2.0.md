@@ -195,7 +195,8 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {
-  "token" : "Integer"
+  "plusFriendId" : String,
+  "token" : Integer
 }
 ```
 
@@ -487,3 +488,166 @@ Content-Type: application/json;charset=UTF-8
 |-- sentCount | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |- createDate | String |	등록 일자 |
 |totalCount | Integer | 총 개수 |
+
+## 발신 프로필 그룹
+
+### 발신 프로필 그룹 조회
+
+#### 요청
+[URL]
+
+```
+GET  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 Appkey|
+|groupSenderKey|	String|	발신 프로필 그룹 발신 키|
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+#### 응답
+```
+{
+    "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+    },
+    "senderGroup": {
+        "groupName": String,
+        "senderKey": String,
+        "status": String,
+        "senders": [
+            {
+                "plusFriendId": String,
+                "senderKey": String,
+                "createDate": String
+            }
+        ],
+        "createDate": String,
+        "updateDate": String
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
+|senderGroup|	Object|	발신 프로필 그룹 |
+|- groupName | String |	발신 프로필 그룹명 |
+|- senderKey | String |	발신 키 |
+|- status | String |	NHN Cloud 플러스친구 상태 코드 <br>(YSC02: 등록 대기중, YSC03: 정상 등록) |
+|- senders | List |	그룹에 속한 발신 프로필 List |
+|-- plusFriendId | String |	카카오톡 채널 검색용 ID |
+|-- senderKey | String |	발신 키 |
+|-- createDate | String | 그룹 등록 일자 |
+|- createDate | String | 등록 일자 |
+|- updateDate |	String|	수정 일자 |
+
+### 그룹에 발신 프로필 추가
+
+#### 요청
+[URL]
+
+```
+POST  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 Appkey|
+|groupSenderKey|	String|	발신 프로필 그룹 발신 키|
+|senderKey|	String|	발신 프로필 발신 키|
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+#### 응답
+```
+{
+    "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
+
+### 그룹에 발신 프로필 삭제
+
+#### 요청
+[URL]
+
+```
+DELETE  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appkey|	String|	고유의 Appkey|
+|groupSenderKey|	String|	발신 프로필 그룹 발신 키|
+|senderKey|	String|	발신 프로필 발신 키|
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+|값|	타입|	필수|	설명|
+|---|---|---|---|
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+
+#### 응답
+```
+{
+    "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header|	Object|	헤더 영역|
+|- resultCode|	Integer|	결과 코드|
+|- resultMessage|	String| 결과 메시지|
+|- isSuccessful|	Boolean| 성공 여부|
