@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > お知らせトーク > API v2.0 Guide
+## Notification > KakaoTalk Bizmessage > お知らせトーク > API v1.5 Guide
 
 ## お知らせトーク
 
@@ -17,9 +17,13 @@
 </tbody>
 </table>
 
-## v2.0 API紹介
-1. 카카오 채널 추가 시, 발급 받은 senderKey 필드로 API 호출이 되도록 변경 되었습니다.
-2. 카카오 채널 그룹 기능이 추가 되었습니다.
+## v1.5 API紹介
+1. テンプレート登録APIにハイライトテンプレートを使用できるように変更されました。（全文送信時、title値を設定できます）
+2. テンプレートタイプが拡張されました。広告・付加情報などの内容を追加することができます（後日提供予定）。
+3. 通知トーク/友達トークメッセージ送信時にcreateUserフィールドが追加されました。
+4. 通知トーク/友達トークのメッセージ照会時に登録時間と登録者で照会できるようフィールドが追加されました。
+5. ファイルを添付してテンプレート問い合わせAPIを追加しました。
+
 
 ## 一般メッセージ
 
@@ -28,7 +32,7 @@
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -53,7 +57,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {
-    "senderKey": String,
+    "plusFriendId": String,
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
@@ -77,7 +81,7 @@ Content-Type: application/json;charset=UTF-8
 
 | 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
-| senderKey              | String  | O    | 発信キー                            |
+| plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
@@ -102,7 +106,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages -d '{"plusFriendId":"{プラスフレンドID}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
 ```
 
 #### レスポンス
@@ -151,7 +155,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/raw-messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -210,7 +214,7 @@ Content-Type: application/json;charset=UTF-8
 
 | 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
-| senderKey           | String  | O    | 発信キー                                   |
+| plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
@@ -242,7 +246,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/raw-messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{プラスフレンドID}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
 ```
 
 #### レスポンス
@@ -293,7 +297,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/messages
+GET  /alimtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -323,7 +327,7 @@ Content-Type: application/json;charset=UTF-8
 | startCreateDate      | String  | 条件必須(3番) | 登録日開始値(yyy-MM-dd HH:mm)                   |
 | endCreateDate        | String  | 条件必須(3番) | 登録日終値(yyy-MM-dd HH:mm)                    |
 | recipientNo          | String  | X         | 受信番号                             |
-| senderKey            | String  | X         | 発信キー                                 |
+| plusFriendId         | String  | X         | プラスフレンドID                                 |
 | templateCode         | String  | X         | テンプレートコード                            |
 | senderGroupingKey    | String  | X         | 発信グルーピングキー                            |
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                           |
@@ -350,7 +354,6 @@ Content-Type: application/json;charset=UTF-8
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
-      "senderKey"    :  String,
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
@@ -394,11 +397,11 @@ Content-Type: application/json;charset=UTF-8
 | -- requestId                | String  | リクエストID                                    |
 | -- recipientSeq             | Integer | 受信者シーケンス番号                       |
 | -- plusFriendId             | String  | プラスフレンドID                                 |
-| -- senderKey                | String  | 発信キー                                  |
 | -- templateCode             | String  | テンプレートコード                           |
 | -- recipientNo              | String  | 受信番号                            |
 | -- content                  | String  | 本文                               |
 | -- requestDate              | String  | リクエスト日
+時                            |
 | -- createDate               | String  | 登録日時                            |
 | -- receiveDate              | String  | 受信日時                            |
 | -- resendStatus             | String  | 再送信ステータスコード                        |
@@ -421,7 +424,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### SMS/LMS再送信ステータス
@@ -440,7 +443,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -464,7 +467,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### レスポンス
@@ -479,7 +482,6 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
-      "senderKey"    :  String,
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
@@ -525,7 +527,6 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - requestId            | String  | リクエストID                                    |
 | - recipientSeq         | Integer | 受信者シーケンス番号                        |
 | - plusFriendId         | String  | プラスフレンドID                                 |
-| - senderKey            | String  | 発信キー                                   |
 | - templateCode         | String  | テンプレートコード                            |
 | - recipientNo          | String  | 受信番号                             |
 | - content              | String  | 本文                                |
@@ -570,7 +571,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/auth/messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -594,7 +595,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {
-    "senderKey": String,
+    "plusFriendId": String,
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
@@ -618,7 +619,7 @@ Content-Type: application/json;charset=UTF-8
 
 | 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
-| senderKey              | String  | O    | 発信キー                         |
+| plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | createUser             | String  | X    | 登録者(コンソールから送信する場合、ユーザーUUIDとして保存)|
@@ -642,7 +643,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{プラスフレンドID}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
 ```
 
 #### レスポンス
@@ -691,7 +692,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/auth/raw-messages
+POST  /alimtalk/v1.5/appkeys/{appkey}/auth/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -715,7 +716,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {
-    "senderKey": String,
+    "plusFriendId": String,
     "templateCode": String,
     "requestDate": String,
     "senderGroupingKey": String,
@@ -751,7 +752,7 @@ Content-Type: application/json;charset=UTF-8
 
 | 値               | タイプ | 必須 | 説明                                |
 | ---------------------- | ------- | ---- | ---------------------------------------- |
-| senderKey              | String  | O    | 発信キー                         |
+| plusFriendId           | String  | O    | プラスフレンドID(最大30文字)                         |
 | templateCode           | String  | O    | 登録した送信テンプレートコード(最大20桁)                    |
 | requestDate            | String  | X    | リクエスト日時(yyyy-MM-dd HH:mm)<br>(入力しない場合は即時送信) |
 | senderGroupingKey      | String  | X    | 発信グルーピングキー(最大100文字)                        |
@@ -781,7 +782,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/raw-messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{プラスフレンドID}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
 ```
 
 #### レスポンス
@@ -832,7 +833,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/auth/messages
+GET  /alimtalk/v1.5/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -862,7 +863,7 @@ Content-Type: application/json;charset=UTF-8
 | startCreateDate      | String  | 条件必須(3番) | 登録日開始値(yyy-MM-dd HH:mm)                   |
 | endCreateDate        | String  | 条件必須(3番) | 登録日終値(yyy-MM-dd HH:mm)                    |
 | recipientNo          | String  | X         | 受信番号                             |
-| senderKey            | String  | X         | 発信キー                                 |
+| plusFriendId         | String  | X         | プラスフレンドID                                 |
 | templateCode         | String  | X         | テンプレートコード                            |
 | senderGroupingKey    | String  | X         | 発信グルーピングキー                            |
 | recipientGroupingKey | String  | X         | 受信者グルーピングキー                           |
@@ -889,7 +890,6 @@ Content-Type: application/json;charset=UTF-8
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
-      "senderKey"    :  String,
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
@@ -933,7 +933,6 @@ Content-Type: application/json;charset=UTF-8
 | -- requestId                | String  | リクエストID                                    |
 | -- recipientSeq             | Integer | 受信者シーケンス番号                       |
 | -- plusFriendId             | String  | プラスフレンドID                                 |
-| -- senderKey                | String  | 発信キー                                  |
 | -- templateCode             | String  | テンプレートコード                           |
 | -- recipientNo              | String  | 受信番号                            |
 | -- content                  | String  | 本文                               |
@@ -960,7 +959,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### SMS/LMS再送信ステータス
@@ -979,7 +978,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v1.5/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1003,7 +1002,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
 ```
 
 #### レスポンス
@@ -1018,7 +1017,6 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
-      "senderKey"    :  String,
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
@@ -1064,7 +1062,6 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - requestId            | String  | リクエストID                                    |
 | - recipientSeq         | Integer | 受信者シーケンス番号                        |
 | - plusFriendId         | String  | プラスフレンドID                                 |
-| - senderKey            | String  | 発信キー                                   |
 | - templateCode         | String  | テンプレートコード                            |
 | - recipientNo          | String  | 受信番号                             |
 | - content              | String  | 本文                                |
@@ -1102,7 +1099,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}
+DELETE  /alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1151,7 +1148,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### メッセージ結果アップデートの照会
@@ -1161,7 +1158,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/message-results
+GET  /alimtalk/v1.5/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1205,7 +1202,6 @@ Content-Type: application/json;charset=UTF-8
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
-      "senderKey"    :  String,
       "templateCode" :  String,
       "recipientNo" :  String,
       "content" :  String,
@@ -1247,7 +1243,6 @@ Content-Type: application/json;charset=UTF-8
 | -- requestId                | String  | リクエストID                                    |
 | -- recipientSeq             | Integer | 受信者シーケンス番号                       |
 | -- plusFriendId             | String  | プラスフレンドID                                 |
-| -- senderKey                | String  | 発信キー                                  |
 | -- templateCode             | String  | テンプレートコード                           |
 | -- recipientNo              | String  | 受信番号                            |
 | -- content                  | String  | 本文                               |
@@ -1272,8 +1267,412 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
+
+## プラスフレンド
+
+### プラスフレンドカテゴリーの照会
+
+#### リクエスト
+[URL]
+
+```
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/categories
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| 値 | タイプ | 説明 |
+| ------ | ------ | ------ |
+| appkey | String | 固有のアプリケーションキー |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| 値    | タイプ | 必須 | 説明                               |
+| ------------ | ------ | ---- | ---------------------------------------- |
+| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
+
+#### レスポンス
+```
+{
+  "header" : {
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+  },
+  "categories" : [
+  {
+      "parentCode" : String,
+      "depth" : Integer,
+      "code" : String,
+      "name" : String,
+      "subCategories" : [
+        {
+        "parentCode" : String,
+        "depth" : Integer,
+        "code" : String,
+        "name" : String,
+        "subCategories" : [
+          {
+            "parentCode" : String,
+            "depth" : Integer,
+            "code" : String,
+            "name" : String
+          }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+| 値        | タイプ | 説明 |
+| ---------------- | ------- | ------- |
+| header           | Object  | ヘッダ領域 |
+| - resultCode     | Integer | 結果コード |
+| - resultMessage  | String  | 結果メッセージ |
+| - isSuccessful   | Boolean | 成否 |
+| categories       | Object  | カテゴリー |
+| - parentCode     | String  | 親コード |
+| - depth          | Integer | カテゴリーの深さ |
+| - code           | String  | カテゴリーコード |
+| - name           | String  | カテゴリー名 |
+| - subCategories  | Object  | サブカテゴリー |
+| -- parentCode    | String  | 親コード |
+| -- depth         | Integer | カテゴリーの深さ |
+| -- code          | String  | カテゴリーコード |
+| -- name          | String  | カテゴリー名 |
+| -- subCategories | Object  | サブカテゴリー |
+| --- parentCode   | String  | 親コード |
+| --- depth        | Integer | カテゴリーの深さ |
+| --- code         | String  | カテゴリーコード |
+| --- name         | String  | カテゴリー名 |
+
+### プラスフレンドの登録
+#### リクエスト
+[URL]
+
+```
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| 値 | タイプ | 説明 |
+| ------ | ------ | ------ |
+| appkey | String | 固有のアプリケーションキー |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| 値    | タイプ | 必須 | 説明                               |
+| ------------ | ------ | ---- | ---------------------------------------- |
+| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
+
+[Request body]
+
+```
+{
+  "plusFriendId" : String,
+  "phoneNo" : String,
+  "categoryCode" : String
+}
+```
+
+| 値    | タイプ | 必須 | 説明                               |
+| ------------ | ------- | ---- | ---------------------------------------- |
+| plusFriendId | String  | O    | プラスフレンドID(最大30文字)                         |
+| phoneNo      | String  | O    | 管理者の携帯電話番号(最大15桁)                       |
+| categoryCode | String  | O    | カテゴリーコード(11文字)<br>カテゴリー照会APIのレスポンス参考<br>ex) 00100010001健康(001) - 病院(0001) - 総合病院(0001) |
+
+#### レスポンス
+```
+{
+  "header" : {
+    "resultCode" :  Integer,
+    "resultMessage" :  String,
+    "isSuccessful" :  boolean
+  }
+}
+```
+
+| 値       | タイプ | 説明 |
+| --------------- | ------- | ------ |
+| header          | Object  | ヘッダ領域 |
+| - resultCode    | Integer | 結果コード |
+| - resultMessage | String  | 結果メッセージ |
+| - isSuccessful  | Boolean | 成否 |
+
+### プラスフレンドトークン認証
+#### リクエスト
+[URL]
+
+```
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/tokens
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| 値    | タイプ | 説明 |
+| ------------ | ------ | -------- |
+| appkey       | String | 固有のアプリケーションキー |
+| plusFriendId | String | プラスフレンドID |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| 値    | タイプ | 必須 | 説明                               |
+| ------------ | ------ | ---- | ---------------------------------------- |
+| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
+
+[Request body]
+
+```
+{
+  "token" : "Integer"
+}
+```
+
+| 値 | タイプ | 必須 | 説明                               |
+| ----- | ------- | ---- | ---------------------------------------- |
+| token | Integer | O    | 認証トークン(プラスフレンド登録API呼び出し後、カカオトークアプリで受け取った認証トークン) |
+
+#### レスポンス
+```
+{
+  "header" : {
+    "resultCode" :  Integer,
+    "resultMessage" :  String,
+    "isSuccessful" :  boolean
+  }
+}
+```
+
+| 値       | タイプ | 説明 |
+| --------------- | ------- | ------ |
+| header          | Object  | ヘッダ領域 |
+| - resultCode    | Integer | 結果コード |
+| - resultMessage | String  | 結果メッセージ |
+| - isSuccessful  | Boolean | 成否 |
+
+
+### プラスフレンド単件照会
+#### リクエスト
+
+[URL]
+
+```
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| 値 | タイプ | 説明 |
+| ------ | ------ | ------ |
+| appkey | String | 固有のアプリケーションキー |
+| plusFriendId | String | プラスフレンドID |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+| 値    | タイプ | 必須 | 説明                               |
+| ------------ | ------ | ---- | ---------------------------------------- |
+| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
+
+
+#### レスポンス
+```
+{  
+   "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+   },
+   "plusFriend":{  
+         "plusFriendId" : String,
+         "plusFriendType" : String,
+         "senderKey" : String,
+         "categoryCode" : String,
+         "status" : String,
+         "statusName" : String,
+         "kakaoStatus" : String,
+         "kakaoStatusName" : String,
+         "kakaoProfileStatus" : String,
+         "kakaoProfileStatusName" : String,
+         "alimtalk": {  
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+          },
+         "friendtalk": {  
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "resendUnsubscribeNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+         },
+         "createDate": String
+    }
+}
+```
+
+| 値                 | タイプ | 説明                               |
+| ------------------------- | ------- | ---------------------------------------- |
+| header                    | Object  | ヘッダ領域                            |
+| - resultCode              | Integer | 結果コード                            |
+| - resultMessage           | String  | 結果メッセージ                           |
+| - isSuccessful            | Boolean | 成否                             |
+| plusFriend               | Object  | プラスフレンド                            |
+| - plusFriendId            | String  | プラスフレンドID                                 |
+| - plusFriendType          | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
+| - senderKey               | String  | 発信キー                                |
+| - categoryCode            | String  | カテゴリーコード                          |
+| - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
+| - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
+| - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
+| - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
+| - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
+| - kakaoProfileStatusName  | String  | カカオプラスフレンドプロフィールステータス名(有効化、無効化、遮断、削除処理中、削除)<br>statusがYSC02の場合、kakaoProfileStatusName null値を持ちます。 |
+|- alimtalk|	Object|	お知らせトーク設定情報|
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
+|-- dailyMaxCount | Integer | お知らせトークの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
+|-- sentCount | Integer | お知らせトークの一日送信件数<br>(値が0の場合、件数制限なし)       |
+|- friendtalk|	Object|	友人トーク設定情報|
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
+|-- resendUnsubscribeNo | String |	再送信時、tc-sms 080受信拒否番号 |
+|-- dailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
+|-- sentCount | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
+| - createDate              | String  | 登録日時                            |
+
+### プラスフレンドリストの照会
+#### リクエスト
+
+[URL]
+
+```
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| 値 | タイプ | 説明 |
+| ------ | ------ | ------ |
+| appkey | String | 固有のアプリケーションキー |
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| 値    | タイプ | 必須 | 説明                               |
+| ------------ | ------ | ---- | ---------------------------------------- |
+| X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./plus-friend-console-guide/#x-secret-key)] |
+
+[Query parameter] 1番or 2番の条件は必須
+
+| 値           | タイプ | 必須 | 説明                               |
+| ------------------- | ------- | ---- | ---------------------------------------- |
+| plusFriendId        | String  | X    | プラスフレンドID                                 |
+| status              | String  | X    | プラスフレンドステータスコード <br>(YSC02：トークン認証待機中、YSC03：正常登録) |
+| isSearchKakaoStatus | boolean | X    | カカオステータスを照会するかどうか(falseの場合、カカオステータス関連フィールド(kakaoStatus、kakaoProfileStatusなど) null値)<br>default値：true |
+| pageNum        | Integer | X    | ページ番号(基本：1) |
+| pageSize       | Integer | X    | 照会件数(基本：15、最大: 1000) |
+
+#### レスポンス
+```
+{  
+   "header":{  
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+   },
+   "plusFriends":[  
+      {  
+         "plusFriendId" : String,
+         "plusFriendType" : String,
+         "senderKey" : String,
+         "categoryCode" : String,
+         "status" : String,
+         "statusName" : String,
+         "kakaoStatus" : String,
+         "kakaoStatusName" : String,
+         "kakaoProfileStatus" : String,
+         "kakaoProfileStatusName" : String,
+         "createDate": String,
+         "alimtalk": {  
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+          },
+         "friendtalk": {  
+                "isResend": Boolean,
+                "resendSendNo": String,
+                "resendUnsubscribeNo": String,
+                "dailyMaxCount" : Integer,
+                "sentCount" : Integer
+         }
+      }
+   ],
+   "totalCount": Integer
+}
+```
+
+| 値                 | タイプ | 説明                               |
+| ------------------------- | ------- | ---------------------------------------- |
+| header                    | Object  | ヘッダ領域                            |
+| - resultCode              | Integer | 結果コード                            |
+| - resultMessage           | String  | 結果メッセージ                           |
+| - isSuccessful            | Boolean | 成否                             |
+| plusFriends               | Object  | プラスフレンド                            |
+| - plusFriendId            | String  | プラスフレンドID                                 |
+| - plusFriendType          | String  | プラスフレンドタイプ(NORMAL、GROUP)                  |
+| - senderKey               | String  | 発信キー                                |
+| - categoryCode            | String  | カテゴリーコード                          |
+| - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
+| - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
+| - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
+| - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
+| - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
+| - kakaoProfileStatusName  | String  | カカオプラスフレンドプロフィールステータス名(有効化、無効化、遮断、削除処理中、削除)<br>statusがYSC02の場合、kakaoProfileStatusName null値を持ちます。 |
+|- alimtalk|	Object|	お知らせトーク設定情報|
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
+|-- dailyMaxCount | Integer | お知らせトークの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
+|-- sentCount | Integer | お知らせトークの一日送信件数<br>(値が0の場合、件数制限なし)       |
+|- friendtalk|	Object|	友人トーク設定情報|
+|-- isResend | String  | 送信失敗設定(再送信)するかどうか                   |
+|-- resendSendNo | String  | 再送信時、tc-sms発信番号              |
+|-- resendUnsubscribeNo | String |	再送信時、tc-sms 080受信拒否番号 |
+|-- dailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
+|-- sentCount | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
+| - createDate              | String  | 登録日時                            |
+| totalCount                | Integer | 総個数                               |
 
 ## テンプレート
 
@@ -1282,7 +1681,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/template/categories
+POST  /alimtalk/v1.5/appkeys/{appkey}/template/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1348,7 +1747,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1357,7 +1756,7 @@ Content-Type: application/json;charset=UTF-8
 | 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
-| senderKey | String | 発信キー |
+| plusFriendId | String | プラスフレンドID |
 
 [Header]
 ```
@@ -1443,7 +1842,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1452,7 +1851,7 @@ Content-Type: application/json;charset=UTF-8
 | 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
-| senderKey | String | 発信キー |
+| plusFriendId | String | プラスフレンドID |
 | templateCode | String | テンプレートコード |
 
 [Header]
@@ -1537,7 +1936,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+DELETE  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1546,7 +1945,7 @@ Content-Type: application/json;charset=UTF-8
 | 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
-| plusFriendId | String | 発信キー |
+| plusFriendId | String | プラスフレンドID |
 | templateCode | String | テンプレートコード |
 
 [Header]
@@ -1579,7 +1978,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
+PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1588,7 +1987,7 @@ Content-Type: application/json;charset=UTF-8
 | 値    | タイプ | 説明 |
 | ------------ | ------ | -------- |
 | appkey       | String | 固有のアプリケーションキー |
-| plusFriendId | String | 発信キー |
+| plusFriendId | String | プラスフレンドID |
 | templateCode | String | テンプレートコード |
 
 [Header]
@@ -1636,7 +2035,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
+POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1645,7 +2044,7 @@ Content-Type: application/json;charset=UTF-8
 |値|	タイプ|	説明|
 |---|---|---|
 |appkey|	String|	固有のAppkey|
-|plusFriendId|	String|	発信キー |
+|plusFriendId|	String|	プラスフレンドID |
 |templateCode|	String|	テンプレートコード |
 
 [Header]
@@ -1697,7 +2096,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/templates
+GET  /alimtalk/v1.5/appkeys/{appkey}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1721,7 +2120,7 @@ Content-Type: application/json;charset=UTF-8
 
 | 値      | タイプ | 必須 | 説明    |
 | -------------- | ------- | ---- | ------------- |
-| plusFriendId   | String  | X    | 発信キー      |
+| plusFriendId   | String  | X    | プラスフレンドID      |
 | templateCode   | String  | X    | テンプレートコード |
 | templateName   | String  | X    | テンプレート名 |
 | templateStatus | String  | X    | テンプレートステータスコード |
@@ -1737,7 +2136,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/templates?plusFriendId={発信キー}&templateStatus={テンプレートステータスコード}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/templates?plusFriendId={プラスフレンドID}&templateStatus={テンプレートステータスコード}"
 ```
 
 #### レスポンス
@@ -1838,7 +2237,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
+GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1862,7 +2261,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
 ```
 
 #### レスポンス
@@ -1964,7 +2363,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/failback/appkey
+POST  /alimtalk/v1.5/appkeys/{appkey}/failback/appkey
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2000,7 +2399,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
 ```
 
 #### レスポンス
@@ -2020,7 +2419,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/failback
+POST  /alimtalk/v1.5/appkeys/{appkey}/failback
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2060,7 +2459,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@プラスフレンド","isResend": true,"resendSendNo": "01012341234" }
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@プラスフレンド","isResend": true,"resendSendNo": "01012341234" }
 ```
 
 #### レスポンス

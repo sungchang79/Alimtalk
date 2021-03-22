@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v1.5 Guide
+## Notification > KakaoTalk Bizmessage > Alimtalk > API v2.0 Guide
 
 ## Alimtalk
 
@@ -17,7 +17,7 @@
 </tbody>
 </table>
 
-## Overview of v1.5 API
+## Overview of v2.0 API
 1. It has been changed to allow emphasized template for Register Template API (for a full-text delivery, the title value can be configured.)
 2. Expanded the template type. Ad or additional information can be added.
 3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
@@ -32,7 +32,7 @@
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/messages
+POST  /alimtalk/v2.0/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -106,7 +106,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
 ```
 
 #### Response
@@ -155,7 +155,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/raw-messages
+POST  /alimtalk/v2.0/appkeys/{appkey}/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -248,7 +248,7 @@ Content-Type: application/json;charset=UTF-8
 [Exapmle]
 
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/raw-messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
 ```
 
 #### Response
@@ -299,7 +299,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/messages
+GET  /alimtalk/v2.0/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -426,7 +426,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### Status of Sending SMS/LMS
@@ -445,7 +445,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -469,7 +469,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### Response
@@ -573,7 +573,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/auth/messages
+POST  /alimtalk/v2.0/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -642,7 +642,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/messages -d '{"plusFriendId":"{PlusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","templateParameter":{"{replaced field}":"{replacement data}"}}]}'
 ```
 
 #### Response
@@ -691,7 +691,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/auth/raw-messages
+POST  /alimtalk/v2.0/appkeys/{appkey}/auth/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -780,7 +780,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{lusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body message}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/raw-messages -d '{"plusFriendId":"{lusFriend ID}","templateCode":"{template code}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{recipient number}","content":"{body message}","buttons":[{"ordering":"{button sequence}","type":"{button type}","name":"{button name}","linkMo":"{mobile web link}"}]}]}'
 ```
 
 #### Response
@@ -831,7 +831,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/auth/messages
+GET  /alimtalk/v2.0/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -957,7 +957,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### Status of Resending SMS/LMS
@@ -976,7 +976,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v2.0/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1000,7 +1000,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
 ```
 
 #### Response
@@ -1097,7 +1097,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}
+DELETE  /alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1146,7 +1146,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### Query Updates of Message Result
@@ -1156,7 +1156,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/message-results
+GET  /alimtalk/v2.0/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1266,429 +1266,8 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
-
-## PlusFriends
-
-### Query PlusFriend by Category
-
-#### Request
-[URL]
-
-```
-GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/categories
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
-
-#### Response
-```
-{
-  "header" : {
-      "resultCode" :  Integer,
-      "resultMessage" :  String,
-      "isSuccessful" :  boolean
-  },
-  "categories" : [
-  {
-      "parentCode" : String,
-      "depth" : Integer,
-      "code" : String,
-      "name" : String,
-      "subCategories" : [
-        {
-        "parentCode" : String,
-        "depth" : Integer,
-        "code" : String,
-        "name" : String,
-        "subCategories" : [
-          {
-            "parentCode" : String,
-            "depth" : Integer,
-            "code" : String,
-            "name" : String
-          }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-
-| Value            | Type    | Description       |
-| ---------------- | ------- | ----------------- |
-| header           | Object  | Header area       |
-| - resultCode     | Integer | Result code       |
-| - resultMessage  | String  | Result message    |
-| - isSuccessful   | Boolean | Successful or not |
-| categories       | Object  | Category          |
-| - parentCode     | String  | Parent code       |
-| - depth          | Integer | Depth of category |
-| - code           | String  | Category code     |
-| - name           | String  | Category name     |
-| - subCategories  | Object  | Sub-category      |
-| -- parentCode    | String  | Parent code       |
-| -- depth         | Integer | Depth of category |
-| -- code          | String  | Category code     |
-| -- name          | String  | Category name     |
-| -- subCategories | Object  | Sub-category      |
-| --- parentCode   | String  | Parent code       |
-| --- depth        | Integer | Depth of category |
-| --- code         | String  | Category code     |
-| --- name         | String  | Category name     |
-
-### Register PlusFriends
-
-#### Request
-
-[URL]
-
-```
-POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request Body]
-
-```
-{
-  "plusFriendId" : String,
-  "phoneNo" : String,
-  "licenseNo" : String,
-  "categoryCode" : String,
-  "fileSeq" : Integer
-}
-```
-
-| Value        | Type    | Required | Description                                                  |
-| ------------ | ------- | -------- | ------------------------------------------------------------ |
-| plusFriendId | String  | O        | PlusFriend ID (up to 30 characters)                          |
-| phoneNo      | String  | O        | Mobile number of administrator (up to 15 characters)         |
-| categoryCode | String  | O        | Category code (11 characters) See response for Search Category API  e.g.) 00100010001 Health (001) - Hospital (0001) - General Hospital (0001) |
-| fileSeq      | Integer | O        | File sequence                                                |
-
-#### Response
-
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  }
-}
-```
-
-| Value           | Type    | Description       |
-| --------------- | ------- | ----------------- |
-| header          | Object  | Header area       |
-| - resultCode    | Integer | Result code       |
-| - resultMessage | String  | Result message    |
-| - isSuccessful  | Boolean | Successful or not |
-
-### Authenticate Tokens for PlusFriends
-
-#### Request
-
-[URL]
-
-```
-POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/tokens
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| Value        | Type   | Description     |
-| ------------ | ------ | --------------- |
-| appkey       | String | Original appkey |
-| plusFriendId | String | PlusFriend ID   |
-
-[Header]
-
-```
-{
-  "X-Secret-Key": String
-}
-```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
-
-[Request Body]
-
-```
-{
-  "token" : "Integer"
-}
-```
-
-| Value | Type    | Required | Description                                                  |
-| ----- | ------- | -------- | ------------------------------------------------------------ |
-| token | Integer | O        | Authentication token (received on Kakaotalk app, after Register PlusFriend API call) |
-
-#### Response
-
-```
-{
-  "header" : {
-    "resultCode" :  Integer,
-    "resultMessage" :  String,
-    "isSuccessful" :  boolean
-  }
-}
-```
-
-| Value           | Type    | Description       |
-| --------------- | ------- | ----------------- |
-| header          | Object  | Header area       |
-| - resultCode    | Integer | Result code       |
-| - resultMessage | String  | Result message    |
-| - isSuccessful  | Boolean | Successful or not |
-
-### Get PlusFriend
-#### Request
-
-[URL]
-
-```
-GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
-| plusFriendId | String  | PlusFriend ID |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
-
-#### Response
-```
-{  
-   "header":{  
-      "resultCode" :  Integer,
-      "resultMessage" :  String,
-      "isSuccessful" :  boolean
-   },
-   "plusFriend":{  
-         "plusFriendId" : String,
-         "plusFriendType" : String,
-         "senderKey" : String,
-         "categoryCode" : String,
-         "status" : String,
-         "statusName" : String,
-         "kakaoStatus" : String,
-         "kakaoStatusName" : String,
-         "kakaoProfileStatus" : String,
-         "kakaoProfileStatusName" : String,
-         "createDate": String,
-         "alimtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-          },
-         "friendtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "resendUnsubscribeNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-         },
-         "createDate": String
-    }
-}
-```
-
-| Value                     | Type    | Description                                                  |
-| ------------------------- | ------- | ------------------------------------------------------------ |
-| header                    | Object  | Header area                                                  |
-| - resultCode              | Integer | Result code                                                  |
-| - resultMessage           | String  | Result message                                               |
-| - isSuccessful            | Boolean | Successful or not                                            |
-| plusFriend                | Object  | PlusFriend                                                   |
-| - plusFriendId            | String  | PlusFriend ID                                                |
-| - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
-| - senderKey               | String  | Sender key                                                   |
-| - categoryCode            | String  | Category code                                                |
-| - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
-| - statusName              | String  | Status name of NHN Cloud PlusFriend (ready for registration, normally registered) |
-| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
-| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
-| - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
-| - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
-|- alimtalk                 |	Object  |	Alimtalk information                                         |
-|-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
-|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- dailyMaxCount           | Integer |	Maximum daily Alimtalk delivery count (no limits for 0)      |
-|-- sentCount               | Integer |	Daily Alimtalk delivery count (no limits for 0)              |
-|- friendtalk               |	Object  |	Friendtalk information                                       |
-|-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
-|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery           |
-|-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
-|-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
-| - createDate              | String  | Date and time of registration                                |
-| totalCount                | Integer | Total count                                                  |
-
-### List PlusFriends
-
-#### Request
-
-[URL]
-
-```
-GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
-
-[Header]
-```
-{
-  "X-Secret-Key": String
-}
-```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
-
-[Query parameter] No.1 or 2 is conditionally required
-
-| Value               | Type    | Required | Description                                                  |
-| ------------------- | ------- | -------- | ------------------------------------------------------------ |
-| plusFriendId        | String  | X        | PlusFriend ID                                                |
-| status              | String  | X        | Status code of PlusFriend  (YSC02: Ready for token authenticated, YSC03: Normally registered) |
-| isSearchKakaoStatus | boolean | X        | Query of Kakao status (null for Kakao status-related fields (e.g. kakaoStatus or kakaoProfileStatus) if it is false) Default: True |
-
-#### Response
-
-```
-{  
-   "header":{  
-      "resultCode" :  Integer,
-      "resultMessage" :  String,
-      "isSuccessful" :  boolean
-   },
-   "plusFriends":[  
-      {  
-         "plusFriendId" : String,
-         "plusFriendType" : String,
-         "senderKey" : String,
-         "categoryCode" : String,
-         "status" : String,
-         "statusName" : String,
-         "kakaoStatus" : String,
-         "kakaoStatusName" : String,
-         "kakaoProfileStatus" : String,
-         "kakaoProfileStatusName" : String,
-         "createDate": String,
-         "alimtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-          },
-         "friendtalk": {  
-                "resendAppKey": String,
-                "isResend": Boolean,
-                "resendSendNo": String,
-                "resendUnsubscribeNo": String,
-                "dailyMaxCount" : Integer,
-                "sentCount" : Integer
-         }
-      }
-   ],
-   "totalCount": Integer
-}
-```
-
-| Value                     | Type    | Description                                                  |
-| ------------------------- | ------- | ------------------------------------------------------------ |
-| header                    | Object  | Header area                                                  |
-| - resultCode              | Integer | Result code                                                  |
-| - resultMessage           | String  | Result message                                               |
-| - isSuccessful            | Boolean | Successful or not                                            |
-| plusFriends               | Object  | PlusFriend                                                   |
-| - plusFriendId            | String  | PlusFriend ID                                                |
-| - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
-| - senderKey               | String  | Sender key                                                   |
-| - categoryCode            | String  | Category code                                                |
-| - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
-| - statusName              | String  | Status name of NHN Cloud PlusFriend (ready for registration, normally registered) |
-| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
-| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
-| - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
-| - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
-|- alimtalk                 |	Object  |	Alimtalk information                                         |
-|-- resendAppKey            | String  | Alternative sms appkey                                       |
-|-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
-|-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- dailyMaxCount           | Integer |	Maximum daily Alimtalk delivery count (no limits for 0)      |
-|-- sentCount               | Integer |	Daily Alimtalk delivery count (no limits for 0)              |
-|- friendtalk               |	Object  |	Friendtalk information                                        |
-|-- resendAppKey            | String  | Alternative sms appkey                                        |
-|-- isResend                | String  | Whether to send text as alternative, if delivery fails        |
-|-- resendSendNo            | String  |	Sender number for alternative delivery                        |
-|-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery            |
-|-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
-|-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
-| - createDate              | String  | Date and time of registration                                |
-| totalCount                | Integer | Total count                                                  |
 
 ## Templates
 
@@ -1697,7 +1276,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/template/categories
+POST  /alimtalk/v2.0/appkeys/{appkey}/template/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1765,7 +1344,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
+POST  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1863,7 +1442,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+PUT  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1960,7 +1539,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+DELETE  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2004,7 +1583,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
+PUT  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2061,7 +1640,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
+POST  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2122,7 +1701,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/templates
+GET  /alimtalk/v2.0/appkeys/{appkey}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2163,7 +1742,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/templates?plusFriendId={PlusFriend ID}&templateStatus={template status code}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/templates?plusFriendId={PlusFriend ID}&templateStatus={template status code}"
 ```
 
 #### Response
@@ -2264,7 +1843,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
+GET  /alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2288,7 +1867,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v1.5/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.0/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
 ```
 
 #### Response

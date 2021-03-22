@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > Friendtalk > API v1.3 Guide
+## Notification > KakaoTalk Bizmessage > Friendtalk > API v1.5 Guide
 
 ## Friendtalk
 
@@ -23,7 +23,7 @@
 [URL]
 
 ```
-POST  /friendtalk/v1.3/appkeys/{appkey}/messages
+POST  /friendtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -50,6 +50,7 @@ Content-Type: application/json;charset=UTF-8
     "plusFriendId": String,
     "requestDate": String,
     "senderGroupingKey": String,
+    "createUser" : String,
     "recipientList": [{
         "recipientNo": String,
         "content": String,
@@ -77,6 +78,7 @@ Content-Type: application/json;charset=UTF-8
 | plusFriendId           | String  | O        | Plus Friend ID (up to 30 characters)                         |
 | requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm), to be sent immediately if field is not sent |
 | senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
+| createUser             | String  | X        | Registrant (saved as user UUID when delivered via console)   |
 | recipientList          | List    | O        | List of recipients (up to 1000)                              |
 | - recipientNo          | String  | O        | Recipient number                                             |
 | - content              | String  | O        | Body message (up to 1000 characters)<br>Up to 400, if image is included |
@@ -93,12 +95,17 @@ Content-Type: application/json;charset=UTF-8
 | - isAd                 | Boolean | X        | Ad or not (default is true)                                  |
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
 
-* <b> Send the first-registered Plus Friend, if Plus Friend ID field is not sent.</b>
+* <b> Request date and time can be configured up to 90 days after a point of calling </b>
 * <b> Delivery restricted during night (20:00~08:00 on the following day)</b>
+* <b> Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
+* <b> Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/en/Notification/SMS/en/api-guide/#_1)])</b>
+* <b> Friendtalk ad message can be replaced by Ad SMS API, so it must be registered at the 080 Unsubscription Service to enable alternative delivery. </b>
+* <b> When the resendContent field of a Friendtalk ad message is available, ad phrase for SMS Ad API is required to enable alternative delivery. (Ad) Content [Unsubscribe for Free] 080XXXXXXX </b>
+* <b> When the resendContent field of a Friendtalk ad message is missing, ad phrase is automatically created with registered 080 number for unsubscription to enable alternative delivery. </b>
 
 [Example]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/messages -d '{"plusFriendId":"@Plus Friend","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"message","buttons":[{"ordering":1,"type":"WL","name":"button1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages -d '{"plusFriendId":"@Plus Friend","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"message","buttons":[{"ordering":1,"type":"WL","name":"button1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
 ```
 
 #### Response
@@ -149,7 +156,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /friendtalk/v1.3/appkeys/{appkey}/messages
+GET  /friendtalk/v1.5/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -169,21 +176,24 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
 | X-Secret-Key | String | O        | Can be created on console. [[Reference](./plus-friend-console-guide/#x-secret-key)] |
 
-[Query parameter] No.1 or 2 is conditionally required
+[Query parameter] No.1 or (2, 3) is conditionally required
 
 | Value                | Type    | Required                      | Description                                            |
 | -------------------- | ------- | ----------------------------- | ------------------------------------------------------ |
 | requestId            | String  | Conditionally required (no.1) | Request ID                                             |
 | startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)      |
 | endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)        |
+| startCreateDate      | String  | Conditionally required (no.3) | Start date of registration (mm:HH dd-MM-yyyy)          |
+| endCreateDate        | String  | Conditionally required (no.3) | End date of registration (mm:HH dd-MM-yyyy)            |
 | recipientNo          | String  | X                             | Recipient number                                       |
 | plusFriendId         | String  | X                             | Plus Friend ID                                         |
 | senderGroupingKey    | String  | X                             | Sender's grouping key                                  |
 | recipientGroupingKey | String  | X                             | Recipient's grouping key                               |
 | messageStatus        | String  | X                             | Request status (COMPLETED: successful, FAILED: failed) |
 | resultCode           | String  | X                             | Delivery result (MRC01: successful, MRC02: failed)     |
+| createUser           | String  | X                             | Registrant (saved as user UUID when delivered via console)  |
 | pageNum              | Integer | X                             | Page number (default: 1)                               |
-| pageSize             | Integer | X                             | Number of queries (default: 15)                        |
+| pageSize             | Integer | X                             | Number of queries (default: 15, max: 1000)             |
 
 #### Response
 ```
@@ -201,12 +211,14 @@ Content-Type: application/json;charset=UTF-8
           "plusFriendId" :  String,
           "recipientNo" :  String,
           "requestDate" : String,
+          "createDate" : String,
           "content" :  String,
           "messageStatus" :  String,
           "resendStatus" :  String,
           "resendStatusName" :  String,
           "resultCode" :  String,
           "resultCodeName" : String,
+          "createUser" : String,
           "senderGroupingKey": String,
           "recipientGroupingKey": String
         }
@@ -229,19 +241,21 @@ Content-Type: application/json;charset=UTF-8
 | -- plusFriendId             | String  | Plus Friend ID                                         |
 | -- recipientNo              | String  | Recipient number                                       |
 | -- requestDate              | String  | Date and time of request                               |
+| -- createDate               | String  | Registered date and time                               |
 | -- content                  | String  | Body                                                   |
 | -- messageStatus            | String  | Request status (COMPLETED: successful, FAILED: failed) |
 | -- resendStatus             | String  | Status code of resending                               |
 | -- resendStatusName         | String  | Status code name of resending                          |
 | -- resultCode               | String  | Result code of receiving                               |
 | -- resultCodeName           | String  | Result code name of receiving                          |
+| -- createUser               | String  | Registrant (saved as user UUID when delivered via console)  |
 | -- senderGroupingKey        | String  | Sender's grouping key                                  |
 | -- recipientGroupingKey     | String  | Recipient's grouping key                               |
 | - totalCount                | Integer | Total count                                            |
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
 ```
 
 #### Status of Resending
@@ -260,7 +274,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /friendtalk/v1.3/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -289,7 +303,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Example]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### Response
@@ -306,17 +320,22 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "plusFriendId" :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
+      "createDate" : String,
       "receiveDate" : String,
       "content" :  String,
       "messageStatus" :  String,
       "resendStatus" :  String,
       "resendStatusName" :  String,
+      "resendResultCode" : String,
+      "resendRequestId" : String,
       "resultCode" :  String,
       "resultCodeName" : String,
+      "createUser" : String,
       "imageSeq" : Integer,
       "imageName" : String,
       "imageUrl" : String,
       "imageLink" : String,
+      "wide" : Boolean,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -347,6 +366,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - plusFriendId         | String  | Plus Friend ID                                               |
 | - recipientNo          | String  | Recipient number                                             |
 | - requestDate          | String  | Date and time of request                                     |
+| - createDate           | String  | Registered date and time                                     |
 | - receiveDate          | String  | Date and time of receiving                                   |
 | - content              | String  | Body                                                         |
 | - messageStatus        | String  | Status of request (COMPLETED: successful, FAILED: failed)    |
@@ -354,10 +374,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - resendStatusName     | String  | Status code name of resending                                |
 | - resultCode           | String  | Result code of receiving                                     |
 | - resultCodeName       | String  | Result code name of receiving                                |
+| - createUser           | String  | Registrant (saved as user UUID when delivered via console)   |
 | - imageSeq             | Integer | Image number                                                 |
 | - imageName            | String  | Image name (name of uploaded file)                           |
 | - imageUrl             | String  | Image URL                                                    |
 | - imageLink            | String  | Image link                                                   |
+| - wide                 | Boolean | Image is wide or not                                         |
 | - buttons              | List    | List of buttons                                              |
 | -- ordering            | Integer | Button sequence                                              |
 | -- type                | String  | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
@@ -377,7 +399,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /friendtalk/v1.3/appkeys/{appkey}/message-results
+GET  /friendtalk/v1.5/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -405,7 +427,7 @@ Content-Type: application/json;charset=UTF-8
 | startUpdateDate | String  | O        | Start time of querying result updates (yyyy-MM-dd HH:mm) |
 | endUpdateDate   | String  | O        | End time of querying result updates (yyyy-MM-dd HH:mm)   |
 | pageNum         | Integer | X        | Page number (default: 1)                                 |
-| pageSize        | Integer | X        | Number of queries (default: 15, max: 1000)               |
+| pageSize        | Integer | X        | Number of queries (default: 15)                          |
 
 #### Response
 ```
@@ -466,7 +488,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
 
 ## Image Management
@@ -477,7 +499,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /friendtalk/v1.3/appkeys/{appkey}/images
+POST  /friendtalk/v1.5/appkeys/{appkey}/images
 Content-Type: multipart/form-data
 ```
 
@@ -502,11 +524,12 @@ Content-Type: multipart/form-data
 | Value | Type | Required | Description |
 | ----- | ---- | -------- | ----------- |
 | image | File | O        | Image       |
+| wide  | boolean | X | Image is wide or not (Default: false) |
 
 [Example]
 
 ```
-curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
+curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
 ```
 
 #### Response
@@ -544,7 +567,7 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 [URL]
 
 ```
-GET  /friendtalk/v1.3/appkeys/{appkey}/images
+GET  /friendtalk/v1.5/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -575,7 +598,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/images?pageNum=1&pageSize=15"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images?pageNum=1&pageSize=15"
 ```
 
 #### Response
@@ -593,6 +616,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
             "imageSeq" : Integer,
             "imageUrl" : String,
             "imageName" : String,
+            "wide": String,
             "createDate" : String
         }
     ],
@@ -613,6 +637,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- imageSeq     | Integer | Image number (to send Friendtalk messages) |
 | -- imageUrl     | String  | Image URL                                  |
 | -- imageName    | String  | Image name (name of uploaded file)         |
+| -- wide         | boolean |	Image is wide or not                       |
 | -- createDate   | String  | Date and time of creation                  |
 | - totalCount    | Integer | Total count                                |
 
@@ -624,7 +649,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v1.3/appkeys/{appkey}/images
+DELETE  /friendtalk/v1.5/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -653,7 +678,7 @@ Content-Type: application/json;charset=UTF-8
 [Example]
 
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.3/appkeys/{appkey}/images?imageSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images?imageSeq=1,2,3"
 ```
 
 #### Response

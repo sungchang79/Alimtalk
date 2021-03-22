@@ -78,7 +78,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientNo    | String  | O    | 수신 번호                                    |
 | - content        | String  | O    | 내용(최대 1000자)<br>이미지 포함 시, 최대 400자        |
 | - imageSeq       | Integer | X    | 이미지 번호                                   |
-| - imageLink      | String  | X    | 이미지 링크(이미지 번호를 입력할 경우 필수)                |
+| - imageLink      | String  | X    | 이미지 링크                |
 | - buttons        | List    | X    | 버튼                                       |
 | -- ordering      | Integer | X    | 버튼 순서(버튼이 있는 경우 필수)                      |
 | -- type          | String  | X    | 버튼 타입(WL:웹 링크, AL:앱 링크, BK:봇 키워드, MD:메시지 전달) |
@@ -328,7 +328,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - imageSeq         | Integer | 이미지 번호                                   |
 | - imageName        | String  | 이미지명(업로드한 파일명)                           |
 | - imageUrl         | String  | 이미지 URL                                  |
-| - imageLink        | String  | 이미지 링크(이미지 번호를 입력할 경우 필수)                |
+| - imageLink        | String  | 이미지 링크                |
 | - buttons          | List    | 버튼 목록                                    |
 | -- ordering        | Integer | 버튼 순서                                    |
 | -- type            | String  | 버튼 타입(WL:웹 링크, AL:앱 링크, BK:봇 키워드, MD:메시지 전달) |

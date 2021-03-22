@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > 친구톡 > API v1.5 가이드
+## Notification > KakaoTalk Bizmessage > 친구톡 > API v2.0 가이드
 
 ## 친구톡
 
@@ -23,7 +23,7 @@
 [URL]
 
 ```
-POST  /friendtalk/v1.5/appkeys/{appkey}/messages
+POST  /friendtalk/v2.0/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -47,7 +47,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {
-    "plusFriendId": String,
+    "senderKey": String,
     "requestDate": String,
     "senderGroupingKey": String,
     "createUser" : String,
@@ -83,7 +83,7 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 ID(최대 30자) |
+|senderKey|	String|	O | 발신 키 (40자) |
 |requestDate|	String|	X | 요청 일시(yyyy-MM-dd HH:mm), 필드를 보내지 않을 경우, 즉시 발송 |
 |senderGroupingKey| String | X| 발신 그룹핑 키(최대 100자) |
 | createUser | String | X | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
@@ -91,7 +91,7 @@ Content-Type: application/json;charset=UTF-8
 |- recipientNo|	String|	O|	수신 번호 |
 |- content|	String|	O| 내용(최대 1000자)<br>이미지 발송 시, 최대 400자<br>와이드 이미지 발송 시, 최대 76자 |
 |- imageSeq|	Integer|	X|	이미지 번호 |
-|- imageLink|	String|	X|	이미지 링크(이미지 번호를 입력할 경우 필수)|
+|- imageLink|	String|	X|	이미지 링크   |
 |- buttons|	List|	X|	버튼<br>와이드 이미지 발송 시, 링크 버튼 1개 |
 |-- ordering|	Integer|	X |	버튼 순서(버튼이 있는 경우 필수)|
 |-- type| String |	X |	버튼 타입(WL:웹 링크, AL:앱 링크, BK:봇 키워드, MD:메시지 전달) |
@@ -120,7 +120,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages -d '{"plusFriendId":"@플러스친구","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"내용","buttons":[{"ordering":1,"type":"WL","name":"버튼1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages -d '{"senderKey":"9e0afe2c12aaaaaaaaaa7520052880b555f1a60a","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"내용","buttons":[{"ordering":1,"type":"WL","name":"버튼1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
 ```
 
 #### 응답
@@ -171,7 +171,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /friendtalk/v1.5/appkeys/{appkey}/messages
+GET  /friendtalk/v2.0/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -201,7 +201,7 @@ Content-Type: application/json;charset=UTF-8
 |startCreateDate| String| 조건 필수(3번) | 등록 날짜 시작값(yyyy-MM-dd HH:mm)|
 |endCreateDate|  String| 조건 필수(3번) |  등록 날짜 끝값(yyyy-MM-dd HH:mm) |
 |recipientNo|	String|	X |	수신 번호 |
-|plusFriendId|	String|	X |	플러스친구 ID |
+|senderKey|	String|	X |	발신키 |
 |senderGroupingKey| String | X| 발신 그룹핑 키 |
 |recipientGroupingKey|	String|	X|	수신자 그룹핑 키 |
 |messageStatus| String |	X | 요청 상태(COMPLETED: 성공, FAILED: 실패 )	|
@@ -224,9 +224,11 @@ Content-Type: application/json;charset=UTF-8
           "requestId" :  String,
           "recipientSeq" : Integer,
           "plusFriendId" :  String,
+          "senderKey" : String,
           "recipientNo" :  String,
           "requestDate" : String,
           "createDate" : String,
+          "receiveDate" : String,
           "content" :  String,
           "messageStatus" :  String,
           "resendStatus" :  String,
@@ -254,9 +256,11 @@ Content-Type: application/json;charset=UTF-8
 |-- requestId | String |	요청 ID |
 |-- recipientSeq | Integer |	수신자 시퀀스 번호 |
 |-- plusFriendId | String |	플러스친구 ID |
+|-- senderKey   | String | 발신 키   |
 |-- recipientNo | String |	수신 번호 |
 |-- requestDate | String |	요청 일시 |
 |-- createDate | String | 등록 일시 |
+|-- receiveDate | String |	수신 일시 |
 |-- content | String |	본문 |
 |-- messageStatus | String |	요청 상태(COMPLETED: 성공, FAILED: 실패 ) |
 |-- resendStatus | String |	재발송 상태 코드 |
@@ -270,7 +274,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
 ```
 
 #### 재발송 상태
@@ -289,7 +293,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -318,7 +322,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### 응답
@@ -333,6 +337,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
+      "senderKey" :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
       "createDate" : String,
@@ -350,6 +355,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "imageName" : String,
       "imageUrl" : String,
       "imageLink" : String,
+      "wide" : Boolean,
       "buttons" : [
         {
           "ordering" :  Integer,
@@ -378,6 +384,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- requestId | String |	요청 ID |
 |- recipientSeq | Integer |	수신자 시퀀스 번호 |
 |- plusFriendId | String |	플러스친구 ID |
+|- senderKey   | String | 발신 키   |
 |- recipientNo | String |	수신 번호 |
 |- requestDate | String |	요청 일시 |
 |- createDate | String | 등록 일시 |
@@ -394,7 +401,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- imageSeq|	Integer|  이미지 번호 |
 |- imageName|	String|  이미지명(업로드한 파일명) |
 |- imageUrl|	String|  이미지 URL |
-|- imageLink|	String| 이미지 링크(이미지 번호를 입력할 경우 필수)|
+|- imageLink|	String| 이미지 링크   |
+|- wide     | boolean | 와이드 이미지 여부 |
 |- buttons | List |	버튼 리스트 |
 |-- ordering | Integer |	버튼 순서 |
 |-- type | String |	버튼 타입(WL: 웹 링크, AL: 앱 링크, BK: 봇 키워드, MD: 메시지 전달) |
@@ -415,7 +423,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}
+DELETE  /friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -464,7 +472,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### 메시지 결과 업데이트 조회
@@ -474,7 +482,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /friendtalk/v1.5/appkeys/{appkey}/message-results
+GET  /friendtalk/v2.0/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -517,6 +525,7 @@ Content-Type: application/json;charset=UTF-8
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
+      "senderKey"    :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
       "receiveDate" : String,
@@ -546,6 +555,7 @@ Content-Type: application/json;charset=UTF-8
 |-- requestId | String |	요청 ID |
 |-- recipientSeq | Integer |	수신자 시퀀스 번호 |
 |-- plusFriendId | String |	플러스친구 ID |
+|-- senderKey | String |	발신 키 |
 |-- recipientNo | String |	수신 번호 |
 |-- requestDate | String |	요청 일시 |
 |-- receiveDate | String |	수신 일시 |
@@ -561,7 +571,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
 
 ## 이미지 관리
@@ -572,7 +582,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /friendtalk/v1.5/appkeys/{appkey}/images
+POST  /friendtalk/v2.0/appkeys/{appkey}/images
 Content-Type: multipart/form-data
 ```
 
@@ -601,7 +611,7 @@ Content-Type: multipart/form-data
 
 [예시]
 ```
-curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
+curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
 ```
 
 #### 응답
@@ -639,7 +649,7 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 [URL]
 
 ```
-GET  /friendtalk/v1.5/appkeys/{appkey}/images
+GET  /friendtalk/v2.0/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -668,7 +678,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images?pageNum=1&pageSize=15"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images?pageNum=1&pageSize=15"
 ```
 
 #### 응답
@@ -719,7 +729,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v1.5/appkeys/{appkey}/images
+DELETE  /friendtalk/v2.0/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -747,7 +757,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/images?imageSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images?imageSeq=1,2,3"
 ```
 
 #### 응답
@@ -776,7 +786,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-POST  /friendtalk/v1.5/appkeys/{appkey}/failback/appkey
+POST  /friendtalk/v2.0/appkeys/{appkey}/failback/appkey
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -811,7 +821,7 @@ Content-Type: application/json;charset=UTF-8
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
 ```
 
 #### 응답
@@ -831,7 +841,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /friendtalk/v1.5/appkeys/{appkey}/failback
+POST  /friendtalk/v2.0/appkeys/{appkey}/failback
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -856,7 +866,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```
 {  
-   "plusFriendId": String,
+   "senderKey": String,
    "isResend": Boolean,
    "resendSendNo": String,
    "resendUnsubscribeNo": String
@@ -865,14 +875,14 @@ Content-Type: application/json;charset=UTF-8
 
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|plusFriendId|	String|	O | 플러스친구 ID |
+|senderKey|	String|	O | 발신 키 |
 |isResend|	Boolean|	O | 발송 실패 시, 문자 대체발송 여부<br>Console에서 대체 발송 설정 시, default로 재발송 됩니다. |
 |resendSendNo|	String|	O | 대체 발송 발신번호<br><span style="color:red">(SMS 상품에 등록된 발신번호가 아닐 경우, 대체발송이 실패할 수 있습니다.)</span> |
 |resendUnsubscribeNo|	String|	X | 대체 발송 080 수신거부번호<br><span style="color:red">(SMS 상품에 등록된 080수신거부번호가 아닐 경우, 대체발송이 실패할 수 있습니다.)</span> |
 
 [예시]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v1.5/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@플러스친구","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"senderKey": "9e0afe2c12aaaaaaaaaa7520052880b555f1a60a","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
 ```
 
 #### 응답
