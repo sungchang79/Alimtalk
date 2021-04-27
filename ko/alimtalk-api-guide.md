@@ -1386,7 +1386,7 @@ Content-Type: application/json;charset=UTF-8
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 |securityFlag| Boolean | X| 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
-|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 입력한 템플릿을 우선 심사 |
+|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 기타일 경우, 최하위 우선순위로 심사 |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-ordering|	Integer |	X | 버튼 순서(1~5) |
 |-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가[광고 추가/복합형만]) |
@@ -1480,7 +1480,7 @@ Content-Type: application/json;charset=UTF-8
 |tempalteTitle| String | X| 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
 |templateSubtitle| String | X| 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
 |securityFlag| Boolean | X| 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
-|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 입력한 템플릿을 우선 심사 |
+|categoryCode| String | X | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 기타일 경우, 최하위 우선순위로 심사 |
 |buttons|	List |	X | 버튼 리스트 (최대 5개) |
 |-ordering|	Integer |	X | 버튼 순서(1~5) |
 |-type|	String |	X | 버튼 타입(WL:웹링크, AL:앱링크, DS:배송 조회, BK:봇 키워드, MD:메시지 전달, BC: 상담톡 전환, BT: 봇 전환, AC: 채널 추가[광고 추가/복합형만]) |
@@ -1757,6 +1757,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "content": String,
                       "userName": String,
                       "createdAt": String,
+                      "attachment": [{
+                        "originalFileName": "String",
+                        "filePath": "String"
+                      }],
                       "status": String
                     }  
                 ],
@@ -1781,7 +1785,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- isSuccessful|	Boolean| 성공 여부|
 |templateListResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
-|-- plusFriendId | String |	플러스친구 ID |
+|-- plusFriendId | String |	카카오톡 채널 검색용 ID 또는 발신 프로필 그룹명 |
 |-- senderKey    | String | 발신 키    |
 |-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
@@ -1804,9 +1808,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- comments | List | 검수 결과 |
 |--- id | Integer | 문의 아이디 |
 |--- content |  String | 문의 내용 |
-|---userName | String | 작성자 |
-|---createAt | String | 등록 날짜 |
-|---status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
+|--- userName | String | 작성자 |
+|--- createAt | String | 등록 날짜 |
+|--- attachment | List | 첨부 파일 |
+|---- originalFileName | String | 첨부 파일명 |
+|---- filePath | String | 첨부 파일 경로 |
+|--- status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
 |-- status| String | 템플릿 상태 |
 |-- statusName | String | 템플릿 상태명 |
 |-- securityFlag| Boolean | 보안 템플릿 여부 |
@@ -1890,6 +1897,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "content": String,
                       "userName": String,
                       "createdAt": String,
+                      "attachment": [{
+                        "originalFileName": "String",
+                        "filePath": "String"
+                      }],
                       "status": String
                     }  
                 ],
@@ -1915,7 +1926,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |- isSuccessful|	Boolean| 성공 여부|
 |templateModificationsResponse|	Object|	본문 영역|
 |- templates | List |	템플릿 리스트 |
-|-- plusFriendId | String |	플러스친구 ID |
+|-- plusFriendId | String |	카카오톡 채널 검색용 ID 또는 발신 프로필 그룹명 |
 |-- senderKey    | String | 발신 키    |
 |-- plusFriendType | String | 플러스친구 타입(NORMAL, GROUP) |
 |-- templateCode | String |	템플릿 코드 |
@@ -1938,9 +1949,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- comments | List | 검수 결과 |
 |--- id | Integer | 문의 아이디 |
 |--- content |  String | 문의 내용 |
-|---userName | String | 작성자 |
-|---createAt | String | 등록 날짜 |
-|---status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
+|--- userName | String | 작성자 |
+|--- createAt | String | 등록 날짜 |
+|--- attachment | List | 첨부 파일 |
+|---- originalFileName | String | 첨부 파일명 |
+|---- filePath | String | 첨부 파일 경로 |
+|--- status | String | 댓글 상태(INQ: 문의, APR: 승인, REJ: 반려, REP: 답변) |
 |-- status| String | 템플릿 상태 |
 |-- statusName | String | 템플릿 상태명 |
 |-- securityFlag| Boolean | 보안 템플릿 여부 |
