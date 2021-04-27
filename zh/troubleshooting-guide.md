@@ -1,78 +1,80 @@
 ## Notification > KakaoTalk Bizmessage > 문제 해결 가이드
 
-### 배송 조회 버튼
+### Message for Query Delivery Button
 
-카카오 메세지에 택배사 명과 송장번호를 기재한 후, 배송 조회 버튼을 추가하시면 메세지 내용에서 택배사 명과 송장번호를 추출하여 각 택배사에서 제공하는 배송조회 페이지 링크가 자동으로 생성됩니다. 카카오에서 지원하지 않는 택배사 명과 운송장번호가 알림톡 메시지 내에 포함된 경우에 배송조회 버튼 클릭 시 ‘지원하지 않는 택배사’ 페이지로 이동합니다.
+Fill out the courier name and invoice number, and add a button to query delivery. Then, the courier name and invoice number are exported from the message, and the links for each courier’s query delivery page are automatically created. In case an Alimtalk message includes any courier and invoice number which are not supported by Kakaotalk, the query delivery button is not created.
 
-배송조회 버튼 지원이 가능한 택배사 목록 안내드립니다.
+Here is the list of couriers for which Kakaotalk supports the query of delivery.
 
-지원 택배사 :
-
+List of Couriers Available to Query :
 KGB택배 우체국택배 로젠택배 CJ대한통운 일양로지스 GTX로지스 FedEx 한진택배 경동택배 합동택배 롯데택배 농협택배 호남택배 CU 편의점택배 CVSnet편의점택배 TNT Express USPS EMS 천일택배 DHL 대신택배 건영택배 한덱스
 
-<span style="color:red">**이는 카카오와 해당 택배사와의 계약 관계에 의해 변동될 수 있음을 유의해주시기 바랍니다.**</span>
+<span style="color:red">**Please note that the list is subject to change by contracts between Kakotalk and each courier.**</span>
 
-택배사 별 송장번호 형식
+invoice number format
 
 ```
-우체국택배: 숫자 13자리 또는 숫자 6자리 + 숫자 7자리 (구분자 '-' 또는 '_')
-예시) 1234567890123, 123456-1234567, 123456_1234567
+우체국택배: 13 Numeric or 6 Numeric + 7 Numeric (Separator '-' or '_')
+example) 1234567890123, 123456-1234567, 123456_1234567
 
-로젠택배: 숫자 11자리 또는 숫자 3자리 + 숫자 4자리 + 숫자 4자리 (구분자 '-' 또는 '_'))
-예시) 12345678901, 123-1234-1234, 123_1234_1234
+로젠택배: 11 Numeric or 3 Numeric + 4 Numeric + 4 Numeric (Separator '-' or '_'))
+example) 12345678901, 123-1234-1234, 123_1234_1234
 
-일양로지스: 숫자 9~11자리
-예시) 123456789, 1234567890, 12345678901
+일양로지스: 9~11 Numeric
+example) 123456789, 1234567890, 12345678901
 
-FedEx: 숫자 12자리
-예시) 123456789012
+FedEx: 12 Numeric
+example) 123456789012
 
-한진택배: 숫자 10자리 또는 숫자 12자리
-예시) 1234567890, 123456789012
+한진택배: 10 Numeric or 12 Numeric
+example) 1234567890, 123456789012
 
-경동택배: 숫자 9~16자리 또는 숫자 4자리 + 숫자 3자리 + 숫자 6자리 (구분자 '-')
-예시) 123456789, 1234567890123456, 1234-123-123456
+경동택배: 9~16 Numeric or 4 Numeric + 3 Numeric + 6 Numeric (Separator '-')
+example) 123456789, 1234567890123456, 1234-123-123456
 
-합동택배: 숫자 9~16자리
-예시) 123456789, 1234567890123456
+합동택배: 9~16 Numeric
+example) 123456789, 1234567890123456
 
-롯데택배: 숫자 12자리 또는 숫자 4자리 + 숫자 4자리 + 숫자 4자리 (구분자 '-')
-예시) 123456789012, 1234-1234-1234
+롯데택배: 12 Numeric or 4 Numeric + 4 Numeric + 4 Numeric (Separator '-')
+example) 123456789012, 1234-1234-1234
 
-농협택배: 숫자 12자리
-예시) 123456789012
+농협택배: 12 Numeric
+example) 123456789012
 
-호남택배: 숫자 10자리
-예시) 1234567890
+호남택배: 10 Numeric
+example) 1234567890
 
-천일택배: 숫자 11자리
-예시) 12345678901
+천일택배: 11 Numeric
+example) 12345678901
 
-대신택배: 숫자 13자리
-예시) 1234567890123
+대신택배: 13 Numeric
+example) 1234567890123
 
-건영택배: 숫자 10자리
-예시) 1234567890
+건영택배: 10 Numeric
+example) 1234567890
 
-CU편의점택배: 숫자 10자리 또는 숫자 12자리 또는 숫자 4자리 + 숫자 4자리 + 숫자 4자리 (구분자 '-' 또는 '_')
-예시) 1234567890, 123456789012, 1234-1234-1234, 1234_1234_1234
+CU편의점택배: 10 Numeric or 12 Numeric or 4 Numeric + 4 Numeric + 4 Numeric (Separator '-' or '_')
+example) 1234567890, 123456789012, 1234-1234-1234, 1234_1234_1234
 
-CVSnet편의점택배: 숫자 10자리 또는 숫자 12자리 또는 숫자 4자리 + 숫자 4자리 + 숫자 4자리 (구분자 '-' 또는 '_')
-예시) 1234567890, 123456789012, 1234-1234-1234, 1234_1234_1234
+CVSnet편의점택배: 10 Numeric or 12 Numeric or 4 Numeric + 4 Numeric + 4 Numeric (Separator '-' or '_')
+example) 1234567890, 123456789012, 1234-1234-1234, 1234_1234_1234
 
-한덱스: 숫자 10자리 또는 숫자 14자리
-예시) 1234567890, 12345678901234
+한덱스: 10 Numeric or 14 Numeric
+example) 1234567890, 12345678901234
 
-TNT Express: 숫자 8~9자리
-예시) 12345678, 123456789
+TNT Express: 8~9 Numeric
+example) 12345678, 123456789
 
-USPS: 숫자 10자리 또는 숫자 22자리 또는 대문자 알파벳 2자리 + 숫자 9자리 + 대문자 알파벳 2자리 (구분자 없음)
-예시) 1234567890, 1234567890123456789012, AB123456789AB
+USPS: 10 Numeric or 22 Numeric or 2 capital Alphabet + 9 Numeric + 2 capital Alphabet (No Separator)
+example) 1234567890, 1234567890123456789012, AB123456789AB
 
-EMS: 대문자 알파벳 2자리 + 숫자 9자리 + 대문자 알파벳 2자리 (구분자 없음)
-예시) AB1234567890AB
+EMS: 2 capital Alphabet + 9 Numeric + 2 capital Alphabet (No Separator)
+example) AB1234567890AB
 
-DHL: 숫자 10자리
-예시) 1234567890
+DHL: 10 Numeric
+example) 1234567890
+
+굿투럭: 12 Numeric or 4 Numeric + 4 Numeric + 4 Numeric (Separator '-')
+예시) 1234-1234-1234
+
 ```
-
