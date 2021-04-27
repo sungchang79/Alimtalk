@@ -1780,6 +1780,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "content": String,
                       "userName": String,
                       "createdAt": String,
+                      "attachment": [{
+                        "originalFileName": "String",
+                        "filePath": "String"
+                      }],
                       "status": String
                     }  
                 ],
@@ -1823,9 +1827,12 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- comments          | List    | 検収結果                            |
 | --- id               | Integer | お問い合わせID                                   |
 | --- content          | String  | お問い合わせ内容                            |
-| ---userName          | String  | 作成者                               |
-| ---createAt          | String  | 登録日                            |
-| ---status            | String  | 応答状態(INQ：お問い合わせ、APR：承認、REJ：差し戻し、REP：返信) |
+| --- userName          | String  | 作成者                               |
+| --- createAt          | String  | 登録日                            |
+| --- attachment        | List | 添付ファイル                           |
+| ---- originalFileName | String | 添付ファイル名                        |
+| ---- filePath         | String | 添付ファイルへのパス                   |
+| --- status            | String  | 応答状態(INQ：お問い合わせ、APR：承認、REJ：差し戻し、REP：返信) |
 | -- status            | String  | テンプレートのステータス                           |
 | -- statusName        | String  | テンプレートのステータス名                           |
 | -- createDate        | String  | 作成日時                            |
@@ -1905,6 +1912,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "content": String,
                       "userName": String,
                       "createdAt": String,
+                      "attachment": [{
+                        "originalFileName": "String",
+                        "filePath": "String"
+                      }],
                       "status": String
                     }  
                 ],
@@ -1951,6 +1962,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | --- content          | String  | お問い合わせ内容                            |
 | ---userName          | String  | 作成者                               |
 | ---createAt          | String  | 登録日                            |
+| --- attachment        | List | 添付ファイル                           |
+| ---- originalFileName | String | 添付ファイル名                        |
+| ---- filePath         | String | 添付ファイルへのパス                   |
 | ---status            | String  | 応答状態(INQ：お問い合わせ、APR：承認、REJ：差し戻し、REP：返信) |
 | -- status            | String  | テンプレートのステータス                           |
 | -- statusName        | String  | テンプレートのステータス名                           |
