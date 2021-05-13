@@ -511,6 +511,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "schemeAndroid": String
         }
       ],
+      "messageOption": {
+        "price": Integer,
+        "currencyType": "String"
+      },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
   }
@@ -554,6 +558,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
 |-- schemeIos | String |	IOS 앱 링크 (AL 타입일 경우 필수 필드) |
 |-- schemeAndroid | String |	Android 앱 링크 (AL 타입일 경우 필수 필드) |
+|- messageOption | Object |	메시지 옵션 |
+|-- price | Integer |	message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+|-- currencyType | String |	message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 |- senderGroupingKey | String | 발신 그룹핑 키 |
 |- recipientGroupingKey | String |	수신자 그룹핑 키 |
 
@@ -1053,6 +1060,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "schemeAndroid": String
         }
       ],
+      "messageOption": {
+        "price": Integer,
+        "currencyType": "String"
+      },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
   }
@@ -1096,6 +1107,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |-- linkPc | String |	PC 웹 링크  (WL 타입일 경우 선택 필드) |
 |-- schemeIos | String |	IOS 앱 링크 (AL 타입일 경우 필수 필드) |
 |-- schemeAndroid | String |	Android 앱 링크 (AL 타입일 경우 필수 필드) |
+|- messageOption | Object |	메시지 옵션 |
+|-- price | Integer |	message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+|-- currencyType | String |	message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 |- senderGroupingKey | String | 발신 그룹핑 키 |
 |- recipientGroupingKey | String |	수신자 그룹핑 키 |
 

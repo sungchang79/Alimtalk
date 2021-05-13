@@ -233,7 +233,7 @@
 	</tr>
 	<tr>
 		<td>3027</td>
-		<td>Non-Kakaotalk user (phone number error/050 safe number)</td>
+		<td>Message Buttons/Direct connection does not match template</td>
 	</tr>
 	<tr>
 		<td>3028</td>

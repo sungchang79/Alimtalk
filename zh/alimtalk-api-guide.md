@@ -516,6 +516,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "schemeAndroid": String
         }
       ],
+      "messageOption": {
+        "price": Integer,
+        "currencyType": "String"
+      },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
   }
@@ -556,6 +560,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC web link (optional for the WL type)                       |
 | -- schemeIos           | String  | iOS app link (required for the AL type)                      |
 | -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
+| - messageOption        | Object  | Message Option                                               |
+| -- price               | Integer | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| -- currencyType        | String  | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 | - senderGroupingKey    | String  | Sender's grouping key                                        |
 | - recipientGroupingKey | String  | Recipient grouping key                                       |
 
@@ -1051,6 +1058,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "schemeAndroid": String
         }
       ],
+      "messageOption": {
+        "price": Integer,
+        "currencyType": "String"
+      },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
   }
@@ -1094,6 +1105,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC web link (optional for the WL type)                       |
 | -- schemeIos           | String  | iOS app link (required for the AL type)                      |
 | -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
+| - messageOption        | Object  | Message Option                                               |
+| -- price               | Integer | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| -- currencyType        | String  | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 | - senderGroupingKey    | String  | Sender's grouping key                                        |
 | - recipientGroupingKey | String  | Recipient's grouping key                                     |
 

@@ -301,7 +301,7 @@ Content-Type: application/json;charset=UTF-8
 	</tr>
 	<tr>
 		<td>3027</td>
-		<td>카카오톡을 사용하지 않는 사용자 (전화번호 오류 / 050 안심번호)</td>
+		<td>메시지 버튼/바로연결이 템플릿과 일치하지 않음</td>
 	</tr>
 	<tr>
 		<td>3029</td>
