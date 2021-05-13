@@ -518,7 +518,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       ],
       "messageOption": {
         "price": Integer,
-        "currencyType": "String"
+        "currencyType": String
       },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
@@ -1060,7 +1060,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       ],
       "messageOption": {
         "price": Integer,
-        "currencyType": "String"
+        "currencyType": String
       },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
@@ -1783,8 +1783,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "userName": String,
                       "createdAt": String,
                       "attachment": [{
-                        "originalFileName": "String",
-                        "filePath": "String"
+                        "originalFileName": String,
+                        "filePath": String
                       }],
                       "status": String
                     }  
@@ -1917,8 +1917,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "userName": String,
                       "createdAt": String,
                       "attachment": [{
-                        "originalFileName": "String",
-                        "filePath": "String"
+                        "originalFileName": String,
+                        "filePath": String
                       }],
                       "status": String
                     }  
