@@ -38,19 +38,19 @@
 | Common  | false     | -3009      | Button name does not exist.                                  |
 | Common  | false     | -3010      | Template body does not match.                                |
 | Common  | false     | -3011      | Template button does not match.                              |
-| Common  | false     | -3012      | 수정할 수 없는 템플릿 상태 (승인/반려 상태만 가능)           |
-| Common  | false     | -3013      | 이미 수정 중인 템플릿이 존재                          |
-| Common  | false     | -3014      | 버튼 타입이 올바르지 않은 경우                        |
-| Common  | false     | -3015      | CBT 기능이 비활성화 된 플러스친구일 경우                 |
-| Common  | false     | -3016      | 강조 표기형 템플릿은 templateTitle, templateSubtitle 필수 필드            |
-| Common  | false     | -3017      | templateSubtitle 은 치환 변수를 사용 불가            |
-| Common  | false     | -3018      | 부가 정보형 템플릿은 templateExtra 필수 필드           |
-| Common  | false     | -3019      | 광고 추가형 템플릿은 templateAd 필수 필드           |
-| Common  | false     | -3020      | 복합형 템플릿은 templateExtra, templateAd 필수 필드   |
-| Common  | false     | -3021      | templateExtra은 치환 변수를 사용 불가               |
-| Common  | false     | -3022      | templateAd은 치환 변수를 사용 불가                  |
-| Common  | false     | -3023      | templateAd은 url link 포함 불가                   |
-| Common  | false     | -3024      | CA 타입 버튼은 광고 추가형 복합형 템플릿만 등록 가능       |
+| Common  | false     | -3012      | Unavailable to modify template (either approved or returned)           |
+| Common  | false     | -3013      | Template under modification exists                           |
+| Common  | false     | -3014      | Invalid button type                         |
+| Common  | false     | -3015      | Plus Friend with CBT deactivated                  |
+| Common  | false     | -3016      | Reguires templateTitle and templateSubtitle, for Emphasized templates            |
+| Common  | false     | -3017      | Unable to use replacement variable for templateSubtitle            |
+| Common  | false     | -3018      | Requires templateExtra for Extra Information-type templates           |
+| Common  | false     | -3019      | Requires templateAd for Ad-included-type templates           |
+| Common  | false     | -3020      | Requires templateExtra and templateAd for Mixed-purposes templates   |
+| Common  | false     | -3021      | Unable to use replacement variable for templateExtra               |
+| Common  | false     | -3022      | Unable to use replacement variable for templateAd                  |
+| Common  | false     | -3023      | Unable to include url link for templateAd                   |
+| Common  | false     | -3024      | CA-type button can be registration only for Ad-included or Mixed Purposes-type templates       |
 | Common  | false     | -3100      | Unavailable to inquire of template                           |
 | Common  | false     | -4003      | Query range exceeding a month                                |
 | Common  | false     | -4004      | Appkey does not exist                                        |
@@ -62,7 +62,7 @@
 | Common  | false     | -4100      | Invalid query period                                         |
 | Common  | false     | -4101      | Invalid query parameter for statistics                       |
 | Common  | false     | -4103      | Start/End time value of delivery request is unavailable for queries |
-| Common  | false     | -4200      | 유효하지 않은 대체 발송 메시지                                      |
+| Common  | false     | -4200      | Invalid alternative delivery message                                       |
 | Common  | false     | -5000      | Invalid recipient number                                     |
 | Common  | false     | -7000      | Vendor request API failed                                    |
 | Common  | false     | -8000      | Image sequence (imageSeq) is missing                         |
@@ -70,14 +70,14 @@
 | Common  | false     | -8002      | No image available corresponding to image sequence           |
 | Common  | false     | -8003      | Deleting image failed                                        |
 | Common  | false     | -8005      | No Plus Friend is registered in project to upload images     |
-| Common  | false     | -8006      | 인증 메시지 발송 시, 템플릿 내용에 인증 문구가 없는 경우       |
+| Common  | false     | -8006      | Authentication message not included in Template, when sending an authentication message       |
 | Common  | false     | -9995      | Called API of a faded version                                |
 | Common  | false     | -9996      | Content-type is not application/json                         |
 | Common  | false     | -9998      | API does not exist                                           |
 | Common  | false     | -9999      | Error in system                                              |
 
 
-## 발송 결과 코드
+## Delivery Result Codes
 
 <table class="table table-striped table-hover">
 <thead>
@@ -99,69 +99,61 @@
 		<td>1002</td>
 		<td>Format error of recipient number</td>
 	</tr>
-	<tr>
+  <tr>
 		<td>1003</td>
-		<td>발신 프로필 키가 유효하지 않음</td>
+		<td>Invalid sender profile key </td>
 	</tr>
-	<tr>
+  <tr>
 		<td>1004</td>
-		<td>Request Body(JSON)에서 name을 찾을 수 없음</td>
+		<td>Cannot find name from request body(JSON)</td>
 	</tr>
   <tr>
 		<td>1006</td>
-		<td>삭제된 발신 프로필(고객센터에게 문의)</td>
+		<td>Deleted sender profile (contact Customer Center)</td>
 	</tr>
 	<tr>
 		<td>1007</td>
-		<td>차단 상태의 발신 프로필(고객센터에게 문의)</td>
+		<td>Blocked sender profile (contact Customer Center)</td>
 	</tr>
 	<tr>
 		<td>1011</td>
-		<td>계약 정보를 찾을 수 없음(고객센터에게 문의)</td>
+		<td>Contract information is not found (contact Customer Center) </td>
 	</tr>
   <tr>
 		<td>1012</td>
-		<td>잘못된 형식의 사용자키 요청</td>
+		<td>Invalid user key request format</td>
 	</tr>
   <tr>
 		<td>1013</td>
-		<td>유효하지 않은 앱 연결</td>
-	</tr>
-	<tr>
-		<td>1014</td>
-		<td>유효하지 않은 사업자번호</td>
+		<td>Invalid app connection</td>
 	</tr>
 	<tr>
 		<td>1015</td>
-		<td>유효하지 않은 app user id 요청</td>
-	</tr>
-	<tr>
-		<td>1016</td>
-		<td>사업자등록번호 불일치</td>
+		<td>Invalid app user ID request </td>
 	</tr>
   <tr>
 		<td>1021</td>
-		<td>차단 상태의 카카오톡 채널</td>
+		<td>Blocked Kakaotalk channel </td>
 	</tr>
 	<tr>
 		<td>1022</td>
-		<td>차단 상태의 카카오톡 채널</td>
+		<td>Blocked Kakaotalk channel </td>
 	</tr>
 	<tr>
 		<td>1023</td>
-		<td>삭제된 카카오톡 채널</td>
+		<td>Deleted Kakaotalk channel </td>
 	</tr>
 	<tr>
 		<td>1024</td>
-		<td>삭제 대기 상태의 카카오톡 채널</td>
+		<td>Kakaotalk channel waiting for deletion </td>
 	</tr>
 	<tr>
 		<td>1025</td>
-		<td>메시지 차단 상태의 카카오톡 채널</td>
+		<td>Kakaotalk channel blocked for message </td>
 	</tr>
 	<tr>
 		<td>1030</td>
-		<td>잘못된 파라미터 요청</td>
+		<td>Invalid parameter request</td>
 	</tr>
 	<tr>
 		<td>2000</td>
@@ -173,23 +165,23 @@
 	</tr>
 	<tr>
 		<td>2004</td>
-		<td>템플릿 일치 확인 시 오류 발생(내부 오류 발생)</td>
+		<td>Error occurred when template consistency is checked (internal error occurred)</td>
 	</tr>
 	<tr>
 		<td>3000</td>
-		<td>예기치 않은 오류 발생</td>
+		<td>Unexpected error occurred</td>
 	</tr>
 	<tr>
 		<td>3005</td>
-		<td>메시지를 발송했으나 수신 확인이 안 됨(성공 불확실, 서버에는 암호화되어 보관되며 3일 이내 수신 가능)</td>
+		<td>Message is delievered but receipt is not confirmed (Uncertain if successful; Encrypted and saved in server and available for sending within 3 days)</td>
 	</tr>
 	<tr>
 		<td>3006</td>
-		<td>내부 시스템 오류로 메시지 전송 실패</td>
+		<td>Message delivery failed due to internal system error </td>
 	</tr>
 	<tr>
 		<td>3008</td>
-		<td>전화번호 오류</td>
+		<td>Phone number error </td>
 	</tr>
 	<tr>
 		<td>3009</td>
@@ -197,19 +189,19 @@
 	</tr>
 	<tr>
 		<td>3010</td>
-		<td>예기치 않은 오류 발생</td>
+		<td>Unexpected error occurred </td>
 	</tr>
 	<tr>
 		<td>3011</td>
-		<td>메시지가 존재하지 않음</td>
+		<td>Message does not exist </td>
 	</tr>
 	<tr>
 		<td>3012</td>
-		<td>카카오 통신 실패</td>
+		<td>Communication failed with Kakaotalk </td>
 	</tr>
 	<tr>
 		<td>3013</td>
-		<td>메시지가 비어 있음</td>
+		<td>Message is empty </td>
 	</tr>
 	<tr>
 		<td>3014</td>
@@ -221,7 +213,11 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>메시지를 전송할 수 없음<br>1. 카카오톡 사용했었다가 탈퇴한사람<br>2. 카카오톡 가입한적이 한번도 없는 사람<br>3. 알림톡 수신차단<br>4. 안드로이드 사용자의경우, "핸드폰 유심과 카카오톡 사용번호"가 다른 사람<br>5. 활성 사용자가 아닌 경우(push에 해당)<br>6. 카카오톡 최소 사용버전 및 카톡 미지원, 제재 사용자 등</td>
+		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan <br>2. User who has never been subscribed to Kakaotalk <br>3. Blocked user from Alimtalk messages <br>4. Android users who use different "Kakaotalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum Kakaotalk version or unsupported device, or punished user </td>
+	</tr>
+	<tr>
+		<td>3022</td>
+		<td>Not available time (Friend Talk messages can be sent from 08:00 to 20:50)</td>
 	</tr>
 	<tr>
 		<td>3023</td>
@@ -233,7 +229,7 @@
 	</tr>
 	<tr>
 		<td>3025</td>
-		<td>변수 글자 수 제한 초과</td>
+		<td>Exceeded the limit of variable character count </td>
 	</tr>
 	<tr>
 		<td>3026</td>
@@ -241,15 +237,15 @@
 	</tr>
 	<tr>
 		<td>3027</td>
-		<td>Non-Kakaotalk user (phone number error/050 safe number)</td>
+		<td>Message Buttons/Direct connection does not match template</td>
 	</tr>
 	<tr>
 		<td>3028</td>
-		<td>메시지 강조 표기 타이틀이 템플릿과 일치하지 않음</td>
+		<td>Message highlited title does not match template </td>
 	</tr>
 	<tr>
 		<td>3029</td>
-		<td>메시지 강조 표기 타이틀 길이 제한 초과(50자)</td>
+		<td>Exceeded limit of length in message highlighted title (50 characters)</td>
 	</tr>
 	<tr>
 		<td>3030</td>
@@ -339,11 +335,11 @@
 	</tr>
 	<tr>
 		<td>4000</td>
-		<td>메시지 전송 결과를 찾을 수 없음</td>
+		<td>Message delivery result is not found </td>
 	</tr>
 	<tr>
 		<td>4001</td>
-		<td>알 수 없는 메시지 상태</td>
+		<td>Unknown message status </td>
 	</tr>
   <tr>
 		<td>9998</td>

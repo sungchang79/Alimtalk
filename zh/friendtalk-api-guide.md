@@ -96,7 +96,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
 
 * <b> Request date and time can be configured up to 90 days after a point of calling </b>
-* <b> Delivery restricted during night (20:00~08:00 on the following day)</b>
+* <b> Delivery restricted during night (20:50~08:00 on the following day)</b>
 * <b> Delivery is to be replaced by SMS, and field input must follow delivery API specifications of the SMS service (e.g. sender number registered at SMS service, 080 unsubscription, and field length restrictions) </b>
 * <b> Title or message of an alternative delivery may be cut in length, if the byte size exceeds restrictions (see [[Cautions for SMS](https://docs.toast.com/en/Notification/SMS/en/api-guide/#_1)])</b>
 * <b> Friendtalk ad message can be replaced by Ad SMS API, so it must be registered at the 080 Unsubscription Service to enable alternative delivery. </b>

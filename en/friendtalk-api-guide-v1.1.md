@@ -90,7 +90,7 @@ Content-Type: application/json;charset=UTF-8
 | - isAd           | Boolean | X        | Ad or not (default is true)                                  |
 
 * <b> Send the first-registered Plus Friend, if Plus Friend ID field is not sent.</b>
-* <b> Delivery restricted during night (20:00~08:00 on the following day)</b>
+* <b> Delivery restricted during night (20:50~08:00 on the following day)</b>
 
 [Example]
 

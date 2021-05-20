@@ -74,7 +74,11 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "recipientGroupingKey": String
-    }]
+    }],
+    "messageOption": {
+      "price": Integer,
+      "currencyType": String
+    }
 }
 ```
 
@@ -97,6 +101,9 @@ Content-Type: application/json;charset=UTF-8
 | -- resendContent       | String  | X        | Alternative delivery message (up to 1000 characters)<br/>(resent with template message if value is unavailable.) |
 | -- resendSendNo        | String  | X        | Sender number for alternative delivery (up to 13 characters)<br/><span style="color:red">(Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
+| messageOption          | Object  | X        | Message Option                                               |
+| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 
 * <b>Request date and time can be set up to 90 days since a point of calling.</b>
 * <b>Since alternative delivery is made in the SMS service, field values must follow the API specifications for SMS (e.g. Sender number registered at the SMS service, or restriction in the field length). </b>
@@ -209,7 +216,11 @@ Content-Type: application/json;charset=UTF-8
             },
             "recipientGroupingKey": String
         }
-    ]
+    ],
+    "messageOption": {
+      "price": Integer,
+      "currencyType": String
+    }
 }
 ```
 
@@ -238,6 +249,9 @@ Content-Type: application/json;charset=UTF-8
 | -- resendContent       | String  | X        | Alternative delivery message (up to 1000 characters)<br/>(resent template message, if value is unavailable.) |
 | -- resendSendNo        | String  | X        | Sender number for alternative delivery (up to 13 characters)<br/><span style="color:red">(alternative delivery may fail, if sender number is not registered in the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
+| messageOption          | Object  | X        | Message Option                                               |
+| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 
 * <b>Enter data completed with replacement for the body and button. </b>
 * **Request date and time can be set up to 90 days since a point of calling.**
@@ -516,6 +530,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "schemeAndroid": String
         }
       ],
+      "messageOption": {
+        "price": Integer,
+        "currencyType": String
+      },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
   }
@@ -556,6 +574,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC web link (optional for the WL type)                       |
 | -- schemeIos           | String  | iOS app link (required for the AL type)                      |
 | -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
+| - messageOption        | Object  | Message Option                                               |
+| -- price               | Integer | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| -- currencyType        | String  | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 | - senderGroupingKey    | String  | Sender's grouping key                                        |
 | - recipientGroupingKey | String  | Recipient grouping key                                       |
 
@@ -619,7 +640,11 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "recipientGroupingKey": String
-    }]
+    }],
+    "messageOption": {
+      "price": Integer,
+      "currencyType": String
+    }
 }
 ```
 
@@ -641,6 +666,9 @@ Content-Type: application/json;charset=UTF-8
 | - resendContent        | String  | X        | Message for alternative delivery (up to 1000 characters)<br>(resent with template message, if the value is left empty.) |
 | - resendSendNo         | String  | X        | Sender number for alternative delivery (up to 13 characters)<br><span style="color:red">(if the number is not registered in SMS service, alternative delivery may fail.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
+| messageOption          | Object  | X        | Message Option                                               |
+| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 
 * <b> Request date and time can be set up to 90 days since a point of calling. </b>
 
@@ -749,7 +777,11 @@ Content-Type: application/json;charset=UTF-8
             },
             "recipientGroupingKey": String
         }
-    ]
+    ],
+    "messageOption": {
+      "price": Integer,
+      "currencyType": String
+    }
 }
 ```
 
@@ -778,6 +810,9 @@ Content-Type: application/json;charset=UTF-8
 | - resendContent        | String  | X        | Alternative delivery message (up to 1000 characters)<br>(resent with template message if value is unavailable.) |
 | - resendSendNo         | String  | X        | Sender number for alternative delivery (up to 13 characters)<br><span style="color:red"> (Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
+| messageOption          | Object  | X        | Message Option                                               |
+| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 
 * <b>Enter data completed with replacement in the body and button. </b>
 * <b>Request date and time can be set up to 90 days since a point of calling. </b>
@@ -1051,6 +1086,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "schemeAndroid": String
         }
       ],
+      "messageOption": {
+        "price": Integer,
+        "currencyType": String
+      },
       "senderGroupingKey": String,
       "recipientGroupingKey": String
   }
@@ -1094,6 +1133,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC web link (optional for the WL type)                       |
 | -- schemeIos           | String  | iOS app link (required for the AL type)                      |
 | -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
+| - messageOption        | Object  | Message Option                                               |
+| -- price               | Integer | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
+| -- currencyType        | String  | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
 | - senderGroupingKey    | String  | Sender's grouping key                                        |
 | - recipientGroupingKey | String  | Recipient's grouping key                                     |
 
@@ -1769,8 +1811,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "userName": String,
                       "createdAt": String,
                       "attachment": [{
-                        "originalFileName": "String",
-                        "filePath": "String"
+                        "originalFileName": String,
+                        "filePath": String
                       }],
                       "status": String
                     }  
@@ -1903,8 +1945,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
                       "userName": String,
                       "createdAt": String,
                       "attachment": [{
-                        "originalFileName": "String",
-                        "filePath": "String"
+                        "originalFileName": String,
+                        "filePath": String
                       }],
                       "status": String
                     }  
