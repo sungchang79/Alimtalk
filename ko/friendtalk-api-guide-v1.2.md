@@ -94,7 +94,7 @@ Content-Type: application/json;charset=UTF-8
 | - recipientGroupingKey | String  | X    | 수신자 그룹핑 키(최대 100자)                       |
 
 * <b>플러스친구 ID 필드를 보내지 않을 경우, 첫 번째 등록한 플러스친구로 발송됩니다.</b>
-* <b>야간 발송 제한(20:00~다음 날 08:00)</b>
+* <b>야간 발송 제한(20:50~다음 날 08:00)</b>
 * <b>지정한 대체 발송 타입의 바이트 제한을 초과하는 대체 발송 제목이나 내용은 잘려서 대체 발송될 수 있습니다.([[SMS 주의 사항](https://docs.toast.com/ko/Notification/SMS/ko/api-guide/#_1)] 참고)</b>
 * <b>친구톡 광고 메시지는 광고 SMS API로 대체 발송되므로, 반드시 080 수신 거부 번호를 등록해야 대체 발송됩니다.</b>
 
