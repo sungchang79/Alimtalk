@@ -1,4 +1,13 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2021.05.25.
+* [Console] 카카오 템플릿 코드 필드 추가
+    * 카카오에 실제 등록되는 템플릿 코드 필드가 추가되었습니다.
+* [Console] 템플릿 상태/문의 내용 변경 시, 웹훅 기능
+    * 템플릿 상태/문의 내용 변경 시, 웹훅 기능이 추가되었습니다.
+* [API] 발송 시, price, currencyType 필드 추가
+    * 알림톡 광고 모먼트 필드인 price, currencyType 필드 추가되었습니다.
+    * 알림톡 발송 API 및 단건 조회 API messageOption 필드 추가되었습니다.
+
 ### April 27, 2021
 * [Console] Added a feature to register the same sender's profile
     * Improved the system so that the same sender's profile can be registered for other projects.
@@ -189,7 +198,7 @@
     - Added a feature that is used to mask recipient numbers for projects that were individually asked to do so.
 * [Console] Fixed a bug that would occur while counting the number of words in the Alimtalk template body
     - Fixed a bug in which a blank space is counted as 2 characters in the template body.
-    
+
 ### December 4, 2018
 * [API] Added Alimtalk v1.2 API
     - Added the sender/receiver grouping key field when sending a message.
