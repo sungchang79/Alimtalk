@@ -1,4 +1,13 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2021.05.25.
+* [Console] 카카오 템플릿 코드 필드 추가
+    * 카카오에 실제 등록되는 템플릿 코드 필드가 추가되었습니다.
+* [Console] 템플릿 상태/문의 내용 변경 시, 웹훅 기능
+    * 템플릿 상태/문의 내용 변경 시, 웹훅 기능이 추가되었습니다.
+* [API] 발송 시, price, currencyType 필드 추가
+    * 알림톡 광고 모먼트 필드인 price, currencyType 필드 추가되었습니다.
+    * 알림톡 발송 API 및 단건 조회 API messageOption 필드 추가되었습니다.
+
 ### 2021.04.27
 * [Console]同一発信プロフィール登録機能を追加
     * 同じ発信プロフィールを他のプロジェクトに登録できるようにしました。
