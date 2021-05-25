@@ -348,8 +348,8 @@ Content-Type: application/json;charset=UTF-8
 | - categoryCode            | String  | カテゴリーコード                          |
 | - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
 | - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
-| - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
-| - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
+| - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
+| - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
 | - kakaoProfileStatusName  | String  | カカオプラスフレンドプロフィールステータス名(有効化、無効化、遮断、削除処理中、削除)<br>statusがYSC02の場合、kakaoProfileStatusName null値を持ちます。 |
 |- alimtalk|	Object|	お知らせトーク設定情報|
@@ -453,8 +453,8 @@ Content-Type: application/json;charset=UTF-8
 | - categoryCode            | String  | カテゴリーコード                          |
 | - status                  | String  | NHN Cloudプラスフレンドステータスコード <br>(YSC02：登録待機中、YSC03：正常登録) |
 | - statusName              | String  | NHN Cloudプラスフレンドステータス名(登録待機中、正常登録)           |
-| - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断、D：削除)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
-| - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断、削除)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
+| - kakaoStatus             | String  | カカオプラスフレンドステータスコード<br>(A：正常、S：遮断)<br>statusがYSC02の場合、kakaoStatus null値を持ちます。 |
+| - kakaoStatusName         | String  | カカオプラスフレンドステータス名(正常、遮断)<br>statusがYSC02の場合、kakaoStatusName null値を持ちます。 |
 | - kakaoProfileStatus      | String  | カカオプラスフレンドプロフィールステータスコード<br>(A：有効化、B：遮断、C：無効化、D：削除E：削除処理中)<br>statusがYSC02の場合、kakaoProfileStatus null値を持ちます。 |
 | - kakaoProfileStatusName  | String  | カカオプラスフレンドプロフィールステータス名(有効化、無効化、遮断、削除処理中、削除)<br>statusがYSC02の場合、kakaoProfileStatusName null値を持ちます。 |
 |- alimtalk|	Object|	お知らせトーク設定情報|

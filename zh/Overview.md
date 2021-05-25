@@ -9,7 +9,7 @@ RESTful API is provided for easy integration.
 | Message Type | Available to send informative messages                       | Available to send advertisement messages                     |
 | Target       | Friends not necessary (requires phone number information)    | Users who are friends to Plus Friend (requires phone number information) |
 | Format       | 1,000 characters including spaces, Korean or English + Link at the message bottom | - Friendtalk text: 1,000 characters of text in Korean or English + link button<br />- Friendtalk image: 400 characters of text + 1 page of image + link button |
-| Features     | - Restricted to informative biz messages <br />- Send by approved templates | - Delivery prohibited during night time  (20:00~ 08:00 on the following day) |
+| Features     | - Restricted to informative biz messages <br />- Send by approved templates | - Delivery prohibited during night time  (20:50~ 08:00 on the following day) |
 
 ## 발송 전 유의사항
 * 알림톡 이용 시, 고객사는 다음과 같은 서비스 이용 유의 사항을 수신자에게 안내해야 합니다.

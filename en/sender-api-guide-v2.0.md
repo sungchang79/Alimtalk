@@ -355,8 +355,8 @@ Content-Type: application/json;charset=UTF-8
 | - categoryCode            | String  | Category code                                                |
 | - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
 | - statusName              | String  | Status name of NHN Cloud PlusFriend (ready for registration, normally registered) |
-| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
-| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
+| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked) kakaoStatus is null if the status is YSC02. |
+| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked) kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
 |- alimtalk                 |	Object  |	Alimtalk information                                         |
@@ -467,8 +467,8 @@ Content-Type: application/json;charset=UTF-8
 | - categoryCode            | String  | Category code                                                |
 | - status                  | String  | Status code of NHN Cloud PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
 | - statusName              | String  | Status name of NHN Cloud PlusFriend (ready for registration, normally registered) |
-| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |
-| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked, deleted) kakaoStatusName is null if the status is YSC02. |
+| - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked) kakaoStatus is null if the status is YSC02. |
+| - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked) kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
 |- alimtalk                 |	Object  |	Alimtalk information                                         |

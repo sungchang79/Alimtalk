@@ -216,6 +216,10 @@
 		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan <br>2. User who has never been subscribed to Kakaotalk <br>3. Blocked user from Alimtalk messages <br>4. Android users who use different "Kakaotalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum Kakaotalk version or unsupported device, or punished user </td>
 	</tr>
 	<tr>
+		<td>3022</td>
+		<td>Not available time (Friend Talk messages can be sent from 08:00 to 20:50)</td>
+	</tr>
+	<tr>
 		<td>3023</td>
 		<td>Grammatical error of message (error in JSON format)</td>
 	</tr>
@@ -233,7 +237,7 @@
 	</tr>
 	<tr>
 		<td>3027</td>
-		<td>Non-Kakaotalk user (phone number error/050 safe number)</td>
+		<td>Message Buttons/Direct connection does not match template</td>
 	</tr>
 	<tr>
 		<td>3028</td>
