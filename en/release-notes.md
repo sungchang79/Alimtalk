@@ -1,4 +1,8 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2021.06.29.
+* [Console] 발송 결과 업데이트 시, 웹훅 기능
+    * 발송 결과 업데이트 시, 웹훅 기능이 추가되었습니다.
+
 ### 2021.05.25.
 * [Console] 카카오 템플릿 코드 필드 추가
     * 카카오에 실제 등록되는 템플릿 코드 필드가 추가되었습니다.
