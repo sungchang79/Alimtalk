@@ -1,11 +1,8 @@
-## Notification > KakaoTalk Bizmessage > Sender > API v2.0 Guide
+## Notification > KakaoTalk Bizmessage > Sender > API v2.1 Guide
 
-## v2.0 API 소개
+## v2.1 API 소개
 #### 개선된 점
-1. 카카오 채널 추가 시, 발급 받은 senderKey 필드로 API 호출이 되도록 변경 되었습니다. (plusFriendId 필드 대체)
-2. API uri가 변경 되었습니다. (/plus-friends -> /senders)
-3. 카카오 채널 그룹 기능이 추가 되었습니다.
-4. 발신 프로필 삭제 API가 추가되었습니다.
+1. 발신 프로필 조회 API에 차단, 휴면 상태 필드가 추가되었습니다.
 
 #### [API 도메인]
 
@@ -30,7 +27,7 @@
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/sender/categories
+GET  /alimtalk/v2.1/appkeys/{appkey}/sender/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -48,7 +45,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 #### 응답
 ```
@@ -112,7 +109,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/senders
+POST  /alimtalk/v2.1/appkeys/{appkey}/senders
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -130,7 +127,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 [Request Body]
 
@@ -171,7 +168,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/sender/token
+POST  /alimtalk/v2.1/appkeys/{appkey}/sender/token
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -189,7 +186,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 [Request Body]
 
@@ -240,7 +237,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
+DELETE  /alimtalk/v2.1/appkeys/{appkey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -259,7 +256,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 * 발신 프로필 삭제 시, 등록한 템플릿 데이터가 함께 삭제 됩니다.
 * 발신 프로필 삭제 시, 복구가 불가능합니다.
@@ -288,7 +285,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
+GET  /alimtalk/v2.1/appkeys/{appkey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -307,7 +304,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 #### 응답
 ```
@@ -385,7 +382,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/senders
+GET  /alimtalk/v2.1/appkeys/{appkey}/senders
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -403,7 +400,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter] 1번 or 2번 조건 필수
 
@@ -450,7 +447,9 @@ Content-Type: application/json;charset=UTF-8
                 "resendUnsubscribeNo": String,
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
-         }
+         },
+         "dormant": Boolean,
+         "block": Boolean
       }
    ],
    "totalCount": Integer
@@ -487,6 +486,8 @@ Content-Type: application/json;charset=UTF-8
 |-- dailyMaxCount | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |-- sentCount | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음) |
 |- createDate | String |	등록 일자 |
+|- dormant | Boolean |	발신프로필 휴면 여부 |
+|- block | Boolean |	발신프로필 차단 여부 |
 |totalCount | Integer | 총 개수 |
 
 ## 발신 프로필 그룹
@@ -497,7 +498,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}
+GET  /alimtalk/v2.1/appkeys/{appkey}/sender-groups/{groupSenderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -516,7 +517,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 #### 응답
 ```
@@ -566,7 +567,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+POST  /alimtalk/v2.1/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -586,7 +587,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 #### 응답
 ```
@@ -612,7 +613,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+DELETE  /alimtalk/v2.1/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -632,7 +633,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 |값|	타입|	필수|	설명|
 |---|---|---|---|
-|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./plus-friend-console-guide/#x-secret-key)] |
+|X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 #### 응답
 ```
