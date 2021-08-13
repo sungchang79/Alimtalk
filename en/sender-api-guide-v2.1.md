@@ -1,10 +1,8 @@
-## Notification > KakaoTalk Bizmessage > Sender > API v2.0 Guide
+## Notification > KakaoTalk Bizmessage > Sender > API v2.1 Guide
 
-## Overview of v2.0 API
+## Overview of v2.1 API
 #### What's the diffrence
-1. 카카오 채널 추가 시, 발급 받은 senderKey 필드로 API 호출이 되도록 변경 되었습니다. (plusFriendId 필드 대체)
-2. API uri가 변경 되었습니다. (/plus-friends -> /senders)
-3. 카카오 채널 그룹 기능이 추가 되었습니다.
+1. Added dormant, block on Inquire of Senders
 
 #### [API Domain]
 
@@ -29,7 +27,7 @@
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/sender/categories
+GET  /alimtalk/v2.1/appkeys/{appkey}/sender/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -113,7 +111,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/senders
+POST  /alimtalk/v2.1/appkeys/{appkey}/senders
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -175,7 +173,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/sender/token
+POST  /alimtalk/v2.1/appkeys/{appkey}/sender/token
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -235,7 +233,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
+DELETE  /alimtalk/v2.1/appkeys/{appkey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -283,7 +281,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/senders/{senderKey}
+GET  /alimtalk/v2.1/appkeys/{appkey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -338,6 +336,8 @@ Content-Type: application/json;charset=UTF-8
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
          },
+         "dormant": Boolean,
+         "block": Boolean,
          "createDate": String
     }
 }
@@ -372,6 +372,8 @@ Content-Type: application/json;charset=UTF-8
 |-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery           |
 |-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
+| - dormant                 | Boolean |	Sender dormant or not                                        |
+| - block                   | Boolean |	Sender block or not                                          |
 | - createDate              | String  | Date and time of registration                                |
 | totalCount                | Integer | Total count                                                  |
 
@@ -382,7 +384,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/senders
+GET  /alimtalk/v2.1/appkeys/{appkey}/senders
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -448,7 +450,9 @@ Content-Type: application/json;charset=UTF-8
                 "resendUnsubscribeNo": String,
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
-         }
+         },
+         "dormant": Boolean,
+         "block": Boolean,
       }
    ],
    "totalCount": Integer
@@ -484,6 +488,8 @@ Content-Type: application/json;charset=UTF-8
 |-- resendUnsubscribeNo     | String  |	080 unsubscription number for alternative delivery            |
 |-- dailyMaxCount           | Integer |	친구톡 일별 최대 발송 건수<br>(값이 0일 경우 건수 제한없음)              |
 |-- sentCount               | Integer |	친구톡 일별 발송 건수<br>(값이 0일 경우 건수 제한없음)                  |
+| - dormant                 | Boolean |	Sender dormant or not                                        |
+| - block                   | Boolean |	Sender block or not                                          |
 | - createDate              | String  | Date and time of registration                                |
 | totalCount                | Integer | Total count                                                  |
 
@@ -495,7 +501,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}
+GET  /alimtalk/v2.1/appkeys/{appkey}/sender-groups/{groupSenderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -564,7 +570,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+POST  /alimtalk/v2.1/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -610,7 +616,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v2.0/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
+DELETE  /alimtalk/v2.1/appkeys/{appkey}/sender-groups/{groupSenderKey}/senders/{senderKey}
 Content-Type: application/json;charset=UTF-8
 ```
 

@@ -1,10 +1,8 @@
 ## Notification > KakaoTalk Bizmessage > Sender > API v2.0 Guide
 
-## v2.0 API紹介
+## v2.1 API紹介
 #### 改善された点
-1. 카카오 채널 추가 시, 발급 받은 senderKey 필드로 API 호출이 되도록 변경 되었습니다. (plusFriendId 필드 대체)
-2. API uri가 변경 되었습니다. (/plus-friends -> /senders)
-3. 카카오 채널 그룹 기능이 추가 되었습니다.
+1. 発信プロフィール照会時、休眠/遮断状態フィールドが追加されました。
 
 #### [API 도메인]
 
@@ -331,6 +329,8 @@ Content-Type: application/json;charset=UTF-8
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
          },
+         "dormant": Boolean,
+         "block": Boolean,
          "createDate": String
     }
 }
@@ -363,6 +363,8 @@ Content-Type: application/json;charset=UTF-8
 |-- resendUnsubscribeNo | String |	再送信時、tc-sms 080受信拒否番号 |
 |-- dailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 |-- sentCount | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
+|- dormant | Boolean |	発信プロフィール休眠するかどうか |
+|- block | Boolean |	発信プロフィールブロックするかどうか |
 | - createDate              | String  | 登録日時                            |
 
 ### Senderの照会
@@ -434,7 +436,9 @@ Content-Type: application/json;charset=UTF-8
                 "resendUnsubscribeNo": String,
                 "dailyMaxCount" : Integer,
                 "sentCount" : Integer
-         }
+         },
+         "dormant": Boolean,
+         "block": Boolean
       }
    ],
    "totalCount": Integer
@@ -468,6 +472,8 @@ Content-Type: application/json;charset=UTF-8
 |-- resendUnsubscribeNo | String |	再送信時、tc-sms 080受信拒否番号 |
 |-- dailyMaxCount | Integer | カカともへのメッセージの一日最大送信件数<br>(値が0の場合、件数制限なし)    |
 |-- sentCount | Integer | カカともへのメッセージの一日送信件数<br>(値が0の場合、件数制限なし)       |
+|- dormant | Boolean |	発信プロフィール休眠するかどうか |
+|- block | Boolean |	発信プロフィールブロックするかどうか |
 | - createDate              | String  | 登録日時                            |
 | totalCount                | Integer | 総個数                               |
 
