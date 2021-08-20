@@ -100,8 +100,8 @@ Content-Type: application/json;charset=UTF-8
 | -- resendSendNo        | String  | X        | Sender number for alternative delivery (up to 13 characters)<br/><span style="color:red">(Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
 | messageOption          | Object  | X        | Message Option                                               |
-| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
-| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| - price                | Integer | X        | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
+| - currencyType         | String  | X        | Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
 
 * <b>Request date and time can be set up to 90 days since a point of calling.</b>
 * <b>Since alternative delivery is made in the SMS service, field values must follow the API specifications for SMS (e.g. Sender number registered at the SMS service, or restriction in the field length). </b>
@@ -248,8 +248,8 @@ Content-Type: application/json;charset=UTF-8
 | -- resendSendNo        | String  | X        | Sender number for alternative delivery (up to 13 characters)<br/><span style="color:red">(alternative delivery may fail, if sender number is not registered in the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
 | messageOption          | Object  | X        | Message Option                                               |
-| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
-| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| - price                | Integer | X        | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
+| - currencyType         | String  | X        | Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
 
 * <b>Enter data completed with replacement for the body and button. </b>
 * **Request date and time can be set up to 90 days since a point of calling.**
@@ -573,8 +573,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- schemeIos           | String  | iOS app link (required for the AL type)                      |
 | -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
 | - messageOption        | Object  | Message Option                                               |
-| -- price               | Integer | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
-| -- currencyType        | String  | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| -- price               | Integer | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
+| -- currencyType        | String  | Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
 | - senderGroupingKey    | String  | Sender's grouping key                                        |
 | - recipientGroupingKey | String  | Recipient grouping key                                       |
 
@@ -665,8 +665,8 @@ Content-Type: application/json;charset=UTF-8
 | - resendSendNo         | String  | X        | Sender number for alternative delivery (up to 13 characters)<br><span style="color:red">(if the number is not registered in SMS service, alternative delivery may fail.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
 | messageOption          | Object  | X        | Message Option                                               |
-| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
-| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| - price                | Integer | X        | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
+| - currencyType         | String  | X        | Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
 
 * <b> Request date and time can be set up to 90 days since a point of calling. </b>
 
@@ -809,8 +809,8 @@ Content-Type: application/json;charset=UTF-8
 | - resendSendNo         | String  | X        | Sender number for alternative delivery (up to 13 characters)<br><span style="color:red"> (Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
 | messageOption          | Object  | X        | Message Option                                               |
-| - price                | Integer | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
-| - currencyType         | String  | X        | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| - price                | Integer | X        | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
+| - currencyType         | String  | X        | Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
 
 * <b>Enter data completed with replacement in the body and button. </b>
 * <b>Request date and time can be set up to 90 days since a point of calling. </b>
@@ -1132,8 +1132,8 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- schemeIos           | String  | iOS app link (required for the AL type)                      |
 | -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
 | - messageOption        | Object  | Message Option                                               |
-| -- price               | Integer | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
-| -- currencyType        | String  | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| -- price               | Integer | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
+| -- currencyType        | String  | Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
 | - senderGroupingKey    | String  | Sender's grouping key                                        |
 | - recipientGroupingKey | String  | Recipient's grouping key                                     |
 
@@ -1353,11 +1353,11 @@ Content-Type: application/json;charset=UTF-8
 | categories      |	List    |	List of categories |
 | - name          | String  | Category name      |
 | - subCategories | List    |	List of subcategories    |
-| -- code         | String  | Category code (템플릿 등록/수정 시, 사용) |
+| -- code         | String  | Category code (Used when registering/modifying templates) |
 | -- name         | String  |	Category name       |
 | -- groupName    | String  |	Category group name |
-| -- inclusion    | String  |	카테고리 적용 대상 템플릿 설명 |
-| -- exclusion    | String  | 카테고리 제외 대상 템플릿 설명 |
+| -- inclusion    | String  |	Description of templates to which the category applies |
+| -- exclusion    | String  | Description of templates to which the category does not apply |
 
 ### Register Templates
 
@@ -1431,8 +1431,8 @@ Content-Type: application/json;charset=UTF-8
 |templateSubtitle    | String   | X        | Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 |templateImageName | String |	X | Image name  |
 |templateImageUrl | String |	X | Image URL |
-| securityFlag    | Boolean | X        | 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
-| categoryCode    | String  | X        | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 기타일 경우, 최하위 우선순위로 심사 |
+| securityFlag    | Boolean | X        | Security template<br>Set for security messages such as OTP<br>If set, message text is unexposed to all devices except for the main device at the time of sending (default: false) |
+| categoryCode    | String  | X        | Template category code (Refer to API to View Template Category, default: 999999)<br>For other categories, screened by the lowest priority. |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: Bot for Consultation, BT: Bot Transfer, CA: Channel Added [only for Ad Included/Mixed Purposes Type]) |
@@ -1532,8 +1532,8 @@ Content-Type: application/json;charset=UTF-8
 |templateSubtitle| String | X| Auxiliary Template Phrase (No more than 50 characters, Android: To be abbreviated if it exceeds 18 characters, iOS: To be abbreviated if it exceeds 21 characters) |
 |templateImageName | String |	X | Image name  |
 |templateImageUrl | String |	X | Image URL |
-| securityFlag    | Boolean | X        | 보안 템플릿 여부<br>OTP등 보안 메시지 일 경우 설정<br>발신 당시의 메인 디바이스를 제외한 모든 디바이스에 메시지 텍스트 미노출(default: false) |
-| categoryCode    | String  | X        | 템플릿 카테고리 코드 (템플릿 카테고리 조회 API 참고, default: 999999)<br>카테고리 기타일 경우, 최하위 우선순위로 심사 |
+| securityFlag    | Boolean | X        | Security template<br>Set for security messages such as OTP<br>If set, message text is unexposed to all devices except for the main device at the time of sending (default: false) |
+| categoryCode    | String  | X        | Template category code (Refer to API to View Template Category, default: 999999)<br>For other categories, screened by the lowest priority. |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: Bot for Consultation, BT: Bot Transfer, CA: Channel Added [only for Ad Included/Mixed Purposes Type]) |
