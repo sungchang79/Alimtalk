@@ -1,4 +1,8 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2021.08.24.
+* [Console] 이미지 알림톡 기능
+    * 이미지 알림톡 기능이 추가되었습니다.
+
 ### 2021.07.27.
 * [Console] 신규 통계 기능
     * 신규 통계가 추가되어, 고도화 되었습니다.
