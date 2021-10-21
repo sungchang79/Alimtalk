@@ -1339,6 +1339,369 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |RSC04|	대체 발송 성공|
 |RSC05|	대체 발송 실패|
 
+## 대량 발송
+### 대량 발송 요청 목록 조회
+
+#### 요청
+[URL]
+```
+GET /alimtalk/v2.2/appkeys/{appKey}/mass-messages
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appKey|	String|	고유의 앱키|
+
+[Header]
+
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|X-Secret-Key|	String|	고유의 시크릿 키 |
+
+[Query parameter]
+* requestId 또는 startRequestDate + endRequestDate 또는 startCreateDate + endCreateDate는 필수입니다.
+
+|값|	타입| 최대 길이 |	필수|	설명|
+|---|---|---|---|---|
+| requestId | String | - | O | 요청 ID |
+| startRequestDate | String | - | O | 발송 날짜 시작 |
+| endRequestDate | String | - | O | 발송 날짜 종료 |
+| startCreateDate |	String| - |	O |	등록 날짜 시작 |
+| endCreateDate |	String| - |	O |	등록 날짜 종료 |
+| pageNum | optional, Integer | - | X | 페이지 번호 |
+| pageSize | optional, Integer | 1000 | X | 검색 수 |
+
+#### cURL
+```
+curl -X GET \
+'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages?requestId='"${REQUEST_ID}" \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Secret-Key:{secretkey}' 
+```
+
+#### 응답
+```
+{
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "success",
+    "isSuccessful": true
+  },
+  "messages": [
+    {
+      "requestId": "20211007095656Ad1BIJUiIg1",
+      "requestDate": "2021-10-07 09:56:56.0",
+      "plusFriendId": "@toast_ktb",
+      "senderKey": "63597b86904acf0e12aa8e23d0f972e43d857317",
+      "templateCode": "targetButton",
+      "masterStatusCode": "COMPLETE",
+      "content": "#{content}",
+      "buttons": [
+        {
+          "ordering": 1,
+          "type": "WL",
+          "name": "웹 링크",
+          "linkMo": "https://nhn.com",
+          "linkPc": "https://toast.com",
+          "schemeIos": null,
+          "schemeAndroid": null,
+          "chatExtra": null,
+          "chatEvent": null
+        },
+        {
+          "ordering": 2,
+          "type": "AL",
+          "name": "앱 링크",
+          "linkMo": "https://payco.com",
+          "linkPc": "https://toast.com",
+          "schemeIos": null,
+          "schemeAndroid": "daumapps://open",
+          "chatExtra": null,
+          "chatEvent": null
+        }
+      ],
+      "fileId": "20211007095651hYwr9oZDAS0",
+      "templateExtra": "1",
+      "templateAd": "1",
+      "templateTitle": "1",
+      "templateSubtitle": "1",
+      "autoSendYn": "Y",
+      "statsId": "1",
+      "createDate": "2021-10-07 09:56:56.0",
+      "createUser": "6f4f6280-ef5d-11e7-9ede-005056ac7022"
+    }
+  ],
+  "totalCount": 1
+
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|header.isSuccessful|	Boolean|	성공 여부|
+|header.resultCode|	Integer|	실패 코드|
+|header.resultMessage|	String|	실패 메시지|
+|body.messages[].requestId | String | 요청 ID |
+|body.messages[].requestDate | String | 요청 날짜 |
+|body.messages[].createDate | String | 생성 날짜 |
+|body.messages[].createUser | String | 생성 날짜 |
+|body.messages[].plusFriendId | String | 플러스 친구 ID |
+|body.messages[].senderKey | String | 전송자 ID |
+|body.messages[].masterStatusCode | String | 대량 발송 상태 코드 |
+|body.messages[].content | String | 내용 |
+|body.messages[].buttons[].ordering | String | 버튼 순서 |
+|body.messages[].buttons[].type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
+|body.messages[].buttons[].name | String | 버튼 이름 |
+|body.messages[].buttons[].linkMo | String | 모바일 링크 주소 |
+|body.messages[].buttons[].linkPc | String | PC 링크 주소 |
+|body.messages[].buttons[].schemeIos | String | IOS 스킴 |
+|body.messages[].buttons[].schemeAndroid | String | Android 스킴 |
+|body.messages[].buttons[].chatExtra | String | BC: 상담톡 전환시 전달할 메타 정<br/> BT: 봇 전환 시 전달할 메타 정보 |
+|body.messages[].buttons[].chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
+|body.messages[].fileId | String | 첨부 파일 ID |
+|body.messages[].templateCode | String | 템플릿 코드 |
+|body.messages[].templateExtra | String | ? |
+|body.messages[].templateAd | String | 생성 날짜 |
+|body.messages[].templateTitle | String | 템플릿 제목 |
+|body.messages[].templateSubtitle | String | 템플릿 부제 |
+|body.messages[].statsId | String | 통계 ID |
+|body.messages[].autoSendYn | String | 자동 발송 여부 |
+
+
+### 대량 발송 대량 발송 수신자 목록 조회
+
+#### 요청
+[URL]
+```
+GET /alimtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+| appKey |	String |	고유의 앱키 |
+| requestId |	String |	요청 ID |
+
+[Header]
+
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| X-Secret-Key |	String|	고유의 시크릿 키 |
+
+
+|값|	타입| 최대 길이 |	필수|	설명|
+|---|---|---|---|---|
+| requestId | String | - | O | 요청 ID |
+| startRequestDate | String | - | X | 발송 날짜 시작 |
+| endRequestDate | String | - | X | 발송 날짜 종료 |
+| startCreateDate |	String| - |	X |	등록 날짜 시작 |
+| endCreateDate |	String| - |	X |	등록 날짜 종료 |
+| pageNum | optional, Integer | - | X | 페이지 번호 |
+| pageSize | optional, Integer | 1000 | X | 검색 수 |
+
+#### cURL
+```
+curl -X GET \
+'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients?requestId='"${REQUEST_ID}" \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Secret-Key:{secretkey}' 
+```
+
+#### 응답
+```
+{
+    "header": {
+        "resultCode": 0,
+        "resultMessage": "success",
+        "isSuccessful": true
+    },
+    "body": {
+        "messages": [
+            {
+                "requestId": "20210928152356O9CEcsKV2M2",
+                "recipientSeq": 1,
+                "recipientNo": "01012345678",
+                "requestDate": "2021-10-28 15:23:56.0",
+                "receiveDate": "2021-10-28 15:24:09.0",
+                "messageStatus": "COMPLETED",
+                "resultCode": "1000",
+                "resultCodeName": "성공"
+            }
+        ],
+        "totalCount": 1
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| header.isSuccessful|	Boolean|	성공 여부|
+| header.resultCode|	Integer|	실패 코드|
+| header.resultMessage|	String|	실패 메시지|
+| body.messages[].requestId | String | 요청 ID |
+| body.messages[].recipientSeq | String | 수신자 순서 |
+| body.messages[].recipientNo | String | 수신자 번호 |
+| body.messages[].requestDate | String | 요청 날짜 |
+| body.messages[].receiveDate | String | 수신 날짜 |
+| body.messages[].messageStatus | String | 메시지 상태 |
+| body.messages[].resultCode | String | 결과 코드 |
+| body.messages[].resultCodeName | String | 결과 코드 내용 |
+| body.totalCount | Integer | 총 개수 |
+
+### 대량 발송 대량 발송 수신자 조회
+
+#### 요청
+[URL]
+```
+GET /alimtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients/{recipientSeq}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+| appKey |	String | 고유의 앱키 |
+| requestId |	String | 요청 ID |
+| recipientSeq | String | 수신자 순서 |
+
+[Header]
+
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|X-Secret-Key|	String|	고유의 시크릿 키 |
+
+
+|값|	타입| 최대 길이 |	필수|	설명|
+|---|---|---|---|---|
+| requestId | String | - | O | 요청 ID |
+| startRequestDate | String | - | X | 발송 날짜 시작 |
+| endRequestDate | String | - | X | 발송 날짜 종료 |
+| startCreateDate |	String| - |	X |	등록 날짜 시작 |
+| endCreateDate |	String| - |	X |	등록 날짜 종료 |
+| pageNum | optional, Integer | - | X | 페이지 번호 |
+| pageSize | optional, Integer | 1000 | X | 검색 수 |
+
+#### cURL
+```
+curl -X GET \
+'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/1?requestId='"${REQUEST_ID}" \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Secret-Key:{secretkey}' 
+```
+
+#### 응답
+```
+{
+    "header": {
+        "resultCode": 0,
+        "resultMessage": "success",
+        "isSuccessful": true
+    },
+    "body": {
+        "requestId": "20210928152356O9CEcsKV2M2",
+        "recipientSeq": 1,
+        "plusFriendId": "@toast_ktb",
+        "senderKey": "63597b86904acf0e12aa8e23d0f972e43d857317",
+        "templateCode": "helloworld",
+        "recipientNo": "01012345678",
+        "content": "helloworld2",
+        "templateTitle": null,
+        "templateSubtitle": null,
+        "templateExtra": null,
+        "templateAd": null,
+        "requestDate": "2021-10-28 15:23:56.0",
+        "receiveDate": "2021-10-28 15:24:56.0",
+        "createDate": "2021-10-28 15:22:56.0",
+        "resendStatus": "RSC01",
+        "resendStatusName": "대체 발송 미대상",
+        "resendResultCode": null,
+        "resendRequestId": null,
+        "messageStatus": "COMPLETED",
+        "resultCode": "1000",
+        "resultCodeName": "성공",
+        "createUser": "a9cfd033-e9a9-11e7-9ede-005056ac7022",
+        "buttons": [
+            {
+                "ordering": 1,
+                "type": "WL",
+                "name": "웹 링크",
+                "linkMo": "https://nhn.com",
+                "linkPc": "https://toast.com",
+                "schemeIos": null,
+                "schemeAndroid": null,
+                "chatExtra": null,
+                "chatEvent": null
+                "target": null
+            }
+        ],
+        "messageOption": null
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| header.isSuccessful|	Boolean| 성공 여부 |
+| header.resultCode|	Integer| 실패 코드 |
+| header.resultMessage|	String| 실패 메시지 |
+| body.requestId | String | 요청 ID |
+| body.recipientSeq | String | 수신자 순서 |
+| body.plusFriendId | String | 플러스 친구 ID |
+| body.senderKey | String | 전송자 ID |
+| body.recipientNo | String | 수신자 번호 |
+| body.content | String | 내용 |
+| body.templateTitle | String | 요청 날짜 |
+| body.templateSubtitle | String | 요청 날짜 |
+| body.templateExtra | String | 요청 날짜 |
+| body.templateAd | String | 요청 날짜 |
+| body.requestDate | String | 요청 날짜 |
+| body.receiveDate | String | 수신 날짜 |
+| body.createDate | String | 생성 날짜 |
+| body.resendStatus | String | 대체 발송 상태 코드 |
+| body.resendStatusName | String | 대체 발송 상태명 |
+| body.resendRequestId | String | 대체 발송 요청 ID |
+| body.resendResultCode | String | 대체 발송 결과 코드 |
+| body.masterStatusCode | String | 대량 발송 상태 코드 |
+| body.resultCode | String | 결과 상태 코드 |
+| body.resultCodeName | String | 결과 상태명 |
+| body.createUser | String | 생성 유저 ID |
+| body.imageSeq | Integer | 이미지 순서 |
+| body.imageLink | Integer | 이미지 URL |
+| body.buttons[].ordering | String | 버튼 순서 |
+| body.buttons[].type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
+| body.buttons[].name | String | 버튼 이름 |
+| body.buttons[].linkMo | String | 모바일 링크 주소 |
+| body.buttons[].linkPc | String | PC 링크 주소 |
+| body.buttons[].schemeIos | String | IOS 스킴 |
+| body.buttons[].schemeAndroid | String | Android 스킴 |
+| body.buttons[].chatExtra | String | BC: 상담톡 전환시 전달할 메타 정<br/> BT: 봇 전환 시 전달할 메타 정보 |
+| body.buttons[].chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
+| body.messageOption | Boolean | 메시지 옵션 |
+
 ## 템플릿
 
 ### 템플릿 카테고리 조회
