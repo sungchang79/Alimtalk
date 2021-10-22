@@ -34,7 +34,7 @@
 
 |Http method|	URI|
 |---|---|
-|GET| /v2.2/appkeys/{appKey}/stats |
+|GET| /common/v2.2/appkeys/{appKey}/stats |
 
 [Path parameter]
 
@@ -100,7 +100,7 @@
 
 |Http method|	URI|
 |---|---|
-|GET| /v2.2/appkeys/{appKey}/stats/total |
+|GET| /common/v2.2/appkeys/{appKey}/stats/total |
 
 [Path parameter]
 
