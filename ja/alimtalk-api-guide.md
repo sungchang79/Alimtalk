@@ -73,6 +73,7 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "buttons": [
+          "ordering": Integer,
           "chatExtra": String,
           "chatEvent": String,
           "target": String
@@ -105,6 +106,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resendContent       | String  | X    | 代替送信内容(最大1000文字)<br>(値がない場合は、テンプレートの内容で再送信されます。) |
 | -- resendSendNo        | String  | X    | 代替送信発信番号(最大13桁)<br><span style="color:red">(SMSサービスに登録された発信番号ではない場合、代替送信が失敗することがあります。)</span> |
 | - buttons              | List    | X    | 버튼 추가 정보 |
+| -- ordering            | Integer | X    |	ボタン順序(ボタンがある場合は必須) |
 | -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -662,6 +664,7 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "buttons": [
+          "ordering": Integer,
           "chatExtra": String,
           "chatEvent": String,
           "target": String
@@ -694,6 +697,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resendContent       | String  | X    | 代替送信内容(最大1000文字)<br>(値がない場合は、テンプレートの内容で再送信されます。) |
 | -- resendSendNo        | String  | X    | 代替送信発信番号(最大13桁)<br><span style="color:red">(SMSサービスに登録された発信番号ではない場合、代替送信が失敗することがあります。)</span> |
 | - buttons              | List    | X    | 버튼 추가 정보 |
+| -- ordering            | Integer | X    |	ボタン順序(ボタンがある場合は必須) | 
 | -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -1419,7 +1423,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
@@ -1559,7 +1563,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
@@ -1651,7 +1655,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/1?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답

@@ -73,6 +73,7 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "buttons": [
+          "ordering": Integer,
           "chatExtra": String,
           "chatEvent": String,
           "target": String
@@ -106,6 +107,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resendSendNo        | String  | X        | Sender number for alternative delivery (up to 13 characters)<br/><span style="color:red">(Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
 | - buttons              | List    | X        | 버튼 추가 정보 |
+| -- ordering            | Integer | X        |	Button sequence (required, if there is a button) |
 | -- chatExtra           | String  | X        |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X        |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X        |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -666,6 +668,7 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "buttons": [
+          "ordering": Integer,
           "chatExtra": String,
           "chatEvent": String,
           "target": String
@@ -698,6 +701,7 @@ Content-Type: application/json;charset=UTF-8
 | - resendSendNo         | String  | X        | Sender number for alternative delivery (up to 13 characters)<br><span style="color:red">(if the number is not registered in SMS service, alternative delivery may fail.)</span> |
 | - recipientGroupingKey | String  | X        | Recipient grouping key (up to 100 characters)                |
 | - buttons              | List    | X        | 버튼 추가 정보 |
+| -- ordering            | Integer | X        |	Button sequence (required, if there is a button) |
 | -- chatExtra           | String  | X        |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X        |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X        |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -1392,7 +1396,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
@@ -1532,7 +1536,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
@@ -1624,7 +1628,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/1?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
