@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > カカともへのメッセージ > API v2.2 Guide
+## Notification > KakaoTalk Bizmessage > カカともへのメッセージ > API v2.0 Guide
 
 ## カカともへのメッセージ
 
@@ -17,18 +17,13 @@
 </tbody>
 </table>
 
-## v2.2 API紹介
-1. 친구톡 대량 발송 조회가 추가되었습니다.
-2. 메시지 발송 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
-3. 메시지 조회 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
-
 ## メッセージの送信
 #### 送信リクエスト
 
 [URL]
 
 ```
-POST  /friendtalk/v2.2/appkeys/{appkey}/messages
+POST  /friendtalk/v2.0/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -69,10 +64,7 @@ Content-Type: application/json;charset=UTF-8
                     "linkMo": String,
                     "linkPc": String,
                     "schemeIos": String,
-                    "schemeAndroid": String,
-                    "chatExtra": String,
-                    "chatEvent": String,
-                    "target": String
+                    "schemeAndroid": String
                 }
         ],
         "resendParameter": {
@@ -108,9 +100,6 @@ Content-Type: application/json;charset=UTF-8
 | -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド)                |
 | -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- chatExtra           | String  | X    | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
-| -- chatEvent           | String  | X    | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
-| -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - resendParameter      | Object  | X    | 代替発送情報 |
 | -- isResend            | boolean | X    | 送信失敗時、代替送信するかどうか<br>コンソールで送信失敗設定をした時、デフォルト設定は再送信になっています。 |
 | -- resendType          | String  | X    | 代替送信タイプ(SMS、LMS)<br>値がない場合は、テンプレート本文の長さに応じてタイプが決まります。 |
@@ -131,7 +120,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/messages -d '{"plusFriendId":"@プラスフレンド","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"内容","buttons":[{"ordering":1,"type":"WL","name":"ボタン1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages -d '{"plusFriendId":"@プラスフレンド","requestDate":"yyyy-MM-dd HH:mm","recipientList":[{"recipientNo":"010-0000-0000","imageSeq":1,"imageLink":"https://toast.com","content":"内容","buttons":[{"ordering":1,"type":"WL","name":"ボタン1","linkMo":"https://toast.com","linkPc":"https://toast.com"}]}]}'
 ```
 
 #### レスポンス
@@ -182,7 +171,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /friendtalk/v2.2/appkeys/{appkey}/messages
+GET  /friendtalk/v2.0/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -281,7 +270,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages?startRequestDate=2018-05-01%2000:00&endRequestDate=2018-05-30%2023:59"
 ```
 
 #### 再送信ステータス
@@ -300,7 +289,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /friendtalk/v2.2/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -329,7 +318,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### レスポンス
@@ -370,10 +359,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "linkMo" :  String,
           "linkPc": String,
           "schemeIos": String,
-          "schemeAndroid": String,
-          "chatExtra": String,
-          "chatEvent": String,
-          "target": String
+          "schemeAndroid": String
         }
       ],
       "isAd" : Boolean,
@@ -417,9 +403,6 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                |
 | -- schemeIos           | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | -- schemeAndroid       | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
-| -- chatExtra           | String  | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
-| -- chatEvent           | String  | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
-| -- target              | String  | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - isAd                 | Boolean | 広告かどうか                                   |
 | - senderGroupingKey    | String  | 発信グルーピングキー                               |
 | - recipientGroupingKey | String  | 受信者グルーピングキー                              |
@@ -432,7 +415,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v2.2/appkeys/{appkey}/messages/{requestId}
+DELETE  /friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -481,7 +464,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### メッセージ結果アップデート照会
@@ -491,7 +474,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /friendtalk/v2.2/appkeys/{appkey}/message-results
+GET  /friendtalk/v2.0/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -578,358 +561,8 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
-
-## 대량 발송
-### 대량 발송 요청 목록 조회
-
-#### 요청
-[URL]
-```
-GET /friendtalk/v2.2/appkeys/{appKey}/mass-messages
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-| appKey | String | 고유의 앱키 |
-
-[Header]
-
-```
-{
-  "X-Secret-Key": String
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-| X-Secret-Key | String | 고유의 시크릿 키 |
-
-[Query parameter]
-* requestId 또는 startRequestDate + endRequestDate 또는 startCreateDate + endCreateDate는 필수입니다.
-
-|값|	타입| 최대 길이 |	필수|	설명|
-|---|---|---|---|---|
-| requestId | String | - | O | 요청 ID |
-| startRequestDate | String | - | O | 발송 날짜 시작 |
-| endRequestDate | String | - | O | 발송 날짜 종료 |
-| startCreateDate |	String| - |	O |	등록 날짜 시작 |
-| endCreateDate |	String| - |	O |	등록 날짜 종료 |
-| pageNum | optional, Integer | - | X | 페이지 번호 |
-| pageSize | optional, Integer | 1000 | X | 검색 수 |
-
-#### cURL
-```
-curl -X GET \
-'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages?requestId='"${REQUEST_ID}" \
--H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
-```
-
-#### 응답
-```
-{
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "success",
-        "isSuccessful": true
-    },
-    "body": {
-        "messages": [
-            {
-                "requestId": "20211018191655AZC1lfliZt1",
-                "requestDate": "2021-10-18 19:16:55.0",
-                "plusFriendId": "@dofhdaxzrx45tsxm",
-                "senderKey": "0be23c29d485d6288798cda57062516354c7422",
-                "masterStatusCode": "COMPLETE",
-                "content": "안녕하세요",
-                "buttons": [
-                    {
-                        "ordering": 1,
-                        "type": "AL",
-                        "name": "hello",
-                        "linkMo": "https://naver.com",
-                        "linkPc": "https://nhn.com",
-                        "schemeIos": "https://payco.com",
-                        "schemeAndroid": "https://toast.com",
-                        "chatExtra": null,
-                        "chatEvent": null,
-                        "target": null
-                    }
-                ],
-                "isAd": true,
-                "imageSeq": 0,
-                "imageLink": "https://static.toastoven.net/toast/resources/img/logo_nhn_cloud_color.svg",
-                "fileId": "202110181916413GPOesOsxA0",
-                "autoSendYn": "Y",
-                "statsId": null,
-                "createDate": "2021-10-18 19:16:55.0",
-                "createUser": "a8cfe030-29c9-1157-cede-025355ac7022"
-            }
-        ],
-        "totalCount": 1
-    }
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-| header | Object |	헤더 영역 |
-| - resultCode |	Integer |	결과 코드 |
-| - resultMessage |	String | 결과 메시지 |
-| - isSuccessful |	Boolean | 성공 여부 |
-| body | Object | 본문 영역 |
-| - messages | Object | 메시지 리스트 |
-| - buttons | List | 버튼 순서 |
-| -- ordering | String | 버튼 순서 |
-| -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
-| -- name | String | 버튼 이름 |
-| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
-| -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
-| - requestId | String | 요청 ID |
-| - requestDate | String | 요청 날짜 |
-| - plusFriendId | String | 플러스 친구 ID |
-| - senderKey | String | 전송자 ID |
-| - masterStatusCode | String | 대량 발송 상태 코드 |
-| - content | String | 내용 |
-| - isAd | Boolean | 광고 여부 |
-| - imageSeq | d | 이미지 순서 |
-| - imageLink | Boolean | 이미지 URL |
-| - fileId | String | 첨부 파일 ID |
-| - autoSendYn | String | 자동 발송 여부 |
-| - statsId | String | 통계 ID |
-| - createDate | String | 생성 날짜 |
-| - createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
-
-
-### 대량 발송 대량 발송 수신자 목록 조회
-
-#### 요청
-[URL]
-```
-GET /friendtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-| appKey |	String |	고유의 앱키 |
-| requestId |	String |	요청 ID |
-
-[Header]
-
-```
-{
-  "X-Secret-Key": String
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-| X-Secret-Key | String | 고유의 시크릿 키 |
-
-
-|값|	타입| 최대 길이 |	필수|	설명|
-|---|---|---|---|---|
-| requestId | String | - | O | 요청 ID |
-| startRequestDate | String | - | X | 발송 날짜 시작 |
-| endRequestDate | String | - | X | 발송 날짜 종료 |
-| startCreateDate |	String| - |	X |	등록 날짜 시작 |
-| endCreateDate |	String| - |	X |	등록 날짜 종료 |
-| pageNum | optional, Integer | - | X | 페이지 번호 |
-| pageSize | optional, Integer | 1000 | X | 검색 수 |
-
-#### cURL
-```
-curl -X GET \
-'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients?requestId='"${REQUEST_ID}" \
--H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
-```
-
-#### 응답
-```
-{
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "success",
-        "isSuccessful": true
-    },
-    "body": {
-        "recipients": [
-            {
-                "requestId": "20210928152356O9CEcsKV2M2",
-                "recipientSeq": 1,
-                "recipientNo": "01012345678",
-                "requestDate": "2021-10-28 15:23:56.0",
-                "receiveDate": "2021-10-28 15:24:09.0",
-                "messageStatus": "COMPLETED",
-                "resultCode": "1000",
-                "resultCodeName": "성공"
-            }
-        ],
-        "totalCount": 1
-    }
-}
-```
-
-| 값 | 타입| 설명 |
-|---|---|---|
-| header | Object |	헤더 영역 |
-| - resultCode |	Integer |	결과 코드 |
-| - resultMessage |	String | 결과 메시지 |
-| - isSuccessful |	Boolean| 성공 여부 |
-| body | Object | 본문 영역 |
-| - recipients | List | 수신자 리스트 |
-| -- requestId | String | 요청 ID |
-| -- recipientSeq | String | 수신자 시퀀스 번호 |
-| -- recipientNo | String | 수신 번호 |
-| -- requestDate | String | 요청 날짜 |
-| -- receiveDate | String | 수신 날짜 |
-| -- messageStatus | String | 요청 상태 ( COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 )	|
-| -- resultCode | String | 수신 결과 코드 |
-| -- resultCodeName | String | 수신 결과 코드명 |
-| - totalCount | Integer | 총 개수 |
-
-### 대량 발송 대량 발송 수신자 조회
-
-#### 요청
-[URL]
-```
-GET /friendtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients/{recipientSeq}
-Content-Type: application/json;charset=UTF-8
-```
-
-[Path parameter]
-
-|값|	타입|	설명|
-|---|---|---|
-| appKey |	String | 고유의 앱키 |
-| requestId |	String | 요청 ID |
-| recipientSeq | String | 수신자 순서 |
-
-[Header]
-
-```
-{
-  "X-Secret-Key": String
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-|X-Secret-Key|	String|	고유의 시크릿 키 |
-
-
-|값|	타입| 최대 길이 |	필수|	설명|
-|---|---|---|---|---|
-| requestId | String | - | O | 요청 ID |
-| startRequestDate | String | - | X | 발송 날짜 시작 |
-| endRequestDate | String | - | X | 발송 날짜 종료 |
-| startCreateDate |	String| - |	X |	등록 날짜 시작 |
-| endCreateDate |	String| - |	X |	등록 날짜 종료 |
-
-
-#### cURL
-```
-curl -X GET \
-'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/1?requestId='"${REQUEST_ID}" \
--H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
-```
-
-#### 응답
-```
-{
-    "header": {
-        "resultCode": 0,
-        "resultMessage": "success",
-        "isSuccessful": true
-    },
-    "body": {
-        "requestId": "20210928152356O9CEcsKV2M2",
-        "recipientSeq": 1,
-        "plusFriendId": "@dofhdaxzrx45tsxm",
-        "senderKey": "0be23c29d485d6288798cda57062516354c7422",
-        "recipientNo": "01012345678",
-        "requestDate": "2021-10-18 19:16:55.0",
-        "receiveDate": "2021-10-18 19:17:38.0",
-        "content": "안녕하세요",
-        "messageStatus": "COMPLETED",
-        "resendStatus": "RSC01",
-        "resendStatusName": "대체 발송 미대상",
-        "resendRequestId": null,
-        "resendResultCode": null,
-        "resultCode": "1000",
-        "resultCodeName": "성공",
-        "imageSeq": 0,
-        "imageLink": null,
-        "buttons": [
-            {
-                "ordering": 1,
-                "type": "AL",
-                "name": "hello",
-                "linkMo": "https://naver.com",
-                "linkPc": "https://nhn.com",
-                "schemeIos": "https://payco.com",
-                "schemeAndroid": "https://toast.com",
-                "chatExtra": null,
-                "chatEvent": null,
-                "target": null
-            }
-        ],
-        "isAd": true,
-        "createDate": "2021-10-18 19:17:37.0"
-    }
-}
-```
-
-|값|	타입|	설명|
-|---|---|---|
-| header | Object |	헤더 영역 |
-| - resultCode |	Integer |	결과 코드 |
-| - resultMessage |	String | 결과 메시지 |
-| - isSuccessful |	Boolean| 성공 여부 |
-| body | Object | 본문 영역 |
-| - requestId | String | 요청 ID |
-| - plusFriendId | String | 플러스 친구 ID |
-| - senderKey | String | 발신 키(40자)|
-| - recipientNo | String | 수신 번호 |
-| - requestDate | String | 요청 날짜 |
-| - receiveDate | String | 수신 날짜 |
-| - content | String | 본문 |
-| - masterStatusCode | String | 대량 발송 상태 코드 |
-| - resendStatus | String |	대체 발송 상태 코드 (RSC01, RSC02, RSC03, RSC04, RSC05)<br>([[아래 대체 발송 상태 표](http://docs.toast.com/ko/Notification/KakaoTalk%20Bizmessage/ko/alimtalk-api-guide/#smslms)] 참고) |
-| - resendStatusName | String |	대체 발송 상태 코드명 |
-| - resendResultCode | String | 대체 발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
-| - resendRequestId | String | 대체 발송 SMS 요청 ID |
-| - resultCode | String |	수신 결과 코드 |
-| - resultCodeName | String |	수신 결과 코드명 |
-| - imageSeq | Integer | 이미지 순서 |
-| - imageLink | Integer | 이미지 URL |
-| - buttons | List | 버튼 순서 |
-| -- ordering | String | 버튼 순서 |
-| -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
-| -- name | String | 버튼 이름 |
-| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
-| -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
-| - isAD | Boolean | 광고 여부 |
-| - createDate | String | 생성 날짜 |
-
 
 ## イメージの管理
 
@@ -939,7 +572,7 @@ curl -X GET \
 [URL]
 
 ```
-POST  /friendtalk/v2.2/appkeys/{appkey}/images
+POST  /friendtalk/v2.0/appkeys/{appkey}/images
 Content-Type: multipart/form-data
 ```
 
@@ -968,7 +601,7 @@ Content-Type: multipart/form-data
 
 [例]
 ```
-curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
+curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
 ```
 
 #### レスポンス
@@ -1006,7 +639,7 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 [URL]
 
 ```
-GET  /friendtalk/v2.2/appkeys/{appkey}/images
+GET  /friendtalk/v2.0/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1035,7 +668,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/images?pageNum=1&pageSize=15"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images?pageNum=1&pageSize=15"
 ```
 
 #### レスポンス
@@ -1086,7 +719,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /friendtalk/v2.2/appkeys/{appkey}/images
+DELETE  /friendtalk/v2.0/appkeys/{appkey}/images
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1114,7 +747,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/images?imageSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/images?imageSeq=1,2,3"
 ```
 
 #### レスポンス
@@ -1143,7 +776,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-POST  /friendtalk/v2.2/appkeys/{appkey}/failback/appkey
+POST  /friendtalk/v2.0/appkeys/{appkey}/failback/appkey
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1178,7 +811,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
 ```
 
 #### レスポンス
@@ -1198,7 +831,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /friendtalk/v2.2/appkeys/{appkey}/failback
+POST  /friendtalk/v2.0/appkeys/{appkey}/failback
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1239,7 +872,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@플러스친구","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.0/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@플러스친구","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
 ```
 
 #### レスポンス

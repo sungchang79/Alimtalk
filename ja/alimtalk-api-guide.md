@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > お知らせトーク > API v2.1 Guide
+## Notification > KakaoTalk Bizmessage > お知らせトーク > API v2.2 Guide
 
 ## お知らせトーク
 
@@ -17,10 +17,11 @@
 </tbody>
 </table>
 
-## v2.1 API紹介
-1. 通知フリックテンプレート画像のアップロードAPIが追加されました。
-2. templateEmphasizeType中、'IMAGE'が追加されました。
-3. テンプレート照会時、templateImageName、templateImageUrlフィールドが追加されました。
+## v2.2 API紹介
+1. 알림톡 대량 발송 조회, 통계 조회 API가 추가되었습니다.
+2. 치환 메시지 발송 시, buttons 필드가 추가되었습니다.
+3. 전문 메시지 발송 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
+4. 메시지 조회 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
 
 ## 一般メッセージ
 
@@ -29,7 +30,7 @@
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/messages
+POST  /alimtalk/v2.2/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -71,6 +72,12 @@ Content-Type: application/json;charset=UTF-8
           "resendContent" : String,
           "resendSendNo" : String
         },
+        "buttons": [
+          "ordering": Integer,
+          "chatExtra": String,
+          "chatEvent": String,
+          "target": String
+        ],
         "recipientGroupingKey": String
     }],
     "messageOption": {
@@ -98,6 +105,11 @@ Content-Type: application/json;charset=UTF-8
 | -- resendTitle         | String  | X    | LMS代替送信タイトル(最大20文字)<br>(値がない場合は、プラスフレンドIDで再送信されます。) |
 | -- resendContent       | String  | X    | 代替送信内容(最大1000文字)<br>(値がない場合は、テンプレートの内容で再送信されます。) |
 | -- resendSendNo        | String  | X    | 代替送信発信番号(最大13桁)<br><span style="color:red">(SMSサービスに登録された発信番号ではない場合、代替送信が失敗することがあります。)</span> |
+| - buttons              | List    | X    | 버튼 추가 정보 |
+| -- ordering            | Integer | X    |	ボタン順序(ボタンがある場合は必須) |
+| -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - recipientGroupingKey | String  | X    | 受信者グルーピングキー(最大100文字)                       |
 | messageOption          | Object  | X    |	메시지 옵션                                           |
 | - price                | Integer | X    |	message(ユーザーに伝達されるメッセージ)内に含まれた価格/金額/決済金額(モーメント広告に該当) |
@@ -110,7 +122,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
 ```
 
 #### レスポンス
@@ -159,7 +171,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/raw-messages
+POST  /alimtalk/v2.2/appkeys/{appkey}/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -200,7 +212,10 @@ Content-Type: application/json;charset=UTF-8
                     "linkMo": String,
                     "linkPc": String,
                     "schemeIos": String,
-                    "schemeAndroid": String
+                    "schemeAndroid": String,
+                    "chatExtra": String,
+                    "chatEvent": String,
+                    "target": String
                 }
             ],
             "resendParameter": {
@@ -238,6 +253,9 @@ Content-Type: application/json;charset=UTF-8
 | -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
 | -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大200文字)       |
 | -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大200文字)   |
+| -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - resendParameter      | Object  | X    | 代替発送情報 |
 | -- isResend            | boolean | X    | 送信失敗時、代替送信するかどうか<br>コンソールで送信失敗設定をした時、デフォルト設定は再送信になっています。 |
 | -- resendType          | String  | X    | 代替送信タイプ(SMS、LMS)<br>値がない場合は、テンプレート本文の長さに応じてタイプが決まります。 |
@@ -257,7 +275,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/raw-messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/raw-messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
 ```
 
 #### レスポンス
@@ -308,7 +326,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/messages
+GET  /alimtalk/v2.2/appkeys/{appkey}/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -386,7 +404,10 @@ Content-Type: application/json;charset=UTF-8
           "linkMo" :  String,
           "linkPc": String,
           "schemeIos": String,
-          "schemeAndroid": String
+          "schemeAndroid": String,
+          "chatExtra": String,
+          "chatEvent": String,
+          "target": String
         }
       ],
       "senderGroupingKey": String,
@@ -430,13 +451,16 @@ Content-Type: application/json;charset=UTF-8
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos               | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid           | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
+| --- chatExtra               | String  | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| --- chatEvent               | String  | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| --- target                  | String  | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | -- senderGroupingKey        | String  | 発信グルーピングキー                            |
 | -- recipientGroupingKey     | String  | 受信者グルーピングキー                           |
 | - totalCount                | Integer | 総個数                              |
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### SMS/LMS再送信ステータス
@@ -455,7 +479,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v2.2/appkeys/{appkey}/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -479,7 +503,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/messages/{requestId}/{recipientSeq}"
 ```
 
 #### レスポンス
@@ -521,7 +545,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "linkMo" :  String,
           "linkPc": String,
           "schemeIos": String,
-          "schemeAndroid": String
+          "schemeAndroid": String,
+          "chatExtra": String,
+          "chatEvent": String,
+          "target": String
         }
       ],
       "messageOption": {
@@ -568,6 +595,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | -- schemeIos           | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | -- schemeAndroid       | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
+| -- chatExtra           | String  | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| -- chatEvent           | String  | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| -- target              | String  | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - messageOption        | Object  |	메시지 옵션                                           |
 | -- price               | Integer |	message(ユーザーに伝達されるメッセージ)内に含まれた価格/金額/決済金額(モーメント広告に該当) |
 | -- currencyType        | String  |	message(ユーザーに伝達されるメッセージ)内に含まれた価格/金額/決済金額(モーメント広告に該当) |
@@ -592,7 +622,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/auth/messages
+POST  /alimtalk/v2.2/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -633,6 +663,12 @@ Content-Type: application/json;charset=UTF-8
           "resendContent" : String,
           "resendSendNo" : String
         },
+        "buttons": [
+          "ordering": Integer,
+          "chatExtra": String,
+          "chatEvent": String,
+          "target": String
+        ],
         "recipientGroupingKey": String
     }],
     "messageOption": {
@@ -660,6 +696,11 @@ Content-Type: application/json;charset=UTF-8
 | -- resendTitle         | String  | X    | LMS代替送信タイトル(最大20文字)<br>(値がない場合は、プラスフレンドIDで再送信されます。) |
 | -- resendContent       | String  | X    | 代替送信内容(最大1000文字)<br>(値がない場合は、テンプレートの内容で再送信されます。) |
 | -- resendSendNo        | String  | X    | 代替送信発信番号(最大13桁)<br><span style="color:red">(SMSサービスに登録された発信番号ではない場合、代替送信が失敗することがあります。)</span> |
+| - buttons              | List    | X    | 버튼 추가 정보 |
+| -- ordering            | Integer | X    |	ボタン順序(ボタンがある場合は必須) | 
+| -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - recipientGroupingKey | String  | X    | 受信者グルーピングキー(最大100文字)                       |
 | messageOption          | Object  | X    |	메시지 옵션                                           |
 | - price                | Integer | X    |	message(ユーザーに伝達されるメッセージ)内に含まれた価格/金額/決済金額(モーメント広告に該当) |
@@ -671,7 +712,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/auth/messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/auth/messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","templateParameter":{"{日本語識別子フィールド}":"{置換データ}"}}]}'
 ```
 
 #### レスポンス
@@ -720,7 +761,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/auth/raw-messages
+POST  /alimtalk/v2.2/appkeys/{appkey}/auth/raw-messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -762,7 +803,10 @@ Content-Type: application/json;charset=UTF-8
                     "linkMo": String,
                     "linkPc": String,
                     "schemeIos": String,
-                    "schemeAndroid": String
+                    "schemeAndroid": String,
+                    "chatExtra": String,
+                    "chatEvent": String,
+                    "target": String
                 }
             ],
             "resendParameter": {
@@ -801,6 +845,9 @@ Content-Type: application/json;charset=UTF-8
 | -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
 | -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大200文字)       |
 | -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大200文字)   |
+| -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - resendParameter      | Object  | X    | 代替発送情報 |
 | -- isResend            | boolean | X    | 送信失敗時、代替送信するかどうか<br>コンソールで送信失敗設定をした時、デフォルト設定は再送信になっています。 |
 | -- resendType          | String  | X    | 代替送信タイプ(SMS、LMS)<br>値がない場合は、テンプレート本文の長さに応じてタイプが決まります。 |
@@ -817,7 +864,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/auth/raw-messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/auth/raw-messages -d '{"senderKey":"{発信キー}","templateCode":"{テンプレートコード}","requestDate":"2018-10-01 00:00","recipientList":[{"recipientNo":"{受信番号}","content":"{内容}","buttons":[{"ordering":"{ボタン順序}","type":"{ボタンタイプ}","name":"{ボタン名}","linkMo":"{モバイルWebリンク}"}]}]}'
 ```
 
 #### レスポンス
@@ -868,7 +915,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/auth/messages
+GET  /alimtalk/v2.2/appkeys/{appkey}/auth/messages
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -946,7 +993,10 @@ Content-Type: application/json;charset=UTF-8
           "linkMo" :  String,
           "linkPc": String,
           "schemeIos": String,
-          "schemeAndroid": String
+          "schemeAndroid": String,
+          "chatExtra": String,
+          "chatEvent": String,
+          "target": String
         }
       ],
       "senderGroupingKey": String,
@@ -990,13 +1040,16 @@ Content-Type: application/json;charset=UTF-8
 | --- linkPc                  | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | --- schemeIos               | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | --- schemeAndroid           | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
+| --- chatExtra               | String  | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| --- chatEvent               | String  | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| --- target                  | String  | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | -- senderGroupingKey        | String  | 発信グルーピングキー                            |
 | -- recipientGroupingKey     | String  | 受信者グルーピングキー                           |
 | - totalCount                | Integer | 総個数                              |
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/auth/messages?startRequestDate=2018-05-01%20:00&endRequestDate=2018-05-30%20:59"
 ```
 
 #### SMS/LMS再送信ステータス
@@ -1015,7 +1068,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
+GET  /alimtalk/v2.2/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1039,7 +1092,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/auth/messages/{requestId}/{recipientSeq}"
 ```
 
 #### レスポンス
@@ -1081,7 +1134,10 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
           "linkMo" :  String,
           "linkPc": String,
           "schemeIos": String,
-          "schemeAndroid": String
+          "schemeAndroid": String,
+          "chatExtra": String,
+          "chatEvent": String,
+          "target": String
         }
       ],
       "messageOption": {
@@ -1131,6 +1187,9 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | -- linkPc              | String  | PC Webリンク(WLタイプの場合は任意フィールド)                 |
 | -- schemeIos           | String  | iOSアプリリンク(ALタイプの場合は必須フィールド)                |
 | -- schemeAndroid       | String  | Androidアプリリンク(ALタイプの場合は必須フィールド)            |
+| -- chatExtra           | String  | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
+| -- chatEvent           | String  | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
+| -- target              | String  | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
 | - messageOption        | Object  |	메시지 옵션                                           |
 | -- price               | Integer |	message(ユーザーに伝達されるメッセージ)内に含まれた価格/金額/決済金額(モーメント広告に該当) |
 | -- currencyType        | String  |	message(ユーザーに伝達されるメッセージ)内に含まれた価格/金額/決済金額(モーメント広告に該当) |
@@ -1145,7 +1204,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-DELETE  /alimtalk/v2.1/appkeys/{appkey}/messages/{requestId}
+DELETE  /alimtalk/v2.2/appkeys/{appkey}/messages/{requestId}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1194,7 +1253,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
 ```
 
 ### メッセージ結果アップデートの照会
@@ -1204,7 +1263,7 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/message-results
+GET  /alimtalk/v2.2/appkeys/{appkey}/message-results
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1315,8 +1374,383 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
+
+## 대량 발송
+### 대량 발송 요청 목록 조회
+
+#### 요청
+[URL]
+```
+GET /alimtalk/v2.2/appkeys/{appKey}/mass-messages
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+|appKey|	String|	고유의 앱키|
+
+[Header]
+
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|X-Secret-Key|	String|	고유의 시크릿 키 |
+
+[Query parameter]
+* requestId 또는 startRequestDate + endRequestDate 또는 startCreateDate + endCreateDate는 필수입니다.
+
+|값|	타입| 최대 길이 |	필수|	설명|
+|---|---|---|---|---|
+| requestId | String | - | O | 요청 ID |
+| startRequestDate | String | - | O | 발송 날짜 시작 |
+| endRequestDate | String | - | O | 발송 날짜 종료 |
+| startCreateDate |	String| - |	O |	등록 날짜 시작 |
+| endCreateDate |	String| - |	O |	등록 날짜 종료 |
+| pageNum | optional, Integer | - | X | 페이지 번호 |
+| pageSize | optional, Integer | 1000 | X | 검색 수 |
+
+#### cURL
+```
+curl -X GET \
+'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages?requestId='"${REQUEST_ID}" \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Secret-Key:{secretkey}'
+```
+
+#### 응답
+```
+{
+  "header": {
+    "resultCode": 0,
+    "resultMessage": "success",
+    "isSuccessful": true
+  },
+  "messages": [
+    {
+      "requestId": "20211007095656Ad1BIJUiIg1",
+      "requestDate": "2021-10-07 09:56:56.0",
+      "plusFriendId": "@toast_ktb",
+      "senderKey": "63597b86904acf0e12aa8e23d0f972e43d857317",
+      "templateCode": "targetButton",
+      "masterStatusCode": "COMPLETE",
+      "content": "#{content}",
+      "buttons": [
+        {
+          "ordering": 1,
+          "type": "WL",
+          "name": "웹 링크",
+          "linkMo": "https://nhn.com",
+          "linkPc": "https://toast.com",
+          "schemeIos": null,
+          "schemeAndroid": null,
+          "chatExtra": null,
+          "chatEvent": null
+        },
+        {
+          "ordering": 2,
+          "type": "AL",
+          "name": "앱 링크",
+          "linkMo": "https://payco.com",
+          "linkPc": "https://toast.com",
+          "schemeIos": null,
+          "schemeAndroid": "daumapps://open",
+          "chatExtra": null,
+          "chatEvent": null
+        }
+      ],
+      "fileId": "20211007095651hYwr9oZDAS0",
+      "templateExtra": "1",
+      "templateAd": "1",
+      "templateTitle": "1",
+      "templateSubtitle": "1",
+      "autoSendYn": "Y",
+      "statsId": "1",
+      "createDate": "2021-10-07 09:56:56.0",
+      "createUser": "6f4f6280-ef5d-11e7-9ede-005056ac7022"
+    }
+  ],
+  "totalCount": 1
+
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| header | Object |	헤더 영역 |
+| - resultCode |	Integer |	결과 코드 |
+| - resultMessage |	String | 결과 메시지 |
+| - isSuccessful |	Boolean | 성공 여부 |
+| body | Object | 본문 영역 |
+| - messages | Object | 메시지 리스트 |
+| - requestId | String | 요청 ID |
+| - requestDate | String | 요청 날짜 |
+| - createDate | String | 생성 날짜 |
+| - createUser | String | 생성 날짜 |
+| - plusFriendId | String | 플러스 친구 ID |
+| - senderKey | String| 발신 키 (40자) |
+| - masterStatusCode | String | 대량 발송 상태 코드 |
+| - content | String | 내용 |
+| - buttons | List | 버튼 리스트 |
+| -- ordering | String | 버튼 순서 |
+| -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
+| -- name | String | 버튼 이름 |
+| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
+| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
+| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
+| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
+| -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
+| -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
+| - fileId | String | 첨부 파일 ID |
+| - templateCode |	String | 템플릿 코드 (최대 20자) |
+| - templateExtra | String | 템플릿 부가 정보(템플릿 메시지 유형이 [부가 정보형/복합형]일 경우 필수) |
+| - templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구(템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
+| - tempalteTitle| String | 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+| - templateSubtitle| String | 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+| - statsId | String | 통계 ID |
+| - autoSendYn | String | 자동 발송 여부 |
+
+
+### 대량 발송 대량 발송 수신자 목록 조회
+
+#### 요청
+[URL]
+```
+GET /alimtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+| appKey |	String |	고유의 앱키 |
+| requestId |	String |	요청 ID |
+
+[Header]
+
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| X-Secret-Key |	String|	고유의 시크릿 키 |
+
+
+|값|	타입| 최대 길이 |	필수|	설명|
+|---|---|---|---|---|
+| requestId | String | - | O | 요청 ID |
+| startRequestDate | String | - | X | 발송 날짜 시작 |
+| endRequestDate | String | - | X | 발송 날짜 종료 |
+| startCreateDate |	String| - |	X |	등록 날짜 시작 |
+| endCreateDate |	String| - |	X |	등록 날짜 종료 |
+| pageNum | optional, Integer | - | X | 페이지 번호 |
+| pageSize | optional, Integer | 1000 | X | 검색 수 |
+
+#### cURL
+```
+curl -X GET \
+'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients?requestId='"${REQUEST_ID}" \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Secret-Key:{secretkey}'
+```
+
+#### 응답
+```
+{
+    "header": {
+        "resultCode": 0,
+        "resultMessage": "success",
+        "isSuccessful": true
+    },
+    "body": {
+        "messages": [
+            {
+                "requestId": "20210928152356O9CEcsKV2M2",
+                "recipientSeq": 1,
+                "recipientNo": "01012345678",
+                "requestDate": "2021-10-28 15:23:56.0",
+                "receiveDate": "2021-10-28 15:24:09.0",
+                "messageStatus": "COMPLETED",
+                "resultCode": "1000",
+                "resultCodeName": "성공"
+            }
+        ],
+        "totalCount": 1
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| header | Object |	헤더 영역 |
+| - resultCode |	Integer |	결과 코드 |
+| - resultMessage |	String | 결과 메시지 |
+| - isSuccessful |	Boolean | 성공 여부 |
+| body | Object | 본문 영역 |
+| - messages | Object | 메시지 리스트 |
+| -- requestId | String | 요청 ID |
+| -- recipientSeq | String | 수신자 시퀀스 번호 |
+| -- recipientNo | String | 수신 번호 |
+| -- requestDate | String | 요청 날짜 |
+| -- receiveDate | String | 수신 날짜 |
+| -- messageStatus | String | 메시지 상태 |
+| -- resultCode | String | 결과 코드 |
+| -- resultCodeName | String | 결과 코드 내용 |
+| - totalCount | Integer | 총 개수 |
+
+### 대량 발송 대량 발송 수신자 조회
+
+#### 요청
+[URL]
+```
+GET /alimtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients/{recipientSeq}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+|값|	타입|	설명|
+|---|---|---|
+| appKey |	String | 고유의 앱키 |
+| requestId |	String | 요청 ID |
+| recipientSeq | String | 수신자 순서 |
+
+[Header]
+
+```
+{
+  "X-Secret-Key": String
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+|X-Secret-Key|	String|	고유의 시크릿 키 |
+
+
+|값|	타입| 최대 길이 |	필수|	설명|
+|---|---|---|---|---|
+| requestId | String | - | O | 요청 ID |
+| startRequestDate | String | - | X | 발송 날짜 시작 |
+| endRequestDate | String | - | X | 발송 날짜 종료 |
+| startCreateDate |	String| - |	X |	등록 날짜 시작 |
+| endCreateDate |	String| - |	X |	등록 날짜 종료 |
+| pageNum | optional, Integer | - | X | 페이지 번호 |
+| pageSize | optional, Integer | 1000 | X | 검색 수 |
+
+#### cURL
+```
+curl -X GET \
+'https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/1?requestId='"${REQUEST_ID}" \
+-H 'Content-Type: application/json;charset=UTF-8' \
+-H 'X-Secret-Key:{secretkey}'
+```
+
+#### 응답
+```
+{
+    "header": {
+        "resultCode": 0,
+        "resultMessage": "success",
+        "isSuccessful": true
+    },
+    "body": {
+        "requestId": "20210928152356O9CEcsKV2M2",
+        "recipientSeq": 1,
+        "plusFriendId": "@toast_ktb",
+        "senderKey": "63597b86904acf0e12aa8e23d0f972e43d857317",
+        "templateCode": "helloworld",
+        "recipientNo": "01012345678",
+        "content": "helloworld2",
+        "templateTitle": null,
+        "templateSubtitle": null,
+        "templateExtra": null,
+        "templateAd": null,
+        "requestDate": "2021-10-28 15:23:56.0",
+        "receiveDate": "2021-10-28 15:24:56.0",
+        "createDate": "2021-10-28 15:22:56.0",
+        "resendStatus": "RSC01",
+        "resendStatusName": "대체 발송 미대상",
+        "resendResultCode": null,
+        "resendRequestId": null,
+        "messageStatus": "COMPLETED",
+        "resultCode": "1000",
+        "resultCodeName": "성공",
+        "createUser": "a9cfd033-e9a9-11e7-9ede-005056ac7022",
+        "buttons": [
+            {
+                "ordering": 1,
+                "type": "WL",
+                "name": "웹 링크",
+                "linkMo": "https://nhn.com",
+                "linkPc": "https://toast.com",
+                "schemeIos": null,
+                "schemeAndroid": null,
+                "chatExtra": null,
+                "chatEvent": null
+                "target": null
+            }
+        ],
+        "messageOption": null
+    }
+}
+```
+
+|값|	타입|	설명|
+|---|---|---|
+| header | Object |	헤더 영역 |
+| - resultCode |	Integer |	결과 코드 |
+| - resultMessage |	String | 결과 메시지 |
+| - isSuccessful |	Boolean | 성공 여부 |
+| body | Object | 본문 영역 |
+| - requestId | String | 요청 ID |
+| - recipientSeq | String | 수신자 시퀀스 번호 |
+| - plusFriendId | String | 플러스 친구 ID |
+| - senderKey | String | 전송자 ID |
+| - recipientNo | String | 수신 번호 |
+| - content | String | 내용 |
+| - templateCode |	String | 템플릿 코드 (최대 20자) |
+| - templateExtra | String | 템플릿 부가 정보(템플릿 메시지 유형이 [부가 정보형/복합형]일 경우 필수) |
+| - templateAd | String | 템플릿 내 수신 동의 요청 또는 간단한 광고 문구(템플릿 메시지 유형이 [광고 추가형/복합형]일 경우 필수) |
+| - tempalteTitle| String | 템플릿 제목 (최대 50자, Android : 2줄, 23자 이상 말줄임 처리, IOS : 2줄, 27자 이상 말줄임 처리) |
+| - templateSubtitle| String | 템플릿 보조 문구 (최대 50자, Android : 18자 이상 말줄임 처리, IOS : 21자 이상 말줄임 처리) |
+| - requestDate | String | 요청 날짜 |
+| - receiveDate | String | 수신 날짜 |
+| - createDate | String | 생성 날짜 |
+| - resendStatus | String | 대체 발송 상태 코드 |
+| - resendStatusName | String | 대체 발송 상태명 |
+| - resendRequestId | String | 대체 발송 요청 ID |
+| - resendResultCode | String | 대체 발송 결과 코드 |
+| - masterStatusCode | String | 대량 발송 상태 코드 |
+| - resultCode | String | 결과 상태 코드 |
+| - resultCodeName | String | 결과 상태명 |
+| - createUser | String | 생성 유저 ID |
+| - imageSeq | Integer | 이미지 순서 |
+| - imageLink | Integer | 이미지 URL |
+| - buttons | List | 버튼 리스트 |
+| -- ordering | String | 버튼 순서 |
+| -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
+| -- name | String | 버튼 이름 |
+| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
+| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
+| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
+| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
+| -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
+| -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
+| - messageOption | Boolean | 메시지 옵션 |
+
 
 ## テンプレート
 
@@ -1325,7 +1759,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/template/categories
+POST  /alimtalk/v2.2/appkeys/{appkey}/template/categories
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1391,7 +1825,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
+POST  /alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1490,7 +1924,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+PUT  /alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1588,7 +2022,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-DELETE  /alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
+DELETE  /alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1630,7 +2064,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-PUT  /alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
+PUT  /alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1687,7 +2121,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
+POST  /alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/comments_file
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1748,7 +2182,7 @@ Content-Type: application/json;charset=UTF-8
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/templates
+GET  /alimtalk/v2.2/appkeys/{appkey}/templates
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1788,7 +2222,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/templates?plusFriendId={発信キー}&templateStatus={テンプレートステータスコード}"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/templates?plusFriendId={発信キー}&templateStatus={テンプレートステータスコード}"
 ```
 
 #### レスポンス
@@ -1900,7 +2334,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-GET  /alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
+GET  /alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -1924,7 +2358,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
+curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/plus-friends/{plusFriendId}/templates/{templateCode}/modifications"
 ```
 
 #### レスポンス
@@ -2036,7 +2470,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/template-image
+POST  /alimtalk/v2.2/appkeys/{appkey}/template-image
 Content-Type: multipart/form-data
 ```
 
@@ -2064,7 +2498,7 @@ Content-Type: multipart/form-data
 
 [例]
 ```
-curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/template-image" -F "file=@alimtalk-template-image.jpeg"
+curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/template-image" -F "file=@alimtalk-template-image.jpeg"
 ```
 
 #### レスポンス
@@ -2098,7 +2532,7 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/failback/appkey
+POST  /alimtalk/v2.2/appkeys/{appkey}/failback/appkey
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2134,7 +2568,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
 ```
 
 #### レスポンス
@@ -2154,7 +2588,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 [URL]
 
 ```
-POST  /alimtalk/v2.1/appkeys/{appkey}/failback
+POST  /alimtalk/v2.2/appkeys/{appkey}/failback
 Content-Type: application/json;charset=UTF-8
 ```
 
@@ -2194,7 +2628,7 @@ Content-Type: application/json;charset=UTF-8
 
 [例]
 ```
-curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.1/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@プラスフレンド","isResend": true,"resendSendNo": "01012341234" }
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/alimtalk/v2.2/appkeys/{appkey}/failback/appkey -d '{"plusFriendId": "@プラスフレンド","isResend": true,"resendSendNo": "01012341234" }
 ```
 
 #### レスポンス

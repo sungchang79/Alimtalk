@@ -1,4 +1,18 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2021.10.26.
+* [API] 알림톡/친구톡 대량 발송 조회 API 추가
+    * 알림톡/친구톡 대량 발송 조회 API가 추가되었습니다.
+* [API] 통계 API 추가
+    * 통계 API가 추가되었습니다.
+* [API] chatExtra, chatEvent 필드가 추가
+    * 메시지 발송 시, BC(상담톡 전환) 타입 버튼에 chatExtra 필드가 추가되었습니다.
+    * 메시지 발송 시, BT(봇 전환) 타입 버튼에 chatExtra, chatEvent 필드가 추가되었습니다.
+* [API] 웹 링크 타입 버튼에 아웃링크 기능
+    * 버튼 클릭 시, 인앱 브라우져가 아닌 모바일 기기의 브라우져로 열 수 있는 기능
+    * 메시지 발송 시, target 필드가 추가되어, 아웃링크 기능이 추가되었습니다.
+* [API] 앱 링크 타입 버튼 linkMo, linkPc 필드 추가
+    * 앱 링크 타입 버튼 linkMo, linkPc 필드 추가되었습니다.
+
 ### 2021.08.24.
 * [Console] 이미지 알림톡 기능
     * 이미지 알림톡 기능이 추가되었습니다.
@@ -18,8 +32,8 @@
 * [Console] 템플릿 상태/문의 내용 변경 시, 웹훅 기능
     * 템플릿 상태/문의 내용 변경 시, 웹훅 기능이 추가되었습니다.
 * [API] 발송 시, price, currencyType 필드 추가
-    * 알림톡 광고 모먼트 필드인 price, currencyType 필드 추가되었습니다.
-    * 알림톡 발송 API 및 단건 조회 API messageOption 필드 추가되었습니다.
+    * 알림톡 광고 모먼트 필드인 price, currencyType 필드가 추가되었습니다.
+    * 알림톡 발송 API 및 단건 조회 API messageOption 필드가 추가되었습니다.
 
 ### 2021.04.27
 * [Console]同一発信プロフィール登録機能を追加
