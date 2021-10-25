@@ -508,7 +508,7 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
 
-## 대량 발송
+
 ### 대량 발송 요청 목록 조회
 
 #### 요청
@@ -554,51 +554,51 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
 ```
 {
     "header": {
-        "resultCode": 0,
-        "resultMessage": "success",
-        "isSuccessful": true
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
     },
     "body": {
         "messages": [
             {
-                "requestId": "20211018191655AZC1lfliZt1",
-                "requestDate": "2021-10-18 19:16:55.0",
-                "plusFriendId": "@dofhdaxzrx45tsxm",
-                "senderKey": "0be23c29d485d6288798cda57062516354c7422",
-                "masterStatusCode": "COMPLETE",
-                "content": "안녕하세요",
+                "requestId": String,
+                "requestDate": String,
+                "plusFriendId": String,
+                "senderKey": String,
+                "masterStatusCode": String,
+                "content": String,
                 "buttons": [
                     {
-                        "ordering": 1,
-                        "type": "AL",
-                        "name": "hello",
-                        "linkMo": "https://naver.com",
-                        "linkPc": "https://nhn.com",
-                        "schemeIos": "https://payco.com",
-                        "schemeAndroid": "https://toast.com",
-                        "chatExtra": null,
-                        "chatEvent": null,
-                        "target": null
+                        "ordering": Integer,
+                        "type": String,
+                        "name": String,
+                        "linkMo": String,
+                        "linkPc": String,
+                        "schemeIos": String,
+                        "schemeAndroid": String,
+                        "chatExtra": String,
+                        "chatEvent": String,
+                        "target": String
                     }
                 ],
-                "isAd": true,
-                "imageSeq": 0,
-                "imageLink": "https://static.toastoven.net/toast/resources/img/logo_nhn_cloud_color.svg",
-                "fileId": "202110181916413GPOesOsxA0",
-                "autoSendYn": "Y",
-                "statsId": null,
-                "createDate": "2021-10-18 19:16:55.0",
-                "createUser": "a8cfe030-29c9-1157-cede-025355ac7022"
+                "isAd": Boolean,
+                "imageSeq": Integer,
+                "imageLink": String,
+                "fileId": String,
+                "autoSendYn": String,
+                "statsId": String,
+                "createDate": String,
+                "createUser": String
             }
         ],
-        "totalCount": 1
+        "totalCount": Integer
     }
 }
 ```
@@ -611,30 +611,32 @@ curl -X GET \
 | - isSuccessful |	Boolean | 성공 여부 |
 | body | Object | 본문 영역 |
 | - messages | Object | 메시지 리스트 |
-| - buttons | List | 버튼 순서 |
-| -- ordering | String | 버튼 순서 |
-| -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
-| -- name | String | 버튼 이름 |
-| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
-| -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
-| - requestId | String | 요청 ID |
-| - requestDate | String | 요청 날짜 |
-| - plusFriendId | String | 플러스 친구 ID |
-| - senderKey | String | 전송자 ID |
-| - masterStatusCode | String | 대량 발송 상태 코드 |
-| - content | String | 내용 |
-| - isAd | Boolean | 광고 여부 |
-| - imageSeq | d | 이미지 순서 |
-| - imageLink | Boolean | 이미지 URL |
-| - fileId | String | 첨부 파일 ID |
-| - autoSendYn | String | 자동 발송 여부 |
-| - statsId | String | 통계 ID |
-| - createDate | String | 생성 날짜 |
-| - createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| -- requestId | String | 요청 ID |
+| -- requestDate | String | 요청 날짜 |
+| -- plusFriendId | String | 플러스 친구 ID |
+| -- senderKey | String | 전송자 ID |
+| -- masterStatusCode | String | 대량 발송 상태 코드 (WAIT, READY, SENDREADY, SENDWAIT, SENDING, COMPLETE, CANCEL, FAIL) |
+| -- content | String | 내용 |
+| -- buttons | List | 버튼 순서 |
+| --- ordering | String | 버튼 순서 |
+| --- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
+| --- name | String | 버튼 이름 |
+| --- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
+| --- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
+| --- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
+| --- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
+| --- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
+| --- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
+| --- target|	String|	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
+| -- isAd | Boolean | 광고 여부 |
+| -- imageSeq | Integer | 이미지 순서 |
+| -- imageLink | Boolean | 이미지 URL |
+| -- fileId | String | 첨부 파일 ID |
+| -- autoSendYn | String | 자동 발송 여부 |
+| -- statsId | String | 통계 ID |
+| -- createDate | String | 생성 날짜 |
+| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| - totalCount | Integer | 총 개수 |
 
 
 ### 대량 발송 대량 발송 수신자 목록 조회
@@ -681,31 +683,31 @@ Content-Type: application/json;charset=UTF-8
 curl -X GET \
 'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
 ```
 {
     "header": {
-        "resultCode": 0,
-        "resultMessage": "success",
-        "isSuccessful": true
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
     },
     "body": {
         "recipients": [
             {
-                "requestId": "20210928152356O9CEcsKV2M2",
-                "recipientSeq": 1,
-                "recipientNo": "01012345678",
-                "requestDate": "2021-10-28 15:23:56.0",
-                "receiveDate": "2021-10-28 15:24:09.0",
-                "messageStatus": "COMPLETED",
-                "resultCode": "1000",
-                "resultCodeName": "성공"
+                "requestId": String,
+                "recipientSeq": Integer,
+                "recipientNo": String,
+                "requestDate": String,
+                "receiveDate": String,
+                "messageStatus": String,
+                "resultCode": String,
+                "resultCodeName": String
             }
         ],
-        "totalCount": 1
+        "totalCount": Integer
     }
 }
 ```
@@ -719,11 +721,11 @@ curl -X GET \
 | body | Object | 본문 영역 |
 | - recipients | List | 수신자 리스트 |
 | -- requestId | String | 요청 ID |
-| -- recipientSeq | String | 수신자 시퀀스 번호 |
+| -- recipientSeq | Integer | 수신자 시퀀스 번호 |
 | -- recipientNo | String | 수신 번호 |
 | -- requestDate | String | 요청 날짜 |
 | -- receiveDate | String | 수신 날짜 |
-| -- messageStatus | String | 요청 상태 ( COMPLETED -> 성공, FAILED -> 실패, CANCEL -> 취소 )	|
+| -- messageStatus | String | 대량 수신자 발송 상태 코드 (READY, COMPLETED, FAILED, CANCEL) |
 | -- resultCode | String | 수신 결과 코드 |
 | -- resultCodeName | String | 수신 결과 코드명 |
 | - totalCount | Integer | 총 개수 |
@@ -770,53 +772,53 @@ Content-Type: application/json;charset=UTF-8
 #### cURL
 ```
 curl -X GET \
-'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/1?requestId='"${REQUEST_ID}" \
+'https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appKey}/'"${APP_KEY}"'/mass-messages/recipients/${RECIPIENT_SEQ}?requestId='"${REQUEST_ID}" \
 -H 'Content-Type: application/json;charset=UTF-8' \
--H 'X-Secret-Key:{secretkey}' 
+-H 'X-Secret-Key:{secretkey}'
 ```
 
 #### 응답
 ```
 {
     "header": {
-        "resultCode": 0,
-        "resultMessage": "success",
-        "isSuccessful": true
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
     },
     "body": {
-        "requestId": "20210928152356O9CEcsKV2M2",
-        "recipientSeq": 1,
-        "plusFriendId": "@dofhdaxzrx45tsxm",
-        "senderKey": "0be23c29d485d6288798cda57062516354c7422",
-        "recipientNo": "01012345678",
-        "requestDate": "2021-10-18 19:16:55.0",
-        "receiveDate": "2021-10-18 19:17:38.0",
-        "content": "안녕하세요",
-        "messageStatus": "COMPLETED",
-        "resendStatus": "RSC01",
-        "resendStatusName": "대체 발송 미대상",
-        "resendRequestId": null,
-        "resendResultCode": null,
-        "resultCode": "1000",
-        "resultCodeName": "성공",
-        "imageSeq": 0,
-        "imageLink": null,
+        "requestId": String,
+        "recipientSeq": Integer,
+        "plusFriendId": String,
+        "senderKey": String,
+        "recipientNo": String,
+        "requestDate": String,
+        "receiveDate": String,
+        "content": String,
+        "messageStatus": String,
+        "resendStatus": String,
+        "resendStatusName": String,
+        "resendRequestId": String,
+        "resendResultCode": String,
+        "resultCode": String,
+        "resultCodeName": String,
+        "imageSeq": Integer,
+        "imageLink": String,
         "buttons": [
             {
-                "ordering": 1,
-                "type": "AL",
-                "name": "hello",
-                "linkMo": "https://naver.com",
-                "linkPc": "https://nhn.com",
-                "schemeIos": "https://payco.com",
-                "schemeAndroid": "https://toast.com",
-                "chatExtra": null,
-                "chatEvent": null,
-                "target": null
+                "ordering": Integer,
+                "type": String,
+                "name": String,
+                "linkMo": String,
+                "linkPc": String,
+                "schemeIos": String,
+                "schemeAndroid": String,
+                "chatExtra": String,
+                "chatEvent": String,
+                "target": String
             }
         ],
-        "isAd": true,
-        "createDate": "2021-10-18 19:17:37.0"
+        "isAd": Boolean,
+        "createDate": String
     }
 }
 ```
@@ -829,17 +831,18 @@ curl -X GET \
 | - isSuccessful |	Boolean| 성공 여부 |
 | body | Object | 본문 영역 |
 | - requestId | String | 요청 ID |
+| - recipientSeq | Integer | 수신자 시퀀스 번호 |
 | - plusFriendId | String | 플러스 친구 ID |
 | - senderKey | String | 발신 키(40자)|
 | - recipientNo | String | 수신 번호 |
 | - requestDate | String | 요청 날짜 |
 | - receiveDate | String | 수신 날짜 |
 | - content | String | 본문 |
-| - masterStatusCode | String | 대량 발송 상태 코드 |
+| - messageStatus | String | 대량 수신자 발송 상태 코드 (READY, COMPLETED, FAILED, CANCEL) |
 | - resendStatus | String |	대체 발송 상태 코드 (RSC01, RSC02, RSC03, RSC04, RSC05)<br>([[아래 대체 발송 상태 표](http://docs.toast.com/ko/Notification/KakaoTalk%20Bizmessage/ko/alimtalk-api-guide/#smslms)] 참고) |
 | - resendStatusName | String |	대체 발송 상태 코드명 |
-| - resendResultCode | String | 대체 발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
 | - resendRequestId | String | 대체 발송 SMS 요청 ID |
+| - resendResultCode | String | 대체 발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
 | - resultCode | String |	수신 결과 코드 |
 | - resultCodeName | String |	수신 결과 코드명 |
 | - imageSeq | Integer | 이미지 순서 |
@@ -854,9 +857,9 @@ curl -X GET \
 | -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
 | -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
 | -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
-| - isAD | Boolean | 광고 여부 |
+| -- target|	String|	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
+| - isAd | Boolean | 광고 여부 |
 | - createDate | String | 생성 날짜 |
-
 
 ## Image Management
 
