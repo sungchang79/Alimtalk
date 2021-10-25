@@ -73,10 +73,12 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "buttons": [
-          "ordering": Integer,
-          "chatExtra": String,
-          "chatEvent": String,
-          "target": String
+          {
+            "ordering": Integer,
+            "chatExtra": String,
+            "chatEvent": String,
+            "target": String
+          }
         ],
         "recipientGroupingKey": String
     }],
@@ -668,10 +670,12 @@ Content-Type: application/json;charset=UTF-8
           "resendSendNo" : String
         },
         "buttons": [
-          "ordering": Integer,
-          "chatExtra": String,
-          "chatEvent": String,
-          "target": String
+          {
+            "ordering": Integer,
+            "chatExtra": String,
+            "chatEvent": String,
+            "target": String
+          }
         ],
         "recipientGroupingKey": String
     }],
