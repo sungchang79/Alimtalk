@@ -2101,6 +2101,8 @@ Content-Type: application/json;charset=UTF-8
 | ------- | ------ | ---- | ----- |
 | comment | String | O    | お問い合わせ内容 |
 
+* REJステータスのテンプレートにコメントを付けると、REQステータスに変更されます。
+
 #### レスポンス
 ```
 {
@@ -2159,6 +2161,8 @@ Content-Type: application/json;charset=UTF-8
 |---|---|---|---|
 |comment|	String |	O | お問い合わせ内容 |
 |attachments| List<File> | X | 添付ファイルリスト(最大5個) |
+
+* REJステータスのテンプレートにコメントを付けると、REQステータスに変更されます。
 
 #### レスポンス
 ```

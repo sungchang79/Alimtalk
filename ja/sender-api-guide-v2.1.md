@@ -576,6 +576,8 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | ---- | ---------------------------------------- |
 | X-Secret-Key | String | O    | コンソールで作成できる。[[参考](./sender-console-guide/#x-secret-key)] |
 
+* グループの最大メンバー数は5000人です。
+
 #### レスポンス
 ```
 {  
