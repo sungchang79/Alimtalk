@@ -2084,6 +2084,8 @@ Content-Type: application/json;charset=UTF-8
 | ------- | ------ | -------- | ----------- |
 | comment | String | O        | Inquiries   |
 
+* When commenting a template in the REJ status, it will be changed to the REQ status.
+
 #### Response
 ```
 {
@@ -2142,6 +2144,8 @@ Content-Type: application/json;charset=UTF-8
 |---|---|---|---|
 |comment|	String |	O | Content of Inquiry |
 |attachments| List<File> | X | List of Attachment (Up to 5) |
+
+* When commenting a template in the REJ status, it will be changed to the REQ status.
 
 #### Response
 ```

@@ -593,6 +593,8 @@ Content-Type: application/json;charset=UTF-8
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
+* 발신 프로필 최대 5,000개까지 그룹에 추가할 수 있습니다.
+
 #### 응답
 ```
 {

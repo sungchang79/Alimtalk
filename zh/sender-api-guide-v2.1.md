@@ -592,6 +592,8 @@ Content-Type: application/json;charset=UTF-8
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
 | X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
+* The maximum number of members in a group is 5000.
+
 #### Response
 ```
 {
