@@ -1,4 +1,10 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2021.12.02.
+* [API] 알림톡 템플릿 문의하기 API 변경
+    * 카카오 API 스펙 변경으로 인해, 반려 상태의 템플릿 문의 시 검수중 상태로 변경됩니다.
+* [API] 템플릿 리스트 조회 API 버그 수정
+    * categoryCode 필드 값을 정상적으로 응답하도록 수정하였습니다.
+
 ### 2021.10.26.
 * [API] 알림톡/친구톡 대량 발송 조회 API 추가
     * 알림톡/친구톡 대량 발송 조회 API가 추가되었습니다.
