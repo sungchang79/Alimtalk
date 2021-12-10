@@ -19,8 +19,8 @@
 
 ## Overview of v2.2 API
 1. 친구톡 대량 발송 조회가 추가되었습니다.
-2. 메시지 발송 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
-3. 메시지 조회 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
+2. 메시지 발송 시, buttons 필드에 `chatExtra`, `chatEvent`, `target` 필드가 추가되었습니다.
+3. 메시지 조회 시, buttons 필드에 `chatExtra`, `chatEvent`, `target` 필드가 추가되었습니다.
 
 ## Send Messages
 #### Request of Sending
@@ -520,7 +520,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey | String | 고유의 앱키 |
 
@@ -532,14 +532,14 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
-| X-Secret-Key | String | 고유의 시크릿 키 |
+| X-Secret-Key | String | 고유의 비밀 키 |
 
 [Query parameter]
 * requestId 또는 startRequestDate + endRequestDate 또는 startCreateDate + endCreateDate는 필수입니다.
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| 이름 |	타입| 최대 길이 |	필수|	설명|
 |---|---|---|---|---|
 | requestId | String | - | O | 요청 ID |
 | startRequestDate | String | - | O | 발송 날짜 시작 |
@@ -603,7 +603,7 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | header | Object |	헤더 영역 |
 | - resultCode |	Integer |	결과 코드 |
@@ -615,16 +615,16 @@ curl -X GET \
 | -- requestDate | String | 요청 날짜 |
 | -- plusFriendId | String | 플러스 친구 ID |
 | -- senderKey | String | 전송자 ID |
-| -- masterStatusCode | String | 대량 발송 상태 코드 (WAIT, READY, SENDREADY, SENDWAIT, SENDING, COMPLETE, CANCEL, FAIL) |
+| -- masterStatusCode | String | 대량 발송 상태 코드(WAIT, READY, SENDREADY, SENDWAIT, SENDING, COMPLETE, CANCEL, FAIL) |
 | -- content | String | 내용 |
 | -- buttons | List | 버튼 순서 |
 | --- ordering | String | 버튼 순서 |
 | --- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
 | --- name | String | 버튼 이름 |
-| --- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| --- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| --- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| --- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
+| --- linkMo | String | 모바일 웹 링크(WL 타입일 경우 필수 필드) |
+| --- linkPc | String | PC 웹 링크(WL 타입일 경우 선택 필드)|
+| --- schemeIos | String | IOS 앱 링크(AL 타입일 경우 필수 필드) |
+| --- schemeAndroid | String | Android 앱 링크(AL 타입일 경우 필수 필드) |
 | --- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
 | --- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
 | --- target|	String|	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -635,7 +635,7 @@ curl -X GET \
 | -- autoSendYn | String | 자동 발송 여부 |
 | -- statsId | String | 통계 ID |
 | -- createDate | String | 생성 날짜 |
-| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
+| -- createUser | String | 생성 사용자(콘솔에서 발송 시 사용자 UUID로 저장) |
 | - totalCount | Integer | 총 개수 |
 
 
@@ -650,7 +650,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey |	String |	고유의 앱키 |
 | requestId |	String |	요청 ID |
@@ -663,12 +663,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
-| X-Secret-Key | String | 고유의 시크릿 키 |
+| X-Secret-Key | String | 고유의 비밀 키 |
 
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| 이름 |	타입| 최대 길이 |	필수|	설명|
 |---|---|---|---|---|
 | requestId | String | - | O | 요청 ID |
 | startRequestDate | String | - | X | 발송 날짜 시작 |
@@ -712,7 +712,7 @@ curl -X GET \
 }
 ```
 
-| 값 | 타입| 설명 |
+| 이름 | 타입| 설명 |
 |---|---|---|
 | header | Object |	헤더 영역 |
 | - resultCode |	Integer |	결과 코드 |
@@ -725,7 +725,7 @@ curl -X GET \
 | -- recipientNo | String | 수신 번호 |
 | -- requestDate | String | 요청 날짜 |
 | -- receiveDate | String | 수신 날짜 |
-| -- messageStatus | String | 대량 수신자 발송 상태 코드 (READY, COMPLETED, FAILED, CANCEL) |
+| -- messageStatus | String | 대량 수신자 발송 상태 코드(READY, COMPLETED, FAILED, CANCEL) |
 | -- resultCode | String | 수신 결과 코드 |
 | -- resultCodeName | String | 수신 결과 코드명 |
 | - totalCount | Integer | 총 개수 |
@@ -741,7 +741,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey |	String | 고유의 앱키 |
 | requestId |	String | 요청 ID |
@@ -755,12 +755,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
-|X-Secret-Key|	String|	고유의 시크릿 키 |
+|X-Secret-Key|	String|	고유의 비밀 키 |
 
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| 이름 |	타입| 최대 길이 |	필수|	설명|
 |---|---|---|---|---|
 | requestId | String | - | O | 요청 ID |
 | startRequestDate | String | - | X | 발송 날짜 시작 |
@@ -823,7 +823,7 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | header | Object |	헤더 영역 |
 | - resultCode |	Integer |	결과 코드 |
@@ -851,10 +851,10 @@ curl -X GET \
 | -- ordering | String | 버튼 순서 |
 | -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
 | -- name | String | 버튼 이름 |
-| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
+| -- linkMo | String | 모바일 웹 링크(WL 타입일 경우 필수 필드) |
+| -- linkPc | String | PC 웹 링크(WL 타입일 경우 선택 필드)|
+| -- schemeIos | String | IOS 앱 링크(AL 타입일 경우 필수 필드) |
+| -- schemeAndroid | String | Android 앱 링크(AL 타입일 경우 필수 필드) |
 | -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
 | -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
 | -- target|	String|	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |

@@ -36,7 +36,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 
@@ -46,7 +46,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -85,7 +85,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -118,7 +118,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 
@@ -128,7 +128,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -142,7 +142,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |plusFriendId|	String|	O | 카카오톡 채널 검색용 ID (최대 30자) |
 |phoneNo|	String |	O | 관리자 핸드폰 번호 (최대 15자) |
@@ -159,7 +159,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -177,7 +177,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 
@@ -187,7 +187,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -200,7 +200,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |plusFriendId|	String|	O | 카카오톡 채널 검색용 ID |
 |token|	Integer |	O | 인증 토큰 (플러스친구 등록 API 호출 후, 카카오톡 앱으로 받은 인증 토큰) |
@@ -222,7 +222,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -246,7 +246,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 |senderKey| String | 발신 키 |
@@ -257,7 +257,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -275,7 +275,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -294,7 +294,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 |senderKey| String | 발신 키 |
@@ -305,7 +305,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -348,7 +348,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -391,7 +391,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 
@@ -401,13 +401,13 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter] 1번 or 2번 조건 필수
 
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |plusFriendId|	String|	X | 플러스친구 ID |
 | senderKey | String | X | 발신 키 |
@@ -457,7 +457,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -503,7 +503,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 |groupSenderKey|	String|	발신 프로필 그룹 발신 키|
@@ -514,7 +514,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -543,7 +543,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -572,7 +572,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 |groupSenderKey|	String|	발신 프로필 그룹 발신 키|
@@ -584,7 +584,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -599,7 +599,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
@@ -618,7 +618,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appkey|	String|	고유의 Appkey|
 |groupSenderKey|	String|	발신 프로필 그룹 발신 키|
@@ -630,7 +630,7 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-|값|	타입|	필수|	설명|
+| 이름 |	타입|	필수|	설명|
 |---|---|---|---|
 |X-Secret-Key|	String| O | 콘솔에서 생성할 수 있다. [[참고](./sender-console-guide/#x-secret-key)] |
 
@@ -645,7 +645,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |header|	Object|	헤더 영역|
 |- resultCode|	Integer|	결과 코드|
