@@ -1518,7 +1518,7 @@ curl -X GET \
 | - totalCount | Integer | 총 개수 |
 
 
-### 대량 발송 대량 발송 수신자 목록 조회
+### 대량 발송 수신자 목록 조회
 
 #### 요청
 [URL]
@@ -1609,7 +1609,7 @@ curl -X GET \
 | -- resultCodeName | String | 결과 코드 내용 |
 | - totalCount | Integer | 총 개수 |
 
-### 대량 발송 대량 발송 수신자 조회
+### 대량 발송 수신자 조회
 
 #### 요청
 [URL]
