@@ -1,4 +1,12 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2022.01.11.
+* [Console] (구)통계 fade-out
+    * 신규 통계 도입으로 (구)통계 탭이 삭제되었습니다.
+* [Console] 발신프로필 그룹의 멤버 최대 5,000건 제한
+    * 카카오 정책에 따라 발신프로필 그룹의 최대 멤버를 5,000건으로 제한합니다.
+* [Console] CloudTrail 적용
+    * CloudTrail이 적용되어, 사용 이력을 확인할 수 있습니다.
+
 ### 2021.12.02.
 * [API] 알림톡 템플릿 문의하기 API 변경
     * 카카오 API 스펙 변경으로 인해, 반려 상태의 템플릿 문의 시 검수중 상태로 변경됩니다.
