@@ -38,13 +38,13 @@
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey | String | 고유의 앱키 |
 
 [Query parameter]
 
-|값| 타입 | 최대 길이 | 필수 | 설명 |
+| 이름 | 타입 | 최대 길이 | 필수 | 설명 |
 |---|---|---|---|---|
 | statsType | String | - | 필수 | 통계 구분<br/>NORMAL:기본, MINUTELY:분별, HOURLY:시간별, DAILY:일별, BY_DAY:시간별, DAY:요일별 |
 | from | String | - | 필수 | 통계 검색 시작 날짜<br/>yyyy-MM-dd HH:mm:ss | 
@@ -104,13 +104,13 @@
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey | String | 고유의 앱키 |
 
 [Query parameter]
 
-|값| 타입 | 최대 길이 | 필수 | 설명 |
+| 이름 | 타입 | 최대 길이 | 필수 | 설명 |
 |---|---|---|---|---|
 | statsType | String | - | 필수 | 통계 구분<br/>NORMAL:기본, MINUTELY:분별, HOURLY:시간별, DAILY:일별, BY_DAY:시간별, DAY:요일별 |
 | from | String | - | 필수 | 통계 검색 시작 날짜<br/>yyyy-MM-dd HH:mm:ss | 
