@@ -1,40 +1,53 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### January 11, 2022
+* [Console] Fade-out of (Old)Statistics
+    * Due to introduction of new statistics, the (Old)Statistics tab has been deleted.
+* [Console] Limit of maximum 5,000 members for the sender profile group
+    * In accordance with Kakao policy, the maximum number of members in a sender profile group is limited to 5,000.
+* [Console] CloudTrail applied
+    * CloudTrail has been applied, so you can check the usage history.
 
-### 2021.10.26.
-* [API] 알림톡/친구톡 대량 발송 조회 API 추가
-    * 알림톡/친구톡 대량 발송 조회 API가 추가되었습니다.
-* [API] 통계 API 추가
-    * 통계 API가 추가되었습니다.
-* [API] chatExtra, chatEvent 필드가 추가
-    * 메시지 발송 시, BC(상담톡 전환) 타입 버튼에 chatExtra 필드가 추가되었습니다.
-    * 메시지 발송 시, BT(봇 전환) 타입 버튼에 chatExtra, chatEvent 필드가 추가되었습니다.
-* [API] 웹 링크 타입 버튼에 아웃링크 기능 추가
-    * 버튼 클릭 시 인앱 브라우저가 아닌 모바일 기기의 브라우저로 열 수 있는 기능
-    * 메시지 발송 시 target 필드가 추가되어, 아웃링크 기능이 추가되었습니다.
-* [API] 앱 링크 타입 버튼에 linkMo, linkPc 필드 추가
-    * 앱 링크 타입 버튼에 linkMo, linkPc 필드가 추가되었습니다.
+### December 2, 2021
+* [API] Changed the Alimtalk template inquiry API
+    * Due to changes in the Kakao API specification, if you inquire about a template that is in the Rejected status, the template will be changed to the 'Inspection Underway' status.
+* [API] Fixed a bug in the API to list templates
+    * Modified so that the categoryCode field value is responded normally.
 
-### 2021.08.24.
-* [Console] 이미지 알림톡 기능
-    * 이미지 알림톡 기능이 추가되었습니다.
+### October 26, 2021
+* [API] Added Alimtalk/Friendtalk APIs to list mass delivery information
+    * Alimtalk/Friendtalk APIs to list mass delivery information have been added.
+* [API] Added statistics API
+    * A statistics API has been added.
+* [API] Added chatExtra and chatEvent fields
+    * A chatExtra field has been added to the BC (Bot for Consultation) type button when sending a message.
+    * chatExtra and chatEvent fields have been added to the BT (Bot Transfer) type button when sending a message.
+* [API] Added an outlink feature to the web link type button
+    * This is a feature to open the link with the browser of the mobile device instead of the in-app browser when clicking the button.
+    * An outlink feature has been added, by adding a target field when sending a message.
+* [API] Added linkMo and linkPc fields to the app link type button
+    * linkMo and linkPc fields have been added to the app link type button.
 
-### 2021.07.27.
-* [Console] 신규 통계 기능
-    * 신규 통계가 추가되어 기능이 고도화되었습니다.
-    * (구)통계 서비스는 2021년 7월 31일까지 수집되며, 2021년 12월 31일 종료될 예정입니다.
+### August 24, 2021
+* [Console] Image Alimtalk feature
+    * An image Alimtalk feature has been added.
 
-### 2021.06.29.
-* [Console] 발송 결과 업데이트 시, 웹훅 기능
-    * 발송 결과 업데이트 시, 웹훅 기능이 추가되었습니다.
+### July 27, 2021
+* [Console] New statistics feature
+    * New statistics has been added to enhance the functionality.
+    * The collection for (Old)Statistics service will be performed until July 31, 2021, and will end on December 31, 2021.
 
-### 2021.05.25.
-* [Console] 카카오 템플릿 코드 필드 추가
-    * 카카오에 실제 등록되는 템플릿 코드 필드가 추가되었습니다.
-* [Console] 템플릿 상태/문의 내용 변경 시, 웹훅 기능
-    * 템플릿 상태/문의 내용 변경 시, 웹훅 기능이 추가되었습니다.
-* [API] 발송 시, price, currencyType 필드 추가
-    * 알림톡 광고 모먼트 필드인 price, currencyType 필드가 추가되었습니다.
-    * 알림톡 발송 API 및 단건 조회 API messageOption 필드가 추가되었습니다.
+### June 29, 2021
+* [Console] Webhook feature for the update of the sending result
+    * A webhook feature for the update of the sending result has been added.
+
+### May 25, 2021
+* [Console] Added a Kakao template code field
+    * A field for template code that is actually registered in Kakao has been added.
+* [Console] Webhook feature for the change of template status/inquiry content
+    * A webhook feature for the change of template status/inquiry content has been added.
+* [API] Added price and currencyType fields for delivery
+    * price and currencyType fields, which are AlimTalk advertisement moment fields, have been added.
+    * A messageOption field has been added to the AlimTalk delivery API and single message retrieval API.
 
 ### April 27, 2021
 * [Console] Added a feature to register the same sender's profile
