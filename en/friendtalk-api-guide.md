@@ -18,9 +18,9 @@
 </table>
 
 ## Overview of v2.2 API
-1. 친구톡 대량 발송 조회가 추가되었습니다.
-2. 메시지 발송 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
-3. 메시지 조회 시, buttons 필드에 chatExtra, chatEvent, target 필드가 추가되었습니다.
+1. Added Friendtalk mass delivery query API.
+2. Added `chatExtra`, `chatEvent`, and `target` fields to the buttons field when sending messages.
+3. Added `chatExtra`, `chatEvent`, and `target` fields to the buttons field when querying messages.
 
 ## Send Messages
 #### Request of Sending
@@ -34,9 +34,9 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
 ```
@@ -44,9 +44,9 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Request body]
 
@@ -75,36 +75,51 @@ Content-Type: application/json;charset=UTF-8
                     "target": String
                 }
         ],
+        "resendParameter": {
+            "isResend" : boolean,
+            "resendType" : String,
+            "resendTitle" : String,
+            "resendContent" : String,
+            "resendSendNo" : String,
+            "resendUnsubscribeNo": String
+        },
         "isAd": Boolean,
         "recipientGroupingKey": String
     }]
 }
 ```
 
-| Value                  | Type    | Required | Description                                                  |
-| ---------------------- | ------- | -------- | ------------------------------------------------------------ |
-| plusFriendId           | String  | O        | Plus Friend ID (up to 30 characters)                         |
-| requestDate            | String  | X        | Date and time of request (yyyy-MM-dd HH:mm), to be sent immediately if field is not sent |
-| senderGroupingKey      | String  | X        | Sender's grouping key (up to 100 characters)                 |
-| createUser             | String  | X        | Registrant (saved as user UUID when delivered via console)   |
-| recipientList          | List    | O        | List of recipients (up to 1000)                              |
-| - recipientNo          | String  | O        | Recipient number                                             |
-| - content              | String  | O        | Body message (up to 1000 characters)<br>Up to 400, if image is included |
-| - imageSeq             | Integer | X        | Image number                                                 |
-| - imageLink            | String  | X        | Image link (required, with the input of image number)        |
-| - buttons              | List    | X        | Button                                                       |
-| -- ordering            | Integer | X        | Button sequence (required, if there is a button)             |
-| -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
-| -- name                | String  | X        | Button name (required, if there is a button)                 |
-| -- linkMo              | String  | X        | Mobile web link (required for the WL type)                   |
-| -- linkPc              | String  | X        | PC web link (optional for the WL type)                       |
-| -- schemeIos           | String  | X        | iOS app link (required for the AL type)                      |
-| -- schemeAndroid       | String  | X        | Android app link (required for the AL type)                  |
-| -- chatExtra           | String  | X    | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
-| -- chatEvent           | String  | X    | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
-| -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
-| - isAd                 | Boolean | X        | Ad or not (default is true)                                  |
-| - recipientGroupingKey | String  | X        | Recipient's grouping key (up to 100 characters)              |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|senderKey| String| O | Sender key (40 characters) |
+|requestDate|   String| X | Date and time of request (yyyy-MM-dd HH:mm), to be sent immediately if field is not sent |
+|senderGroupingKey| String | X| Sender's grouping key (up to 100 characters) |
+| createUser | String | X | Registrant (saved as user UUID when sending from console) |
+|recipientList| List|   O|  List of recipients (up to 1000) |
+|- recipientNo| String| O|  Recipient number |
+|- content| String| O| Body message (up to 1000 characters)<br>Up to 400, if image is included<br>Up to 76, if wide image is included |
+|- imageSeq|    Integer|    X|  Image number |
+|- imageLink|   String| X|  Image link   |
+|- buttons| List|   X|  Button<br>1 link button, if wide image is included |
+|-- ordering|   Integer|    X | Button sequence (required, if there is a button)|
+|-- type| String |  X | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
+|-- name| String |  X | Button name (required, if there is a button)|
+|-- linkMo| String |    X | Mobile web link (required for the WL type)|
+|-- linkPc | String |   X |PC web link (optional for the WL type) |
+|-- schemeIos | String | X |    iOS app link (required for the AL type) |
+|-- schemeAndroid | String | X |    Android app link (required for the AL type) |
+|-- chatExtra|  String| X| Meta information to send for BC (Bot for Consultation) or BT (Bot Transfer) type buttons |
+|-- chatEvent|  String| X| Bot event name to connect for BT (Bot Transfer) type button |
+|-- target| String| X | In the case of a web link button, out link used when adding "target":"out" attribute<br>Send with the default in-app link |
+|- resendParameter| Object| X| Alternative delivery information |
+|-- isResend|   boolean|    X|  Whether to resend text, if delivery fails<br/>Resent by default, if alternative delivery is set on console. |
+|-- resendType| String| X|  Alternative delivery type (SMS,LMS)<br>Categorized by the length of template body, if value is unavailable. |
+|-- resendTitle|    String| X|  Title of alternative delivery for LMS<br/>(resent with PlusFriend ID if value is unavailable.) |
+|-- resendContent|  String| X|  Alternative delivery content<br/>(resent with [Message body and web link button name - web link mobile link] if value is unavailable.) |
+|-- resendSendNo | String| X| Sender number for alternative delivery (up to 13 characters)<br><span style="color:red"> (Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
+|-- resendUnsubscribeNo | String| X| Alternative delivery 080 blocked number <br> <span style="color:red"> (If it is not the 080 blocked number registered in the SMS service, alternative delivery may fail.) </span> |
+|- isAd | Boolean | X | Ad or not (default is true) |
+|- recipientGroupingKey|    String| X|  Recipient's grouping key (up to 100 characters) |
 
 * <b> Request date and time can be configured up to 90 days after a point of calling </b>
 * <b> Delivery restricted during night (20:50~08:00 on the following day)</b>
@@ -144,21 +159,21 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:
 }
 ```
 
-| Value                   | Type    | Description                        |
-| ----------------------- | ------- | ---------------------------------- |
-| header                  | Object  | Header area                        |
-| - resultCode            | Integer | Result code                        |
-| - resultMessage         | String  | Result message                     |
-| - isSuccessful          | Boolean | Successful or not                  |
-| message                 | Object  | Body area                          |
-| - requestId             | String  | Request ID                         |
-| - senderGroupingKey     | String  | Sender's grouping key              |
-| - sendResults           | Object  | Result of delivery request         |
-| -- recipientSeq         | Integer | Recipient's sequence number        |
-| -- recipientNo          | String  | Recipient number                   |
-| -- resultCode           | Integer | Result code of delivery request    |
-| -- resultMessage        | String  | Result message of delivery request |
-| -- recipientGroupingKey | String  | Recipient's grouping key           |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+|message|   Object| Body area|
+|- requestId | String | Request ID |
+|- senderGroupingKey | String | Sender's grouping key |
+|- sendResults | Object | Result of delivery request |
+|-- recipientSeq | Integer | Recipient's sequence number |
+|-- recipientNo | String | Recipient number |
+|-- resultCode | Integer | Result code of delivery request |
+|-- resultMessage | String | Result message of delivery request |
+|-- recipientGroupingKey | String | Recipient's grouping key |
 
 ## List Deliveries
 
@@ -173,9 +188,9 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
 ```
@@ -183,28 +198,28 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter] No.1 or (2, 3) is conditionally required
 
-| Value                | Type    | Required                      | Description                                            |
-| -------------------- | ------- | ----------------------------- | ------------------------------------------------------ |
-| requestId            | String  | Conditionally required (no.1) | Request ID                                             |
-| startRequestDate     | String  | Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)      |
-| endRequestDate       | String  | Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm)        |
-| startCreateDate      | String  | Conditionally required (no.3) | Start date of registration (mm:HH dd-MM-yyyy)          |
-| endCreateDate        | String  | Conditionally required (no.3) | End date of registration (mm:HH dd-MM-yyyy)            |
-| recipientNo          | String  | X                             | Recipient number                                       |
-| plusFriendId         | String  | X                             | Plus Friend ID                                         |
-| senderGroupingKey    | String  | X                             | Sender's grouping key                                  |
-| recipientGroupingKey | String  | X                             | Recipient's grouping key                               |
-| messageStatus        | String  | X                             | Request status (COMPLETED: successful, FAILED: failed) |
-| resultCode           | String  | X                             | Delivery result (MRC01: successful, MRC02: failed)     |
-| createUser           | String  | X                             | Registrant (saved as user UUID when delivered via console)  |
-| pageNum              | Integer | X                             | Page number (default: 1)                               |
-| pageSize             | Integer | X                             | Number of queries (default: 15, max: 1000)             |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|requestId| String| Conditionally required (no.1) | Request ID |
+|startRequestDate|  String| Conditionally required (no.2) | Start date of delivery request (yyyy-MM-dd HH:mm)|
+|endRequestDate|    String| Conditionally required (no.2) | End date of delivery request (yyyy-MM-dd HH:mm) |
+|startCreateDate| String| Conditionally required (no.3) | Start date of registration (mm:HH dd-MM-yyyy)|
+|endCreateDate|  String| Conditionally required (no.3) |  End date of registration (mm:HH dd-MM-yyyy) |
+|recipientNo|   String| X | Recipient number |
+|senderKey| String| X | Sender key |
+|senderGroupingKey| String | X| Sender's grouping key |
+|recipientGroupingKey|  String| X|  Recipient's grouping key |
+|messageStatus| String |    X | Request status (COMPLETED: successful, FAILED: failed)   |
+|resultCode| String |   X | Delivery result (MRC01: successful, MRC02: failed) |
+|createUser| String | X | Registrant (saved as user UUID when sending from console) |
+|pageNum|   Integer|    X|  Page number (default: 1)|
+|pageSize|  Integer|    X|  Number of queries (default: 15, max: 1000)|
 
 #### Response
 ```
@@ -220,9 +235,11 @@ Content-Type: application/json;charset=UTF-8
           "requestId" :  String,
           "recipientSeq" : Integer,
           "plusFriendId" :  String,
+          "senderKey" : String,
           "recipientNo" :  String,
           "requestDate" : String,
           "createDate" : String,
+          "receiveDate" : String,
           "content" :  String,
           "messageStatus" :  String,
           "resendStatus" :  String,
@@ -239,30 +256,32 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| Value                       | Type    | Description                                            |
-| --------------------------- | ------- | ------------------------------------------------------ |
-| header                      | Object  | Header area                                            |
-| - resultCode                | Integer | Result code                                            |
-| - resultMessage             | String  | Result message                                         |
-| - isSuccessful              | Boolean | Successful or not                                      |
-| messageSearchResultResponse | Object  | Body area                                              |
-| - messages                  | List    | List of messages                                       |
-| -- requestId                | String  | Request ID                                             |
-| -- recipientSeq             | Integer | Recipient sequence number                              |
-| -- plusFriendId             | String  | Plus Friend ID                                         |
-| -- recipientNo              | String  | Recipient number                                       |
-| -- requestDate              | String  | Date and time of request                               |
-| -- createDate               | String  | Registered date and time                               |
-| -- content                  | String  | Body                                                   |
-| -- messageStatus            | String  | Request status (COMPLETED: successful, FAILED: failed) |
-| -- resendStatus             | String  | Status code of resending                               |
-| -- resendStatusName         | String  | Status code name of resending                          |
-| -- resultCode               | String  | Result code of receiving                               |
-| -- resultCodeName           | String  | Result code name of receiving                          |
-| -- createUser               | String  | Registrant (saved as user UUID when delivered via console)  |
-| -- senderGroupingKey        | String  | Sender's grouping key                                  |
-| -- recipientGroupingKey     | String  | Recipient's grouping key                               |
-| - totalCount                | Integer | Total count                                            |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+|messageSearchResultResponse|   Object| Body area|
+|- messages | List |    List of messages |
+|-- requestId | String |    Request ID |
+|-- recipientSeq | Integer |    Recipient sequence number |
+|-- plusFriendId | String | Plus Friend ID |
+|-- senderKey   | String | Sender Key   |
+|-- recipientNo | String |  Recipient number |
+|-- requestDate | String |  Date and time of request |
+|-- createDate | String | Registered date and time |
+|-- receiveDate | String |  Date and time of receiving |
+|-- content | String |  Body |
+|-- messageStatus | String |    Request status (COMPLETED: successful, FAILED: failed) |
+|-- resendStatus | String | Status code of resending |
+|-- resendStatusName | String | Status code name of resending |
+|-- resultCode | String |   Result code of receiving |
+|-- resultCodeName | String |   Result code name of receiving |
+|-- createUser | String | Registrant (saved as user UUID when sending from console) |
+|-- senderGroupingKey | String | Sender's grouping key |
+|-- recipientGroupingKey | String | Recipient's grouping key |
+|- totalCount | Integer | Total count |
 
 [Example]
 ```
@@ -270,13 +289,13 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 ```
 
 #### Status of Resending
-| Value | Description                                      |
-| ----- | ------------------------------------------------ |
-| RSC01 | No target of resending                           |
-| RSC02 | Target of resending (resent, if delivery fails.) |
-| RSC03 | Resending underway                               |
-| RSC04 | Resending successful                             |
-| RSC05 | Resending failed                                 |
+| Name |  Description|
+|---|---|
+|RSC01| No target of resending|
+|RSC02| Target of resending (If sending fails, resending is performed.)|
+|RSC03| Resending in progress|
+|RSC04| Resending successful|
+|RSC05| Resending failed|
 
 ## Get Deliveries
 
@@ -291,9 +310,9 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
 ```
@@ -301,16 +320,16 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| Value        | Type    | Required | Description               |
-| ------------ | ------- | -------- | ------------------------- |
-| requestId    | String  | O        | Request ID                |
-| recipientSeq | Integer | O        | Recipient sequence number |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|requestId| String| O | Request ID |
+|recipientSeq|  Integer |   O | Recipient sequence number |
 
 [Example]
 ```
@@ -329,6 +348,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
+      "senderKey" :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
       "createDate" : String,
@@ -368,46 +388,109 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 }
 ```
 
-| Value                  | Type    | Description                                                  |
-| ---------------------- | ------- | ------------------------------------------------------------ |
-| header                 | Object  | Header area                                                  |
-| - resultCode           | Integer | Result code                                                  |
-| - resultMessage        | String  | Result message                                               |
-| - isSuccessful         | Boolean | Successful or not                                            |
-| message                | Object  | Message                                                      |
-| - requestId            | String  | Request ID                                                   |
-| - recipientSeq         | Integer | Recipient sequence number                                    |
-| - plusFriendId         | String  | Plus Friend ID                                               |
-| - recipientNo          | String  | Recipient number                                             |
-| - requestDate          | String  | Date and time of request                                     |
-| - createDate           | String  | Registered date and time                                     |
-| - receiveDate          | String  | Date and time of receiving                                   |
-| - content              | String  | Body                                                         |
-| - messageStatus        | String  | Status of request (COMPLETED: successful, FAILED: failed)    |
-| - resendStatus         | String  | Status code of resending                                     |
-| - resendStatusName     | String  | Status code name of resending                                |
-| - resultCode           | String  | Result code of receiving                                     |
-| - resultCodeName       | String  | Result code name of receiving                                |
-| - createUser           | String  | Registrant (saved as user UUID when delivered via console)   |
-| - imageSeq             | Integer | Image number                                                 |
-| - imageName            | String  | Image name (name of uploaded file)                           |
-| - imageUrl             | String  | Image URL                                                    |
-| - imageLink            | String  | Image link                                                   |
-| - wide                 | Boolean | Image is wide or not                                         |
-| - buttons              | List    | List of buttons                                              |
-| -- ordering            | Integer | Button sequence                                              |
-| -- type                | String  | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
-| -- name                | String  | Button name                                                  |
-| -- linkMo              | String  | Mobile web link (required for the WL type)                   |
-| -- linkPc              | String  | PC web link (optional for the WL type)                       |
-| -- schemeIos           | String  | iOS app link (required for the AL type)                      |
-| -- schemeAndroid       | String  | Android app link (required for the AL type)                  |
-| -- chatExtra           | String  | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보             |
-| -- chatEvent           | String  | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명                          |
-| -- target              | String  | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
-| - isAd                 | Boolean | Ad or not                                                    |
-| - senderGroupingKey    | String  | Sender's grouping key                                        |
-| - recipientGroupingKey | String  | Recipient's grouping key                                     |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+|message|   Object| Message|
+|- requestId | String | Request ID |
+|- recipientSeq | Integer | Recipient sequence number |
+|- plusFriendId | String |  Plus Friend ID |
+|- senderKey   | String | Sender Key   |
+|- recipientNo | String |   Recipient number |
+|- requestDate | String |   Date and time of request |
+|- createDate | String | Registered date and time |
+|- receiveDate | String |   Date and time of receiving |
+|- content | String |   Body |
+|- messageStatus | String | Status of request (COMPLETED: successful, FAILED: failed) |
+|- resendStatus | String |  Status code of resending |
+|- resendStatusName | String |  Status code name of resending |
+|- resendResultCode | String | Alternative delivery result code SMS result code |
+|- resendRequestId | String | Resending SMS request ID |
+|- resultCode | String |    Result code of receiving |
+|- resultCodeName | String |    Result code name of receiving |
+|- createUser | String | Registrant (saved as user UUID when sending from console) |
+|- imageSeq|    Integer|  Image number |
+|- imageName|   String|  Image name (name of uploaded file) |
+|- imageUrl|    String|  Image URL |
+|- imageLink|   String| Image link   |
+|- wide     | Boolean | Image is wide or not |
+|- buttons | List | List of buttons |
+|-- ordering | Integer |    Button sequence |
+|-- type | String | Button type (WL: Web Link, AL: App Link, BK: Bot Keyword, MD: Message Delivery) |
+|-- name | String | Button name |
+|-- linkMo | String |   Mobile web link (required for the WL type) |
+|-- linkPc | String |   PC web link (optional for the WL type) |
+|-- schemeIos | String |    iOS app link (required for the AL type) |
+|-- schemeAndroid | String |    Android app link (required for the AL type) |
+|-- chatExtra|  String| Meta information to send for BC (Bot for Consultation) or BT (Bot Transfer) type buttons |
+|-- chatEvent|  String| Bot event name to connect for BT (Bot Transfer) type button |
+|-- target| String| In the case of a web link button, out link used when adding "target":"out" attribute<br>Send with the default in-app link |
+|- isAd | Boolean | Ad or not |
+|- senderGroupingKey | String | Sender's grouping key |
+|- recipientGroupingKey | String |  Recipient's grouping key |
+
+## Message
+### Cancel Sending Messages
+
+#### Request
+
+[URL]
+
+```
+DELETE  /friendtalk/v2.2/appkeys/{appkey}/messages/{requestId}
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
+|requestId| String| Request ID|
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+
+[Query parameter]
+
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|recipientSeq|  String| X | Recipient sequence number<br>(to cancel all deliveries of request ID, if the value is left blank) |
+
+* Both general and authentication messages can be canceled by the same API.
+
+#### Response
+```
+{
+  "header" : {
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+  }
+}
+```
+
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+
+[Example]
+```
+curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/messages/{requestId}?recipientSeq=1,2,3"
+```
 
 ### Query Updated Message Results
 
@@ -422,29 +505,28 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| Value  | Type   | Decription      |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
-
 ```
 {
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| Vaue            | Type    | Required | Description                                              |
-| --------------- | ------- | -------- | -------------------------------------------------------- |
-| startUpdateDate | String  | O        | Start time of querying result updates (yyyy-MM-dd HH:mm) |
-| endUpdateDate   | String  | O        | End time of querying result updates (yyyy-MM-dd HH:mm)   |
-| pageNum         | Integer | X        | Page number (default: 1)                                 |
-| pageSize        | Integer | X        | Number of queries (default: 15)                          |
+| Value |  Type| Required| Description|
+|---|---|---|---|
+|startUpdateDate|   String| O | Start time of querying result updates (yyyy-MM-dd HH:mm)|
+|endUpdateDate| String| O | End time of querying result updates (yyyy-MM-dd HH:mm) |
+|pageNum|   Integer|    X|  Page number (default: 1)|
+|pageSize|  Integer|    X|  Number of queries (default: 15)|
 
 #### Response
 ```
@@ -460,6 +542,7 @@ Content-Type: application/json;charset=UTF-8
       "requestId" :  String,
       "recipientSeq" : Integer,
       "plusFriendId" :  String,
+      "senderKey"    :  String,
       "recipientNo" :  String,
       "requestDate" :  String,
       "receiveDate" : String,
@@ -478,40 +561,39 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-| Value                       | Type    | Description                                                  |
-| --------------------------- | ------- | ------------------------------------------------------------ |
-| header                      | Object  | Header area                                                  |
-| - resultCode                | Integer | Result code                                                  |
-| - resultMessage             | String  | Result message                                               |
-| - isSuccessful              | Boolean | Successful or not                                            |
-| messageSearchResultResponse | Object  | Body area                                                    |
-| - messages                  | List    | List of messages                                             |
-| -- requestId                | String  | Request ID                                                   |
-| -- recipientSeq             | Integer | Recipient's sequence number                                  |
-| -- plusFriendId             | String  | Plus Friend ID                                               |
-| -- recipientNo              | String  | Recipient number                                             |
-| -- requestDate              | String  | Date and time of request                                     |
-| -- receiveDate              | String  | Date and time of receiving                                   |
-| -- content                  | String  | Body                                                         |
-| -- messageStatus            | String  | Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled) |
-| -- resendStatus             | String  | Status code of resending                                     |
-| -- resendStatusName         | String  | Status code name of resending                                |
-| -- resultCode               | String  | Result code of receiving                                     |
-| -- resultCodeName           | String  | Result code name of receiving                                |
-| -- senderGroupingKey        | String  | Sender's grouping key                                        |
-| -- recipientGroupingKey     | String  | Recipient's grouping key                                     |
-| - totalCount                | Integer | Total count                                                  |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+|messageSearchResultResponse|   Object| Body area|
+|- messages | List |    List of messages |
+|-- requestId | String |    Request ID |
+|-- recipientSeq | Integer |    Recipient's sequence number |
+|-- plusFriendId | String | Plus Friend ID |
+|-- senderKey | String |    Sender Key |
+|-- recipientNo | String |  Recipient number |
+|-- requestDate | String |  Date and time of request |
+|-- receiveDate | String |  Date and time of receiving |
+|-- content | String |  Body |
+|-- messageStatus | String |    Request status (COMPLETED -> successful, FAILED -> failed, CANCEL -> canceled) |
+|-- resendStatus | String | Status code of resending |
+|-- resendStatusName | String | Status code name of resending |
+|-- resultCode | String |   Result code of receiving |
+|-- resultCodeName | String |   Result code name of receiving |
+|-- senderGroupingKey | String | Sender's grouping key |
+|-- recipientGroupingKey | String | Recipient's grouping key |
+|- totalCount | Integer | Total count |
 
 [Example]
-
 ```
 curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/message-results?startUpdateDate=2018-05-01%20:00&endUpdateDate=2018-05-30%20:59"
 ```
 
+### List Mass Delivery Requests
 
-### 대량 발송 요청 목록 조회
-
-#### 요청
+#### Request
 [URL]
 ```
 GET /friendtalk/v2.2/appkeys/{appKey}/mass-messages
@@ -520,9 +602,9 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| appKey | String | 고유의 앱키 |
+| appKey | String | Unique appkey |
 
 [Header]
 
@@ -532,22 +614,22 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| X-Secret-Key | String | 고유의 시크릿 키 |
+| X-Secret-Key | String | Unique secret key |
 
 [Query parameter]
-* requestId 또는 startRequestDate + endRequestDate 또는 startCreateDate + endCreateDate는 필수입니다.
+* One of the following is required: requestId, startRequestDate + endRequestDate, or startCreateDate + endCreateDate.
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| Name |  Type| Max. Length | Required| Description|
 |---|---|---|---|---|
-| requestId | String | - | O | 요청 ID |
-| startRequestDate | String | - | O | 발송 날짜 시작 |
-| endRequestDate | String | - | O | 발송 날짜 종료 |
-| startCreateDate |	String| - |	O |	등록 날짜 시작 |
-| endCreateDate |	String| - |	O |	등록 날짜 종료 |
-| pageNum | optional, Integer | - | X | 페이지 번호 |
-| pageSize | optional, Integer | 1000 | X | 검색 수 |
+| requestId | String | - | O | Request ID |
+| startRequestDate | String | - | O | Start date of delivery |
+| endRequestDate | String | - | O | End date of delivery |
+| startCreateDate | String| - | O | Start date of registration |
+| endCreateDate |   String| - | O | End date of registration |
+| pageNum | optional, Integer | - | X | Page number |
+| pageSize | optional, Integer | 1000 | X | Search count |
 
 #### cURL
 ```
@@ -557,7 +639,7 @@ curl -X GET \
 -H 'X-Secret-Key:{secretkey}'
 ```
 
-#### 응답
+#### Response
 ```
 {
     "header": {
@@ -603,45 +685,45 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| header | Object |	헤더 영역 |
-| - resultCode |	Integer |	결과 코드 |
-| - resultMessage |	String | 결과 메시지 |
-| - isSuccessful |	Boolean | 성공 여부 |
-| body | Object | 본문 영역 |
-| - messages | Object | 메시지 리스트 |
-| -- requestId | String | 요청 ID |
-| -- requestDate | String | 요청 날짜 |
-| -- plusFriendId | String | 플러스 친구 ID |
-| -- senderKey | String | 전송자 ID |
-| -- masterStatusCode | String | 대량 발송 상태 코드 (WAIT, READY, SENDREADY, SENDWAIT, SENDING, COMPLETE, CANCEL, FAIL) |
-| -- content | String | 내용 |
-| -- buttons | List | 버튼 순서 |
-| --- ordering | String | 버튼 순서 |
-| --- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
-| --- name | String | 버튼 이름 |
-| --- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| --- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| --- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| --- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
-| --- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
-| --- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
-| --- target|	String|	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
-| -- isAd | Boolean | 광고 여부 |
-| -- imageSeq | Integer | 이미지 순서 |
-| -- imageLink | Boolean | 이미지 URL |
-| -- fileId | String | 첨부 파일 ID |
-| -- autoSendYn | String | 자동 발송 여부 |
-| -- statsId | String | 통계 ID |
-| -- createDate | String | 생성 날짜 |
-| -- createUser | String | 등록자(콘솔에서 발송 시 사용자 UUID로 저장) |
-| - totalCount | Integer | 총 개수 |
+| header | Object | Header area |
+| - resultCode |    Integer |   Result code |
+| - resultMessage | String | Result message |
+| - isSuccessful |  Boolean | Successful or not |
+| body | Object | Body area |
+| - messages | Object | List of messages |
+| -- requestId | String | Request ID |
+| -- requestDate | String | Date of request |
+| -- plusFriendId | String | PlusFriend ID |
+| -- senderKey | String | Sender ID |
+| -- masterStatusCode | String | Mass delivery status code (WAIT, READY, SENDREADY, SENDWAIT, SENDING, COMPLETE, CANCEL, FAIL) |
+| -- content | String | Content |
+| -- buttons | List | Button sequence |
+| --- ordering | String | Button sequence |
+| --- type | String | Button type<br/> - WL: Web Link<br/> - AL: App Link<br/> - DS: Delivery Search<br/> - BK: Bot Keyword<br/> - MD: Message Delivery<br/> - BC: Bot for Consultation<br/> - BT: Bot Transfer<br/> - AC: Channel Added [only for Ad Included/Mixed Purposes Type] |
+| --- name | String | Button name |
+| --- linkMo | String | Mobile web link (required for the WL type) |
+| --- linkPc | String | PC web link (optional for the WL type)|
+| --- schemeIos | String | iOS app link (required for the AL type) |
+| --- schemeAndroid | String | Android app link (required for the AL type) |
+| --- chatExtra | String | BC: Meta information to be delivered when switching to consultation talk<br/> BT: Meta information to be delivered when switching to bot |
+| --- chatEvent | String | BT: Bot event name to connect when switching to bot |
+| --- target|   String| In the case of a web link button, out link used when adding "target":"out" attribute<br>Send with the default in-app link |
+| -- isAd | Boolean | Ad or not |
+| -- imageSeq | Integer | Image sequence |
+| -- imageLink | Boolean | Image URL |
+| -- fileId | String | Attachment ID |
+| -- autoSendYn | String | Auto sending or not |
+| -- statsId | String | Statistics ID |
+| -- createDate | String | Date of creation |
+| -- createUser | String | User who created the request (saved as user UUID when sending from console) |
+| - totalCount | Integer | Total count |
 
 
-### 대량 발송 대량 발송 수신자 목록 조회
+### List Mass Delivery Recipients
 
-#### 요청
+#### Request
 [URL]
 ```
 GET /friendtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients
@@ -650,10 +732,10 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| appKey |	String |	고유의 앱키 |
-| requestId |	String |	요청 ID |
+| appKey |  String |    Unique appkey |
+| requestId |   String |    Request ID |
 
 [Header]
 
@@ -663,20 +745,20 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| X-Secret-Key | String | 고유의 시크릿 키 |
+| X-Secret-Key | String | Unique secret key |
 
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| Name |  Type| Max. Length | Required| Description|
 |---|---|---|---|---|
-| requestId | String | - | O | 요청 ID |
-| startRequestDate | String | - | X | 발송 날짜 시작 |
-| endRequestDate | String | - | X | 발송 날짜 종료 |
-| startCreateDate |	String| - |	X |	등록 날짜 시작 |
-| endCreateDate |	String| - |	X |	등록 날짜 종료 |
-| pageNum | optional, Integer | - | X | 페이지 번호 |
-| pageSize | optional, Integer | 1000 | X | 검색 수 |
+| requestId | String | - | O | Request ID |
+| startRequestDate | String | - | X | - |
+| endRequestDate | String | - | X | - |
+| startCreateDate | String| - | X | - |
+| endCreateDate |   String| - | X | End date of registration |
+| pageNum | optional, Integer | - | X | Page number |
+| pageSize | optional, Integer | 1000 | X | Search count |
 
 #### cURL
 ```
@@ -686,7 +768,7 @@ curl -X GET \
 -H 'X-Secret-Key:{secretkey}'
 ```
 
-#### 응답
+#### Response
 ```
 {
     "header": {
@@ -712,27 +794,27 @@ curl -X GET \
 }
 ```
 
-| 값 | 타입| 설명 |
+| Name | Type| Description |
 |---|---|---|
-| header | Object |	헤더 영역 |
-| - resultCode |	Integer |	결과 코드 |
-| - resultMessage |	String | 결과 메시지 |
-| - isSuccessful |	Boolean| 성공 여부 |
-| body | Object | 본문 영역 |
-| - recipients | List | 수신자 리스트 |
-| -- requestId | String | 요청 ID |
-| -- recipientSeq | Integer | 수신자 시퀀스 번호 |
-| -- recipientNo | String | 수신 번호 |
-| -- requestDate | String | 요청 날짜 |
-| -- receiveDate | String | 수신 날짜 |
-| -- messageStatus | String | 대량 수신자 발송 상태 코드 (READY, COMPLETED, FAILED, CANCEL) |
-| -- resultCode | String | 수신 결과 코드 |
-| -- resultCodeName | String | 수신 결과 코드명 |
-| - totalCount | Integer | 총 개수 |
+| header | Object | Header area |
+| - resultCode |    Integer |   Result code |
+| - resultMessage | String | Result message |
+| - isSuccessful |  Boolean| Successful or not |
+| body | Object | Body area |
+| - recipients | List | List of recipients |
+| -- requestId | String | Request ID |
+| -- recipientSeq | Integer | Recipient sequence number |
+| -- recipientNo | String | Recipient number |
+| -- requestDate | String | Date of request |
+| -- receiveDate | String | Date of receiving |
+| -- messageStatus | String | Mass recipient delivery status code (READY, COMPLETED, FAILED, CANCEL) |
+| -- resultCode | String | Result code of receiving |
+| -- resultCodeName | String | Result code name of receiving |
+| - totalCount | Integer | Total count |
 
-### 대량 발송 대량 발송 수신자 조회
+### Get a Mass Delivery Recipient
 
-#### 요청
+#### Request
 [URL]
 ```
 GET /friendtalk/v2.2/appkeys/{appKey}/mass-messages/{requestId}/recipients/{recipientSeq}
@@ -741,11 +823,11 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| appKey |	String | 고유의 앱키 |
-| requestId |	String | 요청 ID |
-| recipientSeq | String | 수신자 순서 |
+| appKey |  String | Unique appkey |
+| requestId |   String | Request ID |
+| recipientSeq | String | Recipient sequence |
 
 [Header]
 
@@ -755,18 +837,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-|X-Secret-Key|	String|	고유의 시크릿 키 |
+|X-Secret-Key|  String| Unique secret key |
 
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| Name |  Type| Max. Length | Required| Description|
 |---|---|---|---|---|
-| requestId | String | - | O | 요청 ID |
-| startRequestDate | String | - | X | 발송 날짜 시작 |
-| endRequestDate | String | - | X | 발송 날짜 종료 |
-| startCreateDate |	String| - |	X |	등록 날짜 시작 |
-| endCreateDate |	String| - |	X |	등록 날짜 종료 |
+| requestId | String | - | O | Request ID |
+| startRequestDate | String | - | X | Start date of delivery |
+| endRequestDate | String | - | X | End date of delivery |
+| startCreateDate | String| - | X | Start date of registration |
+| endCreateDate |   String| - | X | End date of registration |
 
 
 #### cURL
@@ -777,7 +859,7 @@ curl -X GET \
 -H 'X-Secret-Key:{secretkey}'
 ```
 
-#### 응답
+#### Response
 ```
 {
     "header": {
@@ -823,43 +905,44 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| header | Object |	헤더 영역 |
-| - resultCode |	Integer |	결과 코드 |
-| - resultMessage |	String | 결과 메시지 |
-| - isSuccessful |	Boolean| 성공 여부 |
-| body | Object | 본문 영역 |
-| - requestId | String | 요청 ID |
-| - recipientSeq | Integer | 수신자 시퀀스 번호 |
-| - plusFriendId | String | 플러스 친구 ID |
-| - senderKey | String | 발신 키(40자)|
-| - recipientNo | String | 수신 번호 |
-| - requestDate | String | 요청 날짜 |
-| - receiveDate | String | 수신 날짜 |
-| - content | String | 본문 |
-| - messageStatus | String | 대량 수신자 발송 상태 코드 (READY, COMPLETED, FAILED, CANCEL) |
-| - resendStatus | String |	대체 발송 상태 코드 (RSC01, RSC02, RSC03, RSC04, RSC05)<br>([[아래 대체 발송 상태 표](http://docs.toast.com/ko/Notification/KakaoTalk%20Bizmessage/ko/alimtalk-api-guide/#smslms)] 참고) |
-| - resendStatusName | String |	대체 발송 상태 코드명 |
-| - resendRequestId | String | 대체 발송 SMS 요청 ID |
-| - resendResultCode | String | 대체 발송 결과 코드 [SMS 결과 코드](https://docs.toast.com/ko/Notification/SMS/ko/error-code/#api) |
-| - resultCode | String |	수신 결과 코드 |
-| - resultCodeName | String |	수신 결과 코드명 |
-| - imageSeq | Integer | 이미지 순서 |
-| - imageLink | Integer | 이미지 URL |
-| - buttons | List | 버튼 순서 |
-| -- ordering | String | 버튼 순서 |
-| -- type | String | 버튼 종류<br/> - WL: 웹링크<br/> - AL: 앱링크<br/> - DS: 배송 조회<br/> - BK: 봇 키워드<br/> - MD: 메시지 전달<br/> - BC: 상담톡 전환<br/> - BT: 봇 전환<br/> - AC: 채널 추가[광고 추가/복합형만] |
-| -- name | String | 버튼 이름 |
-| -- linkMo | String | 모바일 웹 링크 (WL 타입일 경우 필수 필드) |
-| -- linkPc | String | PC 웹 링크  (WL 타입일 경우 선택 필드)|
-| -- schemeIos | String | IOS 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- schemeAndroid | String | Android 앱 링크 (AL 타입일 경우 필수 필드) |
-| -- chatExtra | String | BC: 상담톡 전환시 전달할 메타 정보<br/> BT: 봇 전환 시 전달할 메타 정보 |
-| -- chatEvent | String | BT: 봇 전환 시 연결할 봇 이벤트명 |
-| -- target|	String|	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
-| - isAd | Boolean | 광고 여부 |
-| - createDate | String | 생성 날짜 |
+| header | Object | Header area |
+| - resultCode |    Integer |   Result code |
+| - resultMessage | String | Result message |
+| - isSuccessful |  Boolean| Successful or not |
+| body | Object | Body area |
+| - requestId | String | Request ID |
+| - recipientSeq | Integer | Recipient sequence number |
+| - plusFriendId | String | PlusFriend ID |
+| - senderKey | String | Sender key (40 characters)|
+| - recipientNo | String | Recipient number |
+| - requestDate | String | Date of request |
+| - receiveDate | String | Date of receiving |
+| - content | String | Body message |
+| - messageStatus | String | Mass recipient delivery status code (READY, COMPLETED, FAILED, CANCEL) |
+| - resendStatus | String | Status code of resending (RSC01, RSC02, RSC03, RSC04, RSC05)<br>([Refer to [Status code of resending table](http://docs.toast.com/en/Notification/KakaoTalk%20Bizmessage/en/alimtalk-api-guide/#smslms)] below) |
+| - resendStatusName | String | Status code name of resending |
+| - resendRequestId | String | Resending SMS request ID |
+| - resendResultCode | String | Result code of resending [Result code of SMS sending](https://docs.toast.com/en/Notification/SMS/en/error-code/#api) |
+| - resultCode | String |   Result code of receiving |
+| - resultCodeName | String |   Result code name of receiving |
+| - imageSeq | Integer | Image sequence |
+| - imageLink | Integer | Image URL |
+| - buttons | List | Button sequence |
+| -- ordering | String | Button sequence |
+| -- type | String | Button type<br/> - WL: Web Link<br/> - AL: App Link<br/> - DS: Delivery Search<br/> - BK: Bot Keyword<br/> - MD: Message Delivery<br/> - BC: Bot for Consultation<br/> - BT: Bot Transfer<br/> - AC: Channel Added [only for Ad Included/Mixed Purposes Type] |
+| -- name | String | Button name |
+| -- linkMo | String | Mobile web link (required for the WL type) |
+| -- linkPc | String | PC web link (optional for the WL type)|
+| -- schemeIos | String | iOS app link (required for the AL type) |
+| -- schemeAndroid | String | Android app link (required for the AL type) |
+| -- chatExtra | String | BC: Meta information to be delivered when switching to consultation talk<br/> BT: Meta information to be delivered when switching to bot |
+| -- chatEvent | String | BT: Bot event name to connect when switching to bot |
+| -- target|    String| In the case of a web link button, out link used when adding "target":"out" attribute<br>Send with the default in-app link |
+| - isAd | Boolean | Ad or not |
+| - createDate | String | Request |
+
 
 ## Image Management
 
@@ -875,9 +958,9 @@ Content-Type: multipart/form-data
 
 [Path parameter]
 
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
 ```
@@ -885,19 +968,18 @@ Content-Type: multipart/form-data
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Request parameter]
 
-| Value | Type | Required | Description |
-| ----- | ---- | -------- | ----------- |
-| image | File | O        | Image       |
-| wide  | boolean | X | Image is wide or not (Default: false) |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|image| File|   O | Image |
+|wide| boolean | X | Image is wide or not (Default: false) |
 
 [Example]
-
 ```
 curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/images" -F "image=@friend-ricecake02.jpeg"
 ```
@@ -919,16 +1001,16 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 }
 ```
 
-| Value           | Type    | Description                                |
-| --------------- | ------- | ------------------------------------------ |
-| header          | Object  | Header area                                |
-| - resultCode    | Integer | Result code                                |
-| - resultMessage | String  | Result message                             |
-| - isSuccessful  | Boolean | Successful or not                          |
-| image           | Object  | Body area                                  |
-| - imageSeq      | Integer | Image number (to send Friendtalk messages) |
-| - imageUrl      | String  | Image URL                                  |
-| - imageName     | String  | Image name (name of uploaded file)         |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+|image| Object| Body area|
+|- imageSeq | Integer | Image number (to send Friendtalk messages)|
+|- imageUrl | String |  Image URL |
+|- imageName | String | Image name (name of uploaded file) |
 
 
 ### Query Images
@@ -943,30 +1025,28 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
-
 ```
 {
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| Value    | Type    | Required | Description                     |
-| -------- | ------- | -------- | ------------------------------- |
-| pageNum  | Integer | X        | Page number (default: 1)        |
-| pageSize | Integer | X        | Number of queries (default: 15) |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|pageNum|   Integer|    X|  Page number (default: 1)|
+|pageSize|  Integer|    X|  Number of queries (default: 15)|
 
 [Example]
-
 ```
 curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/images?pageNum=1&pageSize=15"
 ```
@@ -996,20 +1076,20 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 }
 ```
 
-| Value           | Type    | Description                                |
-| --------------- | ------- | ------------------------------------------ |
-| header          | Object  | Header area                                |
-| - resultCode    | Integer | Result code                                |
-| - resultMessage | String  | Result message                             |
-| - isSuccessful  | Boolean | Successful or not                          |
-| imagesResponse  | Object  | Body area                                  |
-| - image         | Object  | Body area                                  |
-| -- imageSeq     | Integer | Image number (to send Friendtalk messages) |
-| -- imageUrl     | String  | Image URL                                  |
-| -- imageName    | String  | Image name (name of uploaded file)         |
-| -- wide         | boolean |	Image is wide or not                       |
-| -- createDate   | String  | Date and time of creation                  |
-| - totalCount    | Integer | Total count                                |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+|imagesResponse| Object| Body area|
+|- image|   Object| Body area|
+|-- imageSeq | Integer |    Image number (to send Friendtalk messages)|
+|-- imageUrl | String | Image URL |
+|-- imageName | String |    Image name (name of uploaded file) |
+|-- wide | boolean |    Image is wide or not |
+|-- createDate | String |   Date and time of creation |
+|- totalCount | Integer | Total count |
 
 * Response is sent in the order of latest registration.
 
@@ -1025,9 +1105,9 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-| Value  | Type   | Description     |
-| ------ | ------ | --------------- |
-| appkey | String | Original appkey |
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
 
 [Header]
 ```
@@ -1035,18 +1115,17 @@ Content-Type: application/json;charset=UTF-8
   "X-Secret-Key": String
 }
 ```
-| Value        | Type   | Required | Description                                                  |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| X-Secret-Key | String | O        | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
 
 [Query parameter]
 
-| Value    | Type   | Required | Description  |
-| -------- | ------ | -------- | ------------ |
-| imageSeq | String | O        | Image number |
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|imageSeq|  String| O|  Image number |
 
 [Example]
-
 ```
 curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" "https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/images?imageSeq=1,2,3"
 ```
@@ -1063,9 +1142,127 @@ curl -X DELETE -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Ke
 }
 ```
 
-| Value           | Type    | Description       |
-| --------------- | ------- | ----------------- |
-| header          | Object  | Header area       |
-| - resultCode    | Integer | Result code       |
-| - resultMessage | String  | Result message    |
-| - isSuccessful  | Boolean | Successful or not |
+| Name |  Type| Description|
+|---|---|---|
+|header|    Object| Header area|
+|- resultCode|  Integer|    Result code|
+|- resultMessage|   String| Result message|
+|- isSuccessful|    Boolean| Successful or not|
+
+
+## Manage Alternative Delivery
+### Register an SMS AppKey
+
+[URL]
+
+```
+POST  /friendtalk/v2.2/appkeys/{appkey}/failback/appkey
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+
+
+[Request body]
+
+```
+{
+    "resendAppKey": String
+}
+```
+
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|resendAppKey|  String| O | SMS service appkey to set for alternative delivery |
+
+[Example]
+```
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/failback/appkey -d '{"resendAppKey": "smsAppKey"}
+```
+
+#### Response
+```
+
+{
+  "header" : {
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+  }
+}
+```
+
+### Register Alternative Delivery Settings
+
+[URL]
+
+```
+POST  /friendtalk/v2.2/appkeys/{appkey}/failback
+Content-Type: application/json;charset=UTF-8
+```
+
+[Path parameter]
+
+| Name |  Type| Description|
+|---|---|---|
+|appkey|    String| Unique appkey|
+
+[Header]
+```
+{
+  "X-Secret-Key": String
+}
+```
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|X-Secret-Key|  String| O | Can be created on console. [[Reference](./sender-console-guide/#x-secret-key)] |
+
+
+[Request body]
+
+```
+{  
+   "senderKey": String,
+   "isResend": Boolean,
+   "resendSendNo": String,
+   "resendUnsubscribeNo": String
+}
+```
+
+| Name |  Type| Required| Description|
+|---|---|---|---|
+|senderKey| String| O | Sender Key |
+|isResend|  Boolean|    O | Whether to resend text, if delivery fails<br/>Resent by default, if alternative delivery is set on console. |
+|resendSendNo|  String| O | Sender number for alternative delivery<br/><span style="color:red">(Alternative delivery may fail, if the sender number is not registered on the SMS service.)</span> |
+|resendUnsubscribeNo|   String| X | Alternative delivery 080 blocked number <br> <span style="color:red"> (If it is not the 080 blocked number registered in the SMS service, alternative delivery may fail.) </span> |
+
+[Example]
+```
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{secretkey}" https://api-alimtalk.cloud.toast.com/friendtalk/v2.2/appkeys/{appkey}/failback/appkey -d '{"senderKey": "9e0afe2c12aaaaaaaaaa7520052880b555f1a60a","isResend": true,"resendSendNo": "01012341234", "resendUnsubscribeNo": "0801234567" }
+```
+
+#### Response
+```
+
+{
+  "header" : {
+      "resultCode" :  Integer,
+      "resultMessage" :  String,
+      "isSuccessful" :  boolean
+  }
+}
+```
