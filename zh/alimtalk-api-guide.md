@@ -1366,7 +1366,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 |appKey|	String|	고유의 앱키|
 
@@ -1378,14 +1378,14 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
-|X-Secret-Key|	String|	고유의 시크릿 키 |
+|X-Secret-Key|	String|	고유의 비밀 키 |
 
 [Query parameter]
 * requestId 또는 startRequestDate + endRequestDate 또는 startCreateDate + endCreateDate는 필수입니다.
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| 이름 |	타입| 최대 길이 |	필수|	설명|
 |---|---|---|---|---|
 | requestId | String | - | O | 요청 ID |
 | startRequestDate | String | - | O | 발송 날짜 시작 |
@@ -1451,7 +1451,7 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | header | Object |	헤더 영역 |
 | - resultCode |	Integer |	결과 코드 |
@@ -1491,7 +1491,7 @@ curl -X GET \
 | - totalCount | Integer | 총 개수 |
 
 
-### 대량 발송 대량 발송 수신자 목록 조회
+### 대량 발송 수신자 목록 조회
 
 #### 요청
 [URL]
@@ -1502,7 +1502,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey |	String |	고유의 앱키 |
 | requestId |	String |	요청 ID |
@@ -1515,12 +1515,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
-| X-Secret-Key |	String|	고유의 시크릿 키 |
+| X-Secret-Key |	String|	고유의 비밀 키 |
 
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| 이름 |	타입| 최대 길이 |	필수|	설명|
 |---|---|---|---|---|
 | requestId | String | - | O | 요청 ID |
 | startRequestDate | String | - | X | 발송 날짜 시작 |
@@ -1564,7 +1564,7 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | header | Object |	헤더 영역 |
 | - resultCode |	Integer |	결과 코드 |
@@ -1582,7 +1582,7 @@ curl -X GET \
 | -- resultCodeName | String | 결과 코드 내용 |
 | - totalCount | Integer | 총 개수 |
 
-### 대량 발송 대량 발송 수신자 조회
+### 대량 발송 수신자 조회
 
 #### 요청
 [URL]
@@ -1593,7 +1593,7 @@ Content-Type: application/json;charset=UTF-8
 
 [Path parameter]
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | appKey |	String | 고유의 앱키 |
 | requestId |	String | 요청 ID |
@@ -1607,12 +1607,12 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
-|X-Secret-Key|	String|	고유의 시크릿 키 |
+|X-Secret-Key|	String|	고유의 비밀 키 |
 
 
-|값|	타입| 최대 길이 |	필수|	설명|
+| 이름 |	타입| 최대 길이 |	필수|	설명|
 |---|---|---|---|---|
 | requestId | String | - | O | 요청 ID |
 | startRequestDate | String | - | X | 발송 날짜 시작 |
@@ -1683,7 +1683,7 @@ curl -X GET \
 }
 ```
 
-|값|	타입|	설명|
+| 이름 |	타입|	설명|
 |---|---|---|
 | header | Object |	헤더 영역 |
 | - resultCode |	Integer |	결과 코드 |
@@ -2084,6 +2084,8 @@ Content-Type: application/json;charset=UTF-8
 | ------- | ------ | -------- | ----------- |
 | comment | String | O        | Inquiries   |
 
+* When commenting a template in the REJ status, it will be changed to the REQ status.
+
 #### Response
 ```
 {
@@ -2142,6 +2144,8 @@ Content-Type: application/json;charset=UTF-8
 |---|---|---|---|
 |comment|	String |	O | Content of Inquiry |
 |attachments| List<File> | X | List of Attachment (Up to 5) |
+
+* When commenting a template in the REJ status, it will be changed to the REQ status.
 
 #### Response
 ```

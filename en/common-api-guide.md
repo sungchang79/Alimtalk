@@ -1,13 +1,13 @@
 ## Notification > KakaoTalk Bizmessage > Common > API v2.2 Guide
 
-## 통계
+## Statistics
 
-### [API 도메인]
+### [API Domain]
 
 <table>
 <thead>
 <tr>
-<th>도메인</th>
+<th>Domain</th>
 </tr>
 </thead>
 <tbody>
@@ -18,46 +18,46 @@
 </table>
 
 
-### 통계 검색 - 이벤트 기반
-* 이벤트 발생 시간 기준으로 수집된 통계입니다.
-* 다음 시간 기준으로 통계가 수집됩니다.
-    * 요청 개수(REQUESTED): 예약 발송 등록 시간
-    * 발송 개수(SENT): 벤더로 발송 시점 (예약 발송 시간)
-    * 성공 개수(RECEIVED): 발송 결과 성공 (수신 시간)
-    * 실패 개수(SENT_FAILED): 발송 요청 실패 or 발송 결과 실패 시점
-    * 대체 발송 요청 개수(RESENT): 대체 발송 요청 시점
-    * 대체 발송 실패 개수(RESENT_FAILED):대체 발송 요청 실패 시점
+### Statistics Search - Event Based
+* Statistics collected based on the time when the event occurs.
+* Statistics are collected based on the following times:
+    * Request count (REQUESTED): Time when the scheduled delivery is registered
+    * Delivery count (SENT): Time of delivery to the vendor (scheduled delivery time)
+    * Success count (RECEIVED): Delivery result successful (receiving time)
+    * Failure count (SENT_FAILED): When the delivery request fails or when the delivery result fails
+    * Alternative delivery request count (RESENT): Time when the alternative delivery is requested
+    * Alternative delivery failure count (RESENT_FAILED): Time when the alternate delivery request fails
 
-### 통계 정보 조회
+### Get Statistics Information
 
 [URL]
 
-|Http method|	URI|
+|Http method|   URI|
 |---|---|
 |GET| /common/v2.2/appkeys/{appKey}/stats |
 
 [Path parameter]
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| appKey | String | 고유의 앱키 |
+| appKey | String | Unique appkey |
 
 [Query parameter]
 
-|값| 타입 | 최대 길이 | 필수 | 설명 |
+| Name | Type | Max. Length | Required | Description |
 |---|---|---|---|---|
-| statsType | String | - | 필수 | 통계 구분<br/>NORMAL:기본, MINUTELY:분별, HOURLY:시간별, DAILY:일별, BY_DAY:시간별, DAY:요일별 |
-| from | String | - | 필수 | 통계 검색 시작 날짜<br/>yyyy-MM-dd HH:mm:ss | 
-| to | String | - | 필수 | 통계 검색 종료 날짜<br/>yyyy-MM-dd HH:mm:ss |
-| join | Boolean | - | 옵션 | 통계 데이터 조회 시, 트리 형태로 제공할 지 설정 |
-| extra1s | List<String> | - | 옵션 | 하위 상품 구분<br/> ALIMTALK, ALIMTALK_AUTH, FRIENDTALK |
-| extra2s | List<String> | - | 옵션 | senderKey |
-| eventTypes | List<String> | - | 옵션 | 이벤트 종류<br/> REQUESTED, SENT, RECEIVED, SENT_FAILED, RESENT, RESENT_FAILED |
-| eventCategory | String | - | 옵션 | 이벤트 목록(현재 `MESSAGE`만 지원)<br/> MESSAGE |
-| templateCodes | List<String> | - | 옵션 | 템플릿 코드 목록 (친구톡 미지원) |
-| requestIds | List<String> | 5 | 옵션 | 요청 ID 목록 |
-| statsIds | List<String> | - | 옵션 | 통계 ID 목록 |
-| statsCriteria | List<String> | - | 옵션 | 통계 기준<br/>- EVENT: 이벤트(기본 값)<br/>- EXTRA_1,EVENT: 하위 상품 구분, 이벤트<br/>- EXTRA_2,EVENT: senderKey, 이벤트 |
+| statsType | String | - | Required | Statistics type<br/>NORMAL: basic, MINUTELY: by minute, HOURLY: by hour, DAILY: by day, BY_DAY: by hour, DAY: by day of the week |
+| from | String | - | Required | Start date of statistics search<br/>yyyy-MM-dd HH:mm:ss | 
+| to | String | - | Required | End date of statistics search<br/>yyyy-MM-dd HH:mm:ss |
+| join | Boolean | - | Optional | When retrieving statistics data, set whether to provide the data in tree form |
+| extra1s | List<String> | - | Optional | Sub-product type<br/> ALIMTALK, ALIMTALK_AUTH, FRIENDTALK |
+| extra2s | List<String> | - | Optional | senderKey |
+| eventTypes | List<String> | - | Optional | Event type<br/> REQUESTED, SENT, RECEIVED, SENT_FAILED, RESENT, RESENT_FAILED |
+| eventCategory | String | - | Optional | Event list (Currently only `MESSAGE` is supported)<br/> MESSAGE |
+| templateCodes | List<String> | - | Optional | Template code list (FriendTalk unsupported) |
+| requestIds | List<String> | 5 | Optional | Request ID list |
+| statsIds | List<String> | - | Optional | Statistics ID list |
+| statsCriteria | List<String> | - | Optional | Statistics criteria<br/>- EVENT: event (default value)<br/>- EXTRA_1,EVENT: sub product type, event<br/>- EXTRA_2,EVENT: senderKey, event |
 
 [Response body]
 ```json
@@ -94,36 +94,36 @@
 }
 ```
 
-### 이벤트별 개수 조회
+### Get Count per Event
 
 [URL]
 
-|Http method|	URI|
+|Http method|   URI|
 |---|---|
 |GET| /common/v2.2/appkeys/{appKey}/stats/total |
 
 [Path parameter]
 
-|값|	타입|	설명|
+| Name |  Type| Description|
 |---|---|---|
-| appKey | String | 고유의 앱키 |
+| appKey | String | Unique appkey |
 
 [Query parameter]
 
-|값| 타입 | 최대 길이 | 필수 | 설명 |
+| Name | Type | Max. Length | Required | Description |
 |---|---|---|---|---|
-| statsType | String | - | 필수 | 통계 구분<br/>NORMAL:기본, MINUTELY:분별, HOURLY:시간별, DAILY:일별, BY_DAY:시간별, DAY:요일별 |
-| from | String | - | 필수 | 통계 검색 시작 날짜<br/>yyyy-MM-dd HH:mm:ss | 
-| to | String | - | 필수 | 통계 검색 종료 날짜<br/>yyyy-MM-dd HH:mm:ss |
-| join | Boolean | - | 옵션 | 통계 데이터 조회 시, 트리 형태로 제공할 지 설정 |
-| extra1s | List<String> | - | 옵션 | 하위 상품 구분<br/> ALIMTALK, ALIMTALK_AUTH, FRIENDTALK |
-| extra2s | List<String> | - | 옵션 | senderKey |
-| eventTypes | List<String> | - | 옵션 | 이벤트 종류<br/> REQUESTED, SENT, RECEIVED, SENT_FAILED, RESENT, RESENT_FAILED |
-| eventCategory | String | - | 옵션 | 이벤트 목록(현재 `MESSAGE`만 지원)<br/> MESSAGE |
-| templateCodes | List<String> | - | 옵션 | 템플릿 코드 목록 (친구톡 미지원) |
-| requestIds | List<String> | 5 | 옵션 | 요청 ID 목록 |
-| statsIds | List<String> | - | 옵션 | 통계 ID 목록 |
-| statsCriteria | List<String> | - | 옵션 | 통계 기준<br/>- EVENT: 이벤트(기본 값)<br/>- EXTRA_1,EVENT: 하위 상품 구분, 이벤트<br/>- EXTRA_2,EVENT: senderKey, 이벤트 |
+| statsType | String | - | Required | Statistics type<br/>NORMAL: basic, MINUTELY: by minute, HOURLY: by hour, DAILY: by day, BY_DAY: by hour, DAY: by day of the week |
+| from | String | - | Required | Start date of statistics search<br/>yyyy-MM-dd HH:mm:ss | 
+| to | String | - | Required | End date of statistics search<br/>yyyy-MM-dd HH:mm:ss |
+| join | Boolean | - | Optional | When retrieving statistics data, set whether to provide the data in tree form |
+| extra1s | List<String> | - | Optional | Sub-product type<br/> ALIMTALK, ALIMTALK_AUTH, FRIENDTALK |
+| extra2s | List<String> | - | Optional | senderKey |
+| eventTypes | List<String> | - | Optional | Event type<br/> REQUESTED, SENT, RECEIVED, SENT_FAILED, RESENT, RESENT_FAILED |
+| eventCategory | String | - | Optional | Event list (Currently only `MESSAGE` is supported)<br/> MESSAGE |
+| templateCodes | List<String> | - | Optional | Template code list (FriendTalk unsupported) |
+| requestIds | List<String> | 5 | Optional | Request ID list |
+| statsIds | List<String> | - | Optional | Statistics ID list |
+| statsCriteria | List<String> | - | Optional | Statistics criteria<br/>- EVENT: event (default value)<br/>- EXTRA_1,EVENT: sub product type, event<br/>- EXTRA_2,EVENT: senderKey, event |
 
 [Response body]
 ```json
