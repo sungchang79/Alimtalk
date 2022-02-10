@@ -253,10 +253,10 @@ Content-Type: application/json;charset=UTF-8
 | -- ordering            | Integer | X        | Button sequence (required, if there is a button)             |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: Bot for Consultation, BT: Bot Transfer, CA: Channeld Added) |
 | -- name                | String  | X        | Button name (required if there is a button, up to 14 characters) |
-| -- linkMo              | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
-| -- linkPc              | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
-| -- schemeIos           | String  | X        | iOS app link (required for the AL type, up to 200 characters) |
-| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, up to 200 characters) |
+| -- linkMo              | String  | X        | Mobile web link (required for the WL type, up to 500 characters) |
+| -- linkPc              | String  | X        | PC web link (optional for the WL type, up to 500 characters) |
+| -- schemeIos           | String  | X        | iOS app link (required for the AL type, up to 500 characters) |
+| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, up to 500 characters) |
 | -- chatExtra           | String  | X        |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X        |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X        |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -846,10 +846,10 @@ Content-Type: application/json;charset=UTF-8
 | -- ordering            | Integer | X        | Button sequence (required if there a button)                 |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: Bot for Consultation, BT: Bot Transfer, CA: Channel Added) |
 | -- name                | String  | X        | Button name (required if there is a button, for up to 14 characters) |
-| -- linkMo              | String  | X        | Mobile web link (required for the WL type, for up to 200 characters) |
-| -- linkPc              | String  | X        | PC web link (required for the WL type, for up to 200 characters) |
-| -- schemeIos           | String  | X        | iOS app link (required for the AL type, for up to 200 characters) |
-| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, for up to 200 characters) |
+| -- linkMo              | String  | X        | Mobile web link (required for the WL type, for up to 500 characters) |
+| -- linkPc              | String  | X        | PC web link (required for the WL type, for up to 500 characters) |
+| -- schemeIos           | String  | X        | iOS app link (required for the AL type, for up to 500 characters) |
+| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, for up to 500 characters) |
 | -- chatExtra           | String  | X        | BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보             |
 | -- chatEvent           | String  | X        | BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명                          |
 | -- target              | String  | X        | 웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -1858,7 +1858,7 @@ Content-Type: application/json;charset=UTF-8
 | Value               | Type    | Required | Description                                                  |
 | ---------------     | ------- | -------- | ------------------------------------------------------------ |
 | templateCode        | String  | O        | Template code (up to 20 characters)                          |
-| templateName        | String  | O        | Template name (up to 20 characters)                          |
+| templateName        | String  | O        | Template name (up to 150 characters)                          |
 | templateContent     | String  | O        | Template body (up to 1000 characters)                        |
 | templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra Information, AD: Ad Included, MI: Mixed Purposes, default: Basic) |
 |templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, IMAGE: Image type, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required <br>IMAGE: templateImageName and templateImageUrl fields are required |
@@ -1874,10 +1874,10 @@ Content-Type: application/json;charset=UTF-8
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: Bot for Consultation, BT: Bot Transfer, CA: Channel Added [only for Ad Included/Mixed Purposes Type]) |
 | -name           | String  | X        | Button name (required, if there's a button, up to 14 characters) |
-| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
-| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
-| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 200 characters) |
-| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 200 characters) |
+| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 500 characters) |
+| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 500 characters) |
+| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 500 characters) |
+| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 500 characters) |
 
 #### Response
 
@@ -1959,7 +1959,7 @@ Content-Type: application/json;charset=UTF-8
 
 | Value           | Type    | Required | Description                                                  |
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
-| templateName    | String  | O        | Template name (up to 20 characters)                          |
+| templateName    | String  | O        | Template name (up to 150 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
 | templateMessageType | String  | X        | Types of Template Message (BA: Basic, EX: Extra Information, AD: Ad Included, MI: Mixed Purposes, default: Basic) |
 |templateEmphasizeType| String  | X        | Types of Emphasized Template (NONE: Basic, TEXT: Emphasized, IMAGE: Image type, default:NONE)<br>- TEXT: templateTitle and templateSubtitle fields are required <br>IMAGE: templateImageName and templateImageUrl fields are required |
@@ -1975,10 +1975,10 @@ Content-Type: application/json;charset=UTF-8
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery, BC: Bot for Consultation, BT: Bot Transfer, CA: Channel Added [only for Ad Included/Mixed Purposes Type]) |
 | -name           | String  | X        | Button name (required, if there's a button, up to 14 characters) |
-| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
-| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
-| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 200 characters) |
-| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 200 characters) |
+| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 500 characters) |
+| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 500 characters) |
+| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 500 characters) |
+| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 500 characters) |
 
 #### Response
 
