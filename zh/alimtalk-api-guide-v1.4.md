@@ -220,10 +220,10 @@ Content-Type: application/json;charset=UTF-8
 | -- ordering            | Integer | X        | Button sequence (required, if there is a button)             |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
 | -- name                | String  | X        | Button name (required if there is a button, up to 14 characters) |
-| -- linkMo              | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
-| -- linkPc              | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
-| -- schemeIos           | String  | X        | iOS app link (required for the AL type, up to 200 characters) |
-| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, up to 200 characters) |
+| -- linkMo              | String  | X        | Mobile web link (required for the WL type, up to 500 characters) |
+| -- linkPc              | String  | X        | PC web link (optional for the WL type, up to 500 characters) |
+| -- schemeIos           | String  | X        | iOS app link (required for the AL type, up to 500 characters) |
+| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, up to 500 characters) |
 | - resendParameter      |Object   | X        | Alternative delivery information                             |
 | -- isResend            | boolean | X        | Whether to send text as alternative, if delivery fails <br/>Resent in default, if delivery failure is set on console. |
 | -- resendType          | String  | X        | Alternative delivery type (SMS,LMS)<br/>Categorized by the length of template message, if value is unavailable. |
@@ -727,10 +727,10 @@ Content-Type: application/json;charset=UTF-8
 | -- ordering            | Integer | X        | Button sequence (required if there a button)                 |
 | -- type                | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
 | -- name                | String  | X        | Button name (required if there is a button, for up to 14 characters) |
-| -- linkMo              | String  | X        | Mobile web link (required for the WL type, for up to 200 characters) |
-| -- linkPc              | String  | X        | PC web link (required for the WL type, for up to 200 characters) |
-| -- schemeIos           | String  | X        | iOS app link (required for the AL type, for up to 200 characters) |
-| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, for up to 200 characters) |
+| -- linkMo              | String  | X        | Mobile web link (required for the WL type, for up to 500 characters) |
+| -- linkPc              | String  | X        | PC web link (required for the WL type, for up to 500 characters) |
+| -- schemeIos           | String  | X        | iOS app link (required for the AL type, for up to 500 characters) |
+| -- schemeAndroid       | String  | X        | Android app link (required for the AL type, for up to 500 characters) |
 | - isResend             | boolean | X        | Whether to send text as alternative, if delivery fails<br>Resent in default, if delivery failure is set on console. |
 | - resendType           | String  | X        | Alternative delivery type (SMS,LMS)<br>Categorized by the length of template body, if value is unavailable. |
 | - resendTitle          | String  | X        | Title of alternative delivery for LMS (up to 20 characters)<br>(resent with PlusFriend ID, if the value is unavailable.) |
@@ -1569,16 +1569,16 @@ Content-Type: application/json;charset=UTF-8
 | Value           | Type    | Required | Description                                                  |
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
 | templateCode    | String  | O        | Template code (up to 20 characters)                          |
-| templateName    | String  | O        | Template name (up to 20 characters)                          |
+| templateName    | String  | O        | Template name (up to 150 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
 | -name           | String  | X        | Button name (required, if there's a button, up to 14 characters) |
-| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
-| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
-| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 200 characters) |
-| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 200 characters) |
+| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 500 characters) |
+| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 500 characters) |
+| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 500 characters) |
+| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 500 characters) |
 
 #### Response
 
@@ -1650,16 +1650,16 @@ Content-Type: application/json;charset=UTF-8
 
 | Value           | Type    | Required | Description                                                  |
 | --------------- | ------- | -------- | ------------------------------------------------------------ |
-| templateName    | String  | O        | Template name (up to 20 characters)                          |
+| templateName    | String  | O        | Template name (up to 150 characters)                          |
 | templateContent | String  | O        | Template body (up to 1000 characters)                        |
 | buttons         | List    | X        | List of buttons (up to 5)                                    |
 | -ordering       | Integer | X        | Button sequence (1~5)                                        |
 | -type           | String  | X        | Button type (WL: Web Link, AL: App Link, DS: Delivery Search, BK: Bot Keyword, MD: Message Delivery) |
 | -name           | String  | X        | Button name (required, if there's a button, up to 14 characters) |
-| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 200 characters) |
-| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 200 characters) |
-| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 200 characters) |
-| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 200 characters) |
+| -linkMo         | String  | X        | Mobile web link (required for the WL type, up to 500 characters) |
+| -linkPc         | String  | X        | PC web link (optional for the WL type, up to 500 characters) |
+| -schemeIos      | String  | X        | iOS app link (required for the AL type, up to 500 characters) |
+| -schemeAndroid  | String  | X        | Android app link (required for the AL type, up to 500 characters) |
 
 #### Response
 

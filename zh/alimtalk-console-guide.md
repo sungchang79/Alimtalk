@@ -92,9 +92,9 @@ Click **Register Templates** to register a template.
 ![alimtalk_10_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_10_201812.png)
 
 * Only English and numbers up to 10 characters can be registered.  
-* Up to 20 characters are allowed for a template name.
+* Up to 150 characters are allowed for a template name.
 * Template can have up to 1,000 characters, including variables and URL,  be it  Korean or English.
-* Up to 100 characters are allowed for a button link URL.
+* Up to 500 characters are allowed for a button link URL.
 * Register a template replacer, like #{replacer}.
 * To use a replacer for a button link, make sure to enter http:// or https:// protocol. e.g.) http://#{URL} or https://#{URL}
 * You can perform mass registration using the Excel file. If there is any duplicate or invalid template while performing mass registration, only normal templates are registered.

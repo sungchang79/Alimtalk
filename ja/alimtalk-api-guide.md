@@ -251,10 +251,10 @@ Content-Type: application/json;charset=UTF-8
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、AC：チャンネル追加) |
 | -- name                | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
-| -- linkMo              | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
-| -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
-| -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大200文字)       |
-| -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大200文字)   |
+| -- linkMo              | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大500文字)       |
+| -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大500文字)        |
+| -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大500文字)       |
+| -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大500文字)   |
 | -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -845,10 +845,10 @@ Content-Type: application/json;charset=UTF-8
 | -- ordering            | Integer | X    | ボタン順序(ボタンがある場合は必須)                      |
 | -- type                | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、AC：チャンネル追加) |
 | -- name                | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
-| -- linkMo              | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
-| -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
-| -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大200文字)       |
-| -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大200文字)   |
+| -- linkMo              | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大500文字)       |
+| -- linkPc              | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大500文字)        |
+| -- schemeIos           | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大500文字)       |
+| -- schemeAndroid       | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大500文字)   |
 | -- chatExtra           | String  | X    |	BC(상담톡 전환) / BT(봇 전환) 타입 버튼 시, 전달할 메타정보 |
 | -- chatEvent           | String  | X    |	BT(봇 전환) 타입 버튼 시, 연결할 봇 이벤트명 |
 | -- target              | String  | X    |	웹 링크 버튼일 경우, "target":"out" 속성 추가 시 아웃 링크<br>기본 인앱 링크로 발송 |
@@ -1883,7 +1883,7 @@ Content-Type: application/json;charset=UTF-8
 | 値       | タイプ | 必須 | 説明                               |
 | --------------- | ------- | ---- | ---------------------------------------- |
 | templateCode    | String  | O    | テンプレートコード(最大20文字)                           |
-| templateName    | String  | O    | テンプレート名(最大20文字)                             |
+| templateName    | String  | O    | テンプレート名(最大150文字)                             |
 | templateContent | String  | O    | テンプレート本文(最大1000文字)                         |
 | templateMessageType| String | X  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
 |templateEmphasizeType| String| X  | テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
@@ -1899,10 +1899,10 @@ Content-Type: application/json;charset=UTF-8
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
 | -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、AC：チャンネル追加) |[広告追加/複合型のみ]) |
 | -name           | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
-| -linkMo         | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
-| -linkPc         | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
-| -schemeIos      | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大200文字)       |
-| -schemeAndroid  | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大200文字)   |
+| -linkMo         | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大500文字)       |
+| -linkPc         | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大500文字)        |
+| -schemeIos      | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大500文字)       |
+| -schemeAndroid  | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大500文字)   |
 
 #### レスポンス
 ```
@@ -1981,7 +1981,7 @@ Content-Type: application/json;charset=UTF-8
 
 | 値       | タイプ | 必須 | 説明                               |
 | --------------- | ------- | ---- | ---------------------------------------- |
-| templateName    | String  | O    | テンプレート名(最大20文字)                             |
+| templateName    | String  | O    | テンプレート名(最大150文字)                             |
 | templateContent | String  | O    | テンプレート本文(最大1000文字)                         |
 | templateMessageType| String | X  | テンプレートメッセージタイプ(BA:基本型、EX:付加情報型、AD:広告追加型、MI:複合型)<br>EX：templateExtraフィールド必須<br>AD：templateAdフィールド必須、グループテンプレート使用不可<br>MI：templateExtra、templateAdフィールド必須」 |
 | templateEmphasizeType| String| X  | テンプレートハイライトタイプ（NONE：基本、TEXT：ハイライト、default：NONE）<br>TEXT：templateTitle、templateSubtitleフィールド必須 |
@@ -1997,10 +1997,10 @@ Content-Type: application/json;charset=UTF-8
 | -ordering       | Integer | X    | ボタン順序(1~5)                               |
 | -type           | String  | X    | ボタンタイプ(WL：Webリンク、AL：アプリリンク、DS：配送照会、BK：Botキーワード、MD：メッセージ伝達、BC：相談トーク転換、BT：Bot転換、AC：チャンネル追加) |[広告追加/複合型のみ]) |
 | -name           | String  | X    | ボタン名(ボタンがある場合は必須、最大14文字)              |
-| -linkMo         | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大200文字)       |
-| -linkPc         | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大200文字)        |
-| -schemeIos      | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大200文字)       |
-| -schemeAndroid  | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大200文字)   |
+| -linkMo         | String  | X    | モバイルWebリンク(WLタイプの場合は必須フィールド、最大500文字)       |
+| -linkPc         | String  | X    | PC Webリンク(WLタイプの場合は任意フィールド、最大500文字)        |
+| -schemeIos      | String  | X    | iOSアプリリンク(ALタイプの場合は必須フィールド、最大500文字)       |
+| -schemeAndroid  | String  | X    | Androidアプリリンク(ALタイプの場合は必須フィールド、最大500文字)   |
 
 #### レスポンス
 ```
