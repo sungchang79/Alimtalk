@@ -84,7 +84,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -115,6 +116,7 @@ Content-Type: application/json;charset=UTF-8
 |messageOption | Object |	X | 메시지 옵션 |
 |- price | Integer |	X | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
 |- currencyType | String |	X| message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| statsId | String |	X | 통계 ID(발신 검색 조건에는 포함되지 않습니다, 최대 10자) |
 
 * <b>요청 일시는 호출하는 시점부터 90일 후까지 설정 가능합니다.</b>
 * <b>SMS 서비스에서 대체 발송되므로, SMS 서비스의 발송 API 명세에 따라 필드를 입력해야 합니다.(SMS 서비스에 등록된 발신 번호, 각종 필드 길이 제한 등)</b>
@@ -233,7 +235,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -269,6 +272,7 @@ Content-Type: application/json;charset=UTF-8
 | messageOption | Object |	X | 메시지 옵션 |
 |- price | Integer |	X | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
 |- currencyType | String |	X| message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| statsId | String |	X | 통계 ID(발신 검색 조건에는 포함되지 않습니다, 최대 10자) |
 
 * <b>본문과 버튼에 치환이 완성된 데이터를 넣어주세요.</b>
 * <b>요청 일시는 호출하는 시점부터 90일 후까지 설정 가능합니다.</b>
@@ -673,7 +677,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -704,6 +709,7 @@ Content-Type: application/json;charset=UTF-8
 |messageOption | Object |	X | 메시지 옵션 |
 |- price | Integer |	X | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
 |- currencyType | String |	X| message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| statsId | String |	X | 통계 ID(발신 검색 조건에는 포함되지 않습니다, 최대 10자) |
 
 * <b>요청 일시는 호출하는 시점부터 90일 후까지 설정 가능합니다.</b>
 * <b>SMS 서비스에서 대체 발송되므로, SMS 서비스의 발송 API 명세에 따라 필드를 입력해야 합니다.(SMS 서비스에 등록된 발신 번호, 각종 필드 길이 제한 등)</b>
@@ -821,7 +827,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -857,6 +864,7 @@ Content-Type: application/json;charset=UTF-8
 |messageOption | Object |	X | 메시지 옵션 |
 |- price | Integer |	X | message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액 (모먼트 광고에 해당) |
 |- currencyType | String |	X| message(사용자에게 전달될 메시지) 내 포함된 가격/금액/결제금액의 통화단위 KRW, USD, EUR 등 국제 통화 코드 사용 (모먼트 광고에 해당) |
+| statsId | String |	X | 통계 ID(발신 검색 조건에는 포함되지 않습니다, 최대 10자) |
 
 * <b>본문과 버튼에 치환이 완성된 데이터를 넣어주세요.</b>
 * <b>요청 일시는 호출하는 시점부터 90일 후까지 설정 가능합니다.</b>

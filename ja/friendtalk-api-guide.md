@@ -85,7 +85,8 @@ Content-Type: application/json;charset=UTF-8
         },
         "isAd": Boolean,
         "recipientGroupingKey": String
-    }]
+    }],
+    "statsId": String
 }
 ```
 
@@ -120,6 +121,7 @@ Content-Type: application/json;charset=UTF-8
 | -- resendUnsubscribeNo | String  | X    | 代替080受信拒否番号<br><span style="color:red">(SMSサービスに登録された080の受信拒否番号がない場合、代替の転送が失敗することがあります。)</span> |
 | - isAd                 | Boolean | X    | 広告かどうか(デフォルト値true)                          |
 | - recipientGroupingKey | String  | X    | 受信者グルーピングキー(最大100文字)                       |
+| statsId                 | String  | X    |	統計ID(発信検索条件には含まれません, 最大10文字) |
 
 * <b>リクエスト日時は呼び出す時点から90日後まで設定可能です。</b>
 * <b>夜間送信制限(20:00～翌日08:00)</b>

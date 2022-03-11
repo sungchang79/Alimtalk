@@ -84,7 +84,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -115,6 +116,9 @@ Content-Type: application/json;charset=UTF-8
 |messageOption | Object |   X | Message Option |
 |- price | Integer |    X | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
 |- currencyType | String |  X| Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
+| statsId | String |	X | Statistics ID (not included in the delivery search conditions, up to 10 characters) |
+
+
 
 * <b>Request date and time can be set up to 90 days since a point of calling.</b>
 * <b>Since alternative delivery is made in the SMS service, field values must follow the API specifications for SMS (e.g. Sender number registered at the SMS service, or restriction in the field length). </b>
@@ -233,7 +237,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -269,6 +274,7 @@ Content-Type: application/json;charset=UTF-8
 | messageOption | Object |  X | Message Option |
 |- price | Integer |    X | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
 |- currencyType | String |  X| Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
+| statsId | String |	X | Statistics ID (not included in the delivery search conditions, up to 10 characters) |
 
 * <b>Enter data completed with replacement for the body and button. </b>
 * **Request date and time can be set up to 90 days since a point of calling.**
@@ -673,7 +679,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -704,6 +711,7 @@ Content-Type: application/json;charset=UTF-8
 |messageOption | Object |   X | Message Option |
 |- price | Integer |    X | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
 |- currencyType | String |  X| Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
+| statsId | String |	X | Statistics ID (not included in the delivery search conditions, up to 10 characters) |
 
 * <b> Request date and time can be set up to 90 days since a point of calling. </b>
 * <b>Since alternative delivery is made in the SMS service, field values must follow the API specifications for SMS (e.g. Sender number registered at the SMS service, or restriction in the field length). </b>
@@ -821,7 +829,8 @@ Content-Type: application/json;charset=UTF-8
     "messageOption": {
       "price": Integer,
       "currencyType": String
-    }
+    },
+    "statsId": String
 }
 ```
 
@@ -857,6 +866,7 @@ Content-Type: application/json;charset=UTF-8
 |messageOption | Object |   X | Message Option |
 |- price | Integer |    X | Price/amount/payment amount included in message (message to be delivered to user)(related to moment advertisement) |
 |- currencyType | String |  X| Use of international currency codes such as KRW, USD, EUR, which is the currency unit of the price/amount/payment amount included in the message (message to be delivered to the user) (related to moment advertisement) |
+| statsId | String |	X | Statistics ID (not included in the delivery search conditions, up to 10 characters) |
 
 * <b>Enter data completed with replacement in the body and button. </b>
 * <b>Request date and time can be set up to 90 days since a point of calling. </b>

@@ -85,7 +85,8 @@ Content-Type: application/json;charset=UTF-8
         },
         "isAd": Boolean,
         "recipientGroupingKey": String
-    }]
+    }],
+    "statsId": String
 }
 ```
 
@@ -120,6 +121,7 @@ Content-Type: application/json;charset=UTF-8
 |-- resendUnsubscribeNo | String| X| 대체 발송 080 수신 거부 번호<br><span style="color:red">(SMS 서비스에 등록된 080 수신 거부 번호가 아닐 경우, 대체 발송에 실패할 수 있습니다.)</span> |
 |- isAd | Boolean | X |	광고 여부(기본값 true) |
 |- recipientGroupingKey|	String|	X|	수신자 그룹핑 키(최대 100자) |
+| statsId | String |	X | 통계 ID(발신 검색 조건에는 포함되지 않습니다, 최대 10자) |
 
 * <b>요청 일시는 호출하는 시점부터 90일 후까지 설정 가능합니다.</b>
 * <b>야간 발송 제한(20:50~다음 날 08:00)</b>

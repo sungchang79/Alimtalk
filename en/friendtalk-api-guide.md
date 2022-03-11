@@ -85,7 +85,8 @@ Content-Type: application/json;charset=UTF-8
         },
         "isAd": Boolean,
         "recipientGroupingKey": String
-    }]
+    }],
+    "statsId": String
 }
 ```
 
@@ -120,6 +121,7 @@ Content-Type: application/json;charset=UTF-8
 |-- resendUnsubscribeNo | String| X| Alternative delivery 080 blocked number <br> <span style="color:red"> (If it is not the 080 blocked number registered in the SMS service, alternative delivery may fail.) </span> |
 |- isAd | Boolean | X | Ad or not (default is true) |
 |- recipientGroupingKey|    String| X|  Recipient's grouping key (up to 100 characters) |
+| statsId | String |	X | Statistics ID (not included in the delivery search conditions, up to 10 characters) |
 
 * <b> Request date and time can be configured up to 90 days after a point of calling </b>
 * <b> Delivery restricted during night (20:50~08:00 on the following day)</b>
