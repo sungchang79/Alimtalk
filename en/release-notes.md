@@ -1,4 +1,10 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### Mar 29, 2022
+* [Console] Changed the base date for backup of AlimTalk delivery results
+    * The base date for backup of AlimTalk delivery results has been changed from 180 days to 90 days.
+* [Console] Improved the feature to download general, mass, and tag delivery results
+    * For Excel download, changed to create a .zip file for more than 1 million results.
+
 ### January 11, 2022
 * [Console] Fade-out of (Old)Statistics
     * Due to introduction of new statistics, the (Old)Statistics tab has been deleted.
