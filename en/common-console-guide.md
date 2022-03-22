@@ -42,3 +42,13 @@ To use NHN Cloud KakaoTalk Bizmessage Service, make sure the following is displa
 
 Assignor: NHN
 Content of Business: Send KakaoTalk Bizmessage in lieu of customers
+
+## 발송 설정
+메시지 보관 기간 정책에 따라, 90일이 지난 발송 이력 데이터를 백업할 수 있습니다.
+알림톡 백업 여부, 파일 확장자, 파일을 업로드할 저장소 정보를 입력하면, 해당 저장소에 백업 일자가 포함된 파일이 생성됩니다.
+
+## 웹훅 관리
+지정한 이벤트 발생 시, URL을 지정하여 웹훅 이벤트를 받을 수 있습니다.
+
+## 통계 이벤트 키 설정
+이벤트 키를 등록하여, 해당 키로 발송 시, 통계 이벤트 키별로 통계 데이터를 수집할 수 있습니다.
