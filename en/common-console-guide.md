@@ -16,7 +16,7 @@ Only the administrator can receive such token messages.
 
 Enter token message received on the administrator's phone and it is completely registered.
 
-![plusfriend_02_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_02_201904.png)                                                   
+![plusfriend_02_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_02_201904.png)
 
 <b><span style="color:red">With the registration of Plus Friend, the initial maximum daily delivery volume is limited to 1,000.</span></b>
 To change the maximum daily delivery volume, you must send request to Customer Center (support@toast.com).
@@ -25,7 +25,7 @@ To change the maximum daily delivery volume, you must send request to Customer C
 
 'Failed Delivery Setting' can be applied for each Plus Friend.
 
-* Only such Plus Friend messages which are set up with failed delivery can be replaced by LMS or SMS. 발
+* Only such Plus Friend messages which are set up with failed delivery can be replaced by LMS or SMS.
 * With the modification of SMS appkey, failed delivery setting of all Plus Friends become initialized.
 
 ![plusfriend_03_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_03_201812.png)
@@ -43,12 +43,12 @@ To use NHN Cloud KakaoTalk Bizmessage Service, make sure the following is displa
 Assignor: NHN
 Content of Business: Send KakaoTalk Bizmessage in lieu of customers
 
-## 발송 설정
-메시지 보관 기간 정책에 따라, 90일이 지난 발송 이력 데이터를 백업할 수 있습니다.
-알림톡 백업 여부, 파일 확장자, 파일을 업로드할 저장소 정보를 입력하면, 해당 저장소에 백업 일자가 포함된 파일이 생성됩니다.
+## Delivery Setting
+According to the message retention policy, you can back up the delivery history data older than 90 days.
+If you enter whether to use AlimTalk backup, file extension, and information of storage to upload the file to, a file with the backup date is created in the storage.
 
-## 웹훅 관리
-지정한 이벤트 발생 시, URL을 지정하여 웹훅 이벤트를 받을 수 있습니다.
+## Manage Webhooks
+When a specified event occurs, you can receive a webhook event by specifying the URL.
 
-## 통계 이벤트 키 설정
-이벤트 키를 등록하여, 해당 키로 발송 시, 통계 이벤트 키별로 통계 데이터를 수집할 수 있습니다.
+## Statistics Event Key Setting
+By registering an event key, you can collect statistical data for each statistical event key when sending with the key.

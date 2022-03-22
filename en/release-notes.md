@@ -1,9 +1,9 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
 ### Mar 29, 2022
-* [Console] 알림톡 발송 결과 백업 기준일 변경
-    * 알림톡 발송 결과 백업 기준일이 180일에서 90일로 변경되었습니다.
-* [Console] 일반, 대량, 태그 발송 결과 다운로드 기능 개선
-    * Excel 다운로드, 100만 건이 넘는 경우 .zip 파일로 생성하도록 변경되었습니다.
+* [Console] Changed the base date for backup of AlimTalk delivery results
+    * The base date for backup of AlimTalk delivery results has been changed from 180 days to 90 days.
+* [Console] Improved the feature to download general, mass, and tag delivery results
+    * For Excel download, changed to create a .zip file for more than 1 million results.
 
 ### January 11, 2022
 * [Console] Fade-out of (Old)Statistics

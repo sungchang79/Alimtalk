@@ -16,7 +16,7 @@ Only the administrator can receive such token messages.
 
 Enter token message received on the administrator's phone and it is completely registered.
 
-![plusfriend_02_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_02_201904.png)                                                   
+![plusfriend_02_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_02_201904.png)
 
 <b><span style="color:red">With the registration of Plus Friend, the initial maximum daily delivery volume is limited to 1,000.</span></b>
 To change the maximum daily delivery volume, you must send request to Customer Center (support@toast.com).
@@ -25,7 +25,7 @@ To change the maximum daily delivery volume, you must send request to Customer C
 
 'Failed Delivery Setting' can be applied for each Plus Friend.
 
-* Only such Plus Friend messages which are set up with failed delivery can be replaced by LMS or SMS. 발
+* Only such Plus Friend messages which are set up with failed delivery can be replaced by LMS or SMS.
 * With the modification of SMS appkey, failed delivery setting of all Plus Friends become initialized.
 
 ![plusfriend_03_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_03_201812.png)
