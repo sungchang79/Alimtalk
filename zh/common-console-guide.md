@@ -42,3 +42,13 @@ To use NHN Cloud KakaoTalk Bizmessage Service, make sure the following is displa
 
 Assignor: NHN
 Content of Business: Send KakaoTalk Bizmessage in lieu of customers
+
+## Delivery Setting
+According to the message retention policy, you can back up the delivery history data older than 90 days.
+If you enter whether to use AlimTalk backup, file extension, and information of storage to upload the file to, a file with the backup date is created in the storage.
+
+## Manage Webhooks
+When a specified event occurs, you can receive a webhook event by specifying the URL.
+
+## Statistics Event Key Setting
+By registering an event key, you can collect statistical data for each statistical event key when sending with the key.
