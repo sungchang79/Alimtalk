@@ -1,7 +1,7 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
 ### 2022.03.29.
 * [Console] 알림톡 발송 결과 백업 기준일 변경
-    * 알림톡 발송 결과 백업 기준일 변경되었습니다. (180일 -> 90일)
+    * 알림톡 발송 결과 백업 기준일이 180일에서 90일로 변경되었습니다.
 
 ### 2022.01.11.
 * [Console] (구)통계 fade-out
