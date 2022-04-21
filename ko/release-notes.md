@@ -1,4 +1,10 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2022.04.26.
+* [API] SMS 대체 발송 시, 공용 필드 추가
+    * 알림톡/친구톡 SMS로 대체 발송 시, statsId, senderGroupingKey, recipientGroupingKey 필드를 추가하도록 개선하였습니다.
+* [API] 알림톡 전문 발송 템플릿 validation 개선
+    * 알림톡 전문 발송 시, 템플릿 치환자에 공백을 허용하도록 validation을 개선하였습니다.
+
 ### 2022.03.29.
 * [Console] 알림톡 발송 결과 백업 기준일 변경
     * 알림톡 발송 결과 백업 기준일이 180일에서 90일로 변경되었습니다.
