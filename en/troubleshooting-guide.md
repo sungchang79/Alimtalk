@@ -2,9 +2,9 @@
 
 ### Message for Query Delivery Button
 
-Fill out the courier name and invoice number, and add a button to query delivery. Then, the courier name and invoice number are exported from the message, and the links for each courier’s query delivery page are automatically created. In case an Alimtalk message includes any courier and invoice number which are not supported by Kakaotalk, the query delivery button is not created.
+Fill out the courier name and invoice number, and add a button to query delivery. Then, the courier name and invoice number are exported from the message, and the links for each courier’s query delivery page are automatically created. In case an AlimTalk message includes any courier and invoice number which are not supported by KakaoTalk, the query delivery button is not created.
 
-Here is the list of couriers for which Kakaotalk supports the query of delivery.
+Here is the list of couriers for which KakaoTalk supports the query of delivery.
 
 List of Couriers Available to Query :
 KGB택배 우체국택배 로젠택배 일양로지스 GTX로지스 FedEx 한진택배 경동택배 합동택배 롯데택배 농협택배 호남택배 CU 편의점택배 CVSnet편의점택배 TNT Express USPS EMS 천일택배 DHL 대신택배 건영택배 한덱스
