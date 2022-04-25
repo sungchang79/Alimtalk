@@ -1,4 +1,10 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2022.04.26.
+* [API] SMS代替送信時、共用フィールド追加
+    * お知らせトーク/カカともへのメッセージをSMSで代替送信時、 statsId、senderGroupingKey、recipientGroupingKeyフィールドを追加するように改善しました。
+* [API]お知らせトーク全文送信テンプレートvalidation改善
+    * お知らせトーク全文送信時、テンプレート日本語識別子に空白を許可するように有効性検証を改善しました。
+
 ### 2022.03.29.
 * [Console]お知らせトーク送信結果バックアップ基準日を変更
     * お知らせトーク送信結果バックアップ基準日が180日から90日に変更されました。
