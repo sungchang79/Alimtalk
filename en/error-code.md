@@ -17,8 +17,8 @@
 | Common  | false     | -2018      | Invalid button parameter                                     |
 | Common  | false     | -2019      | Failed due to template body with above 1,000 characters      |
 | Common  | false     | -2022      | ImageLink is missing for attached image                      |
-| Common  | false     | -2023      | Friendtalk body message exceeding 400 characters (image attached) |
-| Common  | false     | -2024      | Friendtalk body message exceeding 1,000 characters           |
+| Common  | false     | -2023      | FriendTalk body message exceeding 400 characters (image attached) |
+| Common  | false     | -2024      | FriendTalk body message exceeding 1,000 characters           |
 | Common  | false     | -2025      | Scheduled date and time is from the past                     |
 | Common  | false     | -2026      | Scheduled date and time is 90 days after (available up to 90 days) |
 | Common  | false     | -2027      | Error in parsing due to different date format                |
@@ -133,23 +133,23 @@
 	</tr>
   <tr>
 		<td>1021</td>
-		<td>Blocked Kakaotalk channel </td>
+		<td>Blocked KakaoTalk channel </td>
 	</tr>
 	<tr>
 		<td>1022</td>
-		<td>Blocked Kakaotalk channel </td>
+		<td>Blocked KakaoTalk channel </td>
 	</tr>
 	<tr>
 		<td>1023</td>
-		<td>Deleted Kakaotalk channel </td>
+		<td>Deleted KakaoTalk channel </td>
 	</tr>
 	<tr>
 		<td>1024</td>
-		<td>Kakaotalk channel waiting for deletion </td>
+		<td>KakaoTalk channel waiting for deletion </td>
 	</tr>
 	<tr>
 		<td>1025</td>
-		<td>Kakaotalk channel blocked for message </td>
+		<td>KakaoTalk channel blocked for message </td>
 	</tr>
 	<tr>
 		<td>1030</td>
@@ -197,7 +197,7 @@
 	</tr>
 	<tr>
 		<td>3012</td>
-		<td>Communication failed with Kakaotalk </td>
+		<td>Communication failed with KakaoTalk </td>
 	</tr>
 	<tr>
 		<td>3013</td>
@@ -213,7 +213,7 @@
 	</tr>
 	<tr>
 		<td>3018</td>
-		<td>Unable to send messages<br>1. Kakaotalk user who has withdrwan <br>2. User who has never been subscribed to Kakaotalk <br>3. Blocked user from Alimtalk messages <br>4. Android users who use different "Kakaotalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum Kakaotalk version or unsupported device, or punished user </td>
+		<td>Unable to send messages<br>1. KakaoTalk user who has withdrwan <br>2. User who has never been subscribed to KakaoTalk <br>3. Blocked user from AlimTalk messages <br>4. Android users who use different "KakaoTalk numbers from USIM on device" <br>5. Deactivated users (for push) <br>6. User of the minimum KakaoTalk version or unsupported device, or punished user </td>
 	</tr>
 	<tr>
 		<td>3022</td>
@@ -309,9 +309,9 @@
 	</tr>
 	<tr>
 		<td>3050</td>
-		<td>Non-Kakaotalk user <br>
-	    User opting to block Alimtalk of users who record no Kakaotalk service use within 72 hours <br>
-	    Not a friend of Friendtalk <br></td>
+		<td>Non-KakaoTalk user <br>
+	    User opting to block AlimTalk of users who record no KakaoTalk service use within 72 hours <br>
+	    Not a friend of FriendTalk <br></td>
 	</tr>
 	<tr>
 		<td>3051</td>
@@ -395,7 +395,7 @@
 	</tr>
 	<tr>
 		<td>E920</td>
-		<td>Message table includes a file group key for Alimtalk messages </td>
+		<td>Message table includes a file group key for AlimTalk messages </td>
 	</tr>
 	<tr>
 		<td>E999</td>

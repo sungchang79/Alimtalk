@@ -1,18 +1,18 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > Console Guide
+## Notification > KakaoTalk Bizmessage > AlimTalk > Console Guide
 
 ## General Delivery
 
-To send Alimtalk, go to **NHN Cloud Console** and **Notification > KakaoTalk Bizmessage > Alimtalk**.
+To send AlimTalk, go to **NHN Cloud Console** and **Notification > KakaoTalk Bizmessage > AlimTalk**.
 
 ![alimtalk_01_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_01_201812.png)
 
 Select a Plus Friend and load a registered template.
 You can check your Plus Friends on **Notification > KakaoTalk Bizmessage > Plus Friend Management**.
-You can manage templates on the **Notification > KakaoTalk Bizmessage > Alimtalk > Manage Templates**.
+You can manage templates on the **Notification > KakaoTalk Bizmessage > AlimTalk > Manage Templates**.
 
 Enter replacement key of the template from **General Delivery** at the bottom, and enter recipient number.
 
-After that, click **Send** on the right to send Alimtalk immediately.
+After that, click **Send** on the right to send AlimTalk immediately.
 
 ## Mass Delivery
 
@@ -57,7 +57,7 @@ You can also select and cancel the whole list using the checkbox on top of the l
 
 ### Send/Cancel
 
-If you select **Proceed after Inspection** when performing mass delivery of Alimtalk, you can send or cancel Alimtalk in the **Query Mass Delivery** tab.
+If you select **Proceed after Inspection** when performing mass delivery of AlimTalk, you can send or cancel AlimTalk in the **Query Mass Delivery** tab.
 
 ![alimtalk_07_201812.png](https://static.toastoven.net/prod_alimtalk/alimtalk_07_201812.png)
 
@@ -114,12 +114,12 @@ Click **Register Templates** to register a template.
 #### Register Inquiries of Templates
 
 * You may register inquiries of templates which are only in the <b><span style="color:red">Inspection Underway/Rejected</span></b> status.
-* Inquiries that are registered are added to inspection results, which shall be confirmed by an inspector at Kakaotalk.
+* Inquiries that are registered are added to inspection results, which shall be confirmed by an inspector at KakaoTalk.
 * Inspection result includes inquiries on the usage or reasons of returning a template.
 
 ## Manage Alternative Delivery
 
-* You can set the alternative delivery for Plus Friend according to each message type of Alimktalk/Friendtalk.
+* You can set the alternative delivery for Plus Friend according to each message type of Alimktalk/FriendTalk.
 * Only messages for Plus Friends with alternative delivery set will be resent with LMS or SMS.
 * If you edit the SMS app key, all Plus Friends' alternative delivery settings will be initialized.
 * Because the alternative delivery is performed with SMS service, fields must be entered according to the specification of the SMS service's delivery API. (sender number registered in SMS service, various field length limits, etc.)

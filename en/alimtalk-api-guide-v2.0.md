@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v2.0 Guide
+## Notification > KakaoTalk Bizmessage > AlimTalk > API v2.0 Guide
 
-## Alimtalk
+## AlimTalk
 
 #### [API Domain]
 
@@ -20,8 +20,8 @@
 ## Overview of v2.0 API
 1. It has been changed to allow emphasized template for Register Template API (for a full-text delivery, the title value can be configured.)
 2. Expanded the template type. Ad or additional information can be added.
-3. The CreateUser field has been added when sending Alimtalk/Friendtlk messages.
-4. Field has been added to query registered time and registrant when querying Alimtalk/Friendtalk messages.
+3. The CreateUser field has been added when sending AlimTalk/Friendtlk messages.
+4. Field has been added to query registered time and registrant when querying AlimTalk/FriendTalk messages.
 5. Added Attach Files to Send Inquiry on Templates API.
 
 
@@ -1232,7 +1232,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------------- | ------- | -------- | -------------------------------------------------------- |
 | startUpdateDate     | String  | O        | Start date of querying result updates (yyyy-MM-dd HH:mm) |
 | endUpdateDate       | String  | O        | End date of querying result updates (yyyy-MM-dd HH:mm)   |
-| alimtalkMessageType | String  | X        | Alimtalk message type (NORMAL, AUTH)                     |
+| alimtalkMessageType | String  | X        | AlimTalk message type (NORMAL, AUTH)                     |
 | pageNum             | Integer | X        | Page number (default: 1)                                 |
 | pageSize            | Integer | X        | Number of queries (default: 15, max : 1000)              |
 

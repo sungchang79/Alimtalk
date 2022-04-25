@@ -1,9 +1,9 @@
-## Notification > KakaoTalk Bizmessage > Friendtalk > Console Guide
+## Notification > KakaoTalk Bizmessage > FriendTalk > Console Guide
 
 ## General Delivery
 
-Set up Plus Friend, and enter messages to send Friendtalk messages.
-To send Friendtalk messages, go to the console and **Notification > KakaoTalk Bizmessage > Friendtalk**.
+Set up Plus Friend, and enter messages to send FriendTalk messages.
+To send FriendTalk messages, go to the console and **Notification > KakaoTalk Bizmessage > FriendTalk**.
 
 ![friendtalk_01_201812.png](https://static.toastoven.net/prod_alimtalk/friendtalk_01_201812.png)
 
@@ -23,7 +23,7 @@ Messages are considered as ad messages, if **Advertisement** is selected for **A
 ### Request for Mass Delivery
 Select **Mass Delivery** at the bottom.
 
-![[Figure 4] Mass Delivery of Friendtalk](http://static.toastoven.net/prod_alimtalk/friendtalk_mass_04.png)
+![[Figure 4] Mass Delivery of FriendTalk](http://static.toastoven.net/prod_alimtalk/friendtalk_mass_04.png)
 
 * Enter template replacer in the '#{name}' format, and click **Download Templates** to download CSV, XLSX file including the template replacer.
 * Korean may not be properly saved, if CSV file is open and saved in excel. It is recommended to 'Send after inspect' to see if it has been properly replaced.   
@@ -36,7 +36,7 @@ Select **Mass Delivery** at the bottom.
 
 ## Query of Delivery Result
 
-Go to **Query Delivery Result** to query Friendtalk messages.
+Go to **Query Delivery Result** to query FriendTalk messages.
 ![friendtalk_02_201812.png](https://static.toastoven.net/prod_alimtalk/friendtalk_02_201812.png)
 
 ### Canceling Delivery
@@ -50,7 +50,7 @@ The whole list can be selected and canceled, by selecting the check box on top o
 
 ### Register, Delete, and Search Images
 
-Images for Friendtalk can be registered or deleted.
+Images for FriendTalk can be registered or deleted.
 
 ![friendtalk_03_201812.png](https://static.toastoven.net/prod_alimtalk/friendtalk_03_201812.png)
 
