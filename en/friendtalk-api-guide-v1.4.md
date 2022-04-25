@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Friendtalk > API v1.4 Guide
+## Notification > KakaoTalk Bizmessage > FriendTalk > API v1.4 Guide
 
-## Friendtalk
+## FriendTalk
 
 #### [API Domain]
 
@@ -534,7 +534,7 @@ curl -X POST -H "Content-Type: multipart/form-data" -H "X-Secret-Key:{secretkey}
 | - resultMessage | String  | Result message                             |
 | - isSuccessful  | Boolean | Successful or not                          |
 | image           | Object  | Body area                                  |
-| - imageSeq      | Integer | Image number (to send Friendtalk messages) |
+| - imageSeq      | Integer | Image number (to send FriendTalk messages) |
 | - imageUrl      | String  | Image URL                                  |
 | - imageName     | String  | Image name (name of uploaded file)         |
 
@@ -612,7 +612,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | - isSuccessful  | Boolean | Successful or not                          |
 | imagesResponse  | Object  | Body area                                  |
 | - image         | Object  | Body area                                  |
-| -- imageSeq     | Integer | Image number (to send Friendtalk messages) |
+| -- imageSeq     | Integer | Image number (to send FriendTalk messages) |
 | -- imageUrl     | String  | Image URL                                  |
 | -- imageName    | String  | Image name (name of uploaded file)         |
 | -- wide         | boolean |	Image is wide or not                       |

@@ -16,7 +16,7 @@ To send KakaoTalk Bizmessages, a Plus Friend must be registered first. Plus Frie
 * Register your Plus Friend and authenticate tokens, in reference of the console guide, and the service is enabled.
 
 #### Profile Status of KakaoTalk Plus Friend
-* Refers to the status of sender key to send Alimtalk/Friendtalk.
+* Refers to the status of sender key to send AlimTalk/FriendTalk.
 * May be blocked if profile is not in use for a long time or business information is not consistent.
 * If status is not normal, send request to NHN Cloud Customer Center, along with Plus Friend ID, to ask for the release of blockage.
 

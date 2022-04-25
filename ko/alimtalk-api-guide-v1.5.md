@@ -1,4 +1,4 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v1.5 Guide
+## Notification > KakaoTalk Bizmessage > AlimTalk > API v1.5 Guide
 
 ## 알림톡
 

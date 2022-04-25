@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > Overview
+## Notification > KakaoTalk Bizmessage > AlimTalk > Overview
 
-Alimtalk allows to send informative messages on delivery, scheduled time, and etc. to Kakaotalk users, without adding friends but based on mobile phone numbers.
+AlimTalk allows to send informative messages on delivery, scheduled time, and etc. to KakaoTalk users, without adding friends but based on mobile phone numbers.
 RESTful API is provided for easy integration.
 
 ## Benefits

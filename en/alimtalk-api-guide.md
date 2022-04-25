@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v2.2 Guide
+## Notification > KakaoTalk Bizmessage > AlimTalk > API v2.2 Guide
 
-## Alimtalk
+## AlimTalk
 
 #### [API Domain]
 
@@ -18,7 +18,7 @@
 </table>
 
 ## Overview of v2.2 API
-1. Added Alimtalk mass delivery query and statistics query API.
+1. Added AlimTalk mass delivery query and statistics query API.
 2. Added a `buttons` field to the response body of replaced message sending API.
 3. Added `chatExtra`, `chatEvent`, and `target` fields to the `buttons` field in the response body of the full text message sending API.
 4. Added `chatExtra`, `chatEvent`, and `target` fields to the `buttons` field in the response body of the message query API.
@@ -1289,7 +1289,7 @@ Content-Type: application/json;charset=UTF-8
 |---|---|---|---|
 |startUpdateDate|   String| O | Start date of querying result updates (yyyy-MM-dd HH:mm)|
 |endUpdateDate| String| O | End date of querying result updates (yyyy-MM-dd HH:mm) |
-|alimtalkMessageType|   String| X | Alimtalk message type (NORMAL, AUTH) |
+|alimtalkMessageType|   String| X | AlimTalk message type (NORMAL, AUTH) |
 |pageNum|   Integer|    X|  Page number (default: 1)|
 |pageSize|  Integer|    X|  Number of queries (default: 15, max : 1000)|
 

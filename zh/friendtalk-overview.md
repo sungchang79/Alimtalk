@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Friendtalk > Overview
+## Notification > KakaoTalk Bizmessage > FriendTalk > Overview
 
-Friendtalk enables to send advertisement messages to KakaoTalk users who become Plus Friend based on mobile phone numbers.  
+FriendTalk enables to send advertisement messages to KakaoTalk users who become Plus Friend based on mobile phone numbers.  
 RESTful API is provided for easy integration.
 
 ## Benefits

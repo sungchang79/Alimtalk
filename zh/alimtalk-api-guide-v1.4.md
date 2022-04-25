@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v1.4 Guide
+## Notification > KakaoTalk Bizmessage > AlimTalk > API v1.4 Guide
 
-## Alimtalk
+## AlimTalk
 
 #### [API Domain]
 
@@ -1122,7 +1122,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------------- | ------- | -------- | -------------------------------------------------------- |
 | startUpdateDate     | String  | O        | Start date of querying result updates (yyyy-MM-dd HH:mm) |
 | endUpdateDate       | String  | O        | End date of querying result updates (yyyy-MM-dd HH:mm)   |
-| alimtalkMessageType | String  | X        | Alimtalk message type (NORMAL, AUTH)                     |
+| alimtalkMessageType | String  | X        | AlimTalk message type (NORMAL, AUTH)                     |
 | pageNum             | Integer | X        | Page number (default: 1)                                 |
 | pageSize            | Integer | X        | Number of queries (default: 15, max : 1000)              |
 
@@ -1398,7 +1398,7 @@ Content-Type: application/json;charset=UTF-8
 
 | Value | Type    | Required | Description                                                  |
 | ----- | ------- | -------- | ------------------------------------------------------------ |
-| token | Integer | O        | Authentication token (received on Kakaotalk app, after Register PlusFriend API call) |
+| token | Integer | O        | Authentication token (received on KakaoTalk app, after Register PlusFriend API call) |
 
 #### Response
 
@@ -1500,10 +1500,10 @@ Content-Type: application/json;charset=UTF-8
 | - plusFriendType          | String  | PlusFriend type (NORMAL, GROUP)                              |
 | - senderKey               | String  | Sender key                                                   |
 | - categoryCode            | String  | Category code                                                |
-| - alimtalkDailyMaxCount   | Integer | Number of maximum daily Alimtalk deliveries  (not limited if it is 0) |
-| - friendtalkDailyMaxCount | Integer | Number of maximum daily Friendtalk deliveries (not limited if it is 0) |
-| - alimtalkSentCount       | Integer | Number of daily Alimtalk deliveries  (not limited if it is 0) |
-| - friendtalkSentCount     | Integer | Number of daily Friendtalk deliveries (not limited if it is 0) |
+| - alimtalkDailyMaxCount   | Integer | Number of maximum daily AlimTalk deliveries  (not limited if it is 0) |
+| - friendtalkDailyMaxCount | Integer | Number of maximum daily FriendTalk deliveries (not limited if it is 0) |
+| - alimtalkSentCount       | Integer | Number of daily AlimTalk deliveries  (not limited if it is 0) |
+| - friendtalkSentCount     | Integer | Number of daily FriendTalk deliveries (not limited if it is 0) |
 | - status                  | String  | Status code of TOAST PlusFriend  (YSC02: Ready for registeration, YSC03: Normally registered) |
 | - statusName              | String  | Status name of TOAST PlusFriend (ready for registration, normally registered) |
 | - kakaoStatus             | String  | Status code of Kakao PlusFriend (A: Normal, S: Blocked, D: Deleted) kakaoStatus is null if the status is YSC02. |

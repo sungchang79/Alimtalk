@@ -206,7 +206,7 @@ Content-Type: application/json;charset=UTF-8
 | Value | Type    | Required | Description                                                  |
 | ----- | ------- | -------- | ------------------------------------------------------------ |
 | plusFriendId | String  | O | PlusFriend ID |
-| token | Integer | O        | Authentication token (received on Kakaotalk app, after Register PlusFriend API call) |
+| token | Integer | O        | Authentication token (received on KakaoTalk app, after Register PlusFriend API call) |
 
 #### Response
 
@@ -359,13 +359,13 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked) kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
-|- alimtalk                 |	Object  |	Alimtalk information                                         |
+|- alimtalk                 |	Object  |	AlimTalk information                                         |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
 |-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- dailyMaxCount           | Integer |	Maximum daily Alimtalk delivery count (no limits for 0)      |
-|-- sentCount               | Integer |	Daily Alimtalk delivery count (no limits for 0)              |
-|- friendtalk               |	Object  |	Friendtalk information                                       |
+|-- dailyMaxCount           | Integer |	Maximum daily AlimTalk delivery count (no limits for 0)      |
+|-- sentCount               | Integer |	Daily AlimTalk delivery count (no limits for 0)              |
+|- friendtalk               |	Object  |	FriendTalk information                                       |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
 |-- resendSendNo            | String  |	Sender number for alternative delivery                       |
@@ -475,13 +475,13 @@ Content-Type: application/json;charset=UTF-8
 | - kakaoStatusName         | String  | Status name of Kakao PlusFriend (normal, blocked) kakaoStatusName is null if the status is YSC02. |
 | - kakaoProfileStatus      | String  | Status code of Kakao PlusFriend profile  (A: Activated, B: Blocked, C: Deactivated, D:Deleted, E: Deleting) kakaoProfileStatus is null if the status is YSC02. |
 | - kakaoProfileStatusName  | String  | Status name of Kakao PlusFriend profile (Activated, Deactivated, Blocked, Deleted, or Deleting) kakaoProfileStatusName is null if the status is YSC02. |
-|- alimtalk                 |	Object  |	Alimtalk information                                         |
+|- alimtalk                 |	Object  |	AlimTalk information                                         |
 |-- resendAppKey            | String  | Alternative sms appkey                                       |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails       |
 |-- resendSendNo            | String  |	Sender number for alternative delivery                       |
-|-- dailyMaxCount           | Integer |	Maximum daily Alimtalk delivery count (no limits for 0)      |
-|-- sentCount               | Integer |	Daily Alimtalk delivery count (no limits for 0)              |
-|- friendtalk               |	Object  |	Friendtalk information                                        |
+|-- dailyMaxCount           | Integer |	Maximum daily AlimTalk delivery count (no limits for 0)      |
+|-- sentCount               | Integer |	Daily AlimTalk delivery count (no limits for 0)              |
+|- friendtalk               |	Object  |	FriendTalk information                                        |
 |-- resendAppKey            | String  | Alternative sms appkey                                        |
 |-- isResend                | String  | Whether to send text as alternative, if delivery fails        |
 |-- resendSendNo            | String  |	Sender number for alternative delivery                        |

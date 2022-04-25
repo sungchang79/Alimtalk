@@ -4,13 +4,13 @@
 
 To add a Plus Friend, go to console and select **Notification > KakaoTalk Bizmessage > Plus Friend Management**.
 
-When it is completely registered, Kakaotalk token message is sent to administrator's mobile phone.  
+When it is completely registered, KakaoTalk token message is sent to administrator's mobile phone.  
 Only the administrator can receive such token messages.
 
 ![plusfriend_01_201812.png](https://static.toastoven.net/prod_alimtalk/plusfriend_01_201904.png)
 
 * Make sure to enter ID of search purpose for Plus Friend ID which was registered when the Plus Friend service was requested.
-* Customers receive Kakaotalk Bizmessages in the name of the Plus Friend registered at Kakaotalk.
+* Customers receive KakaoTalk Bizmessages in the name of the Plus Friend registered at KakaoTalk.
 
 ## Token Registration
 
