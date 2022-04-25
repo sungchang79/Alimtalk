@@ -1,6 +1,6 @@
-## Notification > KakaoTalk Bizmessage > Alimtalk > API v2.1 Guide
+## Notification > KakaoTalk Bizmessage > AlimTalk > API v2.1 Guide
 
-## Alimtalk
+## AlimTalk
 
 #### [API Domain]
 
@@ -18,7 +18,7 @@
 </table>
 
 ## Overview of v2.1 API
-1. Added Alimtalk Template-Image Uploding API.
+1. Added AlimTalk Template-Image Uploding API.
 2. Expanded the templateEmphasizeType type. 'IMAGE' can be added.
 3. Added templateImageName, templateImageUrl on Inquire of Templates
 
@@ -1230,7 +1230,7 @@ Content-Type: application/json;charset=UTF-8
 | ------------------- | ------- | -------- | -------------------------------------------------------- |
 | startUpdateDate     | String  | O        | Start date of querying result updates (yyyy-MM-dd HH:mm) |
 | endUpdateDate       | String  | O        | End date of querying result updates (yyyy-MM-dd HH:mm)   |
-| alimtalkMessageType | String  | X        | Alimtalk message type (NORMAL, AUTH)                     |
+| alimtalkMessageType | String  | X        | AlimTalk message type (NORMAL, AUTH)                     |
 | pageNum             | Integer | X        | Page number (default: 1)                                 |
 | pageSize            | Integer | X        | Number of queries (default: 15, max : 1000)              |
 

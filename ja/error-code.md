@@ -4,6 +4,7 @@
 | service | isSuccess | resultCode | resultMessage                            |
 | ------- | --------- | ---------- | ---------------------------------------- |
 | 共通 | true      | 0          | 成功                                |
+| 共通 | false     | 4          | パラメータ検証に失敗しました（resultMessageを参照）    |
 | 共通 | false     | -1000      | 無効なアプリケーションキー                        |
 | 共通 | false     | -1001      | 無効なシークレットキー(secretKey)                  |
 | 共通 | false     | -1002      | 無効なSMSアプリケーションキー                    |

@@ -4,6 +4,7 @@
 | service | isSuccess | resultCode | resultMessage                            |
 | ------- | --------- | ---------- | ---------------------------------------- |
 | 공통      | true      | 0          | 성공                                       |
+| 공통      | false     | 4          | 파라미터 유효성 검증 실패 (resultMessage 참고)    |
 | 공통      | false     | -1000      | 유효하지 않은 앱키                               |
 | 공통      | false     | -1001      | 유효하지 않은 비밀 키(secretKey)                  |
 | 공통      | false     | -1002      | 유효하지 않은 SMS 앱키                           |

@@ -4,6 +4,7 @@
 | service | isSuccess | resultCode | resultMessage                                                |
 | ------- | --------- | ---------- | ------------------------------------------------------------ |
 | Common  | true      | 0          | Successful                                                   |
+| Common  | false     | 4          | Parameter validation failed (see resultMessage)              |
 | Common  | false     | -1000      | Invalid appkey                                               |
 | Common  | false     | -1001      | Invalid secret key                                           |
 | Common  | false     | -1002      | Invalid SMS appkey                                           |
