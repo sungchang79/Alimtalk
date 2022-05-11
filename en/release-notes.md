@@ -1,4 +1,9 @@
 ## Notification > KakaoTalk Bizmessage > Release Notes
+### 2022.05.24.
+* [API] 알림톡 템플릿 삭제 개선
+    * 반려된 템플릿 이외에 다른 상태의 템플릿도 삭제가 가능하도록 개선되었습니다.
+    * 자세한 사항은 [API 가이드](./alimtalk-api-guide/#_50)를 참고하시기 바랍니다.
+
 ### April 26, 2022
 * [API] Added public fields for SMS alternative delivery
     * Made improvements so that the statsId, senderGroupingKey, and recipientGroupingKey fields are added when resending SMS messages for AlimTalk/FriendTalk.
