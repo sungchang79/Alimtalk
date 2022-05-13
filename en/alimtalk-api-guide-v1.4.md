@@ -1826,7 +1826,7 @@ Content-Type: application/json;charset=UTF-8
 | TSC01                | Requested   |
 | TSC02                | Inspecting  |
 | TSC03                | Approved    |
-| TSC04                | Returned    |
+| TSC04                | Rejected    |
 
 [Example]
 
@@ -1907,7 +1907,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | --- content          | String  | Inquiry content                                              |
 | ---userName          | String  | Creator                                                      |
 | ---createAt          | String  | Date of registration                                         |
-| ---status            | String  | Comment status (INQ: Inquired, APR: Approved, REJ: Returned, REP: Replied) |
+| ---status            | String  | Comment status (INQ: Inquired, APR: Approved, REJ: Rejected, REP: Replied) |
 | -- status            | String  | Template status                                              |
 | -- statusName        | String  | Template status name                                         |
 | -- createDate        | String  | Date and time of creation                                    |
@@ -2021,7 +2021,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 | --- content          | String  | Inquiry content                                              |
 | ---userName          | String  | Creator                                                      |
 | ---createAt          | String  | Date of registration                                         |
-| ---status            | String  | Comment status (INQ: Inquired, APR: Approved, REJ: Returned, REP: Replied) |
+| ---status            | String  | Comment status (INQ: Inquired, APR: Approved, REJ: Rejected, REP: Replied) |
 | -- status            | String  | Template status                                              |
 | -- statusName        | String  | Template status name                                         |
 | -- activated         | Boolean | activated or not                                             |

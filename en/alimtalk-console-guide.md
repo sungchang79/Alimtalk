@@ -115,7 +115,7 @@ Click **Register Templates** to register a template.
 
 * You may register inquiries of templates which are only in the <b><span style="color:red">Inspection Underway/Rejected</span></b> status.
 * Inquiries that are registered are added to inspection results, which shall be confirmed by an inspector at KakaoTalk.
-* Inspection result includes inquiries on the usage or reasons of returning a template.
+* Inspection results include inquiries on the usage or reasons of rejecting a template.
 
 ## Manage Alternative Delivery
 

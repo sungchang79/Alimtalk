@@ -2019,9 +2019,9 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-* 승인된 템플릿 삭제 시, NHN Cloud 내에서만 삭제됩니다.(3일간 미발송한 템플릿만 삭제 가능)
-* 승인된 템플릿의 경우, 카카오톡 비즈메시지의 제약 때문에 카카오 내부 데이터는 삭제할 수 없습니다.
-* 카카오에 남아 있는 템플릿은 1년 미사용 시 휴면 처리되고, 휴면 상태가 1년간 지속되면 삭제 처리됩니다. (카카오에서 템플릿이 휴면 전환되거나 삭제되면 담당자에게 알림이 발송됩니다.)
+* When an approved template is deleted, it is only deleted within NHN Cloud. (Only templates that have not been sent for 3 days can be deleted.)
+* In the case of an approved template, Kakao's internal data cannot be deleted due to the restrictions of KakaoTalk BizMessage.
+* A template remaining in Kakao becomes dormant if it is not used for 1 year, and gets deleted if it remains dormant for 1 year. (If a template becomes dormant or gets deleted on Kakao, the person in charge will be notified.)
 
 #### Response
 ```
@@ -2204,7 +2204,7 @@ Content-Type: application/json;charset=UTF-8
 | TSC01 | Requested |
 | TSC02 | Inspecting |
 | TSC03 | Approved |
-| TSC04 | Returned |
+| TSC04 | Rejected |
 
 [Example]
 ```
@@ -2312,7 +2312,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |--- attachment | List | Attachment |
 |---- originalFileName | String | Attachment file name |
 |---- filePath | String | Attachment file path |
-|--- status | String | Comment status (INQ: Inquired, APR: Approved, REJ: Returned, REP: Replied) |
+|--- status | String | Comment status (INQ: Inquired, APR: Approved, REJ: Rejected, REP: Replied) |
 |-- status| String | Template status |
 |-- statusName | String | Template status name |
 |-- securityFlag| Boolean | Whether it is a security template |
@@ -2457,7 +2457,7 @@ curl -X GET -H "Content-Type: application/json;charset=UTF-8" -H "X-Secret-Key:{
 |--- attachment | List | Attachment |
 |---- originalFileName | String | Attachment file name |
 |---- filePath | String | Attachment file path |
-|--- status | String | Comment status (INQ: Inquired, APR: Approved, REJ: Returned, REP: Replied) |
+|--- status | String | Comment status (INQ: Inquired, APR: Approved, REJ: Rejected, REP: Replied) |
 |-- status| String | Template status |
 |-- statusName | String | Template status name |
 |-- securityFlag| Boolean | Whether it is a security template |
